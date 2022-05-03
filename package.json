@@ -1,17 +1,17 @@
 {
   "private": true,
   "scripts": {
-    "dev": "nuxi dev",
+    "serve": "nuxi dev",
     "build": "nuxi build",
     "generate": "nuxi generate",
     "start": "node .output/server/index.mjs",
     "tailwind": "tailwind-config-viewer --open --port 3001"
   },
   "devDependencies": {
-    "nuxt3": "latest"
+    "nuxt": "3.0.0-rc.1",
+    "tailwindcss": "^3.0.24"
   },
   "dependencies": {
-    "tailwind-config-viewer": "^1.6.2",
-    "tailwindcss": "^2.2.19"
+    "tailwind-config-viewer": "^1.6.2"
   }
 }
