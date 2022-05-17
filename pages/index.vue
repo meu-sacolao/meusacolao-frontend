@@ -1,6 +1,6 @@
 <template>
   
-  <NuxtLayout name="upload-cnis">
+  <NuxtLayout name="main-app">
     
     
     <div class="w-full flex flex-col">
