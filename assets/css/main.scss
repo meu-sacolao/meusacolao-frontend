@@ -24,3 +24,11 @@
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+body, html {
+  overflow-x: hidden;
+}
+
+.max-w-full-vw {
+  max-width: calc(100vw - 64px);
+}
