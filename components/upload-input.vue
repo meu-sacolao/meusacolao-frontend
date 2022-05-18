@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full block">
     <label
       class="w-full p-8 px-6 border-4 box-border border-dashed border-yellow-600 rounded block flex items-center justify-center text-zinc-900 relative text-lg"
       :class="[

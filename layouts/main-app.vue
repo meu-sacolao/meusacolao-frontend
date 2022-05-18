@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-dashed h-full">
+  <div class="h-full overflow-y-auto">
     
     <page-header></page-header>
     
