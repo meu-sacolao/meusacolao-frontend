@@ -2,7 +2,7 @@
   <div class="w-full block shadow-lg bg-white border border-slate-100 flex flex-stratch border-box">
 
     <div :class="border" class="grow bg-orange-400 block flex-none"></div>
-    <div :class="content" class="w-full flex flex-col bg-red-100">
+    <div :class="content" class="w-full flex flex-col">
       <slot />
     </div>
   </div>
