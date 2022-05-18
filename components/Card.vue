@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full block shadow-lg bg-white border border-slate-100 flex">
+  <div class="w-full block shadow-lg bg-white border border-slate-100 flex border-box">
 
     <div :class="border" class="h-full block"></div>
     <div :class="content">

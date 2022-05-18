@@ -1,9 +1,11 @@
 <template>
-  <div class="h-full overflow-y-auto scrolling-touch">
-    
-    <page-header></page-header>
-    
-    <slot />
+
+  <div class="w-screen font-sans bg-white text-zinc-700 overflow-x-hidden" style="-webkit-overflow-scrolling: touch;">
+        
+    <div class="h-auto w-full mt-24 p-12 px-6 md:px-20 xl:px-28 overflow-y-auto overflow-x-hidden scrolling-touch">
+      <page-header></page-header>
+      <slot />
+    </div>
 
   </div>
 </template>
