@@ -7,7 +7,7 @@
         modelValue?.name ? 'bg-orange-400' : 'bg-white',
       ]"
     >
-      <Icons icon="file_upload" class="mr-2 flex-shrink-0 block" />
+      <AppIcons icon="file_upload" class="mr-2 flex-shrink-0 block" />
       <span class="whitespace-no-wrap ellipsis block" :class="modelValue && modelValue.name ? 'font-bold' : ''">{{ modelValue.name ? modelValue.name : placeholder }}</span>
       <input
         tabindex="0"

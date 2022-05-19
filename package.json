@@ -1,13 +1,15 @@
 {
   "private": true,
   "scripts": {
-    "serve": "nuxi dev",
+    "serve": "concurrently --kill-others \"npm run tailwind\" \"nuxi dev\"",
     "build": "nuxi build",
     "generate": "nuxi generate",
     "start": "node .output/server/index.mjs",
     "tailwind": "tailwind-config-viewer --open --port 3001"
   },
   "devDependencies": {
+    "@nuxtjs/tailwindcss": "^5.0.4",
+    "concurrently": "^7.2.0",
     "nuxt": "3.0.0-rc.1",
     "sass": "^1.51.0",
     "sass-loader": "^10.2.1",
