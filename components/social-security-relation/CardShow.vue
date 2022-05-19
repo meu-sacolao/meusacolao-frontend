@@ -16,20 +16,20 @@
             <h3 class="h3 truncate ...">{{ socialSecurityRelation.relationOrigin }}</h3>
           </div>
 
-          <div class="w-full flex flex-wrap space-x-8 mt-4">
-            <LabelValue>
+          <div class="w-full flex flex-wrap justify-between mt-4">
+            <LabelValue class="four-cols-breakdown">
               <template v-slot:label>Documento</template>
               <template v-slot:value>{{ socialSecurityRelation.relationDocument ? socialSecurityRelation.relationDocument : '--' }}</template>
             </LabelValue>
-            <LabelValue>
+            <LabelValue class="four-cols-breakdown">
               <template v-slot:label>NIT</template>
               <template v-slot:value>{{ socialSecurityRelation.nit }}</template>
             </LabelValue>
-            <LabelValue>
+            <LabelValue class="four-cols-breakdown">
               <template v-slot:label>Início</template>
               <template v-slot:value>{{ socialSecurityRelation.startAt ? socialSecurityRelation.startAt : '--' }}</template>
             </LabelValue>
-            <LabelValue>
+            <LabelValue class="four-cols-breakdown">
               <template v-slot:label>Término</template>
               <template v-slot:value>{{ socialSecurityRelation.endAt ? socialSecurityRelation.endAt : '--' }}</template>
             </LabelValue>
