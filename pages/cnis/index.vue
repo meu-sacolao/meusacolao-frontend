@@ -2,17 +2,19 @@
   <NuxtLayout name="main-app">
     <div class="w-full flex flex-col space-y-8">
       <AppUploadInput 
-        label="Adicione um arquivo"
+        placeholder="Clique ou arraste aqui um arquivo CNIS (.pdf)"
         v-model="file" 
         accept="application/pdf" 
         @change="upload" 
       />
-      <SocialSecurityRelationCardShow
-        v-for="socialSecurityRelation of contributionTimeBeforeReform.socialSecurityRelations"
+
+      <CnisUserCard :cnisParsedData="cnisParsedData"></CnisUserCard>
+      <CnisSocialSecurityRelationCard
+        v-for="socialSecurityRelation of cnisParsedData.socialSecurityRelations"
         :key="socialSecurityRelation.seqNumber"
         :socialSecurityRelation="socialSecurityRelation"
       >
-      </SocialSecurityRelationCardShow>
+      </CnisSocialSecurityRelationCard>
     </div>
   </NuxtLayout>
 </template>
@@ -29,8 +31,7 @@ export default {
         type: '',
         name: ''
       },
-      cnisParsedData: new CnisParsedData(),
-      contributionTimeBeforeReform: contributionTimeBeforeReform.cnisParsedData
+      cnisParsedData: new CnisParsedData(), 
     }
   },
   mounted() {
@@ -39,7 +40,7 @@ export default {
     //   "password": "123123"
     // })
 
-    console.log(contributionTimeBeforeReform)
+    this.cnisParsedData =  new CnisParsedData(contributionTimeBeforeReform.cnisParsedData)
   },
   methods: {
     upload() {
@@ -48,8 +49,7 @@ export default {
       fd.append('cnisFileName', this.file.name)
       Api.post(`/cnis/upload`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
         .then(({ data }) => {
-          this.cnisParsedData = new CnisParsedData(data.cnis.parsedData)
-          this.contributionTimeBeforeReform = new CnisParsedData(data.contributionTimeBeforeReform.cnisParsedData)
+          this.cnisParsedData = new CnisParsedData(data.calcRetirement.cnisParsedData)
         })
         .catch((error) => {
           console.log(error)
