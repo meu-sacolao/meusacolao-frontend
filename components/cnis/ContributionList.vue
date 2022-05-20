@@ -9,6 +9,10 @@
           <th>Valor pós limite</th>
           <th>Valor pós correção</th>
           <th>Valor final</th>
+          <th>Ordem vinculo</th>
+          <th>Ordem contr.</th>
+          <th>Ignorado?</th>
+          <th>Motivo</th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +31,10 @@
             <span class="ml-2" v-if="contribution.indexCorrection">(Fator: {{ contribution.indexCorrection }})</span>
           </td>
           <td>{{ vueNumberFormat(contribution.finalValue) }}</td>
+          <td>{{ contribution.indexSocialSecurityRelation }}</td>
+          <td>{{ contribution.indexContribution }}</td>
+          <td>{{ contribution.isIgnored }}</td>
+          <td>{{ contribution.ignoredReason }}</td>
         </tr>
       </tbody>
     </table>

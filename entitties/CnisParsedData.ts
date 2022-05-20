@@ -1,4 +1,5 @@
 import SocialSecurityRelation from "./SocialSecurityRelation"
+import Contribution from "./Contribution"
 import User from "./User"
 
 export default class CnisParsedData {
@@ -13,6 +14,11 @@ export default class CnisParsedData {
   user: User = new User()
   socialSecurityRelations: Array<SocialSecurityRelation> = []
 
+  allContributions: Array<Contribution> = []
+  contributionsWithinTimeframe: Array<Contribution> = []
+  contributionsOutOfTimeFrame: Array<Contribution> = []
+  contributionsLessThan80Percent: Array<Contribution> = []
+
   constructor(obj = null) {
     this.cnisGeneratedAt = obj?.cnisGeneratedAt || ''
     this.cnisValidationNumber = obj?.cnisValidationNumber || ''
@@ -23,6 +29,12 @@ export default class CnisParsedData {
 
     this.user = obj?.user || new User()
     this.socialSecurityRelations = obj?.socialSecurityRelations || []
+
+    //Debug items
+    this.allContributions = obj?.allContributions || []
+    this.contributionsWithinTimeframe = obj?.contributionsWithinTimeframe || []
+    this.contributionsOutOfTimeFrame = obj?.contributionsOutOfTimeFrame || []
+    this.contributionsLessThan80Percent = obj?.contributionsLessThan80Percent || []
   }
 
 }

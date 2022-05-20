@@ -43,6 +43,10 @@
       <CnisContributionList
         :contributions="socialSecurityRelation.contributions"
       ></CnisContributionList>
+
+      <!-- <pre class="~bg-slate-200">
+        {{ socialSecurityRelation }}
+      </pre> -->
     </template>
   </AppCard>
 </template>

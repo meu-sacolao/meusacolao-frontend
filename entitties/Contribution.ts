@@ -14,4 +14,7 @@ export default class Contribution {
   isExceededLimit: boolean = false // Se o valor excedeu o teto setar como true
   isIgnored: boolean = false // Se o valor não estiver dentro dos 80% setar como true
   contributionLimit: any
+
+  indexSocialSecurityRelation: number = -1 // Index do socialSecurityRelation / vinculo para manipulação desacoplada da instância
+  indexContribution: number = -1
 }
