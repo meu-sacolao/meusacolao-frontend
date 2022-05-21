@@ -14,10 +14,7 @@ export default class CnisParsedData {
   user: User = new User()
   socialSecurityRelations: Array<SocialSecurityRelation> = []
 
-  allContributions: Array<Contribution> = []
-  contributionsWithinTimeframe: Array<Contribution> = []
-  contributionsOutOfTimeFrame: Array<Contribution> = []
-  contributionsLessThan80Percent: Array<Contribution> = []
+  _debugItems: Array<any> = []
 
   constructor(obj = null) {
     this.cnisGeneratedAt = obj?.cnisGeneratedAt || ''
@@ -31,10 +28,7 @@ export default class CnisParsedData {
     this.socialSecurityRelations = obj?.socialSecurityRelations || []
 
     //Debug items
-    this.allContributions = obj?.allContributions || []
-    this.contributionsWithinTimeframe = obj?.contributionsWithinTimeframe || []
-    this.contributionsOutOfTimeFrame = obj?.contributionsOutOfTimeFrame || []
-    this.contributionsLessThan80Percent = obj?.contributionsLessThan80Percent || []
+    this._debugItems = obj?._debugItems || []
   }
 
 }
