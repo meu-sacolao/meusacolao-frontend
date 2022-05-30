@@ -19,23 +19,23 @@
           <template v-slot:value>{{ cnisParsedData.ageOnRetirementDate }}</template>
         </LabelValue>
         <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>retirementFactor</template>
+          <template v-slot:label>Fator Previdenciário</template>
           <template v-slot:value>{{ cnisParsedData.retirementFactor }}</template>
         </LabelValue>
         <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>avgMajor80Percent</template>
+          <template v-slot:label>Média dos 80% maiores salários</template>
           <template v-slot:value>{{ vueNumberFormat(cnisParsedData.avgMajor80Percent) }}</template>
         </LabelValue>
         <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>avgAllContributions</template>
+          <template v-slot:label>Média de todas as contribuições</template>
           <template v-slot:value>{{ vueNumberFormat(cnisParsedData.avgAllContributions) }}</template>
         </LabelValue>
         <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>withAliquot70</template>
+          <template v-slot:label>Valor calculado com Alíquota de 70%</template>
           <template v-slot:value>{{ vueNumberFormat(cnisParsedData.withAliquot70) }}</template>
         </LabelValue>
         <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>withAliquot60</template>
+          <template v-slot:label>Valor calculado com Alíquota de 60%</template>
           <template v-slot:value>{{ vueNumberFormat(cnisParsedData.withAliquot60) }}</template>
         </LabelValue>
         <LabelValue class="four-cols-breakdown mt-6">
