@@ -39,7 +39,7 @@ export default {
   methods: {
     toggleCard(index) {
       if(this.hideItemsToDebug.indexOf(index) > -1) {
-        this.hideItemsToDebug.splice(index, 1)
+        this.hideItemsToDebug.splice(this.hideItemsToDebug.indexOf(index), 1)
       } else {
         this.hideItemsToDebug.push(index)
       }
