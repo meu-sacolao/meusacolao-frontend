@@ -30,6 +30,10 @@
 
           <div class="w-full flex flex-col mt-4">
 
+            <div class="w-full flex mb-2">
+              <AppIcons icon="analytics" class="text-slate-400" />
+              <p class="ml-2 p truncate text-slate-600 leading-relaxed ...">{{ retirementOption.result }}</p>
+            </div>
             <div 
               class="w-full flex"
               v-for="(error, index) in retirementOption.errors"
