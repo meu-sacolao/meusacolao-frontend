@@ -65,17 +65,3 @@ export default {
   components: { LabelValue }
 }
 </script>
-
-Date = obj?.retirementDate || ''
-this.lifeExpectationValue = obj?.lifeExpectationValue || 0
-this.retirementFactor = obj?.retirementFactor || 0
-this.ageOnRetirementDate = obj?.ageOnRetirementDate || 0
-this.contributionTimeInDays = obj?.contributionTimeInDays || 0
-this.contributionTimeInMonths = obj?.contributionTimeInMonths || 0
-this.contributionTimeInYears = obj?.contributionTimeInYears || 0
-this.contributionTimeString = obj?.contributionTimeString || ''
-this.avgMajor80Percent = obj?.avgMajor80Percent || 0
-this.avgAllContributions = obj?.avgAllContributions || 0
-this.withAliquot70 = obj?.withAliquot70 || 0
-this.withAliquot60 = obj?.withAliquot60 || 0
-this.avgAllWithRetirementFactor = obj?.avgAllWithRetirementFactor || 0

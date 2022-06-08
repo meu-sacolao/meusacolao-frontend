@@ -21,15 +21,21 @@
         <CnisUserCard :cnisParsedData="cnisParsedData"></CnisUserCard>
   
         <CnisRetirementInfoCard :cnisParsedData="cnisParsedData"></CnisRetirementInfoCard>
+
+        <CnisRetirementGroupCard 
+          v-for="(retirementGroup, index) in cnisParsedData.retirementGroups"
+          :key="`retirementGroup${index}`"
+          :retirementGroup="retirementGroup"
+        ></CnisRetirementGroupCard>
   
-        <CnisSocialSecurityRelationCard
+        <!-- <CnisSocialSecurityRelationCard
           v-for="socialSecurityRelation of cnisParsedData.socialSecurityRelations"
           :key="socialSecurityRelation.seqNumber"
           :socialSecurityRelation="socialSecurityRelation"
         >
         </CnisSocialSecurityRelationCard>
   
-        <DebugCnisDebug :_debugItems="cnisParsedData._debugItems"></DebugCnisDebug>
+        <DebugCnisDebug :_debugItems="cnisParsedData._debugItems"></DebugCnisDebug> -->
       </div>
 
     </div>
@@ -50,7 +56,7 @@ export default {
         name: ''
       },
       cnisParsedData: new CnisParsedData(),
-      isProcessed: false
+      isProcessed: true
     }
   },
   mounted() {

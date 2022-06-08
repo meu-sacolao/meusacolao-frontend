@@ -9,8 +9,11 @@
           <th>Valor pós limite</th>
           <th>Valor pós correção</th>
           <th>Valor final</th>
-          <th>Ordem vinculo</th>
-          <th>Ordem contr.</th>
+          <th>É maior que o limite</th>
+          <th>É menor que o mín.</th>
+          <th>É antes de Jul/94</th>
+          <th>É depois da reforma de 2019</th>
+          <th>É maior que 80%</th>
           <th>Ignorado?</th>
           <th>Motivo</th>
         </tr>
@@ -28,12 +31,15 @@
           </td>
           <td>
             <span>{{ vueNumberFormat(contribution.valueAfterCorrection) }}</span>
-            <span class="ml-2" v-if="contribution.indexCorrection">(Fator: {{ contribution.indexCorrection }})</span>
+            <span class="ml-2" v-if="contribution.indexCorrection">(Índice: {{ contribution.indexCorrection }})</span>
           </td>
           <td>{{ vueNumberFormat(contribution.finalValue) }}</td>
-          <td>{{ contribution.indexSocialSecurityRelation }}</td>
-          <td>{{ contribution.indexContribution }}</td>
-          <td>{{ contribution.isIgnored }}</td>
+          <td><AppBooleanLabel v-model:value="contribution.isMoreThanLimit" /></td>
+          <td><AppBooleanLabel v-model:value="contribution.isLessThanMinimum" /></td>
+          <td><AppBooleanLabel v-model:value="contribution.isBeforeJuly1994" /></td>
+          <td><AppBooleanLabel v-model:value="contribution.isAfterReform2019" /></td>
+          <td><AppBooleanLabel v-model:value="contribution.isMajor80ThanPercent" /></td>
+          <td><AppBooleanLabel v-model:value="contribution.isIgnored" /></td>
           <td>{{ contribution.ignoredReason }}</td>
         </tr>
       </tbody>

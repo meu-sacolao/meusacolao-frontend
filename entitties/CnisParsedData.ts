@@ -26,6 +26,7 @@ export default class CnisParsedData {
 
   user: User = new User()
   socialSecurityRelations: Array<SocialSecurityRelation> = []
+  retirementGroups: Array<any> = []
 
   _debugItems: Array<any> = []
 
@@ -52,6 +53,7 @@ export default class CnisParsedData {
 
     this.user = obj?.user || new User()
     this.socialSecurityRelations = obj?.socialSecurityRelations || []
+    this.retirementGroups = obj?.retirementGroups || []
 
     //Debug items
     this._debugItems = obj?._debugItems || []

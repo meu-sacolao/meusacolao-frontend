@@ -33,6 +33,10 @@
               <template v-slot:label>Término</template>
               <template v-slot:value>{{ socialSecurityRelation.endAt ? socialSecurityRelation.endAt : '--' }}</template>
             </LabelValue>
+            <LabelValue class="four-cols-breakdown">
+              <template v-slot:label>Tempo de contribuição</template>
+              <template v-slot:value>{{ socialSecurityRelation.contributionTimeString }} ({{ socialSecurityRelation.contributionTimeInDays }})</template>
+            </LabelValue>
           </div>
         </div>
       </div>

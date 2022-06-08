@@ -4,7 +4,7 @@
       <div class="w-full flex items-center">
         <div class="w-full flex flex-col">
           <div class="w-full flex space-x-2 pr-12">
-            <h3 class="h3 truncate ...">{{ cnisParsedData.user.name }}</h3>
+            <h3 class="h3 truncate leading-relaxed ...">{{ cnisParsedData.user.name }}</h3>
           </div>
 
           <div class="w-full flex flex-wrap justify-between mt-4">
