@@ -56,7 +56,7 @@ export default {
         name: ''
       },
       cnisParsedData: new CnisParsedData(),
-      isProcessed: true
+      isProcessed: false
     }
   },
   mounted() {
@@ -69,6 +69,7 @@ export default {
   },
   methods: {
     upload() {
+      this.isProcessed = false
       const fd = new FormData()
       fd.append('cnisFile', this.file)
       fd.append('cnisFileName', this.file.name)
