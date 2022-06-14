@@ -31,7 +31,7 @@
           <AppIcons icon="close" />
         </button>
         <div class="w-full">
-          <AuthForm> </AuthForm>
+          <AuthForm></AuthForm>
         </div>
       </div>
     </div>
@@ -48,10 +48,10 @@ export default {
     };
   },
   mounted() {
-    this.$eventBus.$on('openModal', this.open)
+    this.emitter.on('openModal', this.open)
   },
   beforeDestroy() {
-    this.$eventBus.$off('openModal')
+    this.emitter.off('openModal')
   },
   methods: {
     open(payload) {

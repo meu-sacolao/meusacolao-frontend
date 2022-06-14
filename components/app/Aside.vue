@@ -4,7 +4,7 @@
     class="mt-24 fixed top-0 right-0 w-full translate-x-full lg:max-w-lg p-12 transition-all duration-300 easy-in-out h-screen bg-brand-grandient overflow-hidden flex items-start justify-center"
     :class="[menuIsOpen ? '-translate-x-0' : '']"
   >
-    <AppButton @click.prevent="$eventBus.$emit('openModal')" bg="bg-slate-700" text="text-white">
+    <AppButton @click.prevent="emitter.emit('openModal')" bg="bg-slate-700" text="text-white">
       Login
     </AppButton>
   </aside>

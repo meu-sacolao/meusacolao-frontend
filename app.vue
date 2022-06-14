@@ -13,6 +13,8 @@
       <NuxtLayout>
         <NuxtPage/>
       </NuxtLayout>
+
+      <AppModal></AppModal>
     </Body>
   </Html>
 </template>
