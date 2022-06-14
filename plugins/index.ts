@@ -1,7 +1,10 @@
-import VueNumberFormat from '@igortrindade/vue-number-format'
-import VueTheMask from 'vue-the-mask'
+
+import setupDirectives from '@/setup/directives'
+import setupComponents from '@/setup/components'
+import setupGlobals from '@/setup/globals'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(VueNumberFormat, { prefix: 'R$ ', decimal: '.', thounsand: ',' })
-  nuxtApp.vueApp.use(VueTheMask)
+  setupDirectives(nuxtApp.vueApp)
+  setupComponents(nuxtApp.vueApp)
+  setupGlobals(nuxtApp.vueApp)
 })
