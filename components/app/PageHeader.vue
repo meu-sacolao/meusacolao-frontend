@@ -7,7 +7,7 @@
     <div class="flex">
       </div>
     <button 
-      @click="toggleMenu()"
+      @click.stop="toggleMenu()"
       class="menu-toggle" 
       :class="{ 'active' : menuIsOpen }"
     >
@@ -25,12 +25,11 @@ export default {
   name: 'AppPageHeader',
   data() {
     return {
-      menuIsOpen: true
+      menuIsOpen: false
     }
   },
   methods: {
     toggleMenu() {
-      console.log(this.$refs['AppAside'])
       this.$refs['AppAside'].toggleDrawer()
     }
   }

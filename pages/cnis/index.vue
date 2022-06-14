@@ -44,7 +44,7 @@
 
 <script>
 import Api from '@/util/Api'
-import CnisParsedData from '@/entitties/CnisParsedData'
+import CnisParsedData from '@/entities/CnisParsedData'
 import contributionTimeBeforeReform from './CNIS Anneliese.pdf_contributionTimeBeforeReform.json'
 export default {
   name: 'PageCnis',
