@@ -3,7 +3,13 @@ import { defineNuxtConfig } from 'nuxt'
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: [
+    '@nuxtjs/tailwindcss'
+  ],
+
+  buildModules: [
+    '@pinia/nuxt',
+  ],
 
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',

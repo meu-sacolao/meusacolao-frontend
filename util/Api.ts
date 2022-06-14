@@ -8,12 +8,14 @@ axios.defaults.headers.common['Content-Type'] = 'application/json'
 axios.defaults.headers.common['Accept'] = '*/*'
 axios.defaults.baseURL = config[process.env.NODE_ENV]['API_BASE_URL']
 
+
+
 /**
  * Request interceptors
  */
-axios.interceptors.request.use(function (config) {
+axios.interceptors.request.use(function (request) {
 
-  return config;
+  return request
 }, function (error) {
   // console.log(error)
   return Promise.reject(error)
