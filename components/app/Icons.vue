@@ -2,8 +2,7 @@
   <div style="display: contents">
     <span
       v-if="getIconType === 'material-icons'"
-      class="material-icons-round"
-      :class="[getIconClasses]"
+      :class="[getIconClasses, `material-symbols-${iconStyle}`]"
       :style="{ fontSize: `${size}px`}"
     >
       {{ getIcon }}
@@ -88,6 +87,11 @@ export default {
     loaderErrorIcon: {
       type: String,
       default: 'more_horiz'
+    },
+
+    iconStyle: {
+      type: String,
+      default: 'sharp'
     }
   },
   data() {
