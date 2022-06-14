@@ -13,20 +13,10 @@
       <NuxtLayout>
         <NuxtPage/>
       </NuxtLayout>
-
-      <AppButton @click="$eventBus.$emit('openModal')">Teste Modal</AppButton>
-
-      <AppModal />
     </Body>
   </Html>
 </template>
 
-<script>
+<script setup>
   import '@/assets/css/main.scss'
-
-  export default {
-    mounted() {
-      // this.$eventBus.$emit('openModal')
-    }
-  }
 </script>
