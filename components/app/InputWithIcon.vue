@@ -1,9 +1,14 @@
 <template>
   <div class="block my-3 w-full">
-    <label v-if="label"><span class="border-b-4 border-cedar-chest">{{label}}</span></label>
+    <label v-if="label"
+      ><span class="border-b-4 border-cedar-chest">{{ label }}</span></label
+    >
     <div class="relative mt-2">
-      <div v-if="icon" class="h-full absolute pin-y pin-l flex items-center text-grey pointer-events-none pl-3">
-        <AppIcons :icon="icon" />
+      <div
+        v-if="icon"
+        class="icon-classes"
+      >
+        <AppIcons :icon="icon" color="text-slate-300" size="18" />
       </div>
 
       <input
@@ -14,7 +19,7 @@
         :value="value"
         @input="$emit('update:value', $event.target.value)"
         @keydown.enter="action()"
-        class="block appearance-none outline-none w-full h-full border border-grey focus:border-blue-dark bg-grey-light text-grey-darker text-lg py-4 pr-4 pl-9"
+        class="input-classes"
       />
       <input
         v-else
@@ -25,7 +30,7 @@
         @input="$emit('update:value', $event.target.value)"
         @keydown.enter="action()"
         v-mask="mask"
-        class="block appearance-none outline-none w-full h-full border border-grey focus:border-blue-dark bg-grey-light text-grey-darker text-lg py-4 pr-4 pl-9"
+        class="input-classes"
       />
     </div>
   </div>
@@ -42,7 +47,18 @@ export default {
     "value",
     "label",
     "action",
-    'mask'
-  ]
-}
+    "mask",
+  ],
+};
 </script>
+
+<style lang="scss">
+
+  .input-classes {
+    @apply block appearance-none outline-none w-full h-full border border-slate-200 focus:border-slate-300 focus:shadow-sm text-lg py-4 pr-4 pl-9;
+  }
+
+  .icon-classes {
+    @apply h-full absolute inset-y-0 left-0 flex items-center text-slate-200 pointer-events-none pl-3;
+  }
+</style>
