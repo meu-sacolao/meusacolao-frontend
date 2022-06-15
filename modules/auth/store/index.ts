@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import Api from '@/util/Api'
+import User from '@/entities/User'
 
 export const useAuthStore = defineStore('auth', {
-
+  persist: true,
   state: () => ({
     loggedUser: null,
     loggedUserToken: null
@@ -20,7 +21,7 @@ export const useAuthStore = defineStore('auth', {
 
     async getLoggedUser() {
       Api.get('/auth/getLoggedUser').then(({ data }) => {
-        console.log(data)
+        this.loggedUser = new User(data)
       })
     }
   },

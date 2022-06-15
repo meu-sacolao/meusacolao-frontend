@@ -15,10 +15,21 @@
       </NuxtLayout>
 
       <AppModal></AppModal>
+
+
+      <div class="w-full bg-red-100">
+        <pre>{{ authStore.loggedUser }}</pre>
+      </div>
     </Body>
   </Html>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import '@/assets/css/main.scss'
+  import { useAuthStore } from "@/modules/auth/store"
+
+  const authStore = useAuthStore()
+
+  const { loggedUser } = authStore
+
 </script>
