@@ -13,16 +13,16 @@
               <template v-slot:value>{{ cnisParsedData.user.cpf ? cnisParsedData.user.cpf : '--' }}</template>
             </LabelValue>
             <LabelValue class="four-cols-breakdown">
+              <template v-slot:label>Data de nascimento</template>
+              <template v-slot:value>{{ cnisParsedData.user.birthDate ? cnisParsedData.user.birthDate : '--' }}</template>
+            </LabelValue>
+            <LabelValue class="four-cols-breakdown">
               <template v-slot:label>NIT</template>
               <template v-slot:value>{{ cnisParsedData.user.nit ? cnisParsedData.user.nit : '--' }}</template>
             </LabelValue>
             <LabelValue class="four-cols-breakdown">
               <template v-slot:label>Nome mãe</template>
               <template v-slot:value>{{ cnisParsedData.user.motherName ? cnisParsedData.user.motherName : '--' }}</template>
-            </LabelValue>
-            <LabelValue class="four-cols-breakdown">
-              <template v-slot:label>Email</template>
-              <template v-slot:value>{{ cnisParsedData.user.email ? cnisParsedData.user.email : '--' }}</template>
             </LabelValue>
           </div>
         </div>

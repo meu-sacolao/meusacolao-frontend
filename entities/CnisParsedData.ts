@@ -24,6 +24,8 @@ export default class CnisParsedData {
   withAliquot60: number = 0
   avgAllWithRetirementFactor: number = 0
 
+  ages: any = null
+
   user: User = new User()
   socialSecurityRelations: Array<SocialSecurityRelation> = []
   retirementGroups: Array<any> = []
@@ -50,6 +52,8 @@ export default class CnisParsedData {
     this.withAliquot70 = obj?.withAliquot70 || 0
     this.withAliquot60 = obj?.withAliquot60 || 0
     this.avgAllWithRetirementFactor = obj?.avgAllWithRetirementFactor || 0
+
+    this.ages = obj?.ages || null
 
     this.user = obj?.user || new User()
     this.socialSecurityRelations = obj?.socialSecurityRelations || []

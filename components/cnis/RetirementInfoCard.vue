@@ -1,46 +1,27 @@
 <template>
   <AppCard>
     <template v-slot:header>
-      <div class="w-full flex flex-wrap justify-start mt-4">
+      <div class="w-full flex space-x-2 pr-12">
+        <h3 class="h3 truncate leading-relaxed ...">Informações do cálculo</h3>
+      </div>
+    </template>
+    <template v-slot:content>
+      <div class="w-full flex flex-wrap justify-start">
         <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>Data aposentadoria</template>
+          <template v-slot:label>Data do cálculo</template>
           <template v-slot:value>{{ cnisParsedData.retirementDate }}</template>
-        </LabelValue>
-        <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>Tempo de contribuição total</template>
-          <template v-slot:value>{{ cnisParsedData.contributionTimeString }}</template>
         </LabelValue>
         <LabelValue class="four-cols-breakdown mt-6">
           <template v-slot:label>Expectativa de vida</template>
           <template v-slot:value>{{ cnisParsedData.lifeExpectationValue }}</template>
         </LabelValue>
         <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>Idade na data da aposentadoria</template>
-          <template v-slot:value>{{ cnisParsedData.ageOnRetirementDate }}</template>
+          <template v-slot:label>Idade na data do cálculo</template>
+          <template v-slot:value>{{ cnisParsedData.ages.onRetirementDate.fullYears }}</template>
         </LabelValue>
         <LabelValue class="four-cols-breakdown mt-6">
           <template v-slot:label>Fator Previdenciário</template>
-          <template v-slot:value>{{ cnisParsedData.retirementFactor }}</template>
-        </LabelValue>
-        <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>Média dos 80% maiores salários</template>
-          <template v-slot:value>{{ vueNumberFormat(cnisParsedData.avgMajor80Percent) }}</template>
-        </LabelValue>
-        <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>Média de todas as contribuições</template>
-          <template v-slot:value>{{ vueNumberFormat(cnisParsedData.avgAllContributions) }}</template>
-        </LabelValue>
-        <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>Valor calculado com Alíquota de 70%</template>
-          <template v-slot:value>{{ vueNumberFormat(cnisParsedData.withAliquot70) }}</template>
-        </LabelValue>
-        <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>Valor calculado com Alíquota de 60%</template>
-          <template v-slot:value>{{ vueNumberFormat(cnisParsedData.withAliquot60) }}</template>
-        </LabelValue>
-        <LabelValue class="four-cols-breakdown mt-6">
-          <template v-slot:label>avgAllWithRetirementFactor</template>
-          <template v-slot:value>{{ vueNumberFormat(cnisParsedData.avgAllWithRetirementFactor) }}</template>
+          <template v-slot:value>{{ vueNumberFormat(cnisParsedData.retirementFactor, { prefix: '', decimals: ',', precision: 2 }) }}</template>
         </LabelValue>
       </div>
     </template>

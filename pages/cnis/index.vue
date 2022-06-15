@@ -6,7 +6,7 @@
       <AppCard>
         <template v-slot:content>
           <div class="flex flex-col space-y-3">
-            <AppInputWithIcon v-model:value="retirementDate" :mask="'##/##/####'" label="Data da aposentadoria" placeholder="DD/MM/AAAA" />
+            <AppInputWithIcon v-model:value="retirementDate" :mask="'##/##/####'" label="Data do cálculo" icon="calendar_month" placeholder="DD/MM/AAAA" />
             <AppUploadInput 
               placeholder="Clique ou arraste aqui um arquivo CNIS (.pdf)"
               v-model="file" 
