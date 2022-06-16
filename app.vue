@@ -13,13 +13,18 @@
       <NuxtLayout>
         <NuxtPage/>
       </NuxtLayout>
-
-      <AppModal></AppModal>
+    
+      <AppBaseModal></AppBaseModal>
       <AppBaseDrawer></AppBaseDrawer>
 
 
-      <div class="w-full bg-red-100">
-        <pre>{{ authStore.loggedUser }}</pre>
+      <div class="w-full flex flex-col space-y-6 p-8 bg-red-100">
+        <AppButton bg="bg-slate-300 w-32" @click="emitter.emit('openDrawer', { component: 'RetirementOptionDetailDrawer', payload: { t: 'asdasd'} })">Abrir drawer</AppButton>
+        <AppButton bg="bg-slate-300 w-32" @click="emitter.emit('openModal', { component: 'AuthForm' })">Abrir Modal</AppButton>
+  
+        <div class="w-full ">
+          <pre>{{ authStore.loggedUser }}</pre>
+        </div>
       </div>
     </Body>
   </Html>

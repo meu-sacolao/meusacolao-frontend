@@ -1,8 +1,6 @@
 <template>
   <NuxtLayout name="main-app">
     <div class="w-full flex flex-col space-y-8">
-
-      <AppButton bg="bg-slate-300" @click="emitter.emit('openDrawer', { component: 'RetirementOptionDetailDrawer', payload: retirementOption })">Ver cálculo</AppButton>
       
       <AppCard>
         <template v-slot:content>

@@ -31,7 +31,7 @@
           <AppIcons icon="close" />
         </button>
         <div class="w-full">
-          <AuthForm></AuthForm>
+          <component v-if="component" :is="component" :payload="payload"/>
         </div>
       </div>
     </div>
@@ -44,7 +44,9 @@ export default {
   data() {
     return {
       show: false,
-      dialogClasses: 'w-full max-w-2xl'
+      dialogClasses: 'w-full max-w-2xl',
+      component: null,
+      payload: null,
     };
   },
   mounted() {
@@ -54,11 +56,14 @@ export default {
     this.emitter.off('openModal')
   },
   methods: {
-    open(payload) {
-      console.log('payload', payload)
+
+    open({ component, payload }) {
+      this.component = component
+      this.payload = payload
       this.show = true
       this.addListeners()
     },
+
     close() {
       this.show = false
       this.removeListeners()

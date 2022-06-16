@@ -1,7 +1,15 @@
 <template>
+
+  <transition name="fade">
+    <div 
+      v-if="menuIsOpen" 
+      @click="toggleDrawer()"
+      class="mt-24 w-screen h-screen fixed inset-0 bg-slate-800 bg-opacity-50 z-10"
+    ></div>
+  </transition>
   <aside 
     ref="aside"
-    class="mt-24 fixed top-0 right-0 w-full translate-x-full lg:max-w-lg p-12 transition-all duration-300 easy-in-out h-screen bg-brand-grandient overflow-hidden flex items-start justify-center"
+    class="mt-24 fixed top-0 right-0 z-20  w-full translate-x-full lg:max-w-lg p-12 transition-all duration-300 easy-in-out h-screen bg-brand-grandient overflow-hidden flex items-start justify-center"
     :class="[menuIsOpen ? '-translate-x-0' : '']"
   >
     <AppButton @click.prevent="emitter.emit('openModal')" bg="bg-slate-700" text="text-white">

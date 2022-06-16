@@ -1,8 +1,8 @@
 
 import VueNumberFormat from '@igortrindade/vue-number-format'
 import VueTheMask from 'vue-the-mask'
-import AuthForm from '@/modules/auth/AuthForm'
 
+import AuthForm from '@/modules/auth/AuthForm'
 import RetirementOptionDetailDrawer from '@/modules/app/cnis/RetirementOptionDetailDrawer'
 
 export default (vueInstance) => {
