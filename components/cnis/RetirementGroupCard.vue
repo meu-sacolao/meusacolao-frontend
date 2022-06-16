@@ -43,6 +43,8 @@
               <p class="ml-2 p truncate text-slate-600 leading-relaxed ...">{{ error }}</p>
             </div>
           </div>
+
+          <AppButton bg="bg-slate-300" @click="emitter.emit('openDrawer', { component: 'RetirementOptionDetailDrawer', payload: retirementOption })">Ver cálculo</AppButton>
           
         </div>
 

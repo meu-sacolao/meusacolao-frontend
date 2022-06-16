@@ -2,6 +2,7 @@
   <NuxtLayout name="main-app">
     <div class="w-full flex flex-col space-y-8">
 
+      <AppButton bg="bg-slate-300" @click="emitter.emit('openDrawer', { component: 'RetirementOptionDetailDrawer', payload: retirementOption })">Ver cálculo</AppButton>
       
       <AppCard>
         <template v-slot:content>
@@ -45,7 +46,6 @@
 <script>
 import Api from '@/util/Api'
 import CnisParsedData from '@/entities/CnisParsedData'
-import contributionTimeBeforeReform from './CNIS Anneliese.pdf_contributionTimeBeforeReform.json'
 export default {
   name: 'PageCnis',
   data() {
@@ -58,14 +58,6 @@ export default {
       cnisParsedData: new CnisParsedData(),
       isProcessed: false
     }
-  },
-  mounted() {
-    // Api.post('/auth/login', {
-    //   "email": "igortrindademe@gmail.com",
-    //   "password": "123123"
-    // })
-
-    this.cnisParsedData =  new CnisParsedData(contributionTimeBeforeReform.cnisParsedData)
   },
   methods: {
     upload() {

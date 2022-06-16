@@ -7,6 +7,12 @@ module.exports = {
       borderWidth: {
         '12': '12px',
         '20': '20px',
+      },
+      minWidth: {
+        'md': '24rem',
+        'md': '28rem',
+        'lg': '32rem',
+        'xl': '36rem',
       }
     },
     fontFamily: {

@@ -15,6 +15,7 @@
       </NuxtLayout>
 
       <AppModal></AppModal>
+      <AppBaseDrawer></AppBaseDrawer>
 
 
       <div class="w-full bg-red-100">
