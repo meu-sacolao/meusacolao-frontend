@@ -10,6 +10,7 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
+
     async login({ email, password }) {
       Api.post('/auth/login', { email, password }).then(({ data }) => {
         this.loggedUserToken = data.token
@@ -17,7 +18,6 @@ export const useAuthStore = defineStore('auth', {
         this.getLoggedUser()
       })
     },
-
 
     async getLoggedUser() {
       Api.get('/auth/getLoggedUser').then(({ data }) => {

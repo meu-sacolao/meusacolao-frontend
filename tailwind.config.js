@@ -8,6 +8,9 @@ module.exports = {
         '12': '12px',
         '20': '20px',
       },
+      maxWidth: {
+        'screen': '100vw !important'
+      },
       minWidth: {
         'md': '24rem',
         'md': '28rem',

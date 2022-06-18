@@ -19,7 +19,7 @@
     <div 
       v-if="showDrawer" 
       ref="baseDrawer"
-      class="origin-right transition-all duration-200 easy-in-out transform fixed top-0 right-0 min-w-xl max-w-full h-screen bg-white shadow-lg flex flex-col z-60 psui-overflow-hidden mt-24"
+      class="base-drawer-dialog transition-all duration-200 easy-in-out transform"
     >
       <button
         @click="closeDrawer()"
@@ -79,3 +79,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .base-drawer-dialog {
+    @apply border fixed top-0 right-0 h-screen w-full bg-white shadow-lg flex flex-col z-50 overflow-hidden mt-24 p-10
+  }
+
+  @media (min-width: 576px) {
+    .base-drawer-dialog {
+      @apply min-w-xl max-w-xl;
+    }
+  }
+</style>
