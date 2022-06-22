@@ -54,8 +54,8 @@ export default {
       fd.append('retirementDate', this.retirementDate)
       Api.post(`/cnis/upload`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
         .then(({ data }) => {
-          this.cnisParsedData = new CnisParsedData(data.cnisParsedData)
-          this.isProcessed = true
+          console.log(data)
+          this.$router.push(`/simulacao/${data.simulation.id}`)
         })
         .catch((error) => {
           console.log(error)

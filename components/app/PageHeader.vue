@@ -4,17 +4,18 @@
       <img src="/images/logo/1x/LOGO_2_1_1x.png" class="h-14" alt="Logo Calculo e previdência"/>
     </div>
 
-    <div class="flex">
-      </div>
-    <button 
-      @click.stop="toggleMenu()"
-      class="menu-toggle" 
-      :class="{ 'active' : showMenu }"
-    >
-      <span class="menu-toggle-bar"></span>
-      <span class="menu-toggle-bar"></span>
-      <span class="menu-toggle-bar"></span>
-    </button>
+    <div class="flex items-center space-x-6">
+      <NuxtLink to="/cnis"><AppButton class="bg-amber-600 text-white rounded-full px-6">Simule sua aposentadoria</AppButton></NuxtLink> 
+      <button 
+        @click.stop="toggleMenu()"
+        class="menu-toggle" 
+        :class="{ 'active' : showMenu }"
+      >
+        <span class="menu-toggle-bar"></span>
+        <span class="menu-toggle-bar"></span>
+        <span class="menu-toggle-bar"></span>
+      </button>
+    </div>
 
     <AppAside ref="AppAside"  v-model:showMenu="showMenu" />
   </nav>

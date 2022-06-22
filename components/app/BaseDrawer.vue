@@ -36,8 +36,10 @@
         <AppIcons icon="close" />
       </button>
 
-      <div class="flex flex-col p-10">
-        <component v-if="component" :is="component" :payload="payload" />
+      <div class="flex flex-col h-full overflow-y-auto">
+        <div class="p-10 mb-24">
+          <component v-if="component" :is="component" :payload="payload" />
+        </div>
       </div>
 
     </div>
@@ -82,7 +84,7 @@ export default {
 
 <style lang="scss">
   .base-drawer-dialog {
-    @apply border fixed top-0 right-0 h-screen w-full bg-white shadow-lg flex flex-col z-50 overflow-hidden mt-24 p-10
+    @apply border fixed top-0 right-0 h-screen w-full bg-white shadow-lg flex flex-col z-50 overflow-hidden mt-24
   }
 
   @media (min-width: 576px) {
