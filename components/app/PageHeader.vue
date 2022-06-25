@@ -1,7 +1,9 @@
 <template>
   <nav class="fixed top-0 right-0 left-0 z-50 w-full px-6 md:px-20 xl:px-28 flex flex-wrap justify-between items-center h-24 font-sans bg-brand-gradient shadow-xl">
     <div class=" flex">
-      <img src="/images/logo/1x/LOGO_2_1_1x.png" class="h-14" alt="Logo Calculo e previdência"/>
+      <nuxt-link to="/">
+        <img src="/images/logo/1x/LOGO_2_1_1x.png" class="h-14" alt="Logo Calculo e previdência"/>
+      </nuxt-link>
     </div>
 
     <div class="flex items-center space-x-6">
@@ -36,7 +38,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

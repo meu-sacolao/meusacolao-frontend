@@ -4,10 +4,11 @@
   </NuxtLayout>
 </template>
 
-<script>
-import ProcessCnisFile from '@/modules/app/cnis/ProcessCnisFile'
-export default {
-  name: 'PageCnis',
-  components: { ProcessCnisFile }
-}
+<script setup>
+  import ProcessCnisFile from '@/modules/app/cnis/ProcessCnisFile'
+
+  useHead({
+    title: 'Simule sua aposentadoria - Cálculo e Previdência',
+  })
+
 </script>
