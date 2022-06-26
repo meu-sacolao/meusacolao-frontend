@@ -21,20 +21,21 @@
       ref="baseDrawer"
       class="base-aside-dialog transition-all duration-200 easy-in-out transform bg-brand-gradient"
     >
-      <AppButton @click.prevent="emitter.emit('openModal', { component: 'AuthForm' })" bg="bg-slate-700" text="text-white">
-        Login
-      </AppButton>
-
       <ul 
         v-for="(group, index) in groups" 
         :key="`aside-group-${index}`"
         class="mt-4"
         v-show="checkPermission(group.roles)"
       >
+        <div class="w-full bg-amber-600 py-2 my-6" v-if="group.title">
+          <h3  class="text-center"><span class="text-xl text-white border-l-4 border-amber-600 pl-4">{{ group.title }}</span></h3>
+        </div>
         <li 
           v-for="(item, index) in group.items" 
           :key="`aside-item-${index}`"
-          class="text-2xl text-white mt-2"
+          class="font-light text-xl text-white mt-2 border-l-4 hover:border-amber-600 pl-4"
+          v-show="checkPermission(item.roles)"
+          :class="[route.path == item.action ? 'border-amber-600' : 'border-transparent']"
         >
           <button @click="makeAction(item.action)">{{ item.title }}</button>
         </li>
@@ -49,11 +50,12 @@
   import { defineProps, defineEmits, defineExpose, getCurrentInstance } from 'vue'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from "@/modules/auth/store"
-  import { useRouter } from 'vue-router'
+  import { useRouter, useRoute  } from 'vue-router'
   import emitter from '@/util/emitter'
 
   const { emit, refs } = getCurrentInstance()
   const router = useRouter()
+  const route = useRoute()
   const authStore = useAuthStore()
 
   const { loggedUser } = storeToRefs(authStore)
@@ -64,25 +66,19 @@
 
   defineEmits(['update:showMenu'])
 
-
-  const actionsAvailable = {
-    loginAction: () => {
-      console.log('asdasd')
-      console.log(emitter)
-      emitter.emit('openModal', { component: 'AuthForm' })
-    }
-  }
-
   const groups = ref([
     {
       items: [
         {
-          title: 'Entre ou cadastre-se',
-          action: { function: 'loginAction' }
-        },
-        {
           title: 'Simule sua aposentadoria',
           action: '/simulacao-de-aposentadoria'
+        },
+        {
+          title: 'Entre ou cadastre-se',
+          roles: 'NONE',
+          action: () => {
+            emitter.emit('openModal', { component: 'AuthForm' })
+          }
         }
       ]
     },
@@ -94,6 +90,18 @@
           title: 'Simulações',
           action: '/admin/simulacoes'
         }
+      ]
+    },
+    {
+      items: [
+        {
+          title: 'Sair',
+          roles: 'ANY',
+          action: () => {
+            authStore.logout()
+            router.push('/')
+          }
+        },
       ]
     }
   ])
@@ -129,17 +137,15 @@
     }
 
     const makeAction = (action) => {
-      console.log(action)
-      console.log(actionsAvailable)
-      if(typeof(action === 'string')) return router.push(action)
-      if(!actionsAvailable[action.function]) throw new Error(`Action: ${action.function} not available in actionsAvailable`)
-      actionsAvailable[action.function]()
+      if(typeof(action) === 'string') return router.push(action)
+      action()
     }
     
     const checkPermission = (roles) => {
-      if(!roles ||roles === 'ANY') return true
-      if(roles === 'NONE' && loggedUser.value.role) return false
-      return roles.includes(loggedUser.value.role)
+      if(!roles) return true
+      if(roles === 'ANY' && loggedUser.value) return true
+      if(roles === 'NONE' && !loggedUser.value) return true
+      return loggedUser.value && roles.includes(loggedUser.value.role)
     }
 
     defineExpose({
