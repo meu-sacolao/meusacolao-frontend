@@ -7,7 +7,7 @@
     </div>
 
     <div class="flex items-center space-x-6">
-      <NuxtLink to="/cnis"><AppButton class="bg-amber-600 text-white rounded-full px-6">Simule sua aposentadoria</AppButton></NuxtLink> 
+      <NuxtLink to="/simulacao-de-aposentadoria"><AppButton class="bg-amber-600 text-white rounded-full px-6">Simule sua aposentadoria</AppButton></NuxtLink> 
       <button 
         @click.stop="toggleMenu()"
         class="menu-toggle" 
@@ -28,7 +28,7 @@ export default {
   name: 'AppPageHeader',
   data() {
     return {
-      showMenu: false
+      showMenu: false,
     }
   },
   methods: {

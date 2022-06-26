@@ -14,24 +14,11 @@
         </div>
       </template>
     </AppCard>  
-
-    <div v-if="isProcessed" class="w-full flex flex-col space-y-8">
-      <CnisUserCard :cnisParsedData="cnisParsedData"></CnisUserCard>
-
-      <CnisRetirementInfoCard :cnisParsedData="cnisParsedData"></CnisRetirementInfoCard>
-
-      <CnisRetirementGroupCard 
-        v-for="(retirementGroup, index) in cnisParsedData.retirementGroups"
-        :key="`retirementGroup${index}`"
-        :retirementGroup="retirementGroup"
-      ></CnisRetirementGroupCard>
-    </div>
   </div>
 </template>
 
 <script>
 import Api from '@/util/Api'
-import CnisParsedData from '@/entities/CnisParsedData'
 export default {
   name: 'ProcessCnisFile',
   data() {
@@ -40,9 +27,7 @@ export default {
       file: {
         type: '',
         name: ''
-      },
-      cnisParsedData: new CnisParsedData(),
-      isProcessed: false
+      }
     }
   },
   methods: {
@@ -54,7 +39,6 @@ export default {
       fd.append('retirementDate', this.retirementDate)
       Api.post(`/cnis/upload`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
         .then(({ data }) => {
-          console.log(data)
           this.$router.push(`/simulacao/${data.simulation.id}`)
         })
         .catch((error) => {

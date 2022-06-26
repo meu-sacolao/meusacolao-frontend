@@ -1,12 +1,11 @@
 <template>
-  <div class="w-full flex flex-col">
-    <slot />
-  </div>
+  <NuxtLayout name="main-app">
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <script setup>
 definePageMeta({
   middleware: ["auth-admin"]
-  // or middleware: 'auth'
 })
 </script>

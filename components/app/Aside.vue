@@ -24,49 +24,128 @@
       <AppButton @click.prevent="emitter.emit('openModal', { component: 'AuthForm' })" bg="bg-slate-700" text="text-white">
         Login
       </AppButton>
+
+      <ul 
+        v-for="(group, index) in groups" 
+        :key="`aside-group-${index}`"
+        class="mt-4"
+        v-show="checkPermission(group.roles)"
+      >
+        <li 
+          v-for="(item, index) in group.items" 
+          :key="`aside-item-${index}`"
+          class="text-2xl text-white mt-2"
+        >
+          <button @click="makeAction(item.action)">{{ item.title }}</button>
+        </li>
+      </ul>
+
     </aside>
   </transition>
 </template>
 
-<script>
-export default {
-  name: 'Aside',
-  props: ['showMenu'],
-  expose: ['toggleDrawer'],
-  emits: ['update:showMenu'],
-  methods: {
+<script setup>
 
-    toggleDrawer() {
-      if(!this.showMenu) {
-        this.addListeners()
+  import { defineProps, defineEmits, defineExpose, getCurrentInstance } from 'vue'
+  import { storeToRefs } from 'pinia'
+  import { useAuthStore } from "@/modules/auth/store"
+  import { useRouter } from 'vue-router'
+  import emitter from '@/util/emitter'
+
+  const { emit, refs } = getCurrentInstance()
+  const router = useRouter()
+  const authStore = useAuthStore()
+
+  const { loggedUser } = storeToRefs(authStore)
+
+  const props = defineProps({
+    showMenu: Boolean
+  })
+
+  defineEmits(['update:showMenu'])
+
+
+  const actionsAvailable = {
+    loginAction: () => {
+      console.log('asdasd')
+      console.log(emitter)
+      emitter.emit('openModal', { component: 'AuthForm' })
+    }
+  }
+
+  const groups = ref([
+    {
+      items: [
+        {
+          title: 'Entre ou cadastre-se',
+          action: { function: 'loginAction' }
+        },
+        {
+          title: 'Simule sua aposentadoria',
+          action: '/simulacao-de-aposentadoria'
+        }
+      ]
+    },
+    {
+      title: 'Administrativo',
+      roles: ['ADMIN'],
+      items: [
+        {
+          title: 'Simulações',
+          action: '/admin/simulacoes'
+        }
+      ]
+    }
+  ])
+
+  const toggleDrawer = () => {
+
+      if(!props.showMenu) {
+        addListeners()
       } else {
-        this.removeListeners()
+        removeListeners()
       }
-      this.$emit('update:showMenu', !this.showMenu)
-    },
+      emit('update:showMenu', !props.showMenu)
+    }
 
-    addListeners() {
-      document.addEventListener("click", this.handleClickOutside)
-      document.addEventListener("keyup", this.handleEsc)
-    },
+    const addListeners = () => {
+      document.addEventListener("click", handleClickOutside)
+      document.addEventListener("keyup", handleEsc)
+    }
 
-    removeListeners() {
-      document.removeEventListener("click", this.handleClickOutside)
-      document.removeEventListener("keyup", this.handleEsc)
-    },
+    const removeListeners = () => {
+      document.removeEventListener("click", handleClickOutside)
+      document.removeEventListener("keyup", handleEsc)
+    }
 
-    handleEsc(evt) {
-      if (this.showMenu && evt.keyCode === 27) this.toggleDrawer()
-    },
+    const handleEsc = (evt) => {
+      if (showMenu && evt.keyCode === 27) toggleDrawer()
+    }
 
-    handleClickOutside(event) {
-      if (!(this.$refs['aside'] == event.target || this.$refs['aside'].contains(event.target))) {
-        this.toggleDrawer()
+    const handleClickOutside = (event) => {
+      if (!(refs['aside'] == event.target || refs['aside'] && refs['aside'].contains(event.target))) {
+        toggleDrawer()
       }
     }
+
+    const makeAction = (action) => {
+      console.log(action)
+      console.log(actionsAvailable)
+      if(typeof(action === 'string')) return router.push(action)
+      if(!actionsAvailable[action.function]) throw new Error(`Action: ${action.function} not available in actionsAvailable`)
+      actionsAvailable[action.function]()
+    }
     
-  }
-}
+    const checkPermission = (roles) => {
+      if(!roles ||roles === 'ANY') return true
+      if(roles === 'NONE' && loggedUser.value.role) return false
+      return roles.includes(loggedUser.value.role)
+    }
+
+    defineExpose({
+      toggleDrawer
+    })
+
 </script>
 
 <style lang="scss">

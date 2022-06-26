@@ -10,6 +10,7 @@ export default class User {
   gender: string = ''
   birthDate: string = ''
   motherName: string = ''
+  role: string = ''
   
   constructor(obj = null) {
     this.id = obj?.id || null
@@ -23,6 +24,7 @@ export default class User {
     this.gender = obj?.gender || ''
     this.birthDate = obj?.birthDate || ''
     this.motherName = obj?.motherName || ''
+    this.role = obj?.role || ''
   }
   
 }

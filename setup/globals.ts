@@ -1,6 +1,5 @@
-import mitt from 'mitt'
 import Api from '@/util/Api'
-const emitter = mitt()
+import emitter from '@/util/emitter'
 
 export default (vueInstance) => {
   vueInstance.config.globalProperties.emitter = emitter
