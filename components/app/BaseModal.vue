@@ -31,7 +31,7 @@
           <AppIcons icon="close" />
         </button>
         <div class="w-full">
-          <component v-if="component" :is="component" :payload="payload"/>
+          <component v-if="component" :is="component" :payload="payload" @close="close" />
         </div>
       </div>
     </div>
