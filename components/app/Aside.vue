@@ -47,7 +47,7 @@
 
 <script setup>
 
-  import { defineProps, defineEmits, defineExpose, getCurrentInstance } from 'vue'
+  import { getCurrentInstance } from 'vue'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from "@/modules/auth/store"
   import { useRouter, useRoute  } from 'vue-router'

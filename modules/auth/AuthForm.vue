@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-  import { defineEmits, getCurrentInstance } from 'vue'
+  import { getCurrentInstance } from 'vue'
   import { useAuthStore } from "@/modules/auth/store"
   import User from '@/entities/User'
 
