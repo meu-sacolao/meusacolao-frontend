@@ -5,9 +5,13 @@
     <AppInputWithIcon v-model:value="user.email" icon="email" type="email" label="Email" placeholder="Insira seu email" />
     <AppInputWithIcon v-model:value="user.password" icon="key" type="password" label="Senha" placeholder="Insira sua senha" />
 
-    <AppButton @click="login()">
-      Entrar
-    </AppButton>
+    <div class="w-full flex justify-end mt-10 block">
+      <AppButton bg="bg-brand-gradient" text="text-white" @click="login()">
+        <span>Entrar</span>
+        <AppIcons icon="chevron_right" />
+      </AppButton>
+    </div>
+    
   </div>
 </template>
 
