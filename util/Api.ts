@@ -17,7 +17,7 @@ axios.interceptors.request.use(function (request) {
   
   const authStore = useAuthStore()
   const { loggedUserToken } = authStore
-  request.headers['Authorization'] = `Bearer ${loggedUserToken}`
+  if(loggedUserToken) request.headers['Authorization'] = `Bearer ${loggedUserToken}`
 
   return request
 }, function (error) {

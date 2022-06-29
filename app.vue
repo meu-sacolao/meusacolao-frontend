@@ -30,11 +30,6 @@
 <script setup lang="ts">
   import '@/assets/css/main.scss'
   import { useAuthStore } from "@/modules/auth/store"
-
   const authStore = useAuthStore()
-
   const { loggedUser } = authStore
-
-  authStore.getLoggedUser()
-
 </script>
