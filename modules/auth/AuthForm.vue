@@ -26,6 +26,7 @@
     authStore.login({ email: user.value.email, password: user.value.password })
       .then(() => {
         emit('close')
+        alert('Logado com sucesso')
       })
       .catch(() => {
         alert('Erro ao logar')
