@@ -14,7 +14,6 @@ export const useAuthStore = defineStore('auth', {
     async login({ email, password }) {
       return Api.post('/auth/login', { email, password }).then(({ data }) => {
         this.loggedUserToken = data.token
-        Api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
         this.getLoggedUser()
       })
     },
