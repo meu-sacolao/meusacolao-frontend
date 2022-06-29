@@ -1,7 +1,12 @@
 <template>
   <div class="w-full block">
+
+    <label class="block mb-1" v-if="label">
+      <span class="border-b-4 border-zinc-200 ">{{ label }}</span>
+    </label>
+
     <label
-      class="w-full p-8 px-6 border-4 box-border border-dashed border-orange-200 hover:border-orange-400 rounded block flex items-center justify-center relative text-lg"
+      class="w-full mt-1 p-8 px-6 border-4 box-border border-dashed border-orange-200 hover:border-orange-400 rounded block flex items-center justify-center relative text-lg"
       :class="[
         disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
         modelValue?.name ? 'bg-orange-400' : 'bg-white',

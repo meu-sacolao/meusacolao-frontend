@@ -1,8 +1,8 @@
 <template>
   <div class="block my-3 w-full">
-    <label v-if="label"
-      ><span class="border-b-4 border-cedar-chest">{{ label }}</span></label
-    >
+    <label v-if="label">
+      <span class="border-b-4 border-zinc-200">{{ label }}</span>
+    </label>
     <div class="relative mt-2">
       <div
         v-if="icon"

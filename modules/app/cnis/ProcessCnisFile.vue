@@ -2,15 +2,31 @@
   <div class="w-full flex flex-col space-y-8">
     
     <AppCard>
+      <template v-slot:header>
+        <div class="w-full flex space-x-2 pr-12">
+        <h3 class="h3 truncate leading-relaxed ...">Simule sua aposentadoria</h3>
+      </div>
+      </template>
       <template v-slot:content>
-        <div class="flex flex-col space-y-3">
+        <div class="flex flex-col space-y-4">
+          
+          <p class="text-lg">
+            Insira seu extrato do INSS (arquivo CNIS) para simular sua aposentadoria gratuitamente.
+          </p>
           <AppInputWithIcon v-model:value="retirementDate" :mask="'##/##/####'" label="Data do cálculo" icon="calendar_month" placeholder="DD/MM/AAAA" />
           <AppUploadInput 
             placeholder="Clique ou arraste aqui um arquivo CNIS (.pdf)"
             v-model="file" 
             accept="application/pdf"
+            label="Arquivo CNIS"
           />
-          <AppButton bg="bg-slate-700" text="text-white" @click="upload">Processar CNIS</AppButton>
+
+        </div>
+        <div class="w-full flex justify-end mt-10 block">
+          <AppButton bg="bg-brand-gradient" text="text-white" @click="upload">
+            <span>Continuar</span>
+            <AppIcons icon="chevron_right" />
+          </AppButton>
         </div>
       </template>
     </AppCard>  
@@ -42,6 +58,7 @@ export default {
           this.$router.push(`/simulacao/${data.simulation.id}`)
         })
         .catch((error) => {
+          alert('Erro ao processar CNIS')
           console.log(error)
         })
     }
