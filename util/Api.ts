@@ -1,5 +1,6 @@
 import axios from 'axios'
 import config from '@/config'
+import { useAuthStore } from "@/modules/auth/store"
 
 /**
  * Default headers
@@ -9,11 +10,14 @@ axios.defaults.headers.common['Accept'] = '*/*'
 axios.defaults.baseURL = config[process.env.NODE_ENV]['API_BASE_URL']
 
 
-
 /**
  * Request interceptors
  */
 axios.interceptors.request.use(function (request) {
+  
+  const authStore = useAuthStore()
+  const { loggedUserToken } = authStore
+  request.headers['Authorization'] = `Bearer ${loggedUserToken}`
 
   return request
 }, function (error) {
