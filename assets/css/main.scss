@@ -8,6 +8,7 @@
 @import './breakdowns.scss';
 @import './menu-toggle.css';
 @import './colors.scss';
+@import 'pell/dist/pell.css';
 
 
 @tailwind base;
@@ -21,4 +22,21 @@ body, html {
 
 .max-w-full-vw {
   max-width: calc(100vw - 64px);
+}
+
+
+.pell-actionbar {
+  padding: 5px;
+  background-color: #FFF;
+}
+
+.pell-content {
+  height: 200px;
+  background-color: #FFF;
+}
+
+.pell {
+  border: 1px solid #e2e8f0;
+  border-radius: 0;
+  box-shadow: none;
 }

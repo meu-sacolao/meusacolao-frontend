@@ -35,4 +35,6 @@
 
   const { loggedUser } = authStore
 
+  authStore.getLoggedUser()
+
 </script>

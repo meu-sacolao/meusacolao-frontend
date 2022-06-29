@@ -4,7 +4,7 @@
     <div 
       v-if="showMenu"
       @click="toggleDrawer()"
-      class="w-screen h-screen fixed inset-0 bg-slate-800 bg-opacity-50 mt-24"
+      class="w-screen fixed inset-0 bg-slate-800 bg-opacity-50 mt-24"
     ></div>
   </transition>
   <transition
@@ -19,7 +19,7 @@
     <aside 
       v-if="showMenu" 
       ref="baseDrawer"
-      class="base-aside-dialog transition-all duration-200 easy-in-out transform bg-brand-gradient"
+      class="base-aside-dialog transition-all duration-200 easy-in-out transform bg-brand-gradient overflow-y-auto"
     >
       <ul 
         v-for="(group, index) in groups" 
@@ -27,13 +27,13 @@
         class="mt-4"
         v-show="checkPermission(group.roles)"
       >
-        <div class="w-full bg-amber-600 py-2 my-6" v-if="group.title">
-          <h3  class="text-center"><span class="text-xl text-white border-l-4 border-amber-600 pl-4">{{ group.title }}</span></h3>
-        </div>
+        <h3 v-if="group.title"><span class="block text-2xl text-amber-500 pl-5 mb-4">
+          <span class="border-b-2 border-zinc-400">{{ group.title }}</span></span>
+        </h3>
         <li 
           v-for="(item, index) in group.items" 
           :key="`aside-item-${index}`"
-          class="font-light text-xl text-white mt-2 border-l-4 hover:border-amber-600 pl-4"
+          class="font-thin text-xl text-white mb-4 border-l-4 hover:border-amber-600 pl-4"
           v-show="checkPermission(item.roles)"
           :class="[route.path == item.action ? 'border-amber-600' : 'border-transparent']"
         >
@@ -83,13 +83,35 @@
       ]
     },
     {
-      title: 'Administrativo',
+      title: 'Gerenciamento',
       roles: ['ADMIN'],
       items: [
         {
           title: 'Simulações',
-          action: '/admin/simulacoes'
+          action: '/admin/simulations'
+        },
+        {
+          title: 'Usuários',
+          action: '/admin/users'
         }
+      ]
+    },
+    {
+      title: 'Plataforma',
+      roles: ['ADMIN'],
+      items: [
+        {
+          title: 'Artigos',
+          action: '/admin/articles'
+        },
+        {
+          title: 'Grupos de aposentadoria',
+          action: '/admin/retirement-groups'
+        },
+        {
+          title: 'Regras de aposentadoria',
+          action: '/admin/retirement-options'
+        },
       ]
     },
     {

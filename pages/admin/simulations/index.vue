@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex flex-col">
-    <h1 class="h1 mb-6 border-l-10 border-orange-500 pl-6 leading-normal">Simulações</h1>
+    <AppTitle>Simulações</AppTitle>
 
     <div class="w-full flex flex-col space-y-6">
         <div 
@@ -72,7 +72,6 @@ GraphQL({ query })
   .then(({ data }) => {
     simulations.value = data.simulations
   })
-
 
   
 </script>
