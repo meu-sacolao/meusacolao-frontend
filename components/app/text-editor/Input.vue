@@ -1,7 +1,9 @@
 <template>
   <div class="block">
-    <label>{{ label }}</label>
-    <div v-bind:id="input_id" class="pell mb-2 hover:shadow"></div>
+    <label class="block mb-2" v-if="label">
+      <span class="border-b-4 border-zinc-200 ">{{ label }}</span>
+    </label>
+    <div v-bind:id="input_id" class="pell mb-2 focus:shadow-sm hover:shadow"></div>
   </div>
 </template>
 
@@ -19,7 +21,7 @@ export default {
     let that = this;
     setTimeout(() => {
       that.pellInit();
-    }, 500);
+    }, 100)
   },
   methods: {
     change(evt) {
@@ -41,8 +43,28 @@ export default {
         actions: pellActions,
       })
 
-      editor.content.innerHTML = that.value;
+      editor.content.innerHTML = that.value
     },
   },
 }
 </script>
+
+
+<style lang="scss">
+  .pell-actionbar {
+    padding: 12px;
+    background-color: #FFF;
+  }
+
+  .pell-content {
+    height: 200px;
+    padding: 16px !important;
+    background-color: #FFF;
+  }
+
+  .pell {
+    border: 1px solid #e2e8f0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+</style>

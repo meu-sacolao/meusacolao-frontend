@@ -20,6 +20,7 @@
         @input="$emit('update:value', $event.target.value)"
         @keydown.enter="action()"
         class="input-classes"
+        :class="[icon ? 'pl-9' : 'pl-4']"
       />
       <input
         v-else
@@ -31,6 +32,7 @@
         @keydown.enter="action()"
         v-mask="mask"
         class="input-classes"
+        :class="[icon ? 'pl-9' : 'pl-4']"
       />
     </div>
   </div>
@@ -55,7 +57,7 @@ export default {
 <style lang="scss">
 
   .input-classes {
-    @apply block appearance-none outline-none w-full h-full border border-slate-200 focus:border-slate-300 focus:shadow-sm text-lg py-4 pr-4 pl-9;
+    @apply block appearance-none outline-none w-full h-full border border-slate-200 focus:border-slate-300 focus:shadow-sm hover:shadow text-lg py-4 pr-4;
   }
 
   .icon-classes {
