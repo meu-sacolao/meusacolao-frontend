@@ -18,7 +18,7 @@
         :placeholder="placeholder || label"
         :value="value"
         @input="$emit('update:value', $event.target.value)"
-        @keydown.enter="action()"
+        @keydown.enter="$emit('keydown.enter', $event.target.value)"
         class="input-classes"
         :class="[icon ? 'pl-9' : 'pl-4']"
       />
@@ -29,7 +29,7 @@
         :placeholder="placeholder"
         :value="value"
         @input="$emit('update:value', $event.target.value)"
-        @keydown.enter="action()"
+        @keydown.enter="$emit('keydown.enter', $event.target.value)"
         v-mask="mask"
         class="input-classes"
         :class="[icon ? 'pl-9' : 'pl-4']"
@@ -38,20 +38,20 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "input-with-icon",
-  props: [
-    "icon",
-    "type",
-    "id_input",
-    "placeholder",
-    "value",
-    "label",
-    "action",
-    "mask",
-  ],
-};
+<script setup>
+
+defineProps({
+  icon: String,
+  type: String,
+  id_input: String,
+  placeholder: String,
+  label: String,
+  action: String,
+  mask: String,
+  value: [String, Number],
+})
+
+  defineEmits(['update:value', 'keydown.enter'])
 </script>
 
 <style lang="scss">

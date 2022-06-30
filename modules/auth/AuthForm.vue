@@ -2,8 +2,21 @@
   
 
   <div class="w-full flex flex-col space-y-4">
-    <AppInputWithIcon v-model:value="user.email" icon="email" type="email" label="Email" placeholder="Insira seu email" />
-    <AppInputWithIcon v-model:value="user.password" icon="key" type="password" label="Senha" placeholder="Insira sua senha" />
+    <AppInputWithIcon 
+      v-model:value="user.email" 
+      icon="email" 
+      type="email" 
+      label="Email" 
+      placeholder="Insira seu email" 
+    />
+    <AppInputWithIcon 
+      v-model:value="user.password" 
+      icon="key" 
+      type="password" 
+      label="Senha" 
+      placeholder="Insira sua senha"
+      @keydown.enter="login()"
+    />
 
     <div class="w-full flex justify-end mt-10 block">
       <AppButton bg="bg-brand-gradient" text="text-white" @click="login()">
