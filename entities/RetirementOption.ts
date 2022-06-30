@@ -9,6 +9,7 @@ export default class RetirementOption extends BaseModel {
   rule: string
   title: string
   content: string
+  order: number
   createdAt: string
   updatedAt: string
 
@@ -22,12 +23,13 @@ export default class RetirementOption extends BaseModel {
   public static fillable =  [
     'key',
     'id',
+    'retirementGroupId',
     'title',
     'content',
-    'retirementDate',
+    'order',
     'createdAt',
     'updatedAt',
-    'retirementGroup'
+    'retirementGroup',
   ]
 
 }
