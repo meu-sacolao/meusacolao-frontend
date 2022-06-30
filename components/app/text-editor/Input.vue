@@ -21,7 +21,7 @@ export default {
     let that = this;
     setTimeout(() => {
       that.pellInit();
-    }, 100)
+    }, 500)
   },
   methods: {
     change(evt) {

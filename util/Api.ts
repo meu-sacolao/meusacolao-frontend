@@ -2,6 +2,7 @@ import axios from 'axios'
 import config from '@/config'
 import { useAuthStore } from "@/modules/auth/store"
 
+
 /**
  * Default headers
  */
@@ -35,6 +36,15 @@ axios.interceptors.response.use(function (response) {
   return response;
 
 }, function (error) {
+
+  const authStore = useAuthStore()
+  const router = useRouter()
+
+  if(error.response && [401, 403].includes(error.response.status)) {
+    alert('Sessão expirada.')
+    authStore.logout()
+    router.push('/')
+  }
 
   return Promise.reject(error)
 
