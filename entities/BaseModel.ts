@@ -1,11 +1,11 @@
-import { filterObjectKeys } from '@igortrindade/lazyfy'
+import { ObjectHelpers } from '@igortrindade/lazyfy'
 
 export default class BaseModel {
 
   static fillable =  []
 
   public static getFillableKeys(data: any = {}) {
-    return filterObjectKeys(this.fillable, data)
+    return ObjectHelpers.filterObjectKeys(this.fillable, data)
   }
 
   public setFillableKeys(instance, keys, data) {
