@@ -1,8 +1,9 @@
 <template>
   <AppCard>
     <template v-slot:header>
-      <div class="w-full flex space-x-2 pr-12">
-        <h3 class="h3 truncate leading-relaxed ...">{{ simulationRetirementGroup.retirementGroup.title }}</h3>
+      <div class="w-full flex flex-col">
+        <h3 class="h3 leading-relaxed ...">{{ simulationRetirementGroup.retirementGroup.title }}</h3>
+        <div class="p text-slate-400 leading-relaxed" v-html="simulationRetirementGroup.retirementGroup.content"></div>
       </div>
     </template>
     <template v-slot:content>
@@ -14,19 +15,21 @@
           :key="`simulationRetirementOption${index}`"
         >
 
-          <div class="w-full flex space-x-4 mb-4">
-            <AppPill v-if="simulationRetirementOption.isGranted" bg="bg-emerald-600" text="text-white">
-              <AppIcons icon="check_circle" />
-              <span class="ml-2">Direito ao Benefício</span>
-            </AppPill>
-            <AppPill v-else bg="bg-zinc-300">
-              <AppIcons icon="block" />
-              <span class="ml-2">Não tem direito ao benefício</span>
-            </AppPill>
-            <h3 class="h4 truncate leading-relaxed ...">{{ simulationRetirementOption.retirementOption.title }}</h3>
+          <div class="w-full flex flex-wrap mb-4">
+            <div class="mr-4">
+              <AppPill v-if="simulationRetirementOption.isGranted" bg="bg-emerald-600" text="text-white">
+                <AppIcons icon="check_circle" />
+                <span class="ml-2">Direito ao Benefício</span>
+              </AppPill>
+              <AppPill v-else bg="bg-zinc-300">
+                <AppIcons icon="block" />
+                <span class="ml-2">Não tem direito ao benefício</span>
+              </AppPill>
+            </div>
+            <h3 class="h4 leading-relaxed">{{ simulationRetirementOption.retirementOption.title }}</h3>
           </div>
 
-          <p class="p truncate text-slate-400 leading-relaxed ...">{{ simulationRetirementOption.retirementOption.content }}</p>
+          <div class="p text-slate-400 leading-relaxed" v-html="simulationRetirementOption.retirementOption.content"></div>
 
           <div class="w-full flex flex-col mt-4">
 

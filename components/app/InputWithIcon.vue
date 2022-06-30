@@ -40,16 +40,16 @@
 
 <script setup>
 
-defineProps({
-  icon: String,
-  type: String,
-  id_input: String,
-  placeholder: String,
-  label: String,
-  action: String,
-  mask: String,
-  value: [String, Number],
-})
+  defineProps({
+    icon: String,
+    type: String,
+    id_input: String,
+    placeholder: String,
+    label: String,
+    action: String,
+    mask: String,
+    value: [String, Number],
+  })
 
   defineEmits(['update:value', 'keydown.enter'])
 </script>

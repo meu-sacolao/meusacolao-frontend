@@ -7,6 +7,13 @@
 
     <div class="mt-6 flex flex-col space-y-4">
       <AppInputWithIcon v-model:value="retirementOption.title" label="Título" placeholder="Insira o título do grupo de aposentadoria" />
+      
+      <AppSelectInput
+        v-model:value="retirementOption.retirementGroupId"
+        :items="retirementGroups"
+        label="Grupo de aposentadoria"
+      />
+      
       <AppTextEditorInput 
         input_id="retirement-group-editor" 
         v-model:value="retirementOption.content" 
@@ -38,8 +45,11 @@ import GraphQL from '@/util/GraphQL'
 
   const router = useRouter()
   const route = useRoute()
-  const retirementOption = ref(new RetirementOption())
   const { type, retirementOptionId } = route.params
+
+  const retirementOption = ref(new RetirementOption())
+  const retirementGroups = ref([])
+  
   const typeLabel = computed(() => {
     return type == 'edit' ? 'Editar' : 'Adicionar'
   })
@@ -70,12 +80,18 @@ import GraphQL from '@/util/GraphQL'
             title
           }
         }
+
+        retirementGroups {
+          id
+          title
+        }
       }
     `
 
     GraphQL({ query, caller: 'AdminRetirementOption' })
       .then(({ data }) => {
         retirementOption.value = data.retirementOptions[0]
+        retirementGroups.value = data.retirementGroups
       })
   }
 

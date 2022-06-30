@@ -14,13 +14,9 @@
               <template v-slot:label>Título</template>
               <template v-slot:value>{{ retirementOption.title }}</template>
             </AppLabelValue>
-            <AppLabelValue class="four-cols-breakdown">
-              <template v-slot:label>Regras de aposentadoria</template>
-              <template v-slot:value>{{ retirementOption.retirementOptions.length }}</template>
-            </AppLabelValue>
 
             <div class="w-full">
-              <NuxtLink :to="`/admin/retirement-groups/edit/${ retirementOption.id }`" class="w-auto">
+              <NuxtLink :to="`/admin/retirement-options/edit/${ retirementOption.id }`" class="w-auto">
                 <AppButton class="bg-brand-gradient text-white rounded-full px-5">
                   <AppIcons icon="zoom_in" />
                   <span  class="ml-1">Editar</span>

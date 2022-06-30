@@ -17,31 +17,28 @@
   </div>
 </template>
 
-<script>
-import Api from '@/util/Api'
-export default {
-  name: 'SimulationShow',
-  data() {
-    return {
-      simulation: null,
-      isLoading: true
-    }
-  },
-  mounted() {
-    this.show()
-  },
-  methods: {
-    show() {
-      this.isLoading = true
-      Api.get(`/simulation/show/${this.$route.params.simulation_id}`)
-        .then(({ data }) => {
-          this.simulation = data.simulation
-          this.isLoading = false
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
+<script setup>
+  import Api from '@/util/Api'
+  import SimulationRetirementGroupCard from'./SimulationRetirementGroupCard'
+
+  const route = useRoute()
+  const simulation = ref(null)
+  const isLoading = ref(false)
+
+  onMounted(() => {
+    get()
+  })
+
+  const get = () => {
+    isLoading.value = true
+    Api.get(`/simulation/show/${route.params.simulation_id}`)
+      .then(({ data }) => {
+        simulation.value = data.simulation
+        isLoading.value = false
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
-}
+
 </script>
