@@ -3,15 +3,15 @@ import BaseModel from '@/entities/BaseModel'
 
 export default class RetirementOption extends BaseModel {
 
-  key: number
-  id: string
-  retirementGroupId: string
-  rule: string
-  title: string
-  content: string
-  order: number
-  createdAt: string
-  updatedAt: string
+  key: number = null
+  id: string = null
+  retirementGroupId: string = null
+  rule: string = null
+  title: string = null
+  content: string = null
+  order: number = null
+  createdAt: string = null
+  updatedAt: string = null
 
   retirementGroup: RetirementGroup
   

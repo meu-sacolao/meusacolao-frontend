@@ -2,7 +2,9 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "serve": "concurrently --kill-others \"npm run tailwind\" \"nuxi dev\"",
+    "serve": "concurrently --kill-others --success first \"npm:dev:*\"",
+    "dev:tailwind": "npm run tailwind",
+    "dev:nuxt": "nuxi dev",
     "build": "nuxi build",
     "generate": "nuxi generate",
     "start": "node .output/server/index.mjs",

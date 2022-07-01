@@ -50,7 +50,6 @@
   import { getCurrentInstance } from 'vue'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from "@/modules/auth/store"
-  import { useRouter, useRoute  } from 'vue-router'
   import emitter from '@/util/emitter'
 
   const { emit, refs } = getCurrentInstance()

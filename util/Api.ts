@@ -38,8 +38,8 @@ axios.interceptors.response.use(function (response) {
 }, function (error) {
 
   const authStore = useAuthStore()
-  const router = useRouter()
 
+  const router = useRouter()
   if(error.response && [401, 403].includes(error.response.status)) {
     alert('Sessão expirada.')
     authStore.logout()
