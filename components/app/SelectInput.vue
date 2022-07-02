@@ -46,6 +46,11 @@ export default {
       default: ''
     },
 
+    icon: {
+      type: [String, Boolean],
+      default: false
+    },
+
     /**
      * It sets the key label of your items if needed.
      */
