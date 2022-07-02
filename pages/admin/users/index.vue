@@ -2,8 +2,16 @@
   <div class="w-full flex flex-col">
     <AppTitle>Usuários</AppTitle>
 
-    <div class="w-full flex flex-col space-y-6">
-        <div 
+    <div class="w-full flex flex-col space-y-6 mt-6">
+
+      <AppLoaderPlaceholder v-if="!users" />
+
+      <AppAlert v-else-if="!users.length"
+        >Nenhum usuário encontrado</AppAlert
+      >
+
+      <div
+        v-else 
           class="w-full flex flex-col bg-white shadow-sm p-4 hover:shadow-lg"
           v-for="(user, index) in users"
           :key="`admin-user-${index}`"
@@ -58,7 +66,7 @@ const query = `
   }
 `
 
-const users = ref([])
+const users = ref(false)
 
 GraphQL({ query })
   .then(({ data }) => {

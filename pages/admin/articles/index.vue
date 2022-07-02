@@ -12,8 +12,16 @@
       </NuxtLink>
     </div>
 
-    <div class="w-full flex flex-col space-y-6">
-        <div 
+    <div class="w-full flex flex-col space-y-6 mt-6">
+
+      <AppLoaderPlaceholder v-if="!articles" />
+
+      <AppAlert v-else-if="!articles.length"
+        >Nenhum artigo encontrado</AppAlert
+      >
+
+      <div
+        v-else 
           class="w-full flex flex-col bg-white shadow-sm p-6 hover:shadow-lg"
           v-for="(article, index) in articles"
           :key="`admin-article-${index}`"
@@ -22,18 +30,20 @@
           <div class="w-full flex flex-wrap space-y-2">
 
             <div class="w-full flex flex-wrap border-b pb-2 mb-2">
-              <AppLabelValue>
+              <AppLabelValue class="four-cols-breakdown">
                 <template v-slot:label>Artigo</template>
                 <template v-slot:value>{{ article.title }}</template>
               </AppLabelValue>
-              <AppLabelValue>
+              <AppLabelValue class="four-cols-breakdown">
                 <template v-slot:label>Está publicado</template>
                 <template v-slot:value>{{ article.isPublished }}</template>
               </AppLabelValue>
-              <AppLabelValue>
+              <AppLabelValue class="four-cols-breakdown">
                 <template v-slot:label>É destaque</template>
                 <template v-slot:value>{{ article.isStarred }}</template>
               </AppLabelValue>
+
+              <img class=" h-12" :src="article.pathUrl" />
 
               <NuxtLink :to="`/admin/articles/edit/${ article.id }`" class="ml-auto">
                 <AppButton class="bg-brand-gradient text-white px-5">
@@ -76,7 +86,7 @@ const query = `
   }
 `
 
-const articles = ref([])
+const articles = ref(false)
 
 GraphQL({ query })
   .then(({ data }) => {
