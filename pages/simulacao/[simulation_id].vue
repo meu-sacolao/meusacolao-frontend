@@ -1,7 +1,5 @@
 <template>
-  <NuxtLayout>
-    <SimulationShow />
-  </NuxtLayout>
+  <SimulationShow />
 </template>
 
 <script>

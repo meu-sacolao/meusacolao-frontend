@@ -1,7 +1,5 @@
 <template>
-  <NuxtLayout>
-    <ProcessCnisFile />
-  </NuxtLayout>
+  <ProcessCnisFile />
 </template>
 
 <script setup>
