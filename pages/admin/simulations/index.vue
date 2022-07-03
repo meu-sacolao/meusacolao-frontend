@@ -4,7 +4,7 @@
 
     <div class="w-full flex flex-col space-y-6">
 
-      <AppLoaderPlaceholder v-if="!simulations" />
+      <AppLoaderPlaceholder :quantity="3" v-if="!simulations" />
 
       <AppAlert v-else-if="!simulations.length">Nenhuma simulação encontrada</AppAlert>
 

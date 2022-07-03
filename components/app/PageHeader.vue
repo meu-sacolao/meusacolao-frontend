@@ -7,7 +7,11 @@
     </div>
 
     <div class="flex items-center space-x-6">
-      <NuxtLink to="/simulacao-de-aposentadoria"><AppButton class="hidden sm:block bg-amber-600 text-white rounded-full px-6">Simule sua aposentadoria</AppButton></NuxtLink> 
+      <NuxtLink to="/simulacao-de-aposentadoria">
+        <AppButton class="hidden sm:block bg-amber-600 text-white rounded-full px-6">
+          Simule sua aposentadoria
+        </AppButton>
+      </NuxtLink> 
       <button 
         @click.stop="toggleMenu()"
         class="menu-toggle" 

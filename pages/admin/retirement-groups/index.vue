@@ -4,7 +4,7 @@
 
     <div class="w-full flex flex-col space-y-6 mt-6">
 
-      <AppLoaderPlaceholder v-if="!retirementGroups" />
+      <AppLoaderPlaceholder :quantity="3" v-if="!retirementGroups" />
 
       <AppAlert v-else-if="!retirementGroups.length"
         >Nenhum grupo de aposentadoria encontrado</AppAlert

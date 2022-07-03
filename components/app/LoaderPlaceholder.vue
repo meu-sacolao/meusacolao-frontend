@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="w-full flex flex-col">
+    <div class="w-full flex flex-col space-y-6">
       <div 
         class="w-full bg-zinc-200"
         :class="classes"
@@ -15,7 +15,7 @@
 <script setup>
   defineProps({
     quantity: {
-      default: 1
+      default: 2
     },
     classes: {
       default: 'h-32'
