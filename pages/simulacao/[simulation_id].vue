@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout name="main-app">
+  <NuxtLayout>
     <SimulationShow />
   </NuxtLayout>
 </template>
