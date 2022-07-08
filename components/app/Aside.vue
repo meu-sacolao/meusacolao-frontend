@@ -92,6 +92,10 @@
         {
           title: 'Usuários',
           action: '/admin/users'
+        },
+        {
+          title: 'Segurados',
+          action: '/admin/clients'
         }
       ]
     },
