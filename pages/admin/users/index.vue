@@ -6,9 +6,9 @@
 
       <AppLoaderPlaceholder v-if="!users" />
 
-      <AppAlert v-else-if="!users.length"
-        >Nenhum usuário encontrado</AppAlert
-      >
+      <AppAlert v-else-if="!users.length">
+        Nenhum usuário encontrado
+      </AppAlert>
 
       <div
         v-else 
@@ -54,7 +54,6 @@ const query = `
       id
       name
       email
-      cpf
       phone
       role
       createdAt

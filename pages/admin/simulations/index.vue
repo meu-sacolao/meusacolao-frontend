@@ -2,7 +2,7 @@
   <div class="w-full flex flex-col">
     <AppTitle>Simulações</AppTitle>
 
-    <div class="w-full flex flex-col space-y-6">
+    <div class="w-full flex flex-col space-y-6 mt-6">
 
       <AppLoaderPlaceholder :quantity="3" v-if="!simulations" />
 
@@ -21,24 +21,24 @@
             <template v-slot:value>{{ simulation.createdAt }}</template>
           </AppLabelValue>
           <AppLabelValue class="four-cols-breakdown">
-            <template v-slot:label>Usuário</template>
-            <template v-slot:value>{{ simulation.user.name }}</template>
+            <template v-slot:label>Segurado</template>
+            <template v-slot:value>{{ simulation.client.name }}</template>
           </AppLabelValue>
           <AppLabelValue class="four-cols-breakdown">
-            <template v-slot:label>Data pedido</template>
+            <template v-slot:label>Data do cálculo</template>
             <template v-slot:value>{{ simulation.retirementDate }}</template>
           </AppLabelValue>
         </div>
 
         <div class="w-full flex space-x-4 mt-4">
           <NuxtLink :to="`/simulacao/${simulation.id}`" target="_blank" class="w-auto">
-            <AppButton class="bg-brand-gradient text-white rounded-full px-5">
+            <AppButton class="bg-brand-gradient text-white px-5">
               <AppIcons icon="zoom_in" />
               <span  class="ml-1">Ver online</span>
             </AppButton>
           </NuxtLink>
           <a v-if="simulation.cnisFile" :href="simulation.cnisFile.pathUrl" target="_blank">
-            <AppButton class="bg-brand-gradient text-white rounded-full px-5">
+            <AppButton class="bg-brand-gradient text-white px-5">
               <AppIcons icon="picture_as_pdf" />
               <span class="ml-1">Download arquivo cnis</span>
             </AppButton>
@@ -52,14 +52,28 @@
 <script setup>
 import GraphQL from '@/util/GraphQL'
 
+const route = useRoute()
+
+const parameters = !route.query.clientId ? '' : `
+  (
+    where: [
+    { column: "clientId", value: "${route.query.clientId}"}
+    ]
+  )
+`
+
 const query = `
   {
-    simulations {
+    simulations ${ parameters } {
       key
       id
       title
       retirementDate  
       createdAt
+      client {
+        id
+        name
+      }
       user {
         id
         name
