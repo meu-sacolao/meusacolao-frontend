@@ -1,9 +1,9 @@
 <template>
-  <AppCard border="w-4 bg-orange-400">
+  <AppCard :border="'w-4 hover:bg-orange-400 bg-zinc-100'">
     <template v-slot:header>
       <div class="w-full flex items-center">
         <span 
-          class="mr-3 material-icons-round flex-none transition-all transform cursor-pointer text-4xl"
+          class="mr-3 material-icons material-symbols-sharp flex-none transition-all transform cursor-pointer text-4xl"
           :class="showContent ? 'rotate-90' : 'closed rotate-0'"
           @click.stop="toggleCard()"
         >
@@ -17,26 +17,29 @@
           </div>
 
           <div class="w-full flex flex-wrap justify-between mt-4">
-            <LabelValue class="four-cols-breakdown">
+            <AppLabelValue class="four-cols-breakdown">
               <template v-slot:label>Documento</template>
               <template v-slot:value>{{ socialSecurityRelation.relationDocument ? socialSecurityRelation.relationDocument : '--' }}</template>
-            </LabelValue>
-            <LabelValue class="four-cols-breakdown">
+            </AppLabelValue>
+            <AppLabelValue class="four-cols-breakdown">
               <template v-slot:label>NIT</template>
               <template v-slot:value>{{ socialSecurityRelation.nit }}</template>
-            </LabelValue>
-            <LabelValue class="four-cols-breakdown">
+            </AppLabelValue>
+            <AppLabelValue class="four-cols-breakdown">
               <template v-slot:label>Início</template>
               <template v-slot:value>{{ socialSecurityRelation.startAt ? socialSecurityRelation.startAt : '--' }}</template>
-            </LabelValue>
-            <LabelValue class="four-cols-breakdown">
+            </AppLabelValue>
+            <AppLabelValue class="four-cols-breakdown">
               <template v-slot:label>Término</template>
               <template v-slot:value>{{ socialSecurityRelation.endAt ? socialSecurityRelation.endAt : '--' }}</template>
-            </LabelValue>
-            <LabelValue class="four-cols-breakdown">
+            </AppLabelValue>
+            <AppLabelValue class="four-cols-breakdown">
               <template v-slot:label>Tempo de contribuição</template>
-              <template v-slot:value>{{ socialSecurityRelation.contributionTimeString }} ({{ socialSecurityRelation.contributionTimeInDays }})</template>
-            </LabelValue>
+              <template v-slot:value>
+                <span v-if="socialSecurityRelation.contributionTime">{{ socialSecurityRelation.contributionTime.time.timeText }}</span>
+                <span v-else>--</span>
+              </template>
+            </AppLabelValue>
           </div>
         </div>
       </div>
@@ -44,9 +47,9 @@
     
     <template v-slot:content v-if="showContent">
 
-      <CnisContributionList
+      <!-- <CnisContributionList
         :contributions="socialSecurityRelation.contributions"
-      ></CnisContributionList>
+      ></CnisContributionList> -->
 
       <!-- <pre class="~bg-slate-200">
         {{ socialSecurityRelation }}
@@ -55,25 +58,16 @@
   </AppCard>
 </template>
 
-<script>
-import LabelValue from '../app/LabelValue.vue'
-export default {
-    name: "CnisSocialSecurityRelationCard",
-    props: ["socialSecurityRelation"],
-    data() {
-        return {
-            showContent: false
-        };
-    },
-    methods: {
-        toggleCard() {
-          this.showContent = !this.showContent;
-        }
-    },
-    components: { LabelValue }
-}
+<script setup>
+
+  defineProps({
+    socialSecurityRelation: Object
+  })
+
+  const showContent = ref(false)
+
+  const toggleCard = () => {
+    showContent.value = !showContent.value
+  }
+
 </script>
-
-<style>
-
-</style>

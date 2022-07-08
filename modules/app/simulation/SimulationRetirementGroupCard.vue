@@ -1,5 +1,5 @@
 <template>
-  <AppCard>
+  <AppCard :border="'w-4 hover:bg-orange-400 bg-zinc-100'">
     <template v-slot:header>
       <div class="w-full flex flex-col">
         <h3 class="h3 leading-relaxed ...">{{ simulationRetirementGroup.retirementGroup.title }}</h3>
@@ -44,7 +44,7 @@
           </div>
 
           <div class="flex mt-6">
-            <AppButton bg="bg-slate-300" @click="emitter.emit('openDrawer', { component: 'RetirementOptionDetailDrawer', payload: simulationRetirementOption })">Ver cálculo</AppButton>
+            <AppButton bg="bg-slate-300" @click="emitter.emit('openDrawer', { component: 'SimulationRetirementOptionDetailDrawer', payload: simulationRetirementOption })">Ver cálculo</AppButton>
           </div>
           
         </div>
@@ -54,19 +54,15 @@
   </AppCard>
 </template>
 
-<script>
-export default {
-  name: "SimulationRetirementGroupCard",
-  props: ["simulationRetirementGroup"],
-  data() {
-    return {
-      showContent: false
-    }
-  },
-  methods: {
-    toggleCard() {
-      this.showContent = !this.showContent;
-    }
+<script setup>
+
+  defineProps({
+    simulationRetirementGroup: Object
+  })
+
+  const showContent = ref(false)
+
+  const toggleCard = () => {
+    showContent.value = !showContent.value
   }
-}
 </script>

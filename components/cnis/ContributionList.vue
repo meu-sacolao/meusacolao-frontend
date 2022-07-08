@@ -67,7 +67,7 @@ export default {
     },
     methods: {
       toggleCard() {
-        this.showContent = !this.showContent;
+        showContent = !showContent;
       }
     },
     components: { LabelValue }
