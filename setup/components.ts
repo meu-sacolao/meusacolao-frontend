@@ -7,7 +7,7 @@ import SimulationRetirementOptionDetailDrawer from '@/modules/app/simulation/Sim
 
 export default (vueInstance) => {
 
-  vueInstance.use(VueNumberFormat, { prefix: 'R$ ', decimal: '.', thounsand: ',' })
+  vueInstance.use(VueNumberFormat, { prefix: 'R$ ', decimal: ',', thounsand: '.' })
   vueInstance.use(VueTheMask)
 
   vueInstance.component('AuthForm', AuthForm)

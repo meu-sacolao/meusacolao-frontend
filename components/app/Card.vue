@@ -27,11 +27,11 @@ export default {
     },
     header: {
       type: String,
-      default: 'p-8 w-full border-b border-slate-100'
+      default: 'p-6 w-full border-b border-slate-100'
     },
     content: {
       type: String,
-      default: 'p-8 w-full'
+      default: 'p-6 w-full'
     },
   }
 }
