@@ -47,7 +47,7 @@
     placeholder: String,
     label: String,
     action: String,
-    mask: String,
+    mask: [Array, String],
     value: [String, Number],
   })
 
