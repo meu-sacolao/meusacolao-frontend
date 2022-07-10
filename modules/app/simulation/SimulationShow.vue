@@ -56,7 +56,7 @@
   import Api from '@/util/Api'
   import SimulationRetirementGroupCard from'@/modules/app/simulation/SimulationRetirementGroupCard'
   import SimulationClientCard from'@/modules/app/simulation/SimulationClientCard'
-  import SocialSecurityRelationsTab from'@/modules/app/simulation/SocialSecurityRelationsTab'
+  import SocialSecurityRelationsTab from'@/modules/app/simulation/social-security-relationSocialSecurityRelationsTab'
 
   const route = useRoute()
   const simulation = ref(null)

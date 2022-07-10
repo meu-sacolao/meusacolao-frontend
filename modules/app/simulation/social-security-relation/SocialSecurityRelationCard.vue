@@ -60,7 +60,7 @@
 
 <script setup>
 
-  import ContributionList from '@/modules/app/simulation/ContributionList'
+  import ContributionList from '@/modules/app/simulation/social-security-relation/contribution/ContributionList'
 
   defineProps({
     socialSecurityRelation: Object
