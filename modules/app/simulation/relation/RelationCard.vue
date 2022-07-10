@@ -1,7 +1,12 @@
 <template>
   <AppCard :border="'w-4 hover:bg-orange-400 bg-zinc-100'">
     <template v-slot:header>
-      <div class="w-full flex items-center">
+      <div class="w-full flex items-center relative">
+
+        <AppButton @click="edit()" class="absolute top-0 right-0 text-zinc-400 hover:text-orange-600">
+          <AppIcons icon="edit" />
+        </AppButton>
+
         <div class="w-full flex flex-col">
           <div class="w-full flex space-x-2 pr-12">
             <h3 class="h3 flex-none text-slate-400">#{{ socialSecurityRelation.seqNumber }}</h3>
@@ -53,6 +58,12 @@
           :contributions="socialSecurityRelation.contributions"
         ></ContributionList>
       </div>
+
+      <RelationEditModal 
+        :show="showModal" 
+        :socialSecurityRelationId="socialSecurityRelation.id"
+        @close="close"
+      />
           
     </template>
   </AppCard>
@@ -60,16 +71,25 @@
 
 <script setup>
 
-  import ContributionList from '@/modules/app/simulation/social-security-relation/contribution/ContributionList'
-
+  import ContributionList from '@/modules/app/simulation/relation/contribution/ContributionList.vue'
+  import RelationEditModal from '@/modules/app/simulation/relation/RelationEditModal.vue'
   defineProps({
     socialSecurityRelation: Object
   })
 
   const showContent = ref(false)
+  const showModal = ref(false)
 
   const toggleCard = () => {
     showContent.value = !showContent.value
+  }
+
+  const edit = () => {
+    showModal.value = true
+  }
+
+  const close = () => {
+    showModal.value = false
   }
 
 </script>

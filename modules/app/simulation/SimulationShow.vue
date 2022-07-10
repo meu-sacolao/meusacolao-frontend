@@ -37,9 +37,9 @@
           name="fade"
         >
           <div v-if="tabSelected.value === 'social-security-relations'" class="p-6 flex flex-col space-y-6">
-            <SocialSecurityRelationsTab 
+            <RelationTab 
               :simulation="simulation"
-            ></SocialSecurityRelationsTab>
+            ></RelationTab>
           </div>
         </transition>
 
@@ -56,7 +56,7 @@
   import Api from '@/util/Api'
   import SimulationRetirementGroupCard from'@/modules/app/simulation/SimulationRetirementGroupCard'
   import SimulationClientCard from'@/modules/app/simulation/SimulationClientCard'
-  import SocialSecurityRelationsTab from'@/modules/app/simulation/social-security-relationSocialSecurityRelationsTab'
+  import RelationTab from'@/modules/app/simulation/relation/RelationTab.vue'
 
   const route = useRoute()
   const simulation = ref(null)

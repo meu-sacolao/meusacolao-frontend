@@ -2,18 +2,18 @@
 
   <div class="w-full flex flex-col space-y-6">
 
-    <SocialSecurityRelationCard
+    <RelationCard
       v-for="(socialSecurityRelation, index) in simulation.socialSecurityRelations"
       :key="`simulation-social-security-${index}`"
       :socialSecurityRelation="socialSecurityRelation"
-    ></SocialSecurityRelationCard>
+    ></RelationCard>
   </div>
 
 </template>
 
 <script setup>
 
-  import SocialSecurityRelationCard from '@/modules/app/simulation/SocialSecurityRelationCard'
+  import RelationCard from '@/modules/app/simulation/relation/RelationCard'
   
   defineProps({
     simulation: Object
