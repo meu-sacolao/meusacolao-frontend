@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.9](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.8...v0.0.9) (2022-07-10)
+
+
+### Features | Funcionalidades
+
+* Coluna de ações lista de contribuições ([4fde229](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/4fde2294083dca507004ce46efab7a999e47996e))
+* Input editar valores ([efbf72f](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/efbf72f9a5a6be6217d627f1d681c07a215c88f9))
+* Lista de contribuições dos vinculos ([30e48bb](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/30e48bbe4dcccf57629100e360c63e4f38226595))
+
 ### [0.0.8](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.7...v0.0.8) (2022-07-08)
 
 
