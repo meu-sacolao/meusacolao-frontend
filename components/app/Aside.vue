@@ -76,7 +76,7 @@
           title: 'Entre ou cadastre-se',
           roles: 'NONE',
           action: () => {
-            emitter.emit('openModal', { component: 'AuthForm' })
+            emitter.emit('openAuthModal')
           }
         }
       ]

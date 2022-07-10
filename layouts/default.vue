@@ -1,21 +1,27 @@
 <template>
   <div class="w-full flex flex-col">
     <slot />
+
+    <!-- MODALS PLACEHOLDER -->
+    <AuthFormModalVue />
   </div>
+
 </template>
 
 <script setup>
-// This compiler macro works in both <script> and <script setup>
-const route = useRoute()
-definePageMeta({
-  // you can also pass a string or a computed property
-  key: route => route.path,
-  layoutTransition: {
-    name: 'foobar',
-    mode: 'out-in',
-    duration: 500
-  },
-})
+
+  import AuthFormModalVue from '@/modules/auth/AuthFormModal.vue';
+  const route = useRoute()
+
+  definePageMeta({
+    key: route => route.path,
+    layoutTransition: {
+      name: 'foobar',
+      mode: 'out-in',
+      duration: 500
+    },
+  })
+
 </script>
 
 <style>

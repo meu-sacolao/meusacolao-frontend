@@ -1,87 +1,78 @@
 <template>
-  <transition name="fade" :duration="550">
-    <div
-      v-if="show"
-      class="
-        fixed
-        inset-0
-        bg-slate-800/70
-        flex
-        items-center
-        justify-center
-        z-50
-        p-12
-        overflow-y-auto
-      "
-    >
-
-      <div :class="[dialogClasses]" class="bg-white shadow p-10 relative my-auto transition-fade-inner" v-if="show">
-        <button
-          @click="close()"
-          class="
-            absolute
-            top-0
-            right-0
-            text-ash-500
-            pr-4
-            pt-5
-            focus:outline-none
-          "
-        >
-          <AppIcons icon="close" />
-        </button>
-        <div class="w-full">
-          <component v-if="component" :is="component" :payload="payload" @close="close" />
+  <teleport to="body">
+    <transition name="fade" :duration="550">
+      <div
+        v-if="show"
+        class="
+          fixed
+          inset-0
+          bg-slate-800/70
+          flex
+          items-center
+          justify-center
+          z-50
+          p-12
+          overflow-y-auto
+        "
+      >
+        <div :class="[dialogClasses]" class="bg-white shadow p-10 relative my-auto transition-fade-inner" v-if="show">
+          <button
+            @click="close()"
+            class="
+              absolute
+              top-0
+              right-0
+              text-ash-500
+              pr-4
+              pt-5
+              focus:outline-none
+            "
+          >
+            <AppIcons icon="close" />
+          </button>
+          <div class="w-full">
+            <slot />
+          </div>
         </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </teleport>
 </template>
 
-<script>
-export default {
-  name: "BaseModal",
-  data() {
-    return {
-      show: false,
-      dialogClasses: 'w-full max-w-2xl',
-      component: null,
-      payload: null,
-    };
-  },
-  mounted() {
-    this.emitter.on('openModal', this.open)
-  },
-  beforeDestroy() {
-    this.emitter.off('openModal')
-  },
-  methods: {
+<script setup>
 
-    open({ component, payload }) {
-      this.component = component
-      this.payload = payload
-      this.show = true
-      this.addListeners()
-    },
+const { emit } = getCurrentInstance()
 
-    close() {
-      this.show = false
-      this.removeListeners()
-    },
+  defineEmits(['close', 'open'])
 
-    addListeners() {
-      document.addEventListener("keyup", this.handleEsc)
+  const props = defineProps({
+    show: {
+      type: Boolean,
+      default: false
     },
+    dialogClasses: {
+      type: String,
+      default: 'w-full max-w-2xl'
+    }
+  })
 
-    removeListeners() {
-      document.removeEventListener("keyup", this.handleEsc)
-    },
+  const close = () => {
+    emit('close')
+  }
 
-    handleEsc(evt) {
-      if (this.show && evt.keyCode === 27) this.close()
-    },
-  },
-}
+  watch(() => props.show, (newValue) => {
+    if(newValue) {
+      emit('open')
+      document.addEventListener("keyup", handleEsc)
+    } else {
+      document.removeEventListener("keyup", handleEsc)
+    }
+  })
+
+  const handleEsc = (event) => {
+    if (props.show && event.keyCode === 27) close()
+  }
+
 </script>
 
 <style scoped>
