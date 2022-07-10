@@ -1,0 +1,71 @@
+<template>
+  <div class="block my-3 w-full">
+    <label v-if="label">
+      <span class="border-b-4 border-zinc-200">{{ label }}</span>
+    </label>
+    <div class="relative mt-2">
+      <div
+        v-if="icon"
+        class="icon-classes"
+      >
+        <AppIcons :icon="icon" color="text-slate-300" size="18" />
+      </div>
+
+      <VueNumberFormat
+        :type="type"
+        :id="id_input"
+        :placeholder="placeholder || label"
+        v-model:value="childValue"
+        class="input-classes"
+        :class="[icon ? 'pl-9' : 'pl-4']"
+        :options="getVueNumberFormatOptions"
+      />
+    </div>
+  </div>
+</template>
+
+<script setup>
+
+  import { vueNumberFormatDefaultOptions } from '@/util/functions/getCurrencyType'
+  const { emit } = getCurrentInstance()
+  
+  const props = defineProps({
+    icon: String,
+    type: String,
+    id_input: String,
+    placeholder: String,
+    label: String,
+    action: String,
+    inputOptions: Object,
+    value: [String, Number],
+  })
+
+  defineEmits(['update:value'])
+
+  const getVueNumberFormatOptions = computed(() => {
+    if(!props.inputOptions) return vueNumberFormatDefaultOptions
+    return props.inputOptions
+  })
+
+  const childValue = computed({
+    get() {
+      return props.value
+    },
+    set(val) {
+      emit('update:value', val)
+    }
+  })
+
+
+</script>
+
+<style lang="scss">
+
+  .input-classes {
+    @apply block appearance-none outline-none w-full h-full border border-slate-200 focus:border-slate-300 focus:shadow-sm hover:shadow text-lg py-4 pr-4;
+  }
+
+  .icon-classes {
+    @apply h-full absolute inset-y-0 left-0 flex items-center text-slate-200 pointer-events-none pl-3;
+  }
+</style>
