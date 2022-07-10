@@ -6,6 +6,8 @@
         <tr>
           <th>Competência</th>
           <th>Valor base</th>
+          <th>Valor base</th>
+          <th>Editar</th>
         </tr>
       </thead>
       <tbody>
@@ -15,6 +17,20 @@
         >
           <td>{{ contribution.monthReference }}</td>
           <td>{{ vueNumberFormat(contribution.baseValue) }}</td>
+          <td><AppMoneyInput class="w-40" v-model:value="contribution.baseValue" /></td>
+          <td>
+            <div class="flex ">
+              <AppButton class="text-zinc-400 hover:text-orange-600">
+                <AppIcons icon="edit" />
+              </AppButton>  
+              <AppButton class="text-zinc-400 hover:text-orange-600">
+                <AppIcons icon="do_not_disturb_on" />
+              </AppButton>  
+              <AppButton class="text-zinc-400 hover:text-orange-600">
+                <AppIcons icon="delete_forever" />
+              </AppButton>  
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -31,17 +47,18 @@
 
 <style lang="scss">
   table {
+    
     th {
-      @apply p-3 bg-gray-100 text-left border-b;
+      @apply p-3 bg-gray-100  text-left border-b;
     }
 
     td {
-      @apply p-3 bg-gray-50;
+      @apply p-3  ;
     }
 
     tbody {
       tr {
-        @apply hover:border-b border-slate-100 box-content
+        @apply bg-gray-50 hover:bg-gray-100;
       }
     }
   }
