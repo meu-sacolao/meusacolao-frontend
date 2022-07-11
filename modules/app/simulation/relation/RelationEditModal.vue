@@ -46,6 +46,8 @@
 <script setup>
   import { getCurrentInstance } from 'vue'
   import GraphQL from '@/util/GraphQL'
+  import Api from '@/util/Api'
+  import emitter from '@/util/emitter'
   const { emit } = getCurrentInstance()
   const route = useRoute()
   
@@ -96,7 +98,19 @@
   }
 
   const update = () => {
-    alert('Atualização não implementada ainda')
+    Api.post(`/app/general/updateOrCreate`, 
+    { 
+      entity: 'SocialSecurityRelation', 
+      ...socialSecurityRelation.value
+    }).then((response) => {
+      emitter.emit('simulationUpdated')
+      close()
+      alert('Vínculo atualizado com sucesso')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
   }
 
 

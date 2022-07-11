@@ -57,6 +57,7 @@
   import SimulationRetirementGroupCard from'@/modules/app/simulation/SimulationRetirementGroupCard'
   import SimulationClientCard from'@/modules/app/simulation/SimulationClientCard'
   import RelationTab from'@/modules/app/simulation/relation/RelationTab.vue'
+  import emitter from '@/util/emitter'
 
   const route = useRoute()
   const simulation = ref(null)
@@ -76,11 +77,16 @@
   const tabSelected = ref(tabs.value[0])
 
   onMounted(() => {
-    get()
+    get(true)
+    emitter.on('simulationUpdated', get)
   })
 
-  const get = () => {
-    isLoading.value = true
+  onBeforeUnmount(() => {
+    emitter.off('simulationUpdated')
+  })
+
+  const get = (first = false) => {
+    if(first) isLoading.value = true
     Api.get(`/simulation/show/${route.params.simulation_id}`)
       .then(({ data }) => {
         simulation.value = data.simulation
