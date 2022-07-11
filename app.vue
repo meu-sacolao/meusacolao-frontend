@@ -12,12 +12,10 @@
     <Body>
 
       <div id="main-content" class="w-screen h-screen font-sans bg-slate-100 text-zinc-700 overflow-x-hidden scrolling-touch" style="-webkit-overflow-scrolling: touch;">
-        <div class="min-h-container w-full mt-24 p-12 px-6 md:px-20 xl:px-28 overflow-y-auto overflow-x-hidden scrolling-touch">
-          <AppPageHeader></AppPageHeader>
-          <NuxtLayout>
-            <NuxtPage/>
-          </NuxtLayout>
-        </div>
+        <AppPageHeader></AppPageHeader>
+        <NuxtLayout>
+          <NuxtPage/>
+        </NuxtLayout>
         <AppFooter></AppFooter>
       </div>
 
@@ -29,11 +27,32 @@
 
 <script setup lang="ts">
   import '@/assets/css/main.scss'
+
+  definePageMeta({
+    pageTransition: {
+      mode: 'out-in'
+    }
+  })
 </script>
 
 <style lang="scss">
-  .min-h-container {
-    min-height: calc(100vh - 96px);
+  .page-enter-from, .layout-enter-from {
+    opacity: 0;
   }
+
+  .page-enter-active,
+  .page-leave-active,
+  .layout-enter-active, 
+  .layout-leave-active {
+    transition: all 0.3s;
+  }
+  .page-enter,
+  .page-leave-to,
+  .layout-enter, 
+  .layout-leave-active {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
 </style>
 

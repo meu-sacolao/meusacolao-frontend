@@ -1,5 +1,17 @@
 <template>
-  <div class="w-full flex flex-col">
+
+  <div class="
+    min-h-container 
+    w-full
+    mt-24
+    flex 
+    flex-col
+    overflow-y-auto
+    overflow-x-hidden
+    scrolling-touch
+  "
+  :class="layoutSpacesClasses"
+  >
     <slot />
   </div>
 </template>
@@ -8,30 +20,22 @@
 
   const route = useRoute()
 
-  definePageMeta({
-    key: route => route.path,
-    layoutTransition: {
-      name: 'foobar',
-      mode: 'out-in',
-      duration: 500
-    },
+  const nonSpacingRoutes = ['/']
+  const nonSpacingClasses = ''
+  const spacingClasses = 'p-12 px-6 md:px-20 xl:px-28'
+
+  const layoutSpacesClasses = ref(nonSpacingRoutes.includes(route.path) ? nonSpacingClasses : spacingClasses)
+
+  watch(() => route.path, (newValue) => {
+    if(newValue === '/') {
+      setTimeout(() => {
+        layoutSpacesClasses.value = nonSpacingClasses
+      }, 300)
+    } else {
+      setTimeout(() => {
+        layoutSpacesClasses.value = spacingClasses
+      }, 300)
+    }
   })
 
 </script>
-
-<style>
-
-.page-enter-from{
-  opacity: 0;
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.3s;
-}
-.page-enter,
-.page-leave-to {
-  opacity: 0;
-  transform: translateX(-100px);
-}
-</style>
