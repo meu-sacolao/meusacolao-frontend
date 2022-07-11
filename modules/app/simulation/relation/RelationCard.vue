@@ -11,8 +11,8 @@
           <div class="w-full flex space-x-2 pr-12">
             <h3 class="h3 flex-none text-slate-400">#{{ socialSecurityRelation.seqNumber }}</h3>
             <h3 class="h3 flex-none text-slate-400">{{ socialSecurityRelation.relationType }}</h3>
-            <h3 class="h3 truncate ...">{{ socialSecurityRelation.relationOrigin }}</h3>
           </div>
+          <h3 class="h3 pr-12">{{ socialSecurityRelation.relationOrigin }}</h3>
 
           <div class="w-full flex flex-wrap mt-4 space-y-2">
             <AppLabelValue class="four-cols-breakdown">
