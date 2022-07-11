@@ -1,5 +1,8 @@
 <template>
-  <AppCard :border="'w-4 hover:bg-orange-400 bg-zinc-100'">
+  <AppCard 
+    v-if="simulationRetirementGroup.simulationRetirementOptions.length"
+    :border="'w-4 hover:bg-orange-400 bg-zinc-100'"
+  >
     <template v-slot:header>
       <div class="w-full flex flex-col">
         <h3 class="h3 leading-relaxed ...">{{ simulationRetirementGroup.retirementGroup.title }}</h3>
@@ -55,7 +58,7 @@
 </template>
 
 <script setup>
-
+  
   defineProps({
     simulationRetirementGroup: Object
   })

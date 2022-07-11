@@ -1,7 +1,6 @@
 <template>
 
-  <div class="w-full flex flex-col space-y-6">
-
+  <div class="w-full p-6 flex flex-col space-y-6">
     <RelationCard
       v-for="(socialSecurityRelation, index) in simulation.socialSecurityRelations"
       :key="`simulation-social-security-${index}`"

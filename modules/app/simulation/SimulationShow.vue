@@ -9,7 +9,6 @@
 
       <div class="w-full flex flex-col bg-white shadow hover:shadow-lg transition-shadow ease-in-out duration-300 bg-white border border-slate-100">
 
-
         <div class="w-full flex border-b border-zinc-100">
           <div 
             v-for="(tab, index) in tabs"
@@ -25,37 +24,29 @@
         <transition
           name="fade"
         >
-          <div v-if="tabSelected.value === 'result'" class="p-6 flex flex-col space-y-6">
-            <SimulationRetirementGroupCard 
-              v-for="(simulationRetirementGroup, index) in simulation.simulationRetirementGroups"
-              :key="`retirementGroup${index}`"
-              :simulationRetirementGroup="simulationRetirementGroup"
-            ></SimulationRetirementGroupCard>
-          </div>
+          <ResultTab 
+            v-if="tabSelected.value === 'result'"
+            :simulation="simulation"
+          ></ResultTab>
         </transition>
 
         <transition
           name="fade"
         >
-          <div v-if="tabSelected.value === 'social-security-relations'" class="p-6 flex flex-col space-y-6">
-            <RelationTab 
-              :simulation="simulation"
-            ></RelationTab>
-          </div>
+          <RelationTab 
+            v-if="tabSelected.value === 'social-security-relations'"
+            :simulation="simulation"
+          ></RelationTab>
         </transition>
 
-
       </div>
-
-
     </div>
-
   </div>
 </template>
 
 <script setup>
   import Api from '@/util/Api'
-  import SimulationRetirementGroupCard from'@/modules/app/simulation/SimulationRetirementGroupCard'
+  import ResultTab from'@/modules/app/simulation/result/ResultTab'
   import SimulationClientCard from'@/modules/app/simulation/SimulationClientCard'
   import RelationTab from'@/modules/app/simulation/relation/RelationTab.vue'
   import emitter from '@/util/emitter'
