@@ -1,16 +1,11 @@
 <template>
   <div class="w-full flex flex-col">
     <slot />
-
-    <!-- MODALS PLACEHOLDER -->
-    <AuthFormModalVue />
   </div>
-
 </template>
 
 <script setup>
 
-  import AuthFormModalVue from '@/modules/auth/AuthFormModal.vue';
   const route = useRoute()
 
   definePageMeta({

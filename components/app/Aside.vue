@@ -43,10 +43,15 @@
 
     </aside>
   </transition>
+
+  <!-- GLOBAL MODALS PLACEHOLDER -->
+  <AuthFormModalVue :showAuthModal="showAuthModal" @close="closeAuthModal"/>
+
 </template>
 
 <script setup>
 
+  import AuthFormModalVue from '@/modules/auth/AuthFormModal.vue'
   import { getCurrentInstance } from 'vue'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from "@/modules/auth/store"
@@ -57,13 +62,15 @@
   const route = useRoute()
   const authStore = useAuthStore()
 
-  const { loggedUser } = storeToRefs(authStore)
+  defineEmits(['update:showMenu'])
 
   const props = defineProps({
     showMenu: Boolean
   })
 
-  defineEmits(['update:showMenu'])
+  const { loggedUser } = storeToRefs(authStore)
+
+  const showAuthModal = ref(false)
 
   const groups = ref([
     {
@@ -76,7 +83,7 @@
           title: 'Entre ou cadastre-se',
           roles: 'NONE',
           action: () => {
-            emitter.emit('openAuthModal')
+            showAuthModal.value = true
           }
         }
       ]
@@ -132,50 +139,54 @@
   ])
 
   const toggleDrawer = () => {
-
-      if(!props.showMenu) {
-        addListeners()
-      } else {
-        removeListeners()
-      }
-      emit('update:showMenu', !props.showMenu)
+    if(!props.showMenu) {
+      addListeners()
+    } else {
+      removeListeners()
     }
+    emit('update:showMenu', !props.showMenu)
+  }
 
-    const addListeners = () => {
-      document.addEventListener("click", handleClickOutside)
-      document.addEventListener("keyup", handleEsc)
-    }
+  const addListeners = () => {
+    document.addEventListener("click", handleClickOutside)
+    document.addEventListener("keyup", handleEsc)
+  }
 
-    const removeListeners = () => {
-      document.removeEventListener("click", handleClickOutside)
-      document.removeEventListener("keyup", handleEsc)
-    }
+  const removeListeners = () => {
+    document.removeEventListener("click", handleClickOutside)
+    document.removeEventListener("keyup", handleEsc)
+  }
 
-    const handleEsc = (evt) => {
-      if (showMenu && evt.keyCode === 27) toggleDrawer()
-    }
+  const handleEsc = (evt) => {
+    if (showMenu && evt.keyCode === 27) toggleDrawer()
+  }
 
-    const handleClickOutside = (event) => {
-      if (!(refs['aside'] == event.target || refs['aside'] && refs['aside'].contains(event.target))) {
-        toggleDrawer()
-      }
+  const handleClickOutside = (event) => {
+    if (!(refs['aside'] == event.target || refs['aside'] && refs['aside'].contains(event.target))) {
+      toggleDrawer()
     }
+  }
 
-    const makeAction = (action) => {
-      if(typeof(action) === 'string') return router.push(action)
-      action()
-    }
-    
-    const checkPermission = (roles) => {
-      if(!roles) return true
-      if(roles === 'ANY' && loggedUser.value) return true
-      if(roles === 'NONE' && !loggedUser.value) return true
-      return loggedUser.value && roles.includes(loggedUser.value.role)
-    }
+  const makeAction = (action) => {
+    if(typeof(action) === 'string') return router.push(action)
+    action()
+  }
+  
+  const checkPermission = (roles) => {
+    if(!roles) return true
+    if(roles === 'ANY' && loggedUser.value) return true
+    if(roles === 'NONE' && !loggedUser.value) return true
+    return loggedUser.value && roles.includes(loggedUser.value.role)
+  }
 
-    defineExpose({
-      toggleDrawer
-    })
+  const closeAuthModal = () => {
+    showAuthModal.value = false
+  }
+
+  defineExpose({
+    toggleDrawer
+  })
+
 
 </script>
 

@@ -17,6 +17,7 @@
       >
         <div :class="[dialogClasses]" class="bg-white shadow p-10 relative my-auto transition-fade-inner" v-if="show">
           <button
+            v-if="allowClose"
             @click="close()"
             class="
               absolute
@@ -53,6 +54,10 @@ const { emit } = getCurrentInstance()
     dialogClasses: {
       type: String,
       default: 'w-full max-w-2xl'
+    },
+    allowClose: {
+      type: Boolean,
+      default: true
     }
   })
 
@@ -70,7 +75,7 @@ const { emit } = getCurrentInstance()
   })
 
   const handleEsc = (event) => {
-    if (props.show && event.keyCode === 27) close()
+    if (props.allowClose && props.show && event.keyCode === 27) close()
   }
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <AppBaseModal :show="showModal" @close="close">
+  <AppBaseModal :show="showAuthModal" @close="close">
     <div class="w-full flex flex-col space-y-4">
       <AppInputWithIcon 
         v-model:value="user.email" 
@@ -31,35 +31,28 @@
   import { getCurrentInstance } from 'vue'
   import { useAuthStore } from "@/modules/auth/store"
   import User from '@/entities/User'
-  import emitter from '@/util/emitter'
 
   const authStore = useAuthStore()
 
   const { emit } = getCurrentInstance()
 
-  const user = ref(new User())
-  const showModal = ref(false)
+  defineEmits(['close'])
 
-  onMounted(() => {
-    emitter.on('openAuthModal', () => {
-      showModal.value = true
-    })
-  })
-
-  onBeforeUnmount(() => {
-    emitter.off('openAuthModal')
+  const props = defineProps({
+    showAuthModal: Boolean
   })
 
   const close = () => {
-    showModal.value = false
+    emit('close')
   }
+
+  const user = ref(new User())
 
   const login = () => {
     authStore.login({ email: user.value.email, password: user.value.password })
       .then(() => {
         emit('close')
         alert('Logado com sucesso')
-        showModal.value = false
       })
       .catch(() => {
         alert('Erro ao logar')

@@ -1,8 +1,9 @@
 <template>
   <div class="w-full flex flex-col space-y-8">
     
-    
-    <div v-if="!isLoading && simulation" class="w-full flex flex-col space-y-8">
+    <AppLoaderPlaceholder v-if="!simulation" />
+
+    <div v-else class="w-full flex flex-col space-y-8">
 
       <SimulationClientCard :client="simulation.client"></SimulationClientCard>
 
@@ -60,7 +61,7 @@
   import emitter from '@/util/emitter'
 
   const route = useRoute()
-  const simulation = ref(null)
+  const simulation = ref(false)
   const isLoading = ref(false)
 
   const tabs = ref([

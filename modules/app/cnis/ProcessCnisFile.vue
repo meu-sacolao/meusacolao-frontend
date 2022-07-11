@@ -1,6 +1,5 @@
 <template>
   <div class="w-full flex flex-col space-y-8">
-    
     <AppCard>
       <template v-slot:header>
         <div class="w-full flex space-x-2 pr-12">
@@ -30,38 +29,43 @@
         </div>
       </template>
     </AppCard>  
+    <ProcessCnisLoaderModal :showModal="showModal" @close="closeModal" />
   </div>
+
 </template>
 
-<script>
-import Api from '@/util/Api'
-export default {
-  name: 'ProcessCnisFile',
-  data() {
-    return {
-      retirementDate: '19/04/2015',
-      file: {
-        type: '',
-        name: ''
-      }
-    }
-  },
-  methods: {
-    upload() {
-      this.isProcessed = false
-      const fd = new FormData()
-      fd.append('cnisFile', this.file)
-      fd.append('cnisFileName', this.file.name)
-      fd.append('retirementDate', this.retirementDate)
-      Api.post(`/cnis/upload`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
-        .then(({ data }) => {
-          this.$router.push(`/simulacao/${data.simulation.id}`)
-        })
-        .catch((error) => {
-          alert('Erro ao processar CNIS')
-          console.log(error)
-        })
-    }
+<script setup>
+  
+  import Api from '@/util/Api'
+  import ProcessCnisLoaderModal from '@/modules/app/cnis/ProcessCnisLoaderModal.vue'
+  const router = useRouter()
+
+  const retirementDate = ref('19/04/2015')
+  const showModal = ref(false)
+  const file = ref({
+    type: '',
+    name: ''
+  })
+
+  const upload = () => {
+    showModal.value = true
+    const fd = new FormData()
+    fd.append('cnisFile', file.value)
+    fd.append('cnisFileName', file.value.name)
+    fd.append('retirementDate', retirementDate.value)
+    Api.post(`/cnis/upload`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
+      .then(({ data }) => {
+        router.push(`/simulacao/${data.simulation.id}`)
+      })
+      .catch((error) => {
+        showModal.value = false
+        alert('Erro ao processar CNIS')
+        console.log(error)
+      })
   }
-}
+
+  const closeModal = () => {
+    showModal.value = false
+  }
+
 </script>

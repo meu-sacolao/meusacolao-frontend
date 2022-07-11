@@ -21,7 +21,6 @@
         <AppFooter></AppFooter>
       </div>
 
-      <AppBaseModal></AppBaseModal>
       <AppBaseDrawer></AppBaseDrawer>
 
     </Body>
