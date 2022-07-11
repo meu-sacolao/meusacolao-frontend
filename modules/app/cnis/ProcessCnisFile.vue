@@ -3,14 +3,14 @@
     <AppCard>
       <template v-slot:header>
         <div class="w-full flex space-x-2 pr-12">
-        <h3 class="h3 truncate leading-relaxed ...">Simule sua aposentadoria</h3>
+        <h3 class="h3 truncate leading-relaxed ...">Calcule sua aposentadoria</h3>
       </div>
       </template>
       <template v-slot:content>
         <div class="flex flex-col space-y-4">
           
           <p class="text-lg">
-            Insira seu extrato do INSS (arquivo CNIS) para simular sua aposentadoria gratuitamente.
+            Insira seu extrato do INSS (arquivo CNIS) para calcular sua aposentadoria gratuitamente.
           </p>
           <AppInputWithIcon v-model:value="retirementDate" :mask="'##/##/####'" label="Data do cálculo" icon="calendar_month" placeholder="DD/MM/AAAA" />
           <AppUploadInput 

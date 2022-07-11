@@ -7,9 +7,9 @@
     </div>
 
     <div class="flex items-center space-x-6">
-      <NuxtLink to="/simulacao-de-aposentadoria">
+      <NuxtLink to="/calcule-sua-aposentadoria">
         <AppButton class="hidden sm:block bg-amber-600 text-white rounded-full px-6">
-          Simule sua aposentadoria
+          Calcule sua aposentadoria
         </AppButton>
       </NuxtLink> 
       <button 

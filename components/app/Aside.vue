@@ -76,8 +76,8 @@
     {
       items: [
         {
-          title: 'Simule sua aposentadoria',
-          action: '/simulacao-de-aposentadoria'
+          title: 'Calcule sua aposentadoria',
+          action: '/calcule-sua-aposentadoria'
         },
         {
           title: 'Entre ou cadastre-se',

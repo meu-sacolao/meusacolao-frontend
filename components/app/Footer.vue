@@ -6,9 +6,9 @@
       <nuxt-link to="/">
         <img src="/images/logo/1x/LOGO_2_1_1x.png" class="h-14" alt="Logo Calculo e previdência"/>
       </nuxt-link>
-      <NuxtLink to="/simulacao-de-aposentadoria">
+      <NuxtLink to="/calcule-sua-aposentadoria">
         <AppButton class="sm:block bg-amber-600 text-white rounded-full px-6">
-          Simule sua aposentadoria
+          Calcule sua aposentadoria
         </AppButton>
       </NuxtLink> 
     </div>
@@ -17,8 +17,12 @@
       <div class="four-cols-breakdown">
         <h5 class="h5 font-normal">Acesso</h5>
         <ul class="space-y-2 mt-4">
-          <li>Home</li>
-          <li>Simule sua aposentadoria</li>
+          <li>
+            <NuxtLink to="/calcule-sua-aposentadoria">Home</NuxtLink>
+          </li>
+          <li>
+            <NuxtLink to="/calcule-sua-aposentadoria">Calcule sua aposentadoria</NuxtLink>
+          </li>
           <li>Suas simulações</li>
           <li>Cadastre-se</li>
           <li>Login</li>

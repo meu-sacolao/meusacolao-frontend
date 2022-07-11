@@ -2,8 +2,9 @@
   <div class="w-full flex flex-col bg-white">
     <div class="app-intro flex flex-wrap">
       <div class="w-full md:w-1/2 flex flex-col items-center justify-center">
-        <h3 class="h3">Simule sua aposentadoria em segundos</h3>
-        <p>Simular sua aposentadoria nunca foi tão fácil.</p>
+        <h3 class="h3">Calcule sua aposentadoria</h3>
+        <h4>Rapidez e segurança</h4>
+        <p>Calcular sua aposentadoria nunca foi tão fácil</p>
       </div>
       <div class="w-full md:w-1/2 flex items-center justify-center">
         <img src="/images/general/calculating.png" width="60%" />
