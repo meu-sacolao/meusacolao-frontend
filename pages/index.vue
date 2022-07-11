@@ -1,19 +1,26 @@
 <template>
-  <div class="w-full h-screen flex items-center justify-center flex-col">
-    <img src="/images/logo/1x/LOGO_2_1x.png" width="420px" />
-    <h1 class="h1 text-cyan-900">Em breve</h1>
+  <div class="w-full flex flex-col bg-white">
+    <div class="app-intro flex flex-wrap">
+      <div class="w-full md:w-1/2 flex flex-col items-center justify-center">
+        <h3 class="h3">Simule sua aposentadoria em segundos</h3>
+        <p>Simular sua aposentadoria nunca foi tão fácil.</p>
+      </div>
+      <div class="w-full md:w-1/2 flex items-center justify-center">
+        <img src="/images/general/calculating.png" width="60%" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-// This compiler macro works in both <script> and <script setup>
-const route = useRoute()
-definePageMeta({
-  // you can also pass a string or a computed property
-  key: route => route.slug,
-  pageTransition: {
-    name: 'fade',
-    mode: 'out-in'
-  },
-})
+
 </script>
+
+<style lang="scss">
+
+  .app-intro {
+    height: 60vh;
+    padding: 24px;
+    
+  }
+</style>
