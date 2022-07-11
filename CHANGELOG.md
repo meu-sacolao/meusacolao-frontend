@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.9...v0.0.10) (2022-07-11)
+
+
+### Routine tasks | Implementações gerais
+
+* Alterado estrutura modals para permitir reutilização em outros contextos ([30c4142](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/30c414211822f0bb838f91b49a47e057a6c04c60))
+* Organizando pastas dos vinculos e contribuições do projeto ([8378562](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/837856292e2115f4c49db09b35ac39cfed7f4fbe))
+
+
+### Features | Funcionalidades
+
+* Adicionado botão e modal editar vinculo ([2dbd50e](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/2dbd50e9b191ca4d0ed295bfff59c972ca6a185e))
+* Adicionado opção de multiplas mascaras para input cpf e cnpj ([8175eb3](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/8175eb369b3b8af0b2aa63d8aa13b06edaecd599))
+* Atualizar vinculo ([c5880f5](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/c5880f5a9c226344a91f51efeee7d13e858e8dfa))
+
 ### [0.0.9](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.8...v0.0.9) (2022-07-10)
 
 
