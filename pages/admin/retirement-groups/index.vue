@@ -12,9 +12,14 @@
 
       <div
         v-else
-        class="w-full flex flex-col bg-white shadow-sm p-6 hover:shadow-lg"
+        class="w-full flex flex-col bg-white shadow-sm p-6 hover:shadow-lg cursor-move"
         v-for="(retirementGroup, index) in retirementGroups"
         :key="`admin-retirementGroup-${index}`"
+        draggable="true"
+        @dragstart="onDragStart(index)"
+        @dragover.prevent
+        @dragend="onDragEnd"
+        @drop="onDragFinish(index, retirementGroups)"
       >
         <div class="w-full flex flex-wrap space-y-2">
           <div class="w-full flex flex-wrap border-b pb-2 mb-2">
@@ -76,6 +81,9 @@
 
 <script setup>
 import GraphQL from "@/util/GraphQL"
+import useGeneralOrdenation from '@/util/functions/generalOrdenation'
+
+const { onDragStart, onDragEnd, onDragFinish } = useGeneralOrdenation('RetirementGroup')
 
 const query = `
   {
