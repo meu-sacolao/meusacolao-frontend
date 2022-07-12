@@ -7,7 +7,7 @@
       </div>
       </template>
       <template v-slot:content>
-        <div class="flex flex-col space-y-4">
+        <div class="flex flex-col space-y-6">
           
           <p class="text-lg">
             Insira seu extrato do INSS (arquivo CNIS) para calcular sua aposentadoria gratuitamente.
@@ -20,9 +20,22 @@
             label="Arquivo CNIS"
           />
 
+          <AppCheckBox
+            v-model:value="acceptTerms"
+            label="Autorizo que meus dados pessoais e previdenciários sejam utilizados para simulações   de cálculos de benefícios a que faço jus e orientações técnicas dos nossos analistas. "
+          >
+            Autorizo que meus dados pessoais e previdenciários sejam utilizados para simulações   de cálculos de benefícios a que faço jus e orientações técnicas dos nossos analistas. 
+          </AppCheckBox>
+
+
         </div>
         <div class="w-full flex justify-end mt-10 block">
-          <AppButton bg="bg-brand-gradient" text="text-white" @click="upload">
+          <AppButton 
+            bg="bg-brand-gradient" 
+            text="text-white" 
+            @click="upload"
+            :disabled="hasError"
+          >
             <span>Continuar</span>
             <AppIcons icon="chevron_right" />
           </AppButton>
@@ -42,9 +55,15 @@
 
   const retirementDate = ref('19/04/2015')
   const showModal = ref(false)
+  const acceptTerms = ref(false)
   const file = ref({
     type: '',
     name: ''
+  })
+
+  const hasError = computed(() => {
+    if(!retirementDate.value || !acceptTerms.value || !file.value.name || !file.value.name.includes('.pdf')) return true
+    return false
   })
 
   const upload = () => {
