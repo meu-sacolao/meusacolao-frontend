@@ -53,17 +53,32 @@
         </div>
 
       </div>
+
+      <p class="text-lg italic" v-if="isGranted">
+        Pelos elementos apresentados, você tem direito à aposentadoria pela regra <b>{{ simulationRetirementGroup.retirementGroup.title }}</b>.
+        Fale com o analista previdenciário para orientação sobre requerimento ou planejamento para avaliar a melhor estratégia para sua aposentadoria.
+        <span class="font-bold text-blue-600">Fale com o analista!</span>
+      </p>
+      <p class="text-lg italic" v-else>
+        Pelos elementos apresentados, você ainda não tem direito à aposentadoria pela regra <b>{{ simulationRetirementGroup.retirementGroup.title }}</b>.
+        Fale com o analista previdenciário para verificar a inclusão de novos tempos, revisão de valores e avaliar a melhor estratégia para sua aposentadoria.
+        <span class="font-bold text-blue-600">Fale com o analista!</span>
+      </p>
     </template>
   </AppCard>
 </template>
 
 <script setup>
   
-  defineProps({
+  const props = defineProps({
     simulationRetirementGroup: Object
   })
 
   const showContent = ref(false)
+
+  const isGranted = computed(() => {
+    return props.simulationRetirementGroup.simulationRetirementOptions.filter((i) => i.isGranted).length > 0
+  })
 
   const toggleCard = () => {
     showContent.value = !showContent.value
