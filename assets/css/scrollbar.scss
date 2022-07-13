@@ -1,8 +1,8 @@
 /* Scrollbars */
 /* ----------------------------------------- */
 *::-webkit-scrollbar {
-  background-color: #D6DDE530;
-  width: 16px; height: 8px;
+  background-color: #D6DDE5;
+  width: 12px; height: 8px;
 
 }
 *::-webkit-scrollbar:vertical {
@@ -15,17 +15,14 @@
   border-bottom-left-radius: 2px;
 }
 
-*::-webkit-scrollbar-track {
-  background-color: #D6DDE530;
-}
 *::-webkit-scrollbar-thumb {
-  border: 1px solid #D6DDE530;
+  border: 1px solid #D6DDE5;
   background: #164e63;
   border-radius: 4px;
 }
 
 *::-webkit-scrollbar-corner {
-  background-color: #D6DDE530;
+  background-color: #D6DDE5;
   display: none;
 }
 /* ----------------------------------------- Scrollbars */
