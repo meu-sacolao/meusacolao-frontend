@@ -1,8 +1,8 @@
 /* Scrollbars */
 /* ----------------------------------------- */
 *::-webkit-scrollbar {
-  background-color: #D6DDE5;
-  width: 12px; height: 8px;
+  width: 12px; 
+  height: 8px;
 
 }
 *::-webkit-scrollbar:vertical {
@@ -16,13 +16,16 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  border: 1px solid #D6DDE5;
   background: #164e63;
-  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #164e6330 !important;
 }
 
 *::-webkit-scrollbar-corner {
-  background-color: #D6DDE5;
   display: none;
 }
+
+
 /* ----------------------------------------- Scrollbars */
