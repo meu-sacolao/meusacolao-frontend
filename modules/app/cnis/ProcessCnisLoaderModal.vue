@@ -1,7 +1,7 @@
 <template>
   <AppBaseModal :show="showModal" @close="close" :allowClose="false">
-    <div class="w-full flex flex-col items-center space-y-6">
-      <img class="w-1/2" src="/images/general/calculating.png" />
+    <div class="w-full flex flex-col items-center">
+      <img class="w-full -mt-10" src="/images/general/pack-illustrations/07.svg" />
       
       <h5 class="h5 text-center">Aguarde alguns instantes enquanto processamos seu arquivo CNIS e calculamos sua aposentadoria</h5>
     </div>

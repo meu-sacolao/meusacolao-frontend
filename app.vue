@@ -9,15 +9,13 @@
       <Meta name="viewport" content="width=device-width,initial-scale=1.0" />
       <Link rel="icon" href="/images/logo/128w/ICON_2_128w.png" />
     </Head>
-    <Body>
+    <Body id="body" class="w-screen h-screen font-sans bg-slate-100 text-zinc-700 overflow-x-hidden scrolling-touch relative">
 
-      <div id="main-content" class="w-screen h-screen font-sans bg-slate-100 text-zinc-700 overflow-x-hidden scrolling-touch" style="-webkit-overflow-scrolling: touch;">
-        <AppPageHeader></AppPageHeader>
-        <NuxtLayout>
-          <NuxtPage/>
-        </NuxtLayout>
-        <AppFooter></AppFooter>
-      </div>
+      <AppPageHeader></AppPageHeader>
+      <NuxtLayout>
+        <NuxtPage/>
+      </NuxtLayout>
+      <AppFooter></AppFooter>
 
       <AppBaseDrawer></AppBaseDrawer>
 
@@ -33,6 +31,8 @@
       mode: 'out-in'
     }
   })
+
+
 </script>
 
 <style lang="scss">

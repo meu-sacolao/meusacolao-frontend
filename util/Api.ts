@@ -43,7 +43,10 @@ axios.interceptors.response.use(function (response) {
   if(error.response && [401, 403].includes(error.response.status)) {
     alert('Sessão expirada.')
     authStore.logout()
-    router.push('/')
+
+    setTimeout(() => {
+      router.push('/')
+    }, 200)
   }
 
   return Promise.reject(error)

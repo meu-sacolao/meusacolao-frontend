@@ -1,9 +1,26 @@
 <template>
   <div class="w-full flex flex-col space-y-8">
+
+
+    <div class="w-full flex flex-wrap p-8 shadow-md bg-cyan-800/5">
+
+      <div class="w-full lg:w-1/3 flex flex-wrap items-center justify-center">
+        <img class="w-full -mt-10 w-1/2 lg:w-3/4" src="/images/general/pack-illustrations/14.svg" />
+        <h3 class="h3 text-center">Cálculo e Previdência</h3>
+      </div>
+      <div class="w-full lg:w-1/3 bg-white p-6 flex flex-col space-y-4 shadow">
+        <h3 class="h3">Aposentadoria</h3>
+        <p class="leading-relaxed">Verifique de forma simples e rápida se você tem direito a se aposentar e controle seus registros trabalhistas.</p>
+      </div>
+      <div class="w-full lg:w-1/3 bg-white border-t lg:border-l lg:border-t-0 border-zinc-100 p-6 flex flex-col space-y-4 shadow">
+        <h3 class="h3">Programe-se</h3>
+        <p class="leading-relaxed">Realize a projeção de quando irá se aposentar e obtenha auxilio dos nossos analistas para definir a melhor estratégia para sua aposentadoria.</p>
+      </div>
+    </div>
     <AppCard>
       <template v-slot:header>
         <div class="w-full flex space-x-2 pr-12">
-        <h3 class="h3 truncate leading-relaxed ...">Calcule sua aposentadoria</h3>
+        <h3 class="h3 truncate leading-relaxed ...">Calcular aposentadoria</h3>
       </div>
       </template>
       <template v-slot:content>
