@@ -14,7 +14,7 @@
           </h4>
 
           <NuxtLink to="/calcule-sua-aposentadoria">
-            <AppButton class="hidden sm:block bg-amber-600 text-white rounded-full px-6">
+            <AppButton class="bg-amber-600 text-white rounded-full px-6">
               Calcule gratuitamente
             </AppButton>
           </NuxtLink>
