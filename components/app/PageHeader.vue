@@ -59,20 +59,12 @@
   }
 
   const headerClasses = computed(() => {
-    if(route.path === '/') return 'page-header-home'
+    if(route.path === '/') return 'bg-cyan-800'
     return 'bg-brand-gradient shadow-xl'
   })
 
 </script>
 
 <style lang="scss">
-
-  .header-home {
-    @apply bg-transparent;
-  }
-
-  .page-header-home.intro-scrolled {
-    @apply bg-gradient-to-tr from-cyan-800 to-cyan-900 shadow-xl;
-  }
 
 </style>

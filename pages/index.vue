@@ -1,17 +1,29 @@
 <template>
 
-  <div class="w-full flex flex-col absolute -mt-24" >
+  <div class="w-full flex flex-col -mt-24" >
     <!-- HOME INTRO -->
-    <div class="w-full h-screen block shrink-0 flex flex-col justify-center bg-brand-gradient" id="home-intro">
+    <div class="w-full h-screen block shrink-0 flex flex-col justify-center bg-cyan-800" id="home-intro">
       <div class="app-intro flex flex-wrap">
-        <div class="w-full md:w-1/2 flex flex-col items-center justify-center text-white text-right">
-          <h2 class="h2">Calcule sua aposentadoria</h2>
-          <h4>Rapidez e segurança</h4>
-          <p>Calcular sua aposentadoria nunca foi tão fácil</p>
+
+        <div class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-end px-10 lg:px-0 text-white text-center lg:text-right space-y-3">
+          <h1 class="h1 font-medium">Cálculo e Previdência</h1>
+          <h4 class="h4 font-normal">
+            A maneira mais <span class="text-amber-500 text-xl lg:text-2xl">rápida</span> 
+            e <span class="text-amber-500 text-xl lg:text-2xl">segura</span> 
+            de calcular sua aposentadoria sem burocracia!
+          </h4>
+
+          <NuxtLink to="/calcule-sua-aposentadoria">
+            <AppButton class="hidden sm:block bg-amber-600 text-white rounded-full px-6">
+              Calcule gratuitamente
+            </AppButton>
+          </NuxtLink>
         </div>
-        <div class="w-full md:w-1/2 flex items-center justify-center ">
-          <img src="/images/general/pack-illustrations/01.svg" width="80%" />
+
+        <div class="w-full lg:w-2/3 flex items-center justify-center ">
+          <img class="w-full" src="/images/general/pack-illustrations/01.svg" />
         </div>
+
       </div>
     </div>
 
@@ -22,32 +34,6 @@
 
 <script setup>
 
-
-  if(process.client) {
-
-    const body = document.getElementById('body')
-    const pageHeader = document.getElementById('page-header')
-
-    const handleBodyScrollToHome = (event) => {
-      const homeIntro = document.getElementById('home-intro')
-      if (homeIntro && pageHeader) {
-        if(body.scrollTop > (homeIntro.clientHeight - pageHeader.clientHeight)) {
-          pageHeader.classList.add('intro-scrolled')
-        } else {
-          pageHeader.classList.remove('intro-scrolled')
-        }
-      }
-    }
-
-    onMounted(() => {
-      if(body) body.addEventListener('scroll', handleBodyScrollToHome)
-    })
-
-    onBeforeUnmount(() => {
-      if(body) body.removeEventListener('scroll', handleBodyScrollToHome)
-    })
-
-  }
   
 </script>
 
