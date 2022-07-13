@@ -18,7 +18,7 @@
         <h5 class="h5 font-normal">Acesso</h5>
         <ul class="space-y-2 mt-4">
           <li>
-            <NuxtLink to="/calcule-sua-aposentadoria">Home</NuxtLink>
+            <NuxtLink to="/">Home</NuxtLink>
           </li>
           <li>
             <NuxtLink to="/calcule-sua-aposentadoria">Calcule sua aposentadoria</NuxtLink>

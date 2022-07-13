@@ -1,5 +1,24 @@
 <template>
-  <nav class="fixed top-0 right-0 left-0 z-50 w-full px-6 md:px-20 xl:px-28 flex flex-wrap justify-between items-center h-24 font-sans bg-brand-gradient shadow-xl">
+  <nav class="
+    fixed
+    top-0
+    right-0
+    left-0
+    z-50
+    w-full
+    px-6
+    md:px-20
+    xl:px-28
+    flex
+    flex-wrap
+    justify-between
+    items-center
+    h-24
+    font-sans
+  "
+  :class="headerClasses"
+  id="page-header"
+  >
     <div class=" flex">
       <nuxt-link to="/">
         <img src="/images/logo/1x/LOGO_2_1_1x.png" class="h-14" alt="Logo Calculo e previdência"/>
@@ -23,22 +42,37 @@
       </button>
     </div>
 
-    <AppAside ref="AppAside"  v-model:showMenu="showMenu" />
+    <AppAside ref="childred"  v-model:showMenu="showMenu" />
   </nav>
 </template>
 
-<script>
-export default {
-  name: 'AppPageHeader',
-  data() {
-    return {
-      showMenu: false,
-    }
-  },
-  methods: {
-    toggleMenu() {
-      this.$refs['AppAside'].toggleDrawer()
-    }
+<script setup>
+
+  const route = useRoute()
+
+  const childred  = ref()
+
+  const showMenu = ref(false)
+
+  const toggleMenu = () => {
+    childred.value.toggleDrawer()
   }
-}
+
+  const headerClasses = computed(() => {
+    if(route.path === '/') return 'page-header-home'
+    return 'bg-brand-gradient shadow-xl'
+  })
+
 </script>
+
+<style lang="scss">
+
+  .header-home {
+    @apply bg-transparent;
+  }
+
+  .page-header-home.intro-scrolled {
+    @apply bg-gradient-to-tr from-cyan-800 to-cyan-900 shadow-xl;
+  }
+
+</style>

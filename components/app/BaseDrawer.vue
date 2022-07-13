@@ -33,7 +33,7 @@
           focus:outline-none
         "
       >
-        <AppIcons icon="close" />
+        <AppIcons icon="close" size="32" />
       </button>
 
       <div class="flex flex-col h-full overflow-y-auto">

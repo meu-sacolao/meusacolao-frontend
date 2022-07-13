@@ -4,7 +4,7 @@
     <div 
       v-if="showMenu"
       @click="toggleDrawer()"
-      class="w-screen fixed inset-0 bg-slate-800 bg-opacity-50 mt-24"
+      class="w-screen fixed z-20 inset-0 bg-slate-800 bg-opacity-50"
     ></div>
   </transition>
   <transition
@@ -19,8 +19,24 @@
     <aside 
       v-if="showMenu" 
       ref="baseDrawer"
-      class="base-aside-dialog transition-all duration-200 easy-in-out transform bg-brand-gradient overflow-y-auto"
+      class="base-aside-dialog z-30 transition-all duration-200 easy-in-out transform bg-brand-gradient overflow-y-auto"
     >
+
+      <button
+        @click="toggleDrawer()"
+        class="
+          absolute
+          top-0
+          right-0
+          text-white
+          pr-4
+          pt-5
+          focus:outline-none
+        "
+      >
+        <AppIcons icon="close" size="32" />
+      </button>
+
       <ul 
         v-for="(group, index) in groups" 
         :key="`aside-group-${index}`"
@@ -158,7 +174,7 @@
   }
 
   const handleEsc = (evt) => {
-    if (showMenu && evt.keyCode === 27) toggleDrawer()
+    if (props.showMenu && evt.keyCode === 27) toggleDrawer()
   }
 
   const handleClickOutside = (event) => {
@@ -192,7 +208,7 @@
 
 <style lang="scss">
   .base-aside-dialog {
-    @apply mt-24 p-10 fixed top-0 right-0 h-screen w-full shadow-lg flex flex-col z-50 overflow-hidden 
+    @apply pt-24 p-10 fixed top-0 right-0 h-screen w-full shadow-lg flex flex-col overflow-hidden 
   }
 
   @media (min-width: 576px) {
