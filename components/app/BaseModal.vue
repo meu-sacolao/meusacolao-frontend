@@ -11,13 +11,25 @@
           items-center
           justify-center
           z-50
-          p-6
+          p-4
+          md:p-6
           lg:p-8
           xl:p-12
           overflow-y-auto
         "
       >
-        <div :class="[dialogClasses]" class="bg-white shadow p-10 relative my-auto transition-fade-inner" v-if="show">
+        <!-- MODEL DIALOG -->
+        <div :class="[dialogClasses]" class="
+          bg-white
+          shadow
+          p-6
+          md:p-6
+          lg:p-8
+          xl:p-12
+          relative
+          my-auto
+          transition-fade-inner
+        " v-if="show">
           <button
             v-if="allowClose"
             @click="close()"
