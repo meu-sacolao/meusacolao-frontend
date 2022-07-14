@@ -1,7 +1,7 @@
 <template>
   <button 
     class="px-3 py-2 flex items-center justify-center"
-    :class="[bg, text]"
+    :class="[classes, bg, text]"
     :disabled="disabled"
   >
     <slot></slot>
@@ -11,6 +11,10 @@
 export default {
   name: 'Button',
   props: {
+    classes: {
+      type: String,
+      default: 'px-3 py-2 flex items-center justify-center'
+    },
     bg: {
       type: String,
       default: ''

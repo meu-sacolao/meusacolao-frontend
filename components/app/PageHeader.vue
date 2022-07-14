@@ -4,7 +4,7 @@
     top-0
     right-0
     left-0
-    z-50
+    z-40
     w-full
     px-6
     md:px-20

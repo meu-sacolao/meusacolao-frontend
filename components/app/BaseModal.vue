@@ -11,7 +11,9 @@
           items-center
           justify-center
           z-50
-          p-12
+          p-6
+          lg:p-8
+          xl:p-12
           overflow-y-auto
         "
       >
@@ -31,7 +33,7 @@
           >
             <AppIcons icon="close" />
           </button>
-          <div class="w-full">
+          <div class="w-full mt-4">
             <slot />
           </div>
         </div>

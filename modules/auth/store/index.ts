@@ -18,6 +18,14 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
+    async googleLogin(code) {
+      return Api.get(`/auth/googleLogin?code=${code}`)
+        .then(({ data }) => {
+          this.loggedUserToken = data.token
+          this.getLoggedUser()
+        })
+    },
+
     async getLoggedUser() {
       Api.get('/auth/getLoggedUser').then(({ data }) => {
         this.loggedUser = new User(data)
