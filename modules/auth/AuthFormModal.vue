@@ -10,11 +10,11 @@
         <div 
           v-for="(tab, index) in tabs"
           :key="`simulation-tabs-${index}`"
-          class="px-10 pb-2 border-b-8 cursor-pointer"
+          class="px-8 lg:px-10 pb-2 border-b-8 cursor-pointer"
           :class="[tab == tabSelected ? 'border-cyan-800 hover:border-cyan-600' : 'border-transparent hover:border-zinc-100']"
           @click="tabSelected = tab"
         >
-          <h5 class="h5 mb-0">{{ tab.label }}</h5>
+          <h5 class="h5 mb-0 whitespace-nowrap">{{ tab.label }}</h5>
         </div>
       </div>
       

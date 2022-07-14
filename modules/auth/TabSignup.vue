@@ -3,6 +3,13 @@
     <div class="w-full flex flex-col space-y-4">
       <AppInputWithIcon 
         v-model:value="user.email" 
+        icon="person" 
+        type="text" 
+        label="Nome" 
+        placeholder="Insira seu npme" 
+      />
+      <AppInputWithIcon 
+        v-model:value="user.email" 
         icon="email" 
         type="email" 
         label="Email" 
@@ -11,10 +18,10 @@
       <AppInputWithIcon 
         v-model:value="user.phone" 
         icon="phone" 
-        type="phone" 
+        type="tel" 
         label="Telefone" 
         placeholder="Insira seu telefone"
-        mask="(##)# ####-####" 
+        :mask="['(##)####-####', '(##)#####-####']" 
       />
       <AppInputWithIcon 
         v-model:value="user.password" 
@@ -24,12 +31,6 @@
         placeholder="Insira sua senha"
         @keydown.enter="login()"
       />
-
-      <div class="w-full flex justify-end">
-        <NuxtLink class="text-cyan-600" to="/recuperar-senha">
-          Esqueceu sua senha?
-        </NuxtLink>
-      </div>
     </div>
     <div class="w-full flex justify-end mt-8 block">
       <AppButton bg="bg-brand-gradient" text="text-white" @click="login()">
