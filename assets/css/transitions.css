@@ -1,3 +1,4 @@
+/* fade **/
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s ease;
@@ -6,4 +7,26 @@
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* slide-left **/
+
+.slide-left-enter-from, .layout-enter-from {
+  opacity: 0;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.3s;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.3s;
+}
+
+.slide-left-enter,
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
 }

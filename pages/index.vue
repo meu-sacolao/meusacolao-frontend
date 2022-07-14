@@ -34,6 +34,22 @@
 
 <script setup>
 
+  import { useAuthStore } from "@/modules/auth/store"
+  const authStore = useAuthStore()
+  const route = useRoute()
+
+  if(process.client) {
+    onMounted(() => {
+      if (route.query.code) {
+        console.log('route.query.code', route.query.code)
+        authStore.googleLogin(route.query.code)
+          .then(() => {
+            alert('Logado com sucesso com google')
+          })
+      }
+    })
+
+  }
   
 </script>
 

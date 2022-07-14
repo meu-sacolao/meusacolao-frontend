@@ -21,24 +21,16 @@
           </div>
         </div>
 
-        <transition
-          name="fade"
-        >
+        <transition name="slide-left" mode="out-in" appear>
           <ResultTab 
             v-if="tabSelected.value === 'result'"
             :simulation="simulation"
           ></ResultTab>
-        </transition>
-
-        <transition
-          name="fade"
-        >
           <RelationTab 
-            v-if="tabSelected.value === 'social-security-relations'"
+            v-else-if="tabSelected.value === 'social-security-relations'"
             :simulation="simulation"
           ></RelationTab>
         </transition>
-
       </div>
     </div>
   </div>
