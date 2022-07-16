@@ -96,6 +96,11 @@
           action: '/calcule-sua-aposentadoria'
         },
         {
+          title: 'Minhas simulações',
+          action: '/minhas-simulacoes',
+          roles: ['STANDARD', 'ADMIN'],
+        },
+        {
           title: 'Entre ou cadastre-se',
           roles: 'NONE',
           action: () => {
