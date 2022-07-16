@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex flex-col">
-    <div class="w-full flex flex-col space-y-4">
+    <div class="w-full flex flex-col space-y-2">
       <AppInputWithIcon 
         v-model:value="user.email" 
         icon="email" 
@@ -40,7 +40,7 @@
 
   const { emit } = getCurrentInstance()
 
-  defineEmits(['close'])
+  defineEmits(['close', 'setTabSelected'])
 
   const authStore = useAuthStore()
   const user = ref(new User())
@@ -51,8 +51,13 @@
         emit('close')
         alert('Logado com sucesso')
       })
-      .catch(() => {
-        alert('Erro ao logar')
+      .catch((err) => {
+        if(err && err.response.status == 404) {
+          alert('Você não possui cadastro, por favor cadastre-se.')
+          emit('setTabSelected', 'signup')
+        } else {
+          alert('Erro ao logar')
+        }
       })
   }
 

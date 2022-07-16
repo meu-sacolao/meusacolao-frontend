@@ -20,7 +20,7 @@
         @input="$emit('update:value', $event.target.value)"
         @keydown.enter="$emit('keydown.enter', $event.target.value)"
         class="input-classes"
-        :class="[icon ? 'pl-9' : 'pl-4']"
+        :class="getInputClass"
       />
       <input
         v-else
@@ -32,15 +32,19 @@
         @keydown.enter="$emit('keydown.enter', $event.target.value)"
         v-mask="mask"
         class="input-classes"
-        :class="[icon ? 'pl-9' : 'pl-4']"
+        :class="getInputClass"
       />
     </div>
+
+    <p  class="text-red-600 h-4">
+      <slot v-if="hasError" />
+    </p>
   </div>
 </template>
 
 <script setup>
 
-  defineProps({
+  const props = defineProps({
     icon: String,
     type: String,
     id_input: String,
@@ -49,15 +53,35 @@
     action: String,
     mask: [Array, String],
     value: [String, Number],
+    hasError: {
+      type: Boolean,
+      default: false
+    }
   })
 
   defineEmits(['update:value', 'keydown.enter'])
+
+  const getInputClass = computed(() => {
+    let classes = []
+    if(props.icon) {
+      classes.push('pl-9')
+    } else {
+      classes.push('pl-4')
+    }
+    if(props.hasError) {
+      classes.push('border-red-600')
+    } else {
+      classes.push('border-slate-200 focus:border-slate-300')
+    }
+    return classes
+
+  })
 </script>
 
 <style lang="scss">
 
   .input-classes {
-    @apply block appearance-none outline-none w-full h-full border border-slate-200 focus:border-slate-300 focus:shadow-sm hover:shadow text-lg py-4 pr-4;
+    @apply block appearance-none outline-none w-full h-full border focus:shadow-sm hover:shadow text-lg py-4 pr-4;
   }
 
   .icon-classes {

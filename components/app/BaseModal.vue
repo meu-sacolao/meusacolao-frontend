@@ -45,7 +45,7 @@
           >
             <AppIcons icon="close" />
           </button>
-          <div class="w-full mt-4">
+          <div class="w-full mt-8">
             <slot />
           </div>
         </div>

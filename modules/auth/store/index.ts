@@ -18,6 +18,13 @@ export const useAuthStore = defineStore('auth', {
       })
     },
 
+    async signup({ name, email, phone, password }) {
+      return Api.post('/auth/signup', { name, email, phone, password }).then(({ data }) => {
+        this.loggedUserToken = data.token
+        this.getLoggedUser()
+      })
+    },
+
     async googleLogin(code) {
       return Api.get(`/auth/googleLogin?code=${code}`)
         .then(({ data }) => {
