@@ -7,10 +7,18 @@
 
     <div class="mt-6 flex flex-col space-y-4">
       <AppInputWithIcon v-model:value="retirementGroup.title" label="Título" placeholder="Insira o título do grupo de aposentadoria" />
+      
+      <AppTextEditorInput 
+        input_id="retirement-group-editor" 
+        v-model:value="retirementGroup.description" 
+        label="Descrição curta (até 3 linhas)"
+        height="100"
+      />
+
       <AppTextEditorInput 
         input_id="retirement-group-editor" 
         v-model:value="retirementGroup.content" 
-        label="Conteúdo auxiliar"
+        label="Descrição completa"
       />
 
       <div class="w-full flex">
@@ -45,7 +53,7 @@ import GraphQL from '@/util/GraphQL'
   })
 
   const hasError = computed(() => {
-    return !retirementGroup.value.title || !retirementGroup.value.content
+    return !retirementGroup.value.title || !retirementGroup.value.description
   })
 
   onMounted(() => {
@@ -63,6 +71,7 @@ import GraphQL from '@/util/GraphQL'
           key
           id
           title
+          description
           content
         }
       }

@@ -6,6 +6,7 @@ export default class RetirementGroup extends BaseModel {
   key: number = null
   id: string = null
   title: string = ''
+  description: string = ''
   content: string = ''
   retirementDate: string
   createdAt: string = ''
@@ -22,6 +23,7 @@ export default class RetirementGroup extends BaseModel {
     'key',
     'id',
     'title',
+    'description',
     'content',
     'retirementDate',
     'createdAt',

@@ -3,50 +3,60 @@
     <label class="block mb-2" v-if="label">
       <span class="border-b-4 border-zinc-200 ">{{ label }}</span>
     </label>
-    <div v-bind:id="input_id" class="pell mb-2 focus:shadow-sm hover:shadow"></div>
+    <div 
+      :id="id"
+      :style="{'--pell-content-height': height + 'px' }"
+      class="pell mb-2 focus:shadow-sm hover:shadow"
+    ></div>
   </div>
 </template>
 
-<script>
-//Pell editor
-import pell from 'pell'
-import pellActions from './pellActions'
-import sanitizeHtml from './sanitizeHtml'
-import unescape from './unescape'
+<script setup>
+  import pell from 'pell'
+  import pellActions from './pellActions'
+  import sanitizeHtml from './sanitizeHtml'
+  import unescape from './unescape'
+  import generateRandomString from '@/util/functions/generateRandomString'
 
-export default {
-  name: "text-editor",
-  props: ["label", "input_id", "placeholder", "value", "has_error"],
-  mounted() {
-    let that = this;
+  const id = ref(generateRandomString(10))
+  const { emit } = getCurrentInstance()
+
+  defineEmits(['update:value'])
+
+  const props = defineProps({
+    label: String,
+    value: String,
+    height: {
+      type: String,
+      default: '300'
+    }
+  })
+
+  onMounted(() => {
     setTimeout(() => {
-      that.pellInit();
+      pellInit()
     }, 500)
-  },
-  methods: {
-    change(evt) {
-      this.$emit("update:value", this.value)
-    },
+  })
 
-    pellInit() {
-      let that = this;
+  const getPeelHeightClass = computed(() => {
+    return `pell-height-${props.height}`
+  })
 
-      let editor = pell.init({
-        element: document.getElementById(that.input_id),
-        onChange: (html) => {
-          html = unescape(html)
+  const pellInit = () => {
+    const editor = pell.init({
+      element: document.getElementById(id.value),
+      onChange: (html) => {
+        html = unescape(html)
 
-          let clean = sanitizeHtml(html)
+        let clean = sanitizeHtml(html)
 
-          that.$emit("update:value", clean)
-        },
-        actions: pellActions,
-      })
+        emit("update:value", clean)
+      },
+      actions: pellActions,
+    })
+    editor.content.innerHTML = props.value
+  }
 
-      editor.content.innerHTML = that.value
-    },
-  },
-}
 </script>
 
 
@@ -57,7 +67,6 @@ export default {
   }
 
   .pell-content {
-    height: 200px;
     padding: 16px !important;
     background-color: #FFF;
   }
@@ -67,4 +76,9 @@ export default {
     border-radius: 0;
     box-shadow: none;
   }
+
+  .pell-content {
+    height: var(--pell-content-height) !important;
+  }
+
 </style>

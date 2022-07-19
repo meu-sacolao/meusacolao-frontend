@@ -8,7 +8,9 @@ export default class RetirementOption extends BaseModel {
   retirementGroupId: string = null
   rule: string = null
   title: string = null
+  description: string = null
   content: string = null
+  showForNotLoggedUsers: boolean = false
   order: number = null
   createdAt: string = null
   updatedAt: string = null
@@ -25,7 +27,9 @@ export default class RetirementOption extends BaseModel {
     'id',
     'retirementGroupId',
     'title',
+    'description',
     'content',
+    'showForNotLoggedUsers',
     'order',
     'createdAt',
     'updatedAt',

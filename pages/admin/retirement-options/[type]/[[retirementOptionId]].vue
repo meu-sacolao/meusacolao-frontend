@@ -16,20 +16,33 @@
       
       <AppTextEditorInput 
         input_id="retirement-group-editor" 
-        v-model:value="retirementOption.content" 
-        label="Conteúdo auxiliar"
+        v-model:value="retirementOption.description" 
+        label="Descrição curta (até 3 linhas)"
+        height="100"
       />
 
-      <div class="w-full flex">
-        <AppButton 
-          :disabled="hasError" 
-          class="bg-brand-gradient text-white px-5"
-          @click="updateOrCreate()"
-        >
-          <AppIcons icon="save" />
-          <span  class="ml-1">Salvar</span>
-        </AppButton>
-      </div>
+      <AppTextEditorInput 
+        input_id="retirement-group-editor" 
+        v-model:value="retirementOption.content" 
+        label="Descrição completa"
+      />
+
+      <AppCheckBox
+        v-model:value="retirementOption.showForNotLoggedUsers"
+      >
+        Mostrar para usuários não logados
+      </AppCheckBox>
+
+    </div>
+    <div class="w-full flex mt-6">
+      <AppButton 
+        :disabled="hasError" 
+        class="bg-brand-gradient text-white px-5"
+        @click="updateOrCreate()"
+      >
+        <AppIcons icon="save" />
+        <span  class="ml-1">Salvar</span>
+      </AppButton>
     </div>
 
   </div>
@@ -55,7 +68,7 @@ import GraphQL from '@/util/GraphQL'
   })
 
   const hasError = computed(() => {
-    return !retirementOption.value.title || !retirementOption.value.content
+    return !retirementOption.value.title || !retirementOption.value.description
   })
 
   onMounted(() => {
@@ -73,8 +86,10 @@ import GraphQL from '@/util/GraphQL'
           key
           id
           title
+          description
           content
           retirementGroupId
+          showForNotLoggedUsers
           retirementGroup {
             id
             title
