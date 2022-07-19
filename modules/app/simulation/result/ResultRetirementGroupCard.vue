@@ -34,8 +34,18 @@
 
           <div class="p text-slate-400 leading-relaxed" v-html="simulationRetirementOption.retirementOption.content"></div>
 
+          <div class="w-full flex flex-wrap">
+            <AppLabelValue v-if="simulationRetirementOption.age" class="four-cols-breakdown">
+              <template v-slot:label>Idade</template>
+              <template v-slot:value>{{ simulationRetirementOption.age.time.timeText }}</template>
+            </AppLabelValue>
+            <AppLabelValue v-if="simulationRetirementOption.contributionTime" class="four-cols-breakdown">
+              <template v-slot:label>Tempo de contribuição</template>
+              <template v-slot:value>{{ simulationRetirementOption.contributionTime.time.timeText }}</template>
+            </AppLabelValue>
+          </div>
+          <!-- REQUIREMENTS RESULT -->
           <div class="w-full flex flex-col mt-4">
-
             <div 
               class="w-full flex items-center"
               v-for="(requirement, index) in simulationRetirementOption.requirements"
@@ -47,7 +57,11 @@
           </div>
 
           <div class="flex mt-6">
-            <AppButton bg="bg-slate-300" @click="emitter.emit('openDrawer', { component: 'SimulationRetirementOptionDetailDrawer', payload: simulationRetirementOption })">Ver cálculo</AppButton>
+            <AppButton 
+              bg="bg-slate-300" 
+              @click="emitter.emit('openDrawer', { component: 'SimulationRetirementOptionDetailDrawer', payload: simulationRetirementOption })">
+                Ver cálculo
+            </AppButton>
           </div>
           
         </div>
