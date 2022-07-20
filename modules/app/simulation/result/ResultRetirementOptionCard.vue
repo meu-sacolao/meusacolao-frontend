@@ -19,13 +19,25 @@
     <div class="p text-slate-400 leading-relaxed" v-html="simulationRetirementOption.retirementOption.content"></div>
 
     <div class="w-full flex flex-col space-y-4" v-if="simulationRetirementOption.age || simulationRetirementOption.contributionTime">
-      <AppLabelValue v-if="simulationRetirementOption.age">
+      <AppLabelValue>
+        <template v-slot:label>Data base</template>
+        <template v-slot:value>{{ simulationRetirementOption.contextDate }}</template>
+      </AppLabelValue>
+      <AppLabelValue>
         <template v-slot:label>Idade</template>
         <template v-slot:value>{{ simulationRetirementOption.age.time.timeText }}</template>
       </AppLabelValue>
-      <AppLabelValue v-if="simulationRetirementOption.contributionTime">
+      <AppLabelValue>
         <template v-slot:label>Tempo de contribuição</template>
         <template v-slot:value>{{ simulationRetirementOption.contributionTime.time.timeText }}</template>
+      </AppLabelValue>
+      <AppLabelValue>
+        <template v-slot:label>Tempo de contribuição</template>
+        <template v-slot:value>{{ simulationRetirementOption.contributionTime.time.timeText }}</template>
+      </AppLabelValue>
+      <AppLabelValue>
+        <template v-slot:label>Quantidade de contribuições</template>
+        <template v-slot:value>{{ simulationRetirementOption.contributionsTotal }}</template>
       </AppLabelValue>
     </div>
     <!-- REQUIREMENTS RESULT -->

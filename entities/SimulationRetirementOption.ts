@@ -13,6 +13,10 @@ export default interface SimulationRetirementOption {
   retirementOptionId: string
   isGranted: string
   requirements: string
+  contextDate: string
+  age: string
+  contributionTime: string
+  contributionsTotal: string
   retirementDate: RequirementRuleInterface[]
   createdAt: string
   updatedAt: string
