@@ -32,10 +32,6 @@
         <template v-slot:value>{{ simulationRetirementOption.contributionTime.time.timeText }}</template>
       </AppLabelValue>
       <AppLabelValue>
-        <template v-slot:label>Tempo de contribuição</template>
-        <template v-slot:value>{{ simulationRetirementOption.contributionTime.time.timeText }}</template>
-      </AppLabelValue>
-      <AppLabelValue>
         <template v-slot:label>Quantidade de contribuições</template>
         <template v-slot:value>{{ simulationRetirementOption.contributionsTotal }}</template>
       </AppLabelValue>
