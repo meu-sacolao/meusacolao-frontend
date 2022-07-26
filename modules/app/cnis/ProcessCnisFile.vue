@@ -70,7 +70,7 @@
   import ProcessCnisLoaderModal from '@/modules/app/cnis/ProcessCnisLoaderModal.vue'
   const router = useRouter()
 
-  const retirementDate = ref('19/04/2015')
+  const retirementDate = ref('')
   const showModal = ref(false)
   const acceptTerms = ref(false)
   const file = ref({
