@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.12](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.11...v0.0.12) (2022-07-26)
+
+
+### Bug Fixes | Melhorias
+
+* Removido tempo de contribuição duplicado no resultado das regras de aposentadoria ([365ebaf](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/365ebaf5bcbbf26adfffb7e8f877bbc7bb845eac))
+
+
+### Routine tasks | Implementações gerais
+
+* Removido data prefixada formulario cnis ([87aa6cc](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/87aa6cc98ebb7c3f197f228ddf2fb2c01e445fb5))
+* Separando requisições tab  resultado e requisições tab relações previdênciarias ([ceced2e](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/ceced2e17b31c972c6ecad482ded2ec9965d0bfb))
+
+
+### Features | Funcionalidades
+
+* Adicionado gênero cabeçalho simulação ([ca6eaa7](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/ca6eaa73486038560e519f9ac4af8812cb0a85a0))
+* Adicionado idade e tempo de contribuição na lista de regras de aposentadoria do resultado da simulação ([4a32b56](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/4a32b5680779ea9991e470d39ec82ce3f7d965cf))
+* Adicionado informações de contexto em opções de aposentadoria ([a902ff8](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/a902ff8f4ecc91dedb248b7fac296e695de266ae))
+* Vincular simulação à usuário ([6a0c083](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/6a0c08336d6ba8faf8ca216d22f5d22948ef55d5))
+
 ### [0.0.11](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.10...v0.0.11) (2022-07-19)
 
 
