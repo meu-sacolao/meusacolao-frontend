@@ -25,6 +25,13 @@
             <template v-slot:value>{{ simulation.client.name }}</template>
           </AppLabelValue>
           <AppLabelValue class="four-cols-breakdown">
+            <template v-slot:label>Usuário</template>
+            <template v-slot:value>
+              <span v-if="!simulation.user">--</span>
+              <span v-else>{{ simulation.user.name }}</span>
+            </template>
+          </AppLabelValue>
+          <AppLabelValue class="four-cols-breakdown">
             <template v-slot:label>Data do cálculo</template>
             <template v-slot:value>{{ simulation.retirementDate }}</template>
           </AppLabelValue>
@@ -54,10 +61,14 @@ import GraphQL from '@/util/GraphQL'
 
 const route = useRoute()
 
-const parameters = !route.query.clientId ? '' : `
+let whereClause
+if(route.query.clientId) whereClause = `{ column: "clientId", value: "${route.query.clientId}"}`
+if(route.query.userId) whereClause = `{ column: "userId", value: "${route.query.userId}"}`
+
+const parameters = !whereClause ? '' : `
   (
     where: [
-    { column: "clientId", value: "${route.query.clientId}"}
+      ${ whereClause }
     ]
   )
 `
