@@ -39,6 +39,15 @@
               <template v-slot:value>{{ user.role }}</template>
             </AppLabelValue>
           </div>
+
+          <div class="w-full flex space-x-4 mt-4">
+            <NuxtLink :to="`/admin/simulations?userId=${user.id}`" class="w-auto">
+              <AppButton class="bg-brand-gradient text-white px-5">
+                <AppIcons icon="zoom_in" />
+                <span  class="ml-1">Ver simulações</span>
+              </AppButton>
+            </NuxtLink>
+          </div>
         </div>
     </div>
   </div>
@@ -57,10 +66,6 @@ const query = `
       phone
       role
       createdAt
-      simulations {
-        id
-        title
-      }
     }
   }
 `
