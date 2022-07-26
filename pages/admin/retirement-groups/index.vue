@@ -12,17 +12,24 @@
 
       <div
         v-else
-        class="w-full flex flex-col bg-white shadow-sm p-6 hover:shadow-lg cursor-move"
+        class="w-full flex flex-col bg-white shadow-sm p-6 hover:shadow-lg"
         v-for="(retirementGroup, index) in retirementGroups"
         :key="`admin-retirementGroup-${index}`"
-        draggable="true"
-        @dragstart="onDragStart(index)"
-        @dragover.prevent
-        @dragend="onDragEnd"
-        @drop="onDragFinish(index, retirementGroups)"
       >
         <div class="w-full flex flex-wrap space-y-2">
           <div class="w-full flex flex-wrap border-b pb-2 mb-2">
+            
+            <AppButton 
+              class="cursor-move -ml-4 mr-2"
+              draggable="true"
+              @dragstart="onDragStart(index)"
+              @dragover.prevent
+              @dragend="onDragEnd"
+              @drop="onDragFinish(index, retirementGroups)"  
+            >
+              <AppIcons icon="drag_indicator" />
+            </AppButton>
+
             <AppLabelValue>
               <template v-slot:label>Grupo de aposentadoria</template>
               <template v-slot:value>{{ retirementGroup.title }}</template>
@@ -55,6 +62,17 @@
               :key="`admin-retirementOption-${indexRetirementOption}`"
             >
               <div class="w-full flex">
+
+                <AppButton 
+                  class="cursor-move -ml-4 mr-2"
+                  draggable="true"
+                  @dragstart="onDragStartOption(indexRetirementOption)"
+                  @dragover.prevent
+                  @dragend="onDragEndOption"
+                  @drop="onDragFinishOption(indexRetirementOption, retirementGroup.retirementOptions, (index * 10))"  
+                >
+                  <AppIcons icon="drag_indicator" />
+                </AppButton>
                 <AppLabelValue>
                   <template v-slot:label>Título</template>
                   <template v-slot:value>{{ retirementOption.title }}</template>
@@ -83,30 +101,37 @@
 import GraphQL from "@/util/GraphQL"
 import useGeneralOrdenation from '@/util/functions/generalOrdenation'
 
-const { onDragStart, onDragEnd, onDragFinish } = useGeneralOrdenation('RetirementGroup')
+  const { onDragStart, onDragEnd, onDragFinish } = useGeneralOrdenation('RetirementGroup')
+  const { onDragStart: onDragStartOption, onDragEnd: onDragEndOption, onDragFinish: onDragFinishOption } = useGeneralOrdenation('RetirementOption')
 
-const query = `
-  {
-    retirementGroups (
-      order: [
-        { column: "order" }
-      ]
-    ) {
-      key
-      id
-      title
-      createdAt
-      retirementOptions {
+  const query = `
+    {
+      retirementGroups (
+        order: [
+          { column: "order" }
+        ]
+      ) {
+        key
         id
         title
+        createdAt
+        order
+        retirementOptions (
+        order: [
+          { column: "order" }
+        ]
+      ) {
+          id
+          title
+          order
+        }
       }
     }
-  }
-`
+  `
 
-const retirementGroups = ref(false);
+  const retirementGroups = ref(false);
 
-GraphQL({ query }).then(({ data }) => {
-  retirementGroups.value = data.retirementGroups
-})
+  GraphQL({ query }).then(({ data }) => {
+    retirementGroups.value = data.retirementGroups
+  })
 </script>

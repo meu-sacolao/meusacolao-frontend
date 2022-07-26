@@ -24,7 +24,6 @@
         <transition name="slide-left" mode="out-in" appear>
           <ResultTab 
             v-if="tabSelected.value === 'result'"
-            :simulation="simulation"
           ></ResultTab>
           <RelationTab 
             v-else-if="tabSelected.value === 'social-security-relations'"
@@ -42,6 +41,7 @@
   import SimulationClientCard from'@/modules/app/simulation/SimulationClientCard'
   import RelationTab from'@/modules/app/simulation/relation/RelationTab.vue'
   import emitter from '@/util/emitter'
+  import GraphQL from "@/util/GraphQL"
 
   const route = useRoute()
   const simulation = ref(false)
@@ -61,24 +61,46 @@
   const tabSelected = ref(tabs.value[0])
 
   onMounted(() => {
-    get(true)
-    emitter.on('simulationUpdated', get)
+    getSimulation(true)
+    emitter.on('simulationUpdated', getSimulation)
   })
 
   onBeforeUnmount(() => {
     emitter.off('simulationUpdated')
   })
 
-  const get = (first = false) => {
-    if(first) isLoading.value = true
-    Api.get(`/simulation/show/${route.params.simulation_id}`)
-      .then(({ data }) => {
-        simulation.value = data.simulation
-        isLoading.value = false
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+  const getSimulation = () => {
+    const query = `
+
+      {
+
+        simulation ( 
+          where: [
+            { column: "id", value: "${route.params.simulationId}" }
+          ]
+        ) {
+          id
+          retirementDate
+          client {
+            id
+            name
+            motherName
+            email
+            cpf
+            nit
+            gender
+          }
+        }
+      }
+    
+    `
+
+    GraphQL({ query }).then(({ data }) => {
+      
+      // Defines a minimum of 1s to the placeholder been appear
+      simulation.value = data.simulation
+
+    })
   }
 
 </script>

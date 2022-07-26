@@ -1,8 +1,11 @@
 <template>
 
   <div class="w-full p-6 flex flex-col space-y-6">
+
+    <AppLoaderPlaceholder v-if="!socialSecurityRelations" />
+
     <RelationCard
-      v-for="(socialSecurityRelation, index) in simulation.socialSecurityRelations"
+      v-for="(socialSecurityRelation, index) in socialSecurityRelations"
       :key="`simulation-social-security-${index}`"
       :socialSecurityRelation="socialSecurityRelation"
     ></RelationCard>
@@ -14,8 +17,83 @@
 
   import RelationCard from '@/modules/app/simulation/relation/RelationCard'
   
-  defineProps({
-    simulation: Object
+  import GraphQL from "@/util/GraphQL"
+
+  const route = useRoute()
+
+  const socialSecurityRelations = ref(false)
+
+  onMounted(() => {
+    getSimulationSocialSecurityRelations()
   })
+
+  const getSimulationSocialSecurityRelations = () => {
+    const query = `
+
+      {
+
+        simulation ( 
+          where: [
+            { column: "id", value: "${route.params.simulationId}" }
+          ]
+        ) {
+          id
+          retirementDate
+          socialSecurityRelations {
+            id
+            seqNumber
+            nit
+            relationDocument
+            relationOrigin
+            relationType
+            startAt
+            endAt
+            lastPaymentAt
+            indicators
+            contributionTime
+            contributions {
+              id
+              monthReference
+              baseValue
+              valueAfterCheckLimit
+              valueAfterCorrection
+              finalValue
+              isIgnored
+              ignoredReason
+            }
+          }
+          
+        }
+      }
+    
+    `
+
+    const init = new Date().getTime()
+
+    GraphQL({ query }).then(({ data }) => {
+      
+      // Defines a minimum of 1s to the placeholder been appear
+      const end = (new Date().getTime() - init)
+      if(end > 1000) {
+        socialSecurityRelations.value = data.simulation.socialSecurityRelations
+        orderSocialSecurityRelations()
+      } else {
+        setTimeout(() => {
+          socialSecurityRelations.value = data.simulation.socialSecurityRelations
+          orderSocialSecurityRelations()
+        }, (1000 - end))
+      }
+
+    })
+
+    const orderSocialSecurityRelations = () => {
+
+      socialSecurityRelations.value.sort((a, b) => {
+        return a.socialSecurityRelation.seqNumber - b.socialSecurityRelation.seqNumber
+      })
+
+    }
+
+  }
 
 </script>
