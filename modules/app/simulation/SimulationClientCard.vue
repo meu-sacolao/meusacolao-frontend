@@ -17,8 +17,8 @@
           <template v-slot:value>{{ client.birthDate ? client.birthDate : '--' }}</template>
         </AppLabelValue>
         <AppLabelValue class="four-cols-breakdown">
-          <template v-slot:label>NIT</template>
-          <template v-slot:value>{{ client.nit ? client.nit : '--' }}</template>
+          <template v-slot:label>Gênero</template>
+          <template v-slot:value>{{ client.gender }}</template>
         </AppLabelValue>
         <AppLabelValue class="four-cols-breakdown">
           <template v-slot:label>Nome mãe</template>
