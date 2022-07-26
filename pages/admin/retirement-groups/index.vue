@@ -73,10 +73,17 @@
                 >
                   <AppIcons icon="drag_indicator" />
                 </AppButton>
-                <AppLabelValue>
-                  <template v-slot:label>Título</template>
-                  <template v-slot:value>{{ retirementOption.title }}</template>
-                </AppLabelValue>
+
+                <div class="w-full flex flex-col space-y-2">
+                  <AppLabelValue>
+                    <template v-slot:label>Título</template>
+                    <template v-slot:value>{{ retirementOption.title }}</template>
+                  </AppLabelValue>
+                  <AppLabelValue>
+                    <template v-slot:label>Mostrar para todos</template>
+                    <template v-slot:value><AppBooleanLabel :value="retirementOption.showForNotLoggedUsers" /></template>
+                  </AppLabelValue>
+                </div>
                 <NuxtLink
                   :to="`/admin/retirement-options/edit/${retirementOption.id}`"
                   class="ml-auto"
@@ -124,6 +131,7 @@ import useGeneralOrdenation from '@/util/functions/generalOrdenation'
           id
           title
           order
+          showForNotLoggedUsers
         }
       }
     }
