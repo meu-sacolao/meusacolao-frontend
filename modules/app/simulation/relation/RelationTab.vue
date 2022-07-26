@@ -16,15 +16,20 @@
 <script setup>
 
   import RelationCard from '@/modules/app/simulation/relation/RelationCard'
-  
   import GraphQL from "@/util/GraphQL"
+  import emitter from '@/util/emitter'
 
   const route = useRoute()
 
   const socialSecurityRelations = ref(false)
 
   onMounted(() => {
+    emitter.on('simulationUpdated', getSimulationSocialSecurityRelations)
     getSimulationSocialSecurityRelations()
+  })
+
+  onBeforeUnmount(() => {
+    emitter.off('simulationUpdated')
   })
 
   const getSimulationSocialSecurityRelations = () => {
@@ -89,7 +94,7 @@
     const orderSocialSecurityRelations = () => {
 
       socialSecurityRelations.value.sort((a, b) => {
-        return a.socialSecurityRelation.seqNumber - b.socialSecurityRelation.seqNumber
+        return a.seqNumber - b.seqNumber
       })
 
     }

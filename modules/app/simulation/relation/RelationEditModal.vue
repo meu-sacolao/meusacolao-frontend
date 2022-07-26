@@ -41,6 +41,7 @@
       </div>
     </div>
   </AppBaseModal>
+
 </template>
 
 <script setup>
@@ -98,14 +99,21 @@
   }
 
   const update = () => {
-    Api.post(`/app/general/updateOrCreate`, 
-    { 
+
+    const payload = { 
       entity: 'SocialSecurityRelation', 
       ...socialSecurityRelation.value
-    }).then((response) => {
-      emitter.emit('simulationUpdated')
+    }
+    
+    Api.post(`/app/general/updateOrCreate`, payload).then((response) => {
+      isLoading.value = true
       close()
-      alert('Vínculo atualizado com sucesso')
+      Api.get(`/simulation/reprocess/${route.params.simulationId}`)
+      .then(() => {
+        emitter.emit('simulationUpdated')
+        isLoading.value = false
+        alert('Vínculo atualizado com sucesso')
+      })
     })
     .catch((err) => {
       console.log(err)

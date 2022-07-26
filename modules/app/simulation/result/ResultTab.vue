@@ -15,6 +15,7 @@
 
   import ResultRetirementGroupCard from '@/modules/app/simulation/result/ResultRetirementGroupCard'
   import GraphQL from "@/util/GraphQL"
+  import emitter from '@/util/emitter'
 
   const route = useRoute()
 
@@ -22,6 +23,11 @@
 
   onMounted(() => {
     getSimulationRetirementGroups()
+    emitter.on('simulationUpdated', getSimulationRetirementGroups)
+  })
+
+  onBeforeUnmount(() => {
+    emitter.off('simulationUpdated')
   })
 
   const getSimulationRetirementGroups = () => {
