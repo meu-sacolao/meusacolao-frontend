@@ -25,9 +25,12 @@
       </AppLabelValue>
     </div>
 
-    <template v-if="simulationRetirementOption.retirementOption.showForNotLoggedUsers">
+    <template v-if="loggedUser || simulationRetirementOption.retirementOption.showForNotLoggedUsers">
       <!-- REQUIREMENTS RESULT -->
       <div class="w-full flex flex-col">
+        <p class="p text-slate-400 leading-none mb-2">
+          Checklist de requisitos
+        </p>
         <div 
           class="w-full flex items-center"
           v-for="(requirement, index) in simulationRetirementOption.requirements"
@@ -50,17 +53,16 @@
     </template>
 
     <template v-else>
-      <div class="w-full p-8 bg-zinc-100 shadow flex flex-wrap">
+      <div class="w-full p-8 bg-cyan-800/5 p-8 shadow-md bg-cyan-800/5 flex flex-wrap">
         <p class="p">
           <button 
             @click="emitter.emit('openAuthModal')"
             class="font-bold italic text-blue-500"
           >
-            Clique aqui e cadastre-se
+            Clique aqui e cadastre-se gratuitamente
           </button> 
-          gratuitamente para ver o resultado de sua aposentadoria na 
-          <b>{{ simulationRetirementOption.retirementOption.title }}</b>
-          .
+          para ver o resultado de sua aposentadoria na 
+          <b>{{ simulationRetirementOption.retirementOption.title }}</b>.
         </p>
       </div>
     </template>
@@ -70,7 +72,11 @@
 <script setup>
 
   import LabelIsGranted from '@/modules/app/simulation/result/LabelIsGranted'
-  import emitter from '@/util/emitter'
+  import { storeToRefs } from 'pinia'
+  import { useAuthStore } from "@/modules/auth/store"
+  const authStore = useAuthStore()
+
+  const { loggedUser } = storeToRefs(authStore)
 
   const props = defineProps({
     simulationRetirementOption: Object,
