@@ -74,7 +74,7 @@
 
   const router = useRouter()
 
-  const retirementDate = ref(process.env == 'production' ? '' : '10/10/2020')
+  const retirementDate = ref(process.env.NODE_ENV == 'production' ? '' : '10/10/2020')
   const showModal = ref(false)
   const acceptTerms = ref(false)
   const file = ref({
