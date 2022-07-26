@@ -55,6 +55,7 @@
                 title
                 description
                 order
+                showForNotLoggedUsers
               }
             }
           }

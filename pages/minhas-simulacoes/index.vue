@@ -7,5 +7,4 @@
 </template>
 <script setup>
   import UserSimulationListVue from '@/modules/user/simulation/UserSimulationList.vue'
-
 </script>

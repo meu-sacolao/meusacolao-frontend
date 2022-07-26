@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import Api from '@/util/Api'
 import User from '@/entities/User'
+import { useAppSimulationStore } from '@/modules/app/simulation/store'
 
 export const useAuthStore = defineStore('auth', {
   persist: true,
@@ -34,8 +35,11 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async getLoggedUser() {
+      const appSimulationStore = useAppSimulationStore()
+
       Api.get('/auth/getLoggedUser').then(({ data }) => {
         this.loggedUser = new User(data)
+        appSimulationStore.attachSimulations()
       })
     },
 

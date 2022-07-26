@@ -68,9 +68,13 @@
   
   import Api from '@/util/Api'
   import ProcessCnisLoaderModal from '@/modules/app/cnis/ProcessCnisLoaderModal.vue'
+  import { useAppSimulationStore } from '@/modules/app/simulation/store'
+
+  const appSimulationStore = useAppSimulationStore()
+
   const router = useRouter()
 
-  const retirementDate = ref('')
+  const retirementDate = ref(process.env == 'production' ? '' : '10/10/2020')
   const showModal = ref(false)
   const acceptTerms = ref(false)
   const file = ref({
@@ -92,6 +96,7 @@
     Api.post(`/cnis/upload`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
       .then(({ data }) => {
         router.push(`/simulacao/${data.simulation.id}`)
+        appSimulationStore.addSimulationToAttach(data.simulation.id)
       })
       .catch((error) => {
         showModal.value = false

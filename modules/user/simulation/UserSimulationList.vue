@@ -48,19 +48,15 @@ import GraphQL from '@/util/GraphQL'
 
 const route = useRoute()
 
-const parameters = !route.query.clientId ? '' : `
-  (
-    where: [
-    { column: "clientId", value: "${route.query.clientId}"}
-    ]
-  )
-`
-
 const query = `
   {
 
     currentUser {
-      simulations ${ parameters } {
+      simulations (
+        order: [
+          { column: "createdAt", direction: "DESC" }
+        ]
+      ) {
         key
         id
         title

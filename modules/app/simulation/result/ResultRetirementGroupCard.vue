@@ -1,7 +1,7 @@
 <template>
   <AppCard 
     v-if="simulationRetirementGroup.simulationRetirementOptions.length"
-    :border="'w-4 hover:bg-orange-400 bg-zinc-100'"
+    :border="'w-4 bg-zinc-100'"
   >
     <template v-slot:header>
       <div class="w-full flex flex-col">

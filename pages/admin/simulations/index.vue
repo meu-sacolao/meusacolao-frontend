@@ -70,6 +70,7 @@ const query = `
       title
       retirementDate  
       createdAt
+      clientId
       client {
         id
         name

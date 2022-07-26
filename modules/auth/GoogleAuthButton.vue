@@ -8,7 +8,7 @@
       :disabled="redirectUrl == ''"
     >
       <span class="mr-4">Acessar com Google</span>
-      <AppIcons icon="images/general/logo_google.svg" />
+      <AppIcons icon="/images/general/logo_google.svg" />
     </AppButton>
   </NuxtLink>
 </template>

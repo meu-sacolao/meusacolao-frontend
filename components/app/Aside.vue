@@ -159,6 +159,17 @@
     }
   ])
 
+  onMounted(() => {
+    emitter.on('openAuthModal', () => {
+      showAuthModal.value = true
+      console.log('abril modal auth')
+    })
+  })
+
+  onUnmounted(() => {
+    emitter.off('openAuthModal')
+  })
+
   const toggleDrawer = () => {
     if(!props.showMenu) {
       addListeners()
