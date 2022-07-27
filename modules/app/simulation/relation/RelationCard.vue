@@ -3,9 +3,9 @@
     <template v-slot:header>
       <div class="w-full flex items-center relative">
 
-        <AppButton @click="edit()" class="absolute top-0 right-0 text-zinc-400 hover:text-orange-600">
+        <!-- <AppButton @click="edit()" class="absolute top-0 right-0 text-zinc-400 hover:text-orange-600">
           <AppIcons icon="edit" />
-        </AppButton>
+        </AppButton> -->
 
         <div class="w-full flex flex-col">
           <div class="w-full flex space-x-2 pr-12">
