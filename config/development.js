@@ -1,3 +1,4 @@
 export default {
-  API_BASE_URL: "http://127.0.0.1:4000/api"
+  API_BASE_URL: "http://127.0.0.1:4000/api",
+  BASE_WS_URL: "http://127.0.0.1:4000",
 }

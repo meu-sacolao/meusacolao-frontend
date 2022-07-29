@@ -3,9 +3,9 @@
     <template v-slot:header>
       <div class="w-full flex items-center relative">
 
-        <!-- <AppButton @click="edit()" class="absolute top-0 right-0 text-zinc-400 hover:text-orange-600">
+        <AppButton v-if="loggedUser && ['igortrindademe@gmail.com', 'brunofa23@gmail.com'].includes(loggedUser.email)" @click="edit()" class="absolute top-0 right-0 text-zinc-400 hover:text-orange-600">
           <AppIcons icon="edit" />
-        </AppButton> -->
+        </AppButton>
 
         <div class="w-full flex flex-col">
           <div class="w-full flex space-x-2 pr-12">
@@ -73,6 +73,14 @@
 
   import ContributionList from '@/modules/app/simulation/relation/contribution/ContributionList.vue'
   import RelationEditModal from '@/modules/app/simulation/relation/RelationEditModal.vue'
+
+  import { storeToRefs } from 'pinia'
+  import { useAuthStore } from "@/modules/auth/store"
+  const authStore = useAuthStore()
+
+  const { loggedUser } = storeToRefs(authStore)
+
+
   defineProps({
     socialSecurityRelation: Object
   })

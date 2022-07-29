@@ -31,6 +31,7 @@
     "pell": "^1.0.6",
     "pinia": "^2.0.14",
     "pinia-plugin-persistedstate": "^1.6.1",
+    "socket.io-client": "^4.5.1",
     "tailwind-config": "^0.1.2",
     "tailwind-config-viewer": "^1.6.2",
     "vue-inline-svg": "^3.1.0",

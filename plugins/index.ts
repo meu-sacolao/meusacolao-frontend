@@ -8,6 +8,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   setupDirectives(nuxtApp.vueApp)
   setupComponents(nuxtApp.vueApp)
   setupGlobals(nuxtApp.vueApp)
-  setupGlobals(nuxtApp.vueApp)
   setupRouterHooks()
 })

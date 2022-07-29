@@ -46,40 +46,44 @@
   </transition>
 </template>
 
-<script>
-export default {
-  name: 'BaseDrawer',
-  data() {
-    return {
-      showDrawer: false,
-      component: false,
-      payload: null
+<script setup>
+
+    const showDrawer = ref(false)
+    const component = ref(false)
+    const payload = ref(null)
+  
+    const openDrawer = ({ component, payload }) => {
+      component.value = component
+      payload.value = payload
+      showDrawer.value = true
     }
-  },
-  mounted() {
-    document.addEventListener("keyup", this.handleEsc)
-    this.emitter.on('openDrawer', this.openDrawer)
-  },
-  beforeDestroy() {
-    document.removeEventListener("keyup", this.handleEsc)
-    this.emitter.off('openDrawer')
-  },
-  methods: {
-    handleEsc(evt) {
-      if (this.showDrawer && evt.keyCode === 27) this.closeDrawer()
-    },
-    openDrawer({ component, payload }) {      
-      this.component = component
-      this.payload = payload
-      this.showDrawer = true
-    },
-    closeDrawer() {
-      this.showDrawer = false
-      this.component = false
-      this.payload = false
+  
+    const closeDrawer = () => {
+      showDrawer.value = false
+      component.value = false
+      payload.value = null
     }
-  }
-}
+
+    if(process.client) {
+      const emitter = inject('emitter')
+    
+      const handleEsc = (evt) => {
+        if (showDrawer.value && evt.keyCode === 27) closeDrawer()
+      }
+    
+  
+      onMounted(() => {
+        document.addEventListener("keyup", handleEsc)
+        emitter.on('openDrawer', openDrawer)
+      })
+    
+      onBeforeUnmount(() => {
+        document.removeEventListener("keyup", handleEsc)
+        emitter.off('openDrawer')
+      })
+    }
+    
+  
 </script>
 
 <style lang="scss">

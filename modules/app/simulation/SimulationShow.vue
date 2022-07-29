@@ -43,6 +43,8 @@
   import emitter from '@/util/emitter'
   import GraphQL from "@/util/GraphQL"
 
+  import { getCurrentInstance } from 'vue'
+
   const route = useRoute()
   const simulation = ref(false)
   const isLoading = ref(false)
@@ -101,6 +103,19 @@
       simulation.value = data.simulation
 
     })
+  }
+
+
+  if(process.client) {
+
+    const socket = inject('socket')
+
+    socket.emit('addSimulationListener', route.params.simulationId)
+
+    socket.on('simulationProcessed', ({ time }) => {
+      alert('Simulação reprocessada por socket em: ', time)
+    })
+
   }
 
 </script>
