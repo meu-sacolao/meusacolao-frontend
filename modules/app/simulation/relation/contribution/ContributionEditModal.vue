@@ -3,34 +3,34 @@
     <div class="w-full flex flex-col space-y-4">
 
       <AppInputWithIcon 
-        v-model:value="socialSecurityRelation.relationOrigin" 
+        v-model:value="contribution.monthReference" 
         icon="badge"
-        label="Nome" 
-        placeholder="Insira o nome do vínculo" 
+        label="Competência" 
+        placeholder="Competência"
+        disabled="true" 
       />
 
-      <AppInputWithIcon 
-        v-model:value="socialSecurityRelation.relationDocument" 
+      <AppMoneyInput 
+        v-if="contribution.baseValue"
+        v-model:value="contribution.baseValue" 
         icon="badge"
-        label="Documento" 
-        :mask="['###.###.###-##', '##.###.###/####-##']"
-        placeholder="Insira o nome do vínculo" 
+        label="Valor base" 
+        placeholder="Valor"
+        :dateReference="contribution.monthReference"
       />
 
-      <AppInputWithIcon 
-        v-model:value="socialSecurityRelation.startAt" 
-        icon="today"
-        label="Início"
-        :mask="'##/##/####'"
-        placeholder="Insira o início do vínculo" 
-      />
+      <AppCheckBox
+        v-model:value="contribution.isIgnored"
+      >
+        Ignorar contribuição
+      </AppCheckBox>
 
       <AppInputWithIcon 
-        v-model:value="socialSecurityRelation.endAt" 
-        icon="today"
-        label="Término"
-        :mask="'##/##/####'"
-        placeholder="Insira o término do vínculo" 
+        v-model:value="contribution.ignoredReason" 
+        icon="badge"
+        label="Motivo" 
+        placeholder="Insira um motivo de ignorar (opcional)"
+        v-if="contribution.isIgnored"
       />
 
       <div class="w-full flex justify-end mt-10 block">
@@ -51,19 +51,26 @@
   import emitter from '@/util/emitter'
   const { emit } = getCurrentInstance()
   const route = useRoute()
-  
-  defineEmits(['close'])
 
-  const props = defineProps({
-    showModal: Boolean,
-    socialSecurityRelationId: String,
+  onMounted(() => {
+    emitter.on('openModalEditContribution', (id) => {
+      contributionId.value = id
+      showModal.value = true
+      get()
+    })
   })
 
-  const socialSecurityRelation = ref(false)
+  onBeforeUnmount(() => {
+    emitter.off('openModalEditContribution')
+  })
+
+  const contribution = ref(false)
   const isLoading = ref(false)
+  const showModal = ref(false)
+  const contributionId = ref(false)
 
   const close = () => {
-    emit('close')
+    showModal.value = false
   }
 
   const get = () => {
@@ -71,25 +78,22 @@
 
     const query = `
       {
-        socialSecurityRelations (
+        contributions (
           where: [
-            { column: "id", value: "${props.socialSecurityRelationId}"}
+            { column: "id", value: "${contributionId.value}"}
           ]
         ) {
           id
-          nit
-          relationDocument
-          relationOrigin
-          relationType
-          startAt
-          endAt
-          lastPaymentAt
+          monthReference
+          baseValue
+          isIgnored
+          ignoredReason
         }
       }
     `
     GraphQL({ query, caller: 'RelationEditModal' })
       .then(({ data }) => {
-        socialSecurityRelation.value = data.socialSecurityRelations[0]
+        contribution.value = data.contributions[0]
         isLoading.value = false
       })
       .catch((error) => {
@@ -100,8 +104,8 @@
   const update = () => {
 
     const payload = { 
-      entity: 'SocialSecurityRelation', 
-      ...socialSecurityRelation.value
+      entity: 'Contribution', 
+      ...contribution.value
     }
     
     Api.post(`/app/general/updateOrCreate`, payload).then((response) => {
@@ -111,7 +115,7 @@
       .then(() => {
         emitter.emit('simulationUpdated')
         isLoading.value = false
-        alert('Vínculo atualizado com sucesso')
+        alert('Contribuição atualizada com sucesso')
       })
     })
     .catch((err) => {

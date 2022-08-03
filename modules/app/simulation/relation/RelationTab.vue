@@ -9,6 +9,9 @@
       :key="`simulation-social-security-${index}`"
       :socialSecurityRelation="socialSecurityRelation"
     ></RelationCard>
+
+    <ContributionEditModal />
+    
   </div>
 
 </template>
@@ -16,6 +19,7 @@
 <script setup>
 
   import RelationCard from '@/modules/app/simulation/relation/RelationCard'
+  import ContributionEditModal from '@/modules/app/simulation/relation/contribution/ContributionEditModal.vue'
   import GraphQL from "@/util/GraphQL"
   import emitter from '@/util/emitter'
 
@@ -56,7 +60,11 @@
             lastPaymentAt
             indicators
             contributionTime
-            contributions {
+            contributions (
+              order: [
+                { column: "key" }
+              ]
+            ) {
               id
               monthReference
               baseValue

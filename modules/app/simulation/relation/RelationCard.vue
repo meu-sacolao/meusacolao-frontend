@@ -3,7 +3,10 @@
     <template v-slot:header>
       <div class="w-full flex items-center relative">
 
-        <AppButton v-if="loggedUser && ['igortrindademe@gmail.com', 'brunofa23@gmail.com'].includes(loggedUser.email)" @click="edit()" class="absolute top-0 right-0 text-zinc-400 hover:text-orange-600">
+        <AppButton 
+          v-if="loggedUser && ['igortrindademe@gmail.com', 'brunofa23@gmail.com'].includes(loggedUser.email)" 
+          @click="edit()" 
+          class="absolute top-0 right-0 text-zinc-400 hover:text-orange-600">
           <AppIcons icon="edit" />
         </AppButton>
 

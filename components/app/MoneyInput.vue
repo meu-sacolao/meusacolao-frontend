@@ -27,6 +27,8 @@
 <script setup>
 
   import { vueNumberFormatDefaultOptions } from '@/util/functions/getCurrencyType'
+  import getCurrencyType from '@/util/functions/getCurrencyType'
+  import Dates from '@/services/Dates'
   const { emit } = getCurrentInstance()
   
   const props = defineProps({
@@ -38,11 +40,18 @@
     action: String,
     inputOptions: Object,
     value: [String, Number],
+    dateReference: [String, Number]
   })
 
   defineEmits(['update:value'])
 
+
   const getVueNumberFormatOptions = computed(() => {
+    console.log(props.dateReference)
+    if(props.dateReference) {
+      const currency = getCurrencyType(props.dateReference)
+      if(currency) return currency.vueNumberFormatOptions
+    }
     if(!props.inputOptions) return vueNumberFormatDefaultOptions
     return props.inputOptions
   })
