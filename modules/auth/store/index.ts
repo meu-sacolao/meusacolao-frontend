@@ -12,15 +12,15 @@ export const useAuthStore = defineStore('auth', {
 
   actions: {
 
-    async login({ email, password }) {
-      return Api.post('/auth/login', { email, password }).then(({ data }) => {
+    async login({ email, unencryptedPassword }) {
+      return Api.post('/auth/login', { email, unencryptedPassword }).then(({ data }) => {
         this.loggedUserToken = data.token
         this.getLoggedUser()
       })
     },
 
-    async signup({ name, email, phone, password }) {
-      return Api.post('/auth/signup', { name, email, phone, password }).then(({ data }) => {
+    async signup({ name, email, phone, unencryptedPassword }) {
+      return Api.post('/auth/signup', { name, email, phone, unencryptedPassword }).then(({ data }) => {
         this.loggedUserToken = data.token
         this.getLoggedUser()
       })

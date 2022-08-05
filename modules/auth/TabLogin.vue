@@ -9,7 +9,7 @@
         placeholder="Insira seu email" 
       />
       <AppInputWithIcon 
-        v-model:value="user.password" 
+        v-model:value="user.unencryptedPassword" 
         icon="key" 
         type="password" 
         label="Senha" 
@@ -46,7 +46,7 @@
   const user = ref(new User())
 
   const login = () => {
-    authStore.login({ email: user.value.email, password: user.value.password })
+    authStore.login({ email: user.value.email, unencryptedPassword: user.value.unencryptedPassword })
       .then(() => {
         emit('close')
         alert('Logado com sucesso')

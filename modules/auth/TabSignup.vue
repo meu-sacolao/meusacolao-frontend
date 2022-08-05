@@ -33,13 +33,13 @@
         Preencha seu telefone
       </AppInputWithIcon>
       <AppInputWithIcon 
-        v-model:value="user.password" 
+        v-model:value="user.unencryptedPassword" 
         icon="key" 
         type="password" 
         label="Senha" 
         placeholder="Insira sua senha"
         @keydown.enter="signup()"
-        :hasError="tried && formErrors.includes('password')"
+        :hasError="tried && formErrors.includes('unencryptedPassword')"
       >
         Preencha a senha
       </AppInputWithIcon>
@@ -71,7 +71,7 @@
     if(user.value.name.length < 6) errors.push('name')
     if(user.value.phone.length < 10) errors.push('phone')
     if(user.value.email.length < 6) errors.push('email')
-    if(user.value.password.length < 6) errors.push('password')
+    if(user.value.unencryptedPassword.length < 6) errors.push('unencryptedPassword')
     return errors
   })
 
@@ -84,7 +84,7 @@
       name: user.value.name, 
       email: user.value.email, 
       phone: user.value.phone, 
-      password: user.value.password, 
+      unencryptedPassword: user.value.unencryptedPassword, 
     })
       .then(() => {
         emit('close')
