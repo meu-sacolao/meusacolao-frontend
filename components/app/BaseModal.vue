@@ -56,7 +56,7 @@
 
 <script setup>
 
-const { emit } = getCurrentInstance()
+  const { emit } = getCurrentInstance()
 
   defineEmits(['close', 'open'])
 

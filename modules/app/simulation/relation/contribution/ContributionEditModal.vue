@@ -10,8 +10,7 @@
         disabled="true" 
       />
 
-      <AppMoneyInput 
-        v-if="contribution.baseValue"
+      <AppMoneyInput
         v-model:value="contribution.baseValue" 
         icon="badge"
         label="Valor base" 

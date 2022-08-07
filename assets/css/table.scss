@@ -1,0 +1,10 @@
+table {
+    
+  th {
+    @apply p-3 bg-gray-100  text-left border-b;
+  }
+
+  td {
+    @apply p-3  ;
+  }
+}

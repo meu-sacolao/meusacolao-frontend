@@ -73,6 +73,7 @@
               finalValue
               isIgnored
               ignoredReason
+              groupedContributionsQuantity
             }
           }
           

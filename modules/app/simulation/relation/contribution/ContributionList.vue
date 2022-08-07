@@ -16,7 +16,16 @@
           :key="`contribution_${ index }`"
           :class="[contribution.isIgnored ? 'bg-gray-200/50' : 'bg-gray-50 hover:bg-gray-100']"  
         >
-          <td :class="{'line-through' : contribution.isIgnored }">{{ contribution.monthReference }}</td>
+          <td :class="{'line-through' : contribution.isIgnored }">
+            {{ contribution.monthReference }}
+            <button 
+              v-if="contribution.groupedContributionsQuantity > 1" 
+              class="text-orange-500"
+              @click="openContributionMonthReferenceDrawer(contribution.monthReference)"
+            >
+              <AppIcons icon="add_circle" />
+            </button>
+          </td>
           <td :class="{'line-through' : contribution.isIgnored }">{{ vueNumberFormat(contribution.baseValue, getCurrencyFormatter(contribution.monthReference)) }}</td>
           <td>
             <AppMoneyInput 
@@ -50,16 +59,23 @@
         </tr>
       </tbody>
     </table>
+
+    <GroupedContributionDrawer 
+      :monthReference="contributionMonthReference"
+      @close="contributionMonthReference = null"
+    />
   </div>
 </template>
 
 <script setup>
 
+  import GroupedContributionDrawer from '@/modules/app/simulation/relation/contribution/GroupedContributionDrawer'
   import Api from '@/util/Api'
   import emitter from '@/util/emitter'
   import getCurrencyType from '@/util/functions/getCurrencyType'
   
   const route = useRoute()
+  const contributionMonthReference = ref(null)
 
   defineProps({
     contributions: Array
@@ -71,6 +87,10 @@
 
   const getCurrencyFormatter = (monthReference) => {
     return getCurrencyType(monthReference).vueNumberFormatOptions
+  }
+
+  const openContributionMonthReferenceDrawer = (monthReference) => {
+    contributionMonthReference.value = monthReference
   }
 
   const ignoreContribution = (contribution) => {
@@ -115,14 +135,5 @@
 </script>
 
 <style lang="scss">
-  table {
-    
-    th {
-      @apply p-3 bg-gray-100  text-left border-b;
-    }
 
-    td {
-      @apply p-3  ;
-    }
-  }
 </style>
