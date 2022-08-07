@@ -69,8 +69,15 @@
     return props.monthReference ? true : false
   })
 
-  const contributions = ref([])
+  watch(() => props.monthReference, (newValue) => {
+    if(newValue) {
+      emitter.on('simulationUpdated', getContributions)
+    } else {
+      emitter.off('simulationUpdated')
+    }
+  })
 
+  const contributions = ref([])
 
   const getContributions = () => {
     const query = `
@@ -87,6 +94,7 @@
           isIgnored
           socialSecurityRelation {
             id
+            seqNumber
             relationOrigin
           }
         }
@@ -95,7 +103,9 @@
 
     GraphQL({ query, caller: 'GroupedContributionDrawer.getConntributions' })
       .then(({ data }) => {
-        contributions.value = data.contributions
+        contributions.value = data.contributions.sort((a, b) => {
+          return a.socialSecurityRelation.seqNumber - b.socialSecurityRelation.seqNumber
+        })
       })
   }
 

@@ -17,14 +17,16 @@
           :class="[contribution.isIgnored ? 'bg-gray-200/50' : 'bg-gray-50 hover:bg-gray-100']"  
         >
           <td :class="{'line-through' : contribution.isIgnored }">
-            {{ contribution.monthReference }}
-            <button 
-              v-if="contribution.groupedContributionsQuantity > 1" 
-              class="text-orange-500"
-              @click="openContributionMonthReferenceDrawer(contribution.monthReference)"
-            >
-              <AppIcons icon="add_circle" />
-            </button>
+            <div class="flex items-center">
+              <span>{{ contribution.monthReference }}</span>
+              <button 
+                v-if="contribution.groupedContributionsQuantity > 1" 
+                class="text-orange-500 -mb-1 ml-2"
+                @click="openContributionMonthReferenceDrawer(contribution.monthReference)"
+              >
+                <AppIcons icon="add_circle" />
+              </button>
+            </div>
           </td>
           <td :class="{'line-through' : contribution.isIgnored }">{{ vueNumberFormat(contribution.baseValue, getCurrencyFormatter(contribution.monthReference)) }}</td>
           <td>

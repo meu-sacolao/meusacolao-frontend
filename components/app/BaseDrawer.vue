@@ -20,6 +20,7 @@
         v-if="showDrawer" 
         ref="baseDrawer"
         class="base-drawer-dialog transition-all duration-200 easy-in-out transform"
+        :class="dialogClasses"
       >
         <button
           @click="close()"
@@ -57,6 +58,10 @@
     showDrawer: {
       type: Boolean,
       default: false
+    },
+    dialogClasses: {
+      type: String,
+      default: 'w-full lg:w-1/2'
     }
   })
 
@@ -82,12 +87,6 @@
 
 <style lang="scss">
   .base-drawer-dialog {
-    @apply border fixed top-0 right-0 h-screen w-full bg-white shadow-lg flex flex-col z-40 overflow-hidden mt-24
-  }
-
-  @media (min-width: 576px) {
-    .base-drawer-dialog {
-      @apply min-w-xl max-w-xl;
-    }
+    @apply border fixed top-0 right-0 h-screen bg-white shadow-lg flex flex-col z-40 overflow-hidden mt-24
   }
 </style>
