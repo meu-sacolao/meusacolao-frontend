@@ -8,6 +8,7 @@
         label="Competência" 
         placeholder="Competência"
         disabled="true" 
+        :mask="'##/####'"
       />
 
       <AppMoneyInput
@@ -33,11 +34,13 @@
       />
 
       <div class="w-full flex justify-end mt-10 block">
-        <AppButton bg="bg-brand-gradient" text="text-white" @click="update()">
-          <span>Atualizar</span>
-          <AppIcons icon="chevron_right" />
+        <AppButton bg="bg-brand-gradient space-x-2" text="text-white" @click="update()">
+          <AppIcons icon="save" />
+          <span v-if="contribution.id">Atualizar</span>
+          <span v-else>Adicionar</span>
         </AppButton>
       </div>
+
     </div>
   </AppBaseModal>
 
@@ -50,10 +53,11 @@
   import emitter from '@/util/emitter'
   const { emit } = getCurrentInstance()
   const route = useRoute()
+  import Contribution from '@/entities/Contribution'
 
   onMounted(() => {
-    emitter.on('openModalEditContribution', (id) => {
-      contributionId.value = id
+    emitter.on('openModalEditContribution', ({ id = null, socialSecurityRelationId = null, simulationId = null, monthReference = null }) => {
+      contribution.value = new Contribution({ id, socialSecurityRelationId, simulationId, monthReference })
       showModal.value = true
       get()
     })
@@ -63,23 +67,23 @@
     emitter.off('openModalEditContribution')
   })
 
-  const contribution = ref(false)
+  const contribution = ref(new Contribution())
   const isLoading = ref(false)
   const showModal = ref(false)
-  const contributionId = ref(false)
 
   const close = () => {
     showModal.value = false
   }
 
   const get = () => {
+    if(!contribution.value.id) return
     isLoading.value = true
 
     const query = `
       {
         contributions (
           where: [
-            { column: "id", value: "${contributionId.value}"}
+            { column: "id", value: "${contribution.value.id}"}
           ]
         ) {
           id
@@ -92,7 +96,7 @@
     `
     GraphQL({ query, caller: 'RelationEditModal' })
       .then(({ data }) => {
-        contribution.value = data.contributions[0]
+        contribution.value = new Contribution(data.contributions[0])
         isLoading.value = false
       })
       .catch((error) => {

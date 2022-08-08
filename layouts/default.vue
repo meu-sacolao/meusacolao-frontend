@@ -23,7 +23,7 @@
   // Timeout para evitar que quebra / pulo entre as transições de pagina
   const nonSpacingRoutes = ['/']
   const nonSpacingClasses = ''
-  const spacingClasses = 'p-12 px-6 md:px-20 xl:px-28'
+  const spacingClasses = 'p-12 px-6 lg:px-20 xl:px-28'
 
   const layoutSpacesClasses = ref(nonSpacingRoutes.includes(route.path) ? nonSpacingClasses : spacingClasses)
   

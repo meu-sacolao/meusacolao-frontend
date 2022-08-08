@@ -1,20 +1,38 @@
 export default class Contribution {
+
+  id: string = null
+  simulationId: string = null
+  contributionFactorId: string = null
+  contributionLimitId: string = null
+  socialSecurityRelationId: string = null
   monthReference: string = ''
-  paidAt: string = ''
-
-  baseValue: number = 0 // Valor salario do cnis
-  valueAfterCheckLimit: number = 0 // Valor apos aplicação da regra do teto
-  valueAfterCorrection: number = 0 // Valor apos a correção
-  finalValue: number = 0 // Valor final
+  baseValue: number = 0
+  valueAfterCheckLimit: number = 0
+  valueAfterCorrection: number = 0
+  finalValue: number = 0
   contributionValue: string = ''
+  contributionDate: string = ''
   indicators: string = ''
+  history: Array<any> = []
+  isIgnored: boolean = false
+  ignoredReason: string = ''
+  isMoreThanLimit: boolean = false
+  isLessThanMinimum: boolean = false
+  isBeforeJuly1994: boolean = false
+  isAfterReform2019: boolean = false
+  isMajor80ThanPercent: boolean = false
+  isMissingFromCnis: boolean = false
+  isCustomEdit: boolean = false
+  groupedContributionsQuantity: number = 0
+  createdAt: string = ''
+  updatedAt: string = ''
+  
+  constructor(obj = {}) {
+    Object.keys(obj).map((key) => {
+      if(typeof(key) !== undefined) {
+        this[key] = obj[key]
+      }
+    })
+  }
 
-  indexCorrection: string | number = 0 // Indice utilizado da correção
-  limitValue: string | number = 0 // Valor do teto
-  isExceededLimit: boolean = false // Se o valor excedeu o teto setar como true
-  isIgnored: boolean = false // Se o valor não estiver dentro dos 80% setar como true
-  contributionLimit: any
-
-  indexSocialSecurityRelation: number = -1 // Index do socialSecurityRelation / vinculo para manipulação desacoplada da instância
-  indexContribution: number = -1
 }

@@ -33,7 +33,10 @@
   
   const props = defineProps({
     icon: String,
-    type: String,
+    type: {
+      type: String,
+      default: 'tel'
+    },
     id_input: String,
     placeholder: String,
     label: String,
@@ -47,10 +50,13 @@
 
 
   const getVueNumberFormatOptions = computed(() => {
-    console.log(props.dateReference)
-    if(props.dateReference) {
-      const currency = getCurrencyType(props.dateReference)
+    if(!props.dateReference) return vueNumberFormatDefaultOptions
+    try {
+      const dateReference = Dates.parse(props.dateReference)
+      const currency = getCurrencyType(dateReference)
       if(currency) return currency.vueNumberFormatOptions
+    } catch (error) {
+      return vueNumberFormatDefaultOptions
     }
     if(!props.inputOptions) return vueNumberFormatDefaultOptions
     return props.inputOptions

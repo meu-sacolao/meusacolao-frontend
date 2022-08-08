@@ -1,6 +1,5 @@
 <template>
   <button 
-    class="px-3 py-2 flex items-center justify-center"
     :class="[classes, bg, text]"
     :disabled="disabled"
   >

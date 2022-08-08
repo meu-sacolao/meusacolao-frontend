@@ -4,7 +4,6 @@
       <div class="w-full flex items-center relative">
 
         <AppButton 
-          v-if="loggedUser && ['igortrindademe@gmail.com', 'brunofa23@gmail.com'].includes(loggedUser.email)" 
           @click="edit()" 
           class="absolute top-0 right-0 text-zinc-400 hover:text-orange-600">
           <AppIcons icon="edit" />
@@ -43,32 +42,17 @@
     </template>
     
     <template v-slot:content >
-      <div class="w-full flex items-center cursor-pointer" @click.stop="toggleCard()"> 
-        <span 
-          class="mr-1 -ml-1 material-icons material-symbols-sharp text-slate-400 flex-none transition-all transform  text-2xl"
-          :class="showContent ? 'rotate-90' : 'closed rotate-0'"
-        >
-          chevron_right
-        </span>
-        <div class="w-full flex flex-col">
-          <h3 class="h3 flex-none text-slate-400">Contribuições</h3>
-          <p class="text-xs italic">{{socialSecurityRelation.contributions.length}} contribuições</p>
-        </div>
-      </div>
-
-      <div class="mt-4" v-if="showContent">
-        <ContributionList
-          :contributions="socialSecurityRelation.contributions"
-        ></ContributionList>
-      </div>
-
-      <RelationEditModal 
-        :show="showModal" 
-        :socialSecurityRelationId="socialSecurityRelation.id"
-        @close="close"
-      />
-          
+      <ContributionList
+        :socialSecurityRelation="socialSecurityRelation"
+      ></ContributionList>
     </template>
+
+    <RelationEditModal 
+      :show="showModal" 
+      :socialSecurityRelationId="socialSecurityRelation.id"
+      @close="close"
+    />
+
   </AppCard>
 </template>
 
@@ -83,17 +67,11 @@
 
   const { loggedUser } = storeToRefs(authStore)
 
-
   defineProps({
     socialSecurityRelation: Object
   })
-
-  const showContent = ref(false)
+  
   const showModal = ref(false)
-
-  const toggleCard = () => {
-    showContent.value = !showContent.value
-  }
 
   const edit = () => {
     showModal.value = true
