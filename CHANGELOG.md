@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.13](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.12...v0.0.13) (2022-08-09)
+
+
+### Bug Fixes | Melhorias
+
+* Cadastro criptografia password ([3453d57](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/3453d57913f6c09f28db2d35bc94bc65d178d29c))
+* Mostrar ou esconder resultado para usuarios logados ([ba1fafd](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/ba1fafd7a496ec9033b97e4fc680854b1b44d742))
+
+
+### Features | Funcionalidades
+
+* Adicionado editar, ignorar e deletar contribuições ([797c0b6](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/797c0b6d0bafdf69684386757b88345a523e02db))
+* Adicionado mostrar para todos label na lista de regras de aposentadoria do admin ([3e46b1e](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/3e46b1eac3b222c7514972dd9ec5ebe3a7a7b51e))
+* Adicionar contribuição ao vinculo ([1767593](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/1767593b76853fdf64bef1eb2e154b93d05dca5f))
+* Drawer lista contribuições ([201e2ba](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/201e2bacb0ee73f24d49ecc3fd2956be65f14da6))
+* Link filtrar simulações por usuário ([62f3bce](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/62f3bce1f7bfc8db265ab1a351d61e2d5ee6c549))
+* Lista usuário na lista de simulações no admin ([d1ef8ac](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/d1ef8ac5ce7ccc85ae667588046d3d074841041b))
+* Listar contribuições concomitantes ([25bbc29](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/25bbc2960738ae89c0731eb6b74c323828860d5d))
+* Reprossamento da simulação ao alterar dados do vinculo ([d9113e2](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/d9113e2428aeb18ace482d47feed36cbda232b4e))
+* Socket para comunicação real time frontend servidor ([8ba231b](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/8ba231b8d6268c500434eafbd8d0b6338a4bb654))
+
 ### [0.0.12](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.11...v0.0.12) (2022-07-26)
 
 
