@@ -55,7 +55,7 @@
       value: 'result'
     },
     {
-      label: 'Registros trabalhistas',
+      label: 'Registros previdênciarios',
       value: 'social-security-relations'
     }
   ])
