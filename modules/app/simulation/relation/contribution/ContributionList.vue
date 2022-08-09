@@ -105,10 +105,10 @@
   })
 
   const openContributionModal = ({ id = null, socialSecurityRelation = null }) => {
-    let socialSecurityRelationId, simulationId, monthReference
+    let socialSecurityRelationId, monthReference
+    const simulationId = route.params.simulationId
     if(socialSecurityRelation) {
       socialSecurityRelationId = socialSecurityRelation.id
-      simulationId = route.params.simulationId
       if(socialSecurityRelation.endAt) monthReference = Dates.format(socialSecurityRelation.endAt, 'MM/yyyy')
     }
     emitter.emit('openModalEditContribution', { id, simulationId, socialSecurityRelationId, monthReference })
