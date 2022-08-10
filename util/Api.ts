@@ -15,6 +15,8 @@ axios.defaults.baseURL = config[process.env.NODE_ENV]['API_BASE_URL']
  * Request interceptors
  */
 axios.interceptors.request.use(function (request) {
+
+  request.headers['init'] = new Date().getTime()
   
   const authStore = useAuthStore()
   const { loggedUserToken } = authStore
@@ -31,9 +33,13 @@ axios.interceptors.request.use(function (request) {
  * Response interceptors
  */
 axios.interceptors.response.use(function (response) {
-
- 
-  return response;
+  if(response.config['delay']) {
+    const init = response.config.headers['init']
+    const end = (new Date().getTime() - init)
+    if(end > response.config['delay']) return response
+    return new Promise(resolve => setTimeout(() => resolve(response), (response.config['delay'] - end)))
+  }
+  return response
 
 }, function (error) {
 

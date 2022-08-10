@@ -22,6 +22,7 @@
   import ContributionEditModal from '@/modules/app/simulation/relation/contribution/ContributionEditModal.vue'
   import GraphQL from "@/util/GraphQL"
   import emitter from '@/util/emitter'
+  import Dates from '@/services/Dates'
 
   const route = useRoute()
 
@@ -84,28 +85,20 @@
 
     const init = new Date().getTime()
 
-    GraphQL({ query }).then(({ data }) => {
-      
-      // Defines a minimum of 1s to the placeholder been appear
-      const end = (new Date().getTime() - init)
-      if(end > 1000) {
-        socialSecurityRelations.value = data.simulation.socialSecurityRelations
-        orderSocialSecurityRelations()
-      } else {
-        setTimeout(() => {
-          socialSecurityRelations.value = data.simulation.socialSecurityRelations
-          orderSocialSecurityRelations()
-        }, (1000 - end))
-      }
-
+    GraphQL({ query, delay: 1000 }).then(({ data }) => {
+      socialSecurityRelations.value = data.simulation.socialSecurityRelations
+      orderSocialSecurityRelations()
     })
 
     const orderSocialSecurityRelations = () => {
-
       socialSecurityRelations.value.sort((a, b) => {
         return a.seqNumber - b.seqNumber
       })
-
+      for(const socialSecurityRelation of socialSecurityRelations.value) {
+        socialSecurityRelation.contributions.sort((a, b) => {
+          return Dates.parse(a.monthReference) - Dates.parse(b.monthReference)
+        })
+      }
     }
 
   }
