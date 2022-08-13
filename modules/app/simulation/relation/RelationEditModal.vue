@@ -107,7 +107,7 @@
     Api.post(`/app/general/updateOrCreate`, payload).then((response) => {
       isLoading.value = true
       close()
-      Api.get(`/simulation/reprocess/${route.params.simulationId}`)
+      Api.get(`/app/simulation/reprocess/${route.params.simulationId}`)
       .then(() => {
         emitter.emit('simulationUpdated')
         isLoading.value = false

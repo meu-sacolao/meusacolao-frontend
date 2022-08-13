@@ -20,7 +20,7 @@ export const useAppSimulationStore = defineStore('appSimulation', {
     },
 
     attachSimulations() {
-      return Api.post(`/simulation/attach`, { simulationIds: this.simulationsToAttach })
+      return Api.post(`/app/simulation/attach`, { simulationIds: this.simulationsToAttach })
         .then(({ data }) => {
           this.clearSimulationsToAttach()
         })

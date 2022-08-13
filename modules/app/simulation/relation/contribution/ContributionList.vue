@@ -33,49 +33,11 @@
             <th>Editar</th>
           </tr>
         </thead>
-        <tbody>
-          <tr 
-            v-for="(contribution, index) in socialSecurityRelation.contributions"
-            :key="`contribution_${ index }`"
-            :class="[contribution.isIgnored ? 'bg-gray-200/50' : 'bg-gray-50 hover:bg-gray-100']"  
-          >
-            <td :class="{'line-through' : contribution.isIgnored }">
-              <div class="flex items-center">
-                <span>{{ contribution.monthReference }}</span>
-                <button 
-                  v-if="contribution.groupedContributionsQuantity > 1" 
-                  class="text-orange-500 -mb-1 ml-2"
-                  @click="openContributionMonthReferenceDrawer(contribution.monthReference)"
-                >
-                  <AppIcons icon="add_circle" />
-                </button>
-              </div>
-            </td>
-            <td :class="{'line-through' : contribution.isIgnored }">{{ vueNumberFormat(contribution.baseValue, getCurrencyFormatter(contribution.monthReference)) }}</td>
-            <td>
-              <div class="flex " >
-                <AppButton 
-                  @click="openContributionModal({ id: contribution.id })"
-                  class="text-zinc-400 hover:text-orange-600"
-                >
-                  <AppIcons icon="edit" />
-                </AppButton>  
-                <AppButton 
-                  class="text-zinc-400 hover:text-orange-600"
-                  @click="ignoreContribution(contribution)"
-                >
-                  <AppIcons icon="do_not_disturb_on" />
-                </AppButton>  
-                <AppButton 
-                  class="text-zinc-400 hover:text-orange-600"
-                  @click="destroy(contribution)"  
-                >
-                  <AppIcons icon="delete_forever" />
-                </AppButton>  
-              </div>
-            </td>
-          </tr>
-        </tbody>
+        <ContributionRow 
+          :contribution="contribution"
+          v-for="(contribution, index) in socialSecurityRelation.contributions"
+          :key="`contribution_${ index }`"
+        />
       </table>
 
       <GroupedContributionDrawer 
@@ -90,9 +52,8 @@
 <script setup>
 
   import GroupedContributionDrawer from '@/modules/app/simulation/relation/contribution/GroupedContributionDrawer'
-  import Api from '@/util/Api'
+  import ContributionRow from '@/modules/app/simulation/relation/contribution/ContributionRow'
   import emitter from '@/util/emitter'
-  import getCurrencyType from '@/util/functions/getCurrencyType'
   import Dates from '@/services/Dates'
   
   const route = useRoute()
@@ -114,55 +75,9 @@
     emitter.emit('openModalEditContribution', { id, simulationId, socialSecurityRelationId, monthReference })
   }
 
-  const getCurrencyFormatter = (monthReference) => {
-    return getCurrencyType(monthReference).vueNumberFormatOptions
-  }
-
-  const openContributionMonthReferenceDrawer = (monthReference) => {
-    contributionMonthReference.value = monthReference
-  }
 
   const toggleCard = () => {
     showContent.value = !showContent.value
-  }
-
-  const ignoreContribution = (contribution) => {
-
-    const payload = { 
-      entity: 'Contribution', 
-      id: contribution.id,
-      isIgnored: !contribution.isIgnored
-    }
-    
-    Api.post(`/app/general/updateOrCreate`, payload).then((response) => {
-      Api.get(`/simulation/reprocess/${route.params.simulationId}`)
-      .then(() => {
-        emitter.emit('simulationUpdated')
-      })
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-
-  }
-
-  const destroy = (contribution) => {
-
-    const payload = { 
-      entity: 'Contribution', 
-      id: contribution.id
-    }
-    
-    Api.post(`/app/general/destroy`, payload).then((response) => {
-      Api.get(`/simulation/reprocess/${route.params.simulationId}`)
-      .then(() => {
-        emitter.emit('simulationUpdated')
-      })
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-
   }
 
 </script>

@@ -28,6 +28,14 @@
 
   const socialSecurityRelations = ref(false)
 
+  if(process.client) {
+    const socket = inject('socket')
+    socket.on('simulationProcessed', ({ time }) => {
+      console.log('simulationProcessed received')
+      getSimulationSocialSecurityRelations()
+    })
+  }
+
   onMounted(() => {
     emitter.on('simulationUpdated', getSimulationSocialSecurityRelations)
     getSimulationSocialSecurityRelations()
@@ -66,6 +74,7 @@
                 { column: "key" }
               ]
             ) {
+              key
               id
               monthReference
               baseValue
@@ -75,6 +84,7 @@
               isIgnored
               ignoredReason
               groupedContributionsQuantity
+              history
             }
           }
           

@@ -113,7 +113,8 @@
     socket.emit('addSimulationListener', route.params.simulationId)
 
     socket.on('simulationProcessed', ({ time }) => {
-      alert('Simulação reprocessada por socket em: ', time)
+      console.log('simulationProcessed received')
+      getSimulation()
     })
 
   }
