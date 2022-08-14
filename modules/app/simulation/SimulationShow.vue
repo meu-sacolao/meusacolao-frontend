@@ -109,6 +109,7 @@
 
   if(process.client) {
 
+    console.log('Adding socket listeners')
     const socket = inject('socket')
 
     socket.emit('addSimulationListener', route.params.simulationId)
