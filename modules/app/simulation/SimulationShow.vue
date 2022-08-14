@@ -32,6 +32,7 @@
         </transition>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -39,7 +40,7 @@
   import Api from '@/util/Api'
   import ResultTab from'@/modules/app/simulation/result/ResultTab'
   import SimulationClientCard from'@/modules/app/simulation/SimulationClientCard'
-  import RelationTab from'@/modules/app/simulation/relation/RelationTab.vue'
+  import RelationTab from'@/modules/app/simulation/relation/RelationTab'
   import emitter from '@/util/emitter'
   import GraphQL from "@/util/GraphQL"
 

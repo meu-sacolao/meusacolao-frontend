@@ -30,7 +30,7 @@
           <tr>
             <th>Competência</th>
             <th>Valor base</th>
-            <th>Editar</th>
+            <th>#</th>
           </tr>
         </thead>
         <ContributionRow 
@@ -40,10 +40,7 @@
         />
       </table>
 
-      <GroupedContributionDrawer 
-        :monthReference="contributionMonthReference"
-        @close="contributionMonthReference = null"
-      />
+      
     </div>
   </div>
 
@@ -51,7 +48,7 @@
 
 <script setup>
 
-  import GroupedContributionDrawer from '@/modules/app/simulation/relation/contribution/GroupedContributionDrawer'
+  
   import ContributionRow from '@/modules/app/simulation/relation/contribution/ContributionRow'
   import emitter from '@/util/emitter'
   import Dates from '@/services/Dates'

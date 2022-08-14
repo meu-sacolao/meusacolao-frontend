@@ -57,7 +57,6 @@
 
   onMounted(() => {
     emitter.on('openModalEditContribution', ({ id = null, socialSecurityRelationId = null, simulationId = null, monthReference = null }) => {
-      console.log(id, socialSecurityRelationId, simulationId, monthReference)
       contribution.value = new Contribution({ id, socialSecurityRelationId, simulationId, monthReference })
       showModal.value = true
       get()

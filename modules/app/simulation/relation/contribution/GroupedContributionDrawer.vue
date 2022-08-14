@@ -19,21 +19,31 @@
             <tr 
               v-for="(contribution, index) in contributions"
               :key="`contribution_${ index }`"
-              :class="[contribution.isIgnored ? 'bg-gray-200/50' : 'bg-gray-50 hover:bg-gray-100']"  
+              :class="[contribution.isIgnored ? 'bg-orange-200/40' : 'bg-gray-50 hover:bg-gray-100']" 
             >
-              <td :class="{'line-through' : contribution.isIgnored }">
-                {{ contribution.socialSecurityRelation.relationOrigin }}
+              <td>
+                <span class="text-zinc-400 mr-2">#{{ contribution.socialSecurityRelation.seqNumber }}</span>
+                <span>{{ contribution.socialSecurityRelation.relationOrigin }}</span>
               </td>
-              <td :class="{'line-through' : contribution.isIgnored }">
+              <td>
                 {{ vueNumberFormat(contribution.baseValue, getCurrencyFormatter(contribution.monthReference)) }}
               </td>
               <td>
                 <div class="flex " >
                   <AppButton 
+                    title="Editar contribuição"
                     @click="openContributionModal(contribution.id)"
                     class="text-zinc-400 hover:text-orange-600"
                   >
                     <AppIcons icon="edit" />
+                  </AppButton>
+                  <AppButton 
+                    :title="!contribution.isIgnored ? `Ignorar contribuição` : `Remover ignorado da contribuição`"
+                    class="text-zinc-400 hover:text-orange-600"
+                    @click="ignoreContribution(contribution)"
+                  >
+                    <AppIcons v-if="!contribution.isIgnored" icon="do_not_disturb_on" />
+                    <AppIcons v-else icon="add_circle" />
                   </AppButton>
                 </div>
               </td>
@@ -48,7 +58,6 @@
 
 <script setup>
 
-  import Api from '@/util/Api'
   import GraphQL from '@/util/GraphQL'
   const route = useRoute()
   const { emit } = getCurrentInstance()
@@ -56,26 +65,24 @@
   import emitter from '@/util/emitter'
   import getCurrencyType from '@/util/functions/getCurrencyType'
 
-  const props = defineProps({
-    monthReference: {
-      type: String,
-      default: null
-    }
+  onMounted(() => {
+    emitter.on('openGroupedContributionDrawer', ({ monthReference: monthToSearch }) => {
+      monthReference.value = monthToSearch
+      showDrawer.value = true
+      getContributions()
+    })
+
+    emitter.on('simulationUpdated', getContributions)
   })
 
-  defineEmits(['close'])
-
-  const showDrawer = computed(() => {
-    return props.monthReference ? true : false
+  onBeforeUnmount(() => {
+    emitter.off('openGroupedContributionDrawer')
+    emitter.off('simulationUpdated')
   })
 
-  watch(() => props.monthReference, (newValue) => {
-    if(newValue) {
-      emitter.on('simulationUpdated', getContributions)
-    } else {
-      emitter.off('simulationUpdated')
-    }
-  })
+  const showDrawer = ref(false)
+  const monthReference = ref(null)
+  const isProcessing = ref(false)
 
   const contributions = ref([])
 
@@ -85,7 +92,7 @@
         contributions (
           where: [
             { column: "simulationId", value: "${route.params.simulationId}" }
-            { column: "monthReference", value: "${Dates.format(props.monthReference, 'yyyy-MM-dd')}" }
+            { column: "monthReference", value: "${Dates.format(monthReference.value, 'yyyy-MM-dd')}" }
           ]
         ) {
           id
@@ -110,7 +117,7 @@
   }
 
   const openContributionModal = (contributionId) => {
-    emitter.emit('openModalEditContribution', contributionId)
+    emitter.emit('openModalEditContribution', { id: contributionId })
   }
 
   const getCurrencyFormatter = (monthReference) => {
@@ -118,7 +125,25 @@
   }
 
   const close = () => {
-    emit('close')
+    showDrawer.value = false
+  }
+
+  const ignoreContribution = (contribution) => {
+    if(isProcessing.value) return
+    isProcessing.value = true
+    const payload = { 
+      id: contribution.id,
+      isIgnored: !contribution.isIgnored
+    }
+    
+    Api.post(`/app/contribution/updateOrCreate`, payload).then((response) => {
+      Api.get(`/app/simulation/reprocess/${route.params.simulationId}`)
+      isProcessing.value = false
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
   }
 
 

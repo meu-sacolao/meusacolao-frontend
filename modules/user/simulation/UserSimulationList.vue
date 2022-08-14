@@ -44,47 +44,12 @@
 </template>
 
 <script setup>
-import GraphQL from '@/util/GraphQL'
 
-const route = useRoute()
+  import { storeToRefs } from 'pinia'
+  import { useUserSimulationStore } from "@/modules/user/simulation/store"
+  const userSimulationStore = useUserSimulationStore()
+  const { simulations } = storeToRefs(userSimulationStore)
 
-const query = `
-  {
-
-    currentUser {
-      simulations (
-        order: [
-          { column: "createdAt", direction: "DESC" }
-        ]
-      ) {
-        key
-        id
-        title
-        retirementDate  
-        createdAt
-        client {
-          id
-          name
-        }
-        user {
-          id
-          name
-        }
-        cnisFile {
-          id
-          pathUrl
-        }
-      }
-    }
-  }
-`
-
-const simulations = ref(false)
-
-GraphQL({ query })
-  .then(({ data }) => {
-    simulations.value = data.currentUser.simulations
-  })
-
+  userSimulationStore.getSimulations()
   
 </script>

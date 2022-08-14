@@ -11,6 +11,8 @@
     ></RelationCard>
 
     <ContributionEditModal />
+
+    <GroupedContributionDrawer></GroupedContributionDrawer>
     
   </div>
 
@@ -19,7 +21,8 @@
 <script setup>
 
   import RelationCard from '@/modules/app/simulation/relation/RelationCard'
-  import ContributionEditModal from '@/modules/app/simulation/relation/contribution/ContributionEditModal.vue'
+  import ContributionEditModal from '@/modules/app/simulation/relation/contribution/ContributionEditModal'
+  import GroupedContributionDrawer from '@/modules/app/simulation/relation/contribution/GroupedContributionDrawer'
   import GraphQL from "@/util/GraphQL"
   import emitter from '@/util/emitter'
   import Dates from '@/services/Dates'
