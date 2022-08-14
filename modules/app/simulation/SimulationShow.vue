@@ -106,22 +106,22 @@
     })
   }
 
-
-  if(process.client) {
-
-    console.log('Adding socket listeners')
-    const socket = inject('socket')
-
+  const simulationProcessed = () => {
     socket.emit('addSimulationListener', route.params.simulationId)
-
-    console.log(route.params.simulationId)
-    console.log(socket)
-
     socket.on('simulationProcessed', ({ time }) => {
       console.log('simulationProcessed received')
       getSimulation()
     })
+  }
 
+
+  if(process.client) {
+    const socket = inject('socket')
+    if(!socket.connected) {
+      socket.on("connect", simulationProcessed)
+    } else {
+      simulationProcessed()
+    }
   }
 
 </script>
