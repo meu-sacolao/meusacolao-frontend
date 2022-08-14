@@ -109,8 +109,8 @@
   const simulationProcessed = (socket) => {
     console.log('Inicializando socket no component simulações')
     socket.emit('addSimulationListener', route.params.simulationId)
-    socket.on('simulationProcessed', ({ time }) => {
-      console.log('simulationProcessed received')
+    socket.on('simulationProcessed', (payload) => {
+      console.log('simulationProcessed received', payload)
       getSimulation()
     })
   }
