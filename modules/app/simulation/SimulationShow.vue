@@ -114,6 +114,9 @@
 
     socket.emit('addSimulationListener', route.params.simulationId)
 
+    console.log(route.params.simulationId)
+    console.log(socket)
+
     socket.on('simulationProcessed', ({ time }) => {
       console.log('simulationProcessed received')
       getSimulation()
