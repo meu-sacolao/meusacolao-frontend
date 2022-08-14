@@ -118,9 +118,23 @@
   if(process.client) {
     const socket = inject('socket')
     if(!socket.connected) {
-      socket.on("connect", simulationProcessed(socket))
+      socket.on("connect", () => {
+        console.log(socket)
+        console.log('Inicializando socket no component simulações')
+        socket.emit('addSimulationListener', route.params.simulationId)
+        socket.on('simulationProcessed', (payload) => {
+          console.log('simulationProcessed received', payload)
+          getSimulation()
+        })
+      })
     } else {
-      simulationProcessed(socket)
+      console.log(socket)
+      console.log('Inicializando socket no component simulações')
+      socket.emit('addSimulationListener', route.params.simulationId)
+      socket.on('simulationProcessed', (payload) => {
+        console.log('simulationProcessed received', payload)
+        getSimulation()
+      })
     }
   }
 
