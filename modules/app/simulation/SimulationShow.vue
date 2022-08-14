@@ -107,6 +107,7 @@
   }
 
   const simulationProcessed = () => {
+    const socket = inject('socket')
     socket.emit('addSimulationListener', route.params.simulationId)
     socket.on('simulationProcessed', ({ time }) => {
       console.log('simulationProcessed received')
