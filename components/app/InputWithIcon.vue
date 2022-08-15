@@ -36,8 +36,8 @@
       />
     </div>
 
-    <p  class="text-red-600 h-4">
-      <slot v-if="hasError" />
+    <p class="text-red-600 h-4" v-if="hasError">
+      <slot />
     </p>
   </div>
 </template>

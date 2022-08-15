@@ -15,13 +15,23 @@
           <p class="text-xs italic">{{ socialSecurityRelation.contributions.length }} contribuições</p>
         </div>
       </div>
-      <AppButton 
-        bg="bg-brand-gradient text-white"
-        @click="openContributionModal({ socialSecurityRelation })"
-      >
-        <AppIcons icon="add" />
-        Adicionar contribuição
-      </AppButton>
+
+      <div class="ml-auto flex space-x-2">
+        <AppButton 
+          bg="bg-brand-gradient text-white text-sm px-2 py-1"
+          @click="openContributionModal({ socialSecurityRelation })"
+        >
+          <AppIcons icon="add_box" />
+          <span class="ml-2">Adicionar contribuição</span>
+        </AppButton>
+        <AppButton 
+          bg="bg-brand-gradient text-white text-sm px-2 py-1"
+          @click="openModalEditMultipleContributions({ socialSecurityRelation })"
+        >
+          <AppIcons icon="library_add" class="mr-2" />
+          <span class="ml-2">Adicionar multiplas</span>
+        </AppButton>
+      </div>
     </div>
 
     <div class="overflow-x-auto mt-4" v-if="showContent">
@@ -70,6 +80,10 @@
       if(socialSecurityRelation.endAt) monthReference = Dates.format(socialSecurityRelation.endAt, 'MM/yyyy')
     }
     emitter.emit('openModalEditContribution', { id, simulationId, socialSecurityRelationId, monthReference })
+  }
+
+  const openModalEditMultipleContributions = ({ socialSecurityRelation }) => {
+    emitter.emit('openModalEditMultipleContributions', { socialSecurityRelation })
   }
 
 

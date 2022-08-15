@@ -11,6 +11,7 @@
     ></RelationCard>
 
     <ContributionEditModal />
+    <MultipleContributionEditModal />
 
     <GroupedContributionDrawer></GroupedContributionDrawer>
     
@@ -22,6 +23,7 @@
 
   import RelationCard from '@/modules/app/simulation/relation/RelationCard'
   import ContributionEditModal from '@/modules/app/simulation/relation/contribution/ContributionEditModal'
+  import MultipleContributionEditModal from '@/modules/app/simulation/relation/contribution/MultipleContributionEditModal'
   import GroupedContributionDrawer from '@/modules/app/simulation/relation/contribution/GroupedContributionDrawer'
   import GraphQL from "@/util/GraphQL"
   import emitter from '@/util/emitter'

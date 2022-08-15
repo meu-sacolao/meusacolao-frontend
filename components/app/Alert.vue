@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="w-full flex justify-between shadow hover:shadow-md p-3 px-4 my-4 font-medium" :class="getAlertTypeInfo.wrapperClass">
+    <div class="w-full flex justify-between items-center shadow hover:shadow-md p-3 px-4 my-4 font-medium" :class="getAlertTypeInfo.wrapperClass">
       <slot></slot>
       <AppIcons
         :icon="getAlertTypeInfo.icon"

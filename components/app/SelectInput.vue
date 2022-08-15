@@ -116,7 +116,7 @@ export default {
 <style lang="scss">
 
   .select-input-classes {
-    @apply block appearance-none outline-none w-full h-full border border-slate-200 focus:border-slate-300 focus:shadow-sm hover:shadow text-lg py-4 pr-4;
+    @apply block appearance-none outline-none w-full h-full border border-slate-200 focus:border-slate-300 focus:shadow-sm hover:shadow text-lg py-3 pr-4;
   }
 
   .select-icon-classes {
