@@ -108,14 +108,10 @@
 
   const update = () => {
     
-    Api.post(`/app/contribution/updateOrCreate`, contribution.value).then((response) => {
+    Api.post(`/app/contribution/updateOrCreate`, contribution.value).then(({ data }) => {
       isLoading.value = true
+      emitter.emit('contributionUpdated', { contribution: data.contribution })
       close()
-      Api.get(`/app/simulation/reprocess/${route.params.simulationId}`)
-      .then(() => {
-        emitter.emit('simulationUpdated')
-        isLoading.value = false
-      })
     })
     .catch((err) => {
       console.log(err)

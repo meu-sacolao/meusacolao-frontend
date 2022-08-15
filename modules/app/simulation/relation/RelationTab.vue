@@ -26,6 +26,7 @@
   import GraphQL from "@/util/GraphQL"
   import emitter from '@/util/emitter'
   import Dates from '@/services/Dates'
+  import { ArrayHelpers } from '@igortrindade/lazyfy'
 
   const route = useRoute()
 
@@ -42,11 +43,27 @@
   onMounted(() => {
     emitter.on('simulationUpdated', getSimulationSocialSecurityRelations)
     getSimulationSocialSecurityRelations()
+    emitter.on('contributionUpdated', updateContribution)
   })
 
   onBeforeUnmount(() => {
     emitter.off('simulationUpdated')
+    emitter.off('contributionUpdated')
   })
+
+  const updateContribution = ({ contribution }) => {
+
+    const socialSecurityRelation = ArrayHelpers.find(socialSecurityRelations.value, { id: contribution.socialSecurityRelationId })
+    const finded = ArrayHelpers.find(socialSecurityRelation.contributions, { id: contribution.id })
+    if(finded) {
+      Object.keys(contribution).map((key) => {
+        finded[key] = contribution[key]
+      })
+    } else {
+      socialSecurityRelation.contributions.push(contribution)
+      orderSocialSecurityRelations()
+    }
+  }
 
   const getSimulationSocialSecurityRelations = () => {
     const query = `
@@ -103,7 +120,9 @@
       orderSocialSecurityRelations()
     })
 
-    const orderSocialSecurityRelations = () => {
+  }
+
+  const orderSocialSecurityRelations = () => {
       socialSecurityRelations.value.sort((a, b) => {
         return a.seqNumber - b.seqNumber
       })
@@ -113,7 +132,5 @@
         })
       }
     }
-
-  }
 
 </script>

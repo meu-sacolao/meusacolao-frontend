@@ -108,8 +108,8 @@
       isIgnored: !contribution.isIgnored
     }
     
-    Api.post(`/app/contribution/updateOrCreate`, payload).then((response) => {
-      Api.get(`/app/simulation/reprocess/${route.params.simulationId}`)
+    Api.post(`/app/contribution/updateOrCreate`, payload).then(({ data }) => {
+      emitter.emit('contributionUpdated', { contribution: data.contribution })
       isProcessing.value = false
     })
     .catch((err) => {
