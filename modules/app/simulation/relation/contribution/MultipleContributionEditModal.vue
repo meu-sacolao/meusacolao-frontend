@@ -4,7 +4,7 @@
       
       <h3 class="h3 border-l-10 border-orange-500 pl-6 leading-normal mb-4">Adicionar múltiplas contribuições</h3>
 
-      <h5 class="h5 italic" v-if="socialSecurityRelation">Adicionando em: <b>#{{ socialSecurityRelation.seqNumber }} {{ socialSecurityRelation.relationOrigin }}</b></h5>
+      <h5 class="h5 italic" v-if="socialSecurityRelation">Vínculo: <b>#{{ socialSecurityRelation.seqNumber }} {{ socialSecurityRelation.relationOrigin }}</b></h5>
 
       <AppInputWithIcon 
         v-model:value="multipleContribution.startMonthReference" 
