@@ -108,9 +108,11 @@
 
   onMounted(() => {
     emitter.on('openModalEditMultipleContributions', ({ socialSecurityRelation: socialSecurityRelationToSet }) => {
+
+      console.log(socialSecurityRelationToSet)
       showModal.value = true
       socialSecurityRelation.value = socialSecurityRelationToSet
-      multipleContribution.value.socialSecurityRelationId = socialSecurityRelation.value.Id
+      multipleContribution.value.socialSecurityRelationId = socialSecurityRelation.value.id
       multipleContribution.value.simulationId = socialSecurityRelation.value.simulationId
       if(socialSecurityRelation.value.startAt) multipleContribution.value.startMonthReference = Dates.format(socialSecurityRelation.value.startAt, 'MM/yyyy')
       if(socialSecurityRelation.value.endAt) multipleContribution.value.endMonthReference = Dates.format(socialSecurityRelation.value.endAt, 'MM/yyyy')
@@ -137,7 +139,10 @@
     
     Api.post(`/app/contribution/multiple/updateOrCreate`, multipleContribution.value).then(({ data }) => {
       isLoading.value = true
-      emitter.emit('contributionUpdated', { contribution: data.contribution })
+      console.log(data)
+      for(const contribution of data.contributions) {
+        emitter.emit('contributionUpdated', { contribution })
+      }
       close()
     })
     .catch((err) => {

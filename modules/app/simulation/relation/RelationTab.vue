@@ -55,6 +55,8 @@
 
   const updateContribution = ({ contribution }) => {
 
+    console.log('contribution', contribution)
+
     const socialSecurityRelation = ArrayHelpers.find(socialSecurityRelations.value, { id: contribution.socialSecurityRelationId })
     const finded = ArrayHelpers.find(socialSecurityRelation.contributions, { id: contribution.id })
     if(finded) {
@@ -81,6 +83,7 @@
           retirementDate
           socialSecurityRelations {
             id
+            simulationId
             seqNumber
             nit
             relationDocument
