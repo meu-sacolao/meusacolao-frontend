@@ -1,6 +1,6 @@
 <template>
   <AppCard 
-    v-if="simulationRetirementGroup.simulationRetirementOptions.length"
+    v-if="showRetirementGroup(simulationRetirementGroup)"
     :border="'w-4 bg-zinc-100'"
   >
     <template v-slot:header>
@@ -34,13 +34,27 @@
 <script setup>
   
   import ResultRetirementOptionCard from '@/modules/app/simulation/result/ResultRetirementOptionCard'
+  import Dates from '@/services/Dates'
 
   const props = defineProps({
-    simulationRetirementGroup: Object
+    simulationRetirementGroup: Object,
+    simulation: Object,
   })
 
   const isGranted = computed(() => {
     return props.simulationRetirementGroup.simulationRetirementOptions.filter((i) => i.isGranted).length > 0
   })
+
+  const showRetirementGroup = (simulationRetirementGroup) => {
+    const isPreReform = simulationRetirementGroup.retirementGroup.isPreReform
+    const retirementDateIsPreReform = Boolean(Dates.parse(props.simulation.retirementDate) < Dates.parse('2019-11-13'))
+
+    const hasItemsToShow = Boolean(simulationRetirementGroup.simulationRetirementOptions.length)
+    if(isPreReform) {
+      return Boolean(hasItemsToShow)
+    }
+
+    return Boolean(!retirementDateIsPreReform && hasItemsToShow)
+  }
 
 </script>

@@ -5,7 +5,10 @@
 
     <div v-else class="w-full flex flex-col space-y-8">
 
-      <SimulationClientCard :client="simulation.client"></SimulationClientCard>
+      <SimulationClientCard 
+        :client="simulation.client"
+        :simulation="simulation"
+      ></SimulationClientCard>
 
       <div class="w-full flex flex-col bg-white shadow hover:shadow-lg transition-shadow ease-in-out duration-300 bg-white border border-slate-100">
 
@@ -43,8 +46,6 @@
   import RelationTab from'@/modules/app/simulation/relation/RelationTab'
   import emitter from '@/util/emitter'
   import GraphQL from "@/util/GraphQL"
-
-  import { getCurrentInstance } from 'vue'
 
   const route = useRoute()
   const simulation = ref(false)
@@ -92,6 +93,7 @@
             cpf
             nit
             gender
+            birthDate
           }
         }
       }
@@ -106,21 +108,11 @@
     })
   }
   
-  const simulationProcessed = (socket) => {
-    console.log('Inicializando socket no component simulações')
-    socket.emit('addSimulationListener', route.params.simulationId)
-    socket.on('simulationProcessed', (payload) => {
-      console.log('simulationProcessed received', payload)
-      getSimulation()
-    })
-  }
 
   if(process.client) {
     const socket = inject('socket')
     if(!socket.connected) {
       socket.on("connect", () => {
-        console.log(socket)
-        console.log('Inicializando socket no component simulações')
         socket.emit('addSimulationListener', route.params.simulationId)
         socket.on('simulationProcessed', (payload) => {
           console.log('simulationProcessed received', payload)
@@ -128,7 +120,6 @@
         })
       })
     } else {
-      console.log(socket)
       console.log('Inicializando socket no component simulações')
       socket.emit('addSimulationListener', route.params.simulationId)
       socket.on('simulationProcessed', (payload) => {

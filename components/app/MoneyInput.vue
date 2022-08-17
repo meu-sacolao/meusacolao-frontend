@@ -50,6 +50,7 @@
 
 
   const getVueNumberFormatOptions = computed(() => {
+    if(props.inputOptions) return Object.assign({}, vueNumberFormatDefaultOptions, props.inputOptions)
     if(!props.dateReference) return vueNumberFormatDefaultOptions
     try {
       const dateReference = Dates.parse(props.dateReference)
@@ -58,8 +59,7 @@
     } catch (error) {
       return vueNumberFormatDefaultOptions
     }
-    if(!props.inputOptions) return vueNumberFormatDefaultOptions
-    return props.inputOptions
+    return vueNumberFormatDefaultOptions
   })
 
   const childValue = computed({

@@ -4,15 +4,26 @@
 
     <AppLoaderPlaceholder v-if="!socialSecurityRelations" />
 
+    <div class="w-full flex justify-end">
+      <AppButton 
+        bg="bg-brand-gradient text-white text-sm px-2 py-1"
+        @click="openRelationEditModal()"
+      >
+        <AppIcons icon="add_box" />
+        <span class="ml-2">Adicionar vínculo</span>
+      </AppButton>
+    </div>
+
     <RelationCard
       v-for="(socialSecurityRelation, index) in socialSecurityRelations"
       :key="`simulation-social-security-${index}`"
       :socialSecurityRelation="socialSecurityRelation"
     ></RelationCard>
 
-    <ContributionEditModal />
+    <!-- SHARED COMPONENTS -->
+    <RelationEditModal />
     <MultipleContributionEditModal />
-
+    <MultipleContributionEditModal />
     <GroupedContributionDrawer></GroupedContributionDrawer>
     
   </div>
@@ -22,9 +33,11 @@
 <script setup>
 
   import RelationCard from '@/modules/app/simulation/relation/RelationCard'
+  import RelationEditModal from '@/modules/app/simulation/relation/RelationEditModal.vue'
   import ContributionEditModal from '@/modules/app/simulation/relation/contribution/ContributionEditModal'
   import MultipleContributionEditModal from '@/modules/app/simulation/relation/contribution/MultipleContributionEditModal'
   import GroupedContributionDrawer from '@/modules/app/simulation/relation/contribution/GroupedContributionDrawer'
+  import SocialSecurityRelation from '@/entities/SocialSecurityRelation'
   import GraphQL from "@/util/GraphQL"
   import emitter from '@/util/emitter'
   import Dates from '@/services/Dates'
@@ -33,6 +46,7 @@
   const route = useRoute()
 
   const socialSecurityRelations = ref(false)
+  
 
   if(process.client) {
     const socket = inject('socket')
@@ -43,19 +57,19 @@
   }
 
   onMounted(() => {
-    emitter.on('simulationUpdated', getSimulationSocialSecurityRelations)
     getSimulationSocialSecurityRelations()
+    emitter.on('simulationUpdated', getSimulationSocialSecurityRelations)
     emitter.on('contributionUpdated', updateContribution)
+    emitter.on('socialSecurityRelationUpdated', updateSocialSecurityRelation)
   })
 
   onBeforeUnmount(() => {
     emitter.off('simulationUpdated')
     emitter.off('contributionUpdated')
+    emitter.off('socialSecurityRelationUpdated')
   })
 
   const updateContribution = ({ contribution }) => {
-
-    console.log('contribution', contribution)
 
     const socialSecurityRelation = ArrayHelpers.find(socialSecurityRelations.value, { id: contribution.socialSecurityRelationId })
     const finded = ArrayHelpers.find(socialSecurityRelation.contributions, { id: contribution.id })
@@ -67,6 +81,19 @@
       socialSecurityRelation.contributions.push(contribution)
       orderSocialSecurityRelations()
     }
+  }
+
+  const updateSocialSecurityRelation = ({ socialSecurityRelation }) => {
+
+    const finded = ArrayHelpers.find(socialSecurityRelations.value, { id: socialSecurityRelation.id })
+    if(finded) {
+      Object.keys(socialSecurityRelation).map((key) => {
+        finded[key] = socialSecurityRelation[key]
+      })
+    } else {
+      socialSecurityRelations.value.push(socialSecurityRelation)
+    }
+    orderSocialSecurityRelations()
   }
 
   const getSimulationSocialSecurityRelations = () => {
@@ -91,8 +118,12 @@
             relationType
             startAt
             endAt
+            specialTime
             lastPaymentAt
             indicators
+            history
+            isIgnored
+            ignoredReason
             contributionTime
             contributions (
               order: [
@@ -128,14 +159,18 @@
   }
 
   const orderSocialSecurityRelations = () => {
-      socialSecurityRelations.value.sort((a, b) => {
-        return a.seqNumber - b.seqNumber
+    socialSecurityRelations.value.sort((a, b) => {
+      return a.seqNumber - b.seqNumber
+    })
+    for(const socialSecurityRelation of socialSecurityRelations.value) {
+      socialSecurityRelation.contributions.sort((a, b) => {
+        return Dates.parse(a.monthReference) - Dates.parse(b.monthReference)
       })
-      for(const socialSecurityRelation of socialSecurityRelations.value) {
-        socialSecurityRelation.contributions.sort((a, b) => {
-          return Dates.parse(a.monthReference) - Dates.parse(b.monthReference)
-        })
-      }
     }
+  }
+
+  const openRelationEditModal = () => {
+    emitter.emit('openRelationEditModal', { socialSecurityRelation: new SocialSecurityRelation({ simulationId: route.params.simulationId }) })
+  }
 
 </script>

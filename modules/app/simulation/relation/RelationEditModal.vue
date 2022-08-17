@@ -1,6 +1,6 @@
 <template>
-  <AppBaseModal :show="showModal" @open="get" @close="close">
-    <div class="w-full flex flex-col space-y-4">
+  <AppBaseModal :show="showModal" @close="close">
+    <div class="w-full flex flex-col space-y-4" v-if="socialSecurityRelation">
 
       <AppInputWithIcon 
         v-model:value="socialSecurityRelation.relationOrigin" 
@@ -11,7 +11,7 @@
 
       <AppInputWithIcon 
         v-model:value="socialSecurityRelation.relationDocument" 
-        icon="badge"
+        icon="fact_check"
         label="Documento" 
         :mask="['###.###.###-##', '##.###.###/####-##']"
         placeholder="Insira o nome do vínculo" 
@@ -31,6 +31,28 @@
         label="Término"
         :mask="'##/##/####'"
         placeholder="Insira o término do vínculo" 
+      />
+
+      <AppMoneyInput
+        v-model:value="socialSecurityRelation.specialTime" 
+        icon="timer"
+        label="Período especial" 
+        placeholder="1,00"
+        :inputOptions="{ decimals: ',', prefix: '', precision: 2 }"
+      />
+
+      <AppCheckBox
+        v-model:value="socialSecurityRelation.isIgnored"
+      >
+        Ignorar vínculo
+      </AppCheckBox>
+
+      <AppInputWithIcon 
+        v-model:value="socialSecurityRelation.ignoredReason" 
+        icon="badge"
+        label="Motivo" 
+        placeholder="Insira um motivo de ignorar (opcional)"
+        v-if="socialSecurityRelation.isIgnored"
       />
 
       <div class="w-full flex justify-end mt-10 block">
@@ -54,16 +76,24 @@
   
   defineEmits(['close'])
 
-  const props = defineProps({
-    showModal: Boolean,
-    socialSecurityRelationId: String,
+  onMounted(() => {
+    emitter.on('openRelationEditModal', ({ socialSecurityRelation: socialSecurityRelationToSet }) => {
+      showModal.value = true
+      socialSecurityRelation.value = socialSecurityRelationToSet
+    })
   })
 
+  onBeforeUnmount(() => {
+    emitter.off('openRelationEditModal')
+  })
+
+  const showModal = ref(false)
   const socialSecurityRelation = ref(false)
+
   const isLoading = ref(false)
 
   const close = () => {
-    emit('close')
+    showModal.value = false
   }
 
   const get = () => {
@@ -84,6 +114,9 @@
           startAt
           endAt
           lastPaymentAt
+          isIgnored
+          ignoredReason
+          specialTime
         }
       }
     `
@@ -98,21 +131,11 @@
   }
 
   const update = () => {
-
-    const payload = { 
-      entity: 'SocialSecurityRelation', 
-      ...socialSecurityRelation.value
-    }
     
-    Api.post(`/app/general/updateOrCreate`, payload).then((response) => {
+    Api.post(`/app/socialSecurityRelation/updateOrCreate`, socialSecurityRelation.value).then(({ data }) => {
       isLoading.value = true
       close()
-      Api.get(`/app/simulation/reprocess/${route.params.simulationId}`)
-      .then(() => {
-        emitter.emit('simulationUpdated')
-        isLoading.value = false
-        alert('Vínculo atualizado com sucesso')
-      })
+      emitter.emit('socialSecurityRelationUpdated', { socialSecurityRelation: data.socialSecurityRelation })
     })
     .catch((err) => {
       console.log(err)

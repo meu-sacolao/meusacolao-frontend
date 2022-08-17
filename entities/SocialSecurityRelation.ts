@@ -8,9 +8,13 @@ export default class SocialSecurityRelation {
     relationType: string = ''
     startAt: string = ''
     endAt: string = ''
+    specialTime: number = 1
     lastPaymentAt: string = ''
     indicators: Array<string> = []
+    history: Array<string> = []
     contributions: Array<Contribution> = []
+    isIgnored: boolean = false
+    ignoredReason: string = ''
     
     contributionType: string = 'Contribuições'
     contributionTypeSplitter: string = 'Contribuição'

@@ -18,7 +18,6 @@ jobs:
         node-version: '16.14.2'
     - run: git config --global user.email "igortrindademe@gmail.com"
     - run: git config --global user.name "Igor Trindade"
-    - run: git fetch --all
     - run: pwd && npm ci
     - run: npm run release
     - run: git push --follow-tags origin ${{ github.ref_name }}

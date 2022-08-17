@@ -8,6 +8,7 @@ export default class RetirementGroup extends BaseModel {
   title: string = ''
   description: string = ''
   content: string = ''
+  isPreReform: boolean = false
   retirementDate: string
   createdAt: string = ''
   updatedAt: string = ''
@@ -25,6 +26,7 @@ export default class RetirementGroup extends BaseModel {
     'title',
     'description',
     'content',
+    'isPreReform',
     'retirementDate',
     'createdAt',
     'updatedAt',

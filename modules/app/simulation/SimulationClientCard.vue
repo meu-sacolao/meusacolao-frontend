@@ -7,20 +7,24 @@
       </AppLabelValue>
     </template>
     <template v-slot:content>
-      <div class="w-full flex flex-wrap justify-between mt-4">
-        <AppLabelValue class="four-cols-breakdown">
+      <div class="w-full flex flex-wrap justify-between">
+        <AppLabelValue class="four-cols-breakdown mt-4">
+          <template v-slot:label>Data do cálculo</template>
+          <template v-slot:value>{{ simulation.retirementDate }}</template>
+        </AppLabelValue>
+        <AppLabelValue class="four-cols-breakdown mt-4">
           <template v-slot:label>Cpf</template>
           <template v-slot:value>{{ client.cpf ? client.cpf : '--' }}</template>
         </AppLabelValue>
-        <AppLabelValue class="four-cols-breakdown">
+        <AppLabelValue class="four-cols-breakdown mt-4">
           <template v-slot:label>Data de nascimento</template>
           <template v-slot:value>{{ client.birthDate ? client.birthDate : '--' }}</template>
         </AppLabelValue>
-        <AppLabelValue class="four-cols-breakdown">
+        <AppLabelValue class="four-cols-breakdown mt-4">
           <template v-slot:label>Gênero</template>
           <template v-slot:value>{{ client.gender }}</template>
         </AppLabelValue>
-        <AppLabelValue class="four-cols-breakdown">
+        <AppLabelValue class="four-cols-breakdown mt-4">
           <template v-slot:label>Nome mãe</template>
           <template v-slot:value>{{ client.motherName ? client.motherName : '--' }}</template>
         </AppLabelValue>
@@ -33,7 +37,8 @@
 <script setup>
 
   defineProps({
-    client: Object
+    client: Object,
+    simulation: Object,
   })
 
   const showContent = ref(false)

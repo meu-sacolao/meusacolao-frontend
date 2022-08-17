@@ -4,7 +4,7 @@
       <div class="w-full flex items-center relative">
 
         <AppButton 
-          @click="edit()" 
+          @click="openRelationEditModal()" 
           class="absolute top-0 right-0 text-zinc-400 hover:text-orange-600">
           <AppIcons icon="edit" />
         </AppButton>
@@ -46,39 +46,25 @@
         :socialSecurityRelation="socialSecurityRelation"
       ></ContributionList>
     </template>
-
-    <RelationEditModal 
-      :show="showModal" 
-      :socialSecurityRelationId="socialSecurityRelation.id"
-      @close="close"
-    />
-
   </AppCard>
 </template>
 
 <script setup>
 
   import ContributionList from '@/modules/app/simulation/relation/contribution/ContributionList.vue'
-  import RelationEditModal from '@/modules/app/simulation/relation/RelationEditModal.vue'
-
+  import emitter from '@/util/emitter'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from "@/modules/auth/store"
   const authStore = useAuthStore()
 
   const { loggedUser } = storeToRefs(authStore)
 
-  defineProps({
+  const props = defineProps({
     socialSecurityRelation: Object
   })
   
-  const showModal = ref(false)
-
-  const edit = () => {
-    showModal.value = true
-  }
-
-  const close = () => {
-    showModal.value = false
+  const openRelationEditModal = () => {
+    emitter.emit('openRelationEditModal', { socialSecurityRelation: props.socialSecurityRelation })
   }
 
 </script>

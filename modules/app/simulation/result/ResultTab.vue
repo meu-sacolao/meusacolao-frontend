@@ -3,11 +3,15 @@
 
     <AppLoaderPlaceholder v-if="!simulation" />
 
+    <AppAlert type="info" v-if="simulation && retirementDateIsPreReform">As regras de aposentadoria pós-reforma estão disponíveis apenas para simulação com data de cálculo posteriores à 12/11/2019</AppAlert>
+    
     <ResultRetirementGroupCard 
       v-for="(simulationRetirementGroup, index) in simulation.simulationRetirementGroups"
       :key="`retirementGroup${index}`"
       :simulationRetirementGroup="simulationRetirementGroup"
+      :simulation="simulation"
     ></ResultRetirementGroupCard>
+
   </div>
 </template>
 
@@ -16,10 +20,15 @@
   import ResultRetirementGroupCard from '@/modules/app/simulation/result/ResultRetirementGroupCard'
   import GraphQL from "@/util/GraphQL"
   import emitter from '@/util/emitter'
+  import Dates from '@/services/Dates'
 
   const route = useRoute()
 
   const simulation = ref(false)
+
+  const retirementDateIsPreReform = computed(() => {
+    return Boolean(Dates.parse(simulation.value.retirementDate) < Dates.parse('2019-11-13'))
+  })
 
   onMounted(() => {
     getSimulationRetirementGroups()
@@ -40,6 +49,8 @@
             { column: "id", value: "${route.params.simulationId}" }
           ]
         ) {
+          id
+          retirementDate
           simulationRetirementGroups  {
             id
             retirementGroup {
@@ -47,6 +58,7 @@
               title
               description
               order
+              isPreReform
             }
             simulationRetirementOptions {
               id

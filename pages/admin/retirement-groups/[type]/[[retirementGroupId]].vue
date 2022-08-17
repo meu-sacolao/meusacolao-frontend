@@ -21,6 +21,12 @@
         label="Descrição completa"
       />
 
+      <AppCheckBox
+        v-model:value="retirementGroup.isPreReform"
+      >
+        É pré reforma
+      </AppCheckBox>
+
       <div class="w-full flex">
         <AppButton 
           :disabled="hasError" 
@@ -73,6 +79,7 @@ import GraphQL from '@/util/GraphQL'
           title
           description
           content
+          isPreReform
         }
       }
     `
