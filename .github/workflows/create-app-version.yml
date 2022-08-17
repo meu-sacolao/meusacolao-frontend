@@ -1,0 +1,22 @@
+name: Release version
+on:
+  push:
+    branches:
+      - main
+jobs:
+
+  build:
+    name: Create release version and commit it
+    runs-on: ubuntu-latest
+    steps:
+    
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '16.14.2'
+    - run: git config --global user.email "igortrindademe@gmail.com"
+    - run: git config --global user.name "Igor Trindade"
+    - run: git fetch origin ${{ github.ref_name }}
+    - run: pwd && npm ci
+    - run: npm run release
+    - run: git push --follow-tags origin ${{ github.ref_name }}
