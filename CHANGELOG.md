@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.14](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.11...v0.0.14) (2022-08-17)
+
+
+### Features | Funcionalidades
+
+* Adicionado editar, ignorar e deletar contribuições ([797c0b6](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/797c0b6d0bafdf69684386757b88345a523e02db))
+* Adicionado gênero cabeçalho simulação ([ca6eaa7](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/ca6eaa73486038560e519f9ac4af8812cb0a85a0))
+* Adicionado idade e tempo de contribuição na lista de regras de aposentadoria do resultado da simulação ([4a32b56](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/4a32b5680779ea9991e470d39ec82ce3f7d965cf))
+* Adicionado informações de contexto em opções de aposentadoria ([a902ff8](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/a902ff8f4ecc91dedb248b7fac296e695de266ae))
+* Adicionado mostrar para todos label na lista de regras de aposentadoria do admin ([3e46b1e](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/3e46b1eac3b222c7514972dd9ec5ebe3a7a7b51e))
+* Adicionando historico das contribuições ([631d64a](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/631d64a0560286353825173cf332830a45959970))
+* Adicionar contribuição ao vinculo ([1767593](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/1767593b76853fdf64bef1eb2e154b93d05dca5f))
+* Ajustes na lista de contribuições ([246ad4a](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/246ad4a3ce218f371dd9639514d01391305ff467))
+* Drawer lista contribuições ([201e2ba](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/201e2bacb0ee73f24d49ecc3fd2956be65f14da6))
+* Editando multiplas contribuições ([295f86a](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/295f86a04818e58707a6cc5b49da276eb699f904))
+* Link filtrar simulações por usuário ([62f3bce](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/62f3bce1f7bfc8db265ab1a351d61e2d5ee6c549))
+* Lista usuário na lista de simulações no admin ([d1ef8ac](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/d1ef8ac5ce7ccc85ae667588046d3d074841041b))
+* Listar contribuições concomitantes ([25bbc29](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/25bbc2960738ae89c0731eb6b74c323828860d5d))
+* Melhorias na performance edição de contribuições ([a19abeb](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/a19abeb2ffadaf7cbb18ee54a16fea735b43f02d))
+* Persistir editar multiplas contribuições ([85150bf](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/85150bf7bec3b37144ad0607242ac5daf72d505e))
+* Reprossamento da simulação ao alterar dados do vinculo ([d9113e2](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/d9113e2428aeb18ace482d47feed36cbda232b4e))
+* Socket para comunicação real time frontend servidor ([8ba231b](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/8ba231b8d6268c500434eafbd8d0b6338a4bb654))
+* Vincular simulação à usuário ([6a0c083](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/6a0c08336d6ba8faf8ca216d22f5d22948ef55d5))
+
+
+### Bug Fixes | Melhorias
+
+* Alterar trabalhistas para previdenciario ([0e5ac4a](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/0e5ac4adc5eaab576fd058716f113b51f3ae589c))
+* Atualização de conteudo model multiplas contribuições ([a749c12](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/a749c128f50c2d81c787c398cb6bd4a7b17c773d))
+* Atualizar e adicionar contribuições ([552ca08](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/552ca08133ff10d1fa7755f3e5eb3abdd55940ff))
+* Build release ([3efd613](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/3efd6138f5699d8b699f0a71bca0529835021caa))
+* Cadastro criptografia password ([3453d57](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/3453d57913f6c09f28db2d35bc94bc65d178d29c))
+* Editar contribuição ([456336a](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/456336aac36205e2e1b053192144a4022d601ecc))
+* Fix socket watch connection on simulation ([5c6f4a2](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/5c6f4a2cf449e044ea28ebf443cb6b2ac90dc702))
+* Mostrar ou esconder resultado para usuarios logados ([ba1fafd](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/ba1fafd7a496ec9033b97e4fc680854b1b44d742))
+* Removido tempo de contribuição duplicado no resultado das regras de aposentadoria ([365ebaf](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/365ebaf5bcbbf26adfffb7e8f877bbc7bb845eac))
+
+
+### Routine tasks | Implementações gerais
+
+* Adicionado release version a cada push para a branch main ([92d6a98](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/92d6a98dd86fcf88d56d5046b464550f6269c7b2))
+* **release:** 0.0.12 ([418a8a2](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/418a8a26e0e1d863e495ef222487274487f03ab4))
+* **release:** 0.0.13 ([45ece74](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/45ece74caceac78cfa8516ba8597acf92c14ee7a))
+* **release:** 0.0.14 ([fe6a77f](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/fe6a77f0856740232bedacd06543584edcc8793d))
+* **release:** 0.0.14 ([ea35816](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/ea35816bd99a08e2e5336b9528d16aab39b762a1))
+* **release:** 0.0.14 ([27f091b](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/27f091b675950aa930b8391c6791b73a22f4c2a8))
+* **release:** 0.0.15 ([b3d8f86](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/b3d8f86b35d708f47384d5ce4a215863c535973c))
+* Removido data prefixada formulario cnis ([87aa6cc](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/87aa6cc98ebb7c3f197f228ddf2fb2c01e445fb5))
+* Separando requisições tab  resultado e requisições tab relações previdênciarias ([ceced2e](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/ceced2e17b31c972c6ecad482ded2ec9965d0bfb))
 
 ### [0.0.13](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.12...v0.0.13) (2022-08-09)
 
