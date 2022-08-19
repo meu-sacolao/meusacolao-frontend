@@ -88,6 +88,7 @@
   const contributions = ref([])
 
   const getContributions = () => {
+    if(!showDrawer.value) return
     const query = `
       {
         contributions (

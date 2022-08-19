@@ -4,13 +4,13 @@
 
     <AppLoaderPlaceholder v-if="!socialSecurityRelations" />
 
-    <div class="w-full flex justify-end">
+    <div class="w-full flex justify-end" v-if="socialSecurityRelations">
       <AppButton 
         bg="bg-brand-gradient text-white text-sm px-2 py-1"
         @click="openRelationEditModal()"
       >
         <AppIcons icon="add_box" />
-        <span class="ml-2">Adicionar vínculo</span>
+        <span class="ml-2">Adicionar novo vínculo</span>
       </AppButton>
     </div>
 
@@ -22,7 +22,7 @@
 
     <!-- SHARED COMPONENTS -->
     <RelationEditModal />
-    <MultipleContributionEditModal />
+    <ContributionEditModal />
     <MultipleContributionEditModal />
     <GroupedContributionDrawer></GroupedContributionDrawer>
     
@@ -42,7 +42,7 @@
   import emitter from '@/util/emitter'
   import Dates from '@/services/Dates'
   import { ArrayHelpers } from '@igortrindade/lazyfy'
-
+  
   const route = useRoute()
 
   const socialSecurityRelations = ref(false)

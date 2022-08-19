@@ -18,11 +18,14 @@
 <script setup>
 
   import ResultRetirementGroupCard from '@/modules/app/simulation/result/ResultRetirementGroupCard'
+  import Api from "@/util/Api"
   import GraphQL from "@/util/GraphQL"
   import emitter from '@/util/emitter'
   import Dates from '@/services/Dates'
-
+  import { useAppSimulationStore } from '@/modules/app/simulation/store'
+  
   const route = useRoute()
+  const appSimulationStore = useAppSimulationStore()
 
   const simulation = ref(false)
 
@@ -31,8 +34,9 @@
   })
 
   onMounted(() => {
-    getSimulationRetirementGroups()
     emitter.on('simulationUpdated', getSimulationRetirementGroups)
+    emitter.on('reprocessSimulation', appSimulationStore.reprocessSimulation)
+    appSimulationStore.reprocessSimulation()
   })
 
   onBeforeUnmount(() => {
@@ -118,6 +122,26 @@
 
     }
 
+  }
+
+  if(process.client) {
+    const socket = inject('socket')
+    if(!socket.connected) {
+      socket.on("connect", () => {
+        socket.emit('addSimulationListener', route.params.simulationId)
+        socket.on('simulationProcessed', (payload) => {
+          console.log('simulationProcessed received', payload)
+          getSimulationRetirementGroups()
+        })
+      })
+    } else {
+      console.log('Inicializando socket no component simulações')
+      socket.emit('addSimulationListener', route.params.simulationId)
+      socket.on('simulationProcessed', (payload) => {
+        console.log('simulationProcessed received', payload)
+        getSimulationRetirementGroups()
+      })
+    }
   }
 
 </script>

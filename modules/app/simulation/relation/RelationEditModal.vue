@@ -2,6 +2,12 @@
   <AppBaseModal :show="showModal" @close="close">
     <div class="w-full flex flex-col space-y-4" v-if="socialSecurityRelation">
 
+      <h3 class="h3 border-l-10 border-orange-500 pl-6 leading-normal mb-4">
+        <span v-if="socialSecurityRelation.id">Atualizar</span>
+        <span v-else>Adicionar</span>
+        <span> vínculo</span>
+      </h3>
+
       <AppInputWithIcon 
         v-model:value="socialSecurityRelation.relationOrigin" 
         icon="badge"
@@ -71,8 +77,11 @@
   import GraphQL from '@/util/GraphQL'
   import Api from '@/util/Api'
   import emitter from '@/util/emitter'
-  const { emit } = getCurrentInstance()
+  import { useAppSimulationStore } from '@/modules/app/simulation/store'
+  
   const route = useRoute()
+  const { emit } = getCurrentInstance()
+  const appSimulationStore = useAppSimulationStore()
   
   defineEmits(['close'])
 
@@ -135,7 +144,13 @@
     Api.post(`/app/socialSecurityRelation/updateOrCreate`, socialSecurityRelation.value).then(({ data }) => {
       isLoading.value = true
       close()
-      emitter.emit('socialSecurityRelationUpdated', { socialSecurityRelation: data.socialSecurityRelation })
+      if(socialSecurityRelation.id) {
+        emitter.emit('socialSecurityRelationUpdated', { socialSecurityRelation: data.socialSecurityRelation })
+      }
+      
+      emitter.emit('simulationUpdated')
+      appSimulationStore.reprocessSimulation()
+
     })
     .catch((err) => {
       console.log(err)

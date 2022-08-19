@@ -108,8 +108,6 @@
 
   onMounted(() => {
     emitter.on('openModalEditMultipleContributions', ({ socialSecurityRelation: socialSecurityRelationToSet }) => {
-
-      console.log(socialSecurityRelationToSet)
       showModal.value = true
       socialSecurityRelation.value = socialSecurityRelationToSet
       multipleContribution.value.socialSecurityRelationId = socialSecurityRelation.value.id
@@ -139,7 +137,6 @@
     
     Api.post(`/app/contribution/multiple/updateOrCreate`, multipleContribution.value).then(({ data }) => {
       isLoading.value = true
-      console.log(data)
       for(const contribution of data.contributions) {
         emitter.emit('contributionUpdated', { contribution })
       }

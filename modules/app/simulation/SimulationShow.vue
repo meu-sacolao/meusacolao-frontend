@@ -46,8 +46,11 @@
   import RelationTab from'@/modules/app/simulation/relation/RelationTab'
   import emitter from '@/util/emitter'
   import GraphQL from "@/util/GraphQL"
-
+  import { useAppSimulationStore } from '@/modules/app/simulation/store'
+  
   const route = useRoute()
+  const appSimulationStore = useAppSimulationStore()
+
   const simulation = ref(false)
   const isLoading = ref(false)
 
@@ -67,6 +70,7 @@
   onMounted(() => {
     getSimulation(true)
     emitter.on('simulationUpdated', getSimulation)
+    appSimulationStore.setSimulationId(route.params.simulationId)
   })
 
   onBeforeUnmount(() => {
@@ -115,7 +119,6 @@
       socket.on("connect", () => {
         socket.emit('addSimulationListener', route.params.simulationId)
         socket.on('simulationProcessed', (payload) => {
-          console.log('simulationProcessed received', payload)
           getSimulation()
         })
       })
@@ -123,7 +126,6 @@
       console.log('Inicializando socket no component simulações')
       socket.emit('addSimulationListener', route.params.simulationId)
       socket.on('simulationProcessed', (payload) => {
-        console.log('simulationProcessed received', payload)
         getSimulation()
       })
     }

@@ -3,11 +3,18 @@
     <template v-slot:header>
       <div class="w-full flex items-center relative">
 
-        <AppButton 
-          @click="openRelationEditModal()" 
-          class="absolute top-0 right-0 text-zinc-400 hover:text-orange-600">
-          <AppIcons icon="edit" />
-        </AppButton>
+        <div class="absolute top-0 right-0 flex justify-end">
+          <AppButton 
+            @click="openRelationEditModal()" 
+            class="text-zinc-400 hover:text-orange-600">
+            <AppIcons icon="edit" />
+          </AppButton>
+          <AppButton 
+            @click="destroy()" 
+            class="text-zinc-400 hover:text-orange-600">
+            <AppIcons icon="delete_forever" />
+          </AppButton>
+        </div>
 
         <div class="w-full flex flex-col">
           <div class="w-full flex space-x-2 pr-12">
@@ -16,20 +23,24 @@
           </div>
           <h3 class="h3 pr-12">{{ socialSecurityRelation.relationOrigin }}</h3>
 
-          <div class="w-full flex flex-wrap mt-4 space-y-2">
-            <AppLabelValue class="four-cols-breakdown">
+          <div class="w-full flex flex-wrap">
+            <AppLabelValue class="four-cols-breakdown mt-4">
               <template v-slot:label>Documento</template>
               <template v-slot:value>{{ socialSecurityRelation.relationDocument ? socialSecurityRelation.relationDocument : '--' }}</template>
             </AppLabelValue>
-            <AppLabelValue class="four-cols-breakdown">
+            <AppLabelValue class="four-cols-breakdown mt-4">
               <template v-slot:label>Início</template>
               <template v-slot:value>{{ socialSecurityRelation.startAt ? socialSecurityRelation.startAt : '--' }}</template>
             </AppLabelValue>
-            <AppLabelValue class="four-cols-breakdown">
+            <AppLabelValue class="four-cols-breakdown mt-4">
               <template v-slot:label>Término</template>
               <template v-slot:value>{{ socialSecurityRelation.endAt ? socialSecurityRelation.endAt : '--' }}</template>
             </AppLabelValue>
-            <AppLabelValue class="four-cols-breakdown">
+            <AppLabelValue class="four-cols-breakdown mt-4">
+              <template v-slot:label>Tempo especial</template>
+              <template v-slot:value>{{ vueNumberFormat(socialSecurityRelation.specialTime, { prefix: '', precision: 2 }) }}</template>
+            </AppLabelValue>
+            <AppLabelValue class="four-cols-breakdown mt-4">
               <template v-slot:label>Tempo de contribuição</template>
               <template v-slot:value>
                 <span v-if="socialSecurityRelation.contributionTime">{{ socialSecurityRelation.contributionTime.time.timeText }}</span>
@@ -50,7 +61,7 @@
 </template>
 
 <script setup>
-
+  import Api from '@/util/Api'
   import ContributionList from '@/modules/app/simulation/relation/contribution/ContributionList.vue'
   import emitter from '@/util/emitter'
   import { storeToRefs } from 'pinia'
@@ -65,6 +76,13 @@
   
   const openRelationEditModal = () => {
     emitter.emit('openRelationEditModal', { socialSecurityRelation: props.socialSecurityRelation })
+  }
+
+  const destroy = () => {
+    Api.delete(`/app/socialSecurityRelation/destroy/${props.socialSecurityRelation.id}`)
+      .then(() => {
+        emitter.emit('simulationUpdated')
+      })
   }
 
 </script>

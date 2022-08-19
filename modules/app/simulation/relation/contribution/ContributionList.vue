@@ -35,7 +35,9 @@
     </div>
 
     <div class="overflow-x-auto mt-4" v-if="showContent">
-      <table class="table-auto w-full whitespace-nowrap">
+
+      <AppAlert v-if="!socialSecurityRelation.contributions.length">Não encontramos contribuições no vínculo {{ socialSecurityRelation.relationOrigin }}, adicione as contribuições manualmente.</AppAlert>
+      <table class="table-auto w-full whitespace-nowrap" v-else>
         <thead>
           <tr>
             <th>Competência</th>
