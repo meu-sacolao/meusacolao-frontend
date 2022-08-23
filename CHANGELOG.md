@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.17](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.16...v0.0.17) (2022-08-23)
+
+
+### Features | Funcionalidades
+
+* Editar dados segurado ([b85d859](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/b85d8593ebef5f3553ce1d379184783df297d110))
+
 ### [0.0.16](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.15...v0.0.16) (2022-08-19)
 
 ### [0.0.15](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.14...v0.0.15) (2022-08-17)
