@@ -8,6 +8,15 @@
       <Meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <Meta name="viewport" content="width=device-width,initial-scale=1.0" />
       <Link rel="icon" href="/images/logo/128w/ICON_2_128w.png" />
+
+      <Link 
+        v-for="index in 21" 
+        :key="`pack-image-${index}`" 
+        rel="prefetch" 
+        as="image" 
+        :href="`/images/general/pack-illustrations/${index < 10 ? `0${index}` : index}.svg`" 
+      />
+
     </Head>
     <Body id="body" class="w-screen h-screen font-sans bg-slate-100 text-zinc-700 overflow-x-hidden scrolling-touch relative">
 
@@ -31,7 +40,6 @@
       mode: 'out-in'
     }
   })
-
 
 </script>
 
