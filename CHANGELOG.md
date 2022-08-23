@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.19](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.18...v0.0.19) (2022-08-23)
+
+
+### Bug Fixes | Melhorias
+
+* Added prefetch to illustrations pack ([d9236e5](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/d9236e54be545c1f0779f0a30c12c04b74e6c907))
+
 ### [0.0.18](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.17...v0.0.18) (2022-08-23)
 
 
