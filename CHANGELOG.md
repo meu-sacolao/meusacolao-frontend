@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.18](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.17...v0.0.18) (2022-08-23)
+
+
+### Features | Funcionalidades
+
+* Melhorias no fluxo de processamento da simulação ([bb6ea0e](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/bb6ea0e4aefd80aa9f671b51970f1788f328d5e2))
+
 ### [0.0.17](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.16...v0.0.17) (2022-08-23)
 
 
