@@ -1,6 +1,5 @@
 <template>
   <div class="w-full flex flex-col space-y-8">
-    
     <AppLoaderPlaceholder v-if="!simulation" />
 
     <div v-else class="w-full flex flex-col space-y-8">
@@ -18,7 +17,7 @@
             :key="`simulation-tabs-${index}`"
             class="px-10 pt-4 pb-2 border-b-8 cursor-pointer"
             :class="[tab == tabSelected ? 'border-orange-400 hover:border-orange-500' : 'border-transparent hover:border-zinc-100']"
-            @click="tabSelected = tab"
+            @click="setTabSelected(tab)"
           >
             <h5 class="h5 mb-0">{{ tab.label }}</h5>
           </div>
@@ -36,6 +35,7 @@
       </div>
     </div>
 
+    <ClientEditModal />
   </div>
 </template>
 
@@ -44,11 +44,14 @@
   import ResultTab from'@/modules/app/simulation/result/ResultTab'
   import SimulationClientCard from'@/modules/app/simulation/SimulationClientCard'
   import RelationTab from'@/modules/app/simulation/relation/RelationTab'
+  import ClientEditModal from './ClientEditModal.vue'
   import emitter from '@/util/emitter'
   import GraphQL from "@/util/GraphQL"
   import { useAppSimulationStore } from '@/modules/app/simulation/store'
-  
+  import { ArrayHelpers } from '@igortrindade/lazyfy'
+
   const route = useRoute()
+  const router = useRouter()
   const appSimulationStore = useAppSimulationStore()
 
   const simulation = ref(false)
@@ -65,7 +68,10 @@
     }
   ])
 
-  const tabSelected = ref(tabs.value[0])
+  const tabSelected = computed(() => {
+    if(route.query.tab) return ArrayHelpers.find(tabs.value, { value: route.query.tab })
+    return tabs.value[0]
+  })
 
   onMounted(() => {
     getSimulation(true)
@@ -105,10 +111,7 @@
     `
 
     GraphQL({ query }).then(({ data }) => {
-      
-      // Defines a minimum of 1s to the placeholder been appear
       simulation.value = data.simulation
-
     })
   }
   
@@ -129,6 +132,10 @@
         getSimulation()
       })
     }
+  }
+
+  const setTabSelected = (tab) => {
+    router.replace({ ...route, query: { tab: tab.value } })
   }
 
   

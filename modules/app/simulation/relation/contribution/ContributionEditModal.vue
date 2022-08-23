@@ -15,6 +15,7 @@
         placeholder="Competência"
         disabled="true" 
         :mask="'##/####'"
+        type="tel"
       />
 
       <AppMoneyInput

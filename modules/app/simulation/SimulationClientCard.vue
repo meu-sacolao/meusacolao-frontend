@@ -1,10 +1,20 @@
 <template>
   <AppCard>
     <template v-slot:header>
-      <AppLabelValue>
-        <template v-slot:label>Segurado</template>
-        <template v-slot:value>{{ client.name }}</template>
-      </AppLabelValue>
+
+      <div class="w-full flex flex-col relative">
+        <div class="absolute top-0 right-0 flex justify-end">
+          <AppButton 
+            @click="openClientEditModal()" 
+            class="text-zinc-400 hover:text-orange-600">
+            <AppIcons icon="edit" />
+          </AppButton>
+        </div>
+        <AppLabelValue>
+          <template v-slot:label>Segurado</template>
+          <template v-slot:value>{{ client.name }}</template>
+        </AppLabelValue>
+      </div>
     </template>
     <template v-slot:content>
       <div class="w-full flex flex-wrap justify-between">
@@ -36,7 +46,14 @@
 
 <script setup>
 
-  defineProps({
+  
+  import emitter from '@/util/emitter'
+  
+  const openClientEditModal = () => {
+    emitter.emit('openClientEditModal', { client: props.client })
+  }
+
+  const props = defineProps({
     client: Object,
     simulation: Object,
   })

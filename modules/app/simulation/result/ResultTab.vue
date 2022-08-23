@@ -36,7 +36,7 @@
   onMounted(() => {
     emitter.on('simulationUpdated', getSimulationRetirementGroups)
     emitter.on('reprocessSimulation', appSimulationStore.reprocessSimulation)
-    appSimulationStore.reprocessSimulation()
+    getSimulationRetirementGroups()
   })
 
   onBeforeUnmount(() => {
@@ -55,6 +55,7 @@
         ) {
           id
           retirementDate
+          isPendingUpdate
           simulationRetirementGroups  {
             id
             retirementGroup {
@@ -88,18 +89,13 @@
 
     const init = new Date().getTime()
 
-    GraphQL({ query }).then(({ data }) => {
-      
-      // Defines a minimum of 1s to the placeholder been appear
-      const end = (new Date().getTime() - init)
-      if(end > 1000) {
+    GraphQL({ query, delay: 1000 }).then(({ data }) => {
+
+      if(data.simulation.isPendingUpdate) {
+        appSimulationStore.reprocessSimulation()
+      } else {
         simulation.value = data.simulation
         orderSimulationItems()
-      } else {
-        setTimeout(() => {
-          simulation.value = data.simulation
-          orderSimulationItems()
-        }, (1000 - end))
       }
 
     })

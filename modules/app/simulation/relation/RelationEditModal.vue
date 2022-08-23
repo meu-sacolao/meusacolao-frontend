@@ -20,7 +20,8 @@
         icon="fact_check"
         label="Documento" 
         :mask="['###.###.###-##', '##.###.###/####-##']"
-        placeholder="Insira o nome do vínculo" 
+        type="tel"
+        placeholder="Insira o documento do vínculo (CPF ou CNPJ" 
       />
 
       <AppInputWithIcon 
@@ -28,6 +29,7 @@
         icon="today"
         label="Início"
         :mask="'##/##/####'"
+        type="tel"
         placeholder="Insira o início do vínculo" 
       />
 
@@ -36,6 +38,7 @@
         icon="today"
         label="Término"
         :mask="'##/##/####'"
+        type="tel"
         placeholder="Insira o término do vínculo" 
       />
 
@@ -44,6 +47,7 @@
         icon="timer"
         label="Período especial" 
         placeholder="1,00"
+        type="tel"
         :inputOptions="{ decimals: ',', prefix: '', precision: 2 }"
       />
 
@@ -77,11 +81,9 @@
   import GraphQL from '@/util/GraphQL'
   import Api from '@/util/Api'
   import emitter from '@/util/emitter'
-  import { useAppSimulationStore } from '@/modules/app/simulation/store'
   
   const route = useRoute()
   const { emit } = getCurrentInstance()
-  const appSimulationStore = useAppSimulationStore()
   
   defineEmits(['close'])
 
@@ -149,7 +151,6 @@
       }
       
       emitter.emit('simulationUpdated')
-      appSimulationStore.reprocessSimulation()
 
     })
     .catch((err) => {
