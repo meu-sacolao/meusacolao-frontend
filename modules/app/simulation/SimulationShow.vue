@@ -15,17 +15,20 @@
           <div 
             v-for="(tab, index) in tabs"
             :key="`simulation-tabs-${index}`"
-            class="px-10 pt-4 pb-2 border-b-8 cursor-pointer"
+            class="px-10 pt-4 pb-2 border-b-8 cursor-pointer relative"
             :class="[tab == tabSelected ? 'border-orange-400 hover:border-orange-500' : 'border-transparent hover:border-zinc-100']"
             @click="setTabSelected(tab)"
           >
             <h5 class="h5 mb-0">{{ tab.label }}</h5>
+            <span class="w-3 h-3 bg-orange-600 absolute top-0 right-0 mt-2 mr-2 rounded-full" v-if="tab.value == 'result' && simulation.isPendingUpdate"></span>
           </div>
+          
         </div>
 
         <transition name="slide-left" mode="out-in" appear>
           <ResultTab 
             v-if="tabSelected.value === 'result'"
+            :simulation="simulation"
           ></ResultTab>
           <RelationTab 
             v-else-if="tabSelected.value === 'social-security-relations'"
@@ -41,6 +44,7 @@
 
 <script setup>
   import Api from '@/util/Api'
+  import Simulation from '@/entities/Simulation'
   import ResultTab from'@/modules/app/simulation/result/ResultTab'
   import SimulationClientCard from'@/modules/app/simulation/SimulationClientCard'
   import RelationTab from'@/modules/app/simulation/relation/RelationTab'
@@ -55,7 +59,6 @@
   const appSimulationStore = useAppSimulationStore()
 
   const simulation = ref(false)
-  const isLoading = ref(false)
 
   const tabs = ref([
     {
@@ -76,11 +79,15 @@
   onMounted(() => {
     getSimulation(true)
     emitter.on('simulationUpdated', getSimulation)
+    emitter.on('simulationIsPending', () => {
+      simulation.value.isPendingUpdate = true
+    })
     appSimulationStore.setSimulationId(route.params.simulationId)
   })
 
   onBeforeUnmount(() => {
-    emitter.off('simulationUpdated')
+    emitter.off('simulationUpdated', getSimulation)
+    emitter.off('simulationIsPending')
   })
 
   const getSimulation = () => {
@@ -95,6 +102,7 @@
         ) {
           id
           retirementDate
+          isPendingUpdate
           client {
             id
             name
@@ -105,13 +113,40 @@
             gender
             birthDate
           }
+          simulationRetirementGroups  {
+            id
+            retirementGroup {
+              id
+              title
+              description
+              order
+              isPreReform
+            }
+            simulationRetirementOptions {
+              id
+              isGranted
+              contextDate
+              age
+              contributionTime
+              contributionsTotal
+              requirements
+              retirementOption {
+                id
+                title
+                description
+                order
+                showForNotLoggedUsers
+              }
+            }
+          }
         }
       }
     
     `
 
     GraphQL({ query }).then(({ data }) => {
-      simulation.value = data.simulation
+      simulation.value = new Simulation(data.simulation)
+      orderSimulationItems()
     })
   }
   
@@ -138,6 +173,22 @@
     router.replace({ ...route, query: { tab: tab.value } })
   }
 
-  
+  const orderSimulationItems = () => {
+
+    simulation.value.simulationRetirementGroups.sort((a, b) => {
+      return a.retirementGroup.order - b.retirementGroup.order
+    })
+
+    simulation.value.simulationRetirementGroups.forEach((simulationRetirementGroup) => {
+      simulationRetirementGroup.simulationRetirementOptions.sort((a, b) => {
+        return a.retirementOption.order - b.retirementOption.order
+      })
+    })
+
+    simulation.value.simulationRetirementGroups = simulation.value.simulationRetirementGroups.sort((a, b) => {
+      return a.retirementGroup.order - b.retirementGroup.order
+    })
+
+  }
 
 </script>

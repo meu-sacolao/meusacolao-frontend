@@ -24,13 +24,21 @@
         placeholder="Insira o documento do vínculo (CPF ou CNPJ" 
       />
 
+      <AppSelectInput
+        v-model:value="socialSecurityRelation.relationType"
+        :items="relationTypes"
+         icon="contact_page"
+        label="Tipo de vínculo"
+        placeholder="Selecione o tipo de vínculo" 
+      />
+
       <AppInputWithIcon 
         v-model:value="socialSecurityRelation.startAt" 
         icon="today"
         label="Início"
         :mask="'##/##/####'"
         type="tel"
-        placeholder="Insira o início do vínculo" 
+        placeholder="DD/MM/AAAA" 
       />
 
       <AppInputWithIcon 
@@ -39,7 +47,7 @@
         label="Término"
         :mask="'##/##/####'"
         type="tel"
-        placeholder="Insira o término do vínculo" 
+        placeholder="DD/MM/AAAA" 
       />
 
       <AppMoneyInput
@@ -80,6 +88,7 @@
   import { getCurrentInstance } from 'vue'
   import GraphQL from '@/util/GraphQL'
   import Api from '@/util/Api'
+  import SocialSecurityRelation from '@/entities/SocialSecurityRelation'
   import emitter from '@/util/emitter'
   
   const route = useRoute()
@@ -89,8 +98,10 @@
 
   onMounted(() => {
     emitter.on('openRelationEditModal', ({ socialSecurityRelation: socialSecurityRelationToSet }) => {
+
+      console.log('socialSecurityRelationToSet', socialSecurityRelationToSet)
       showModal.value = true
-      socialSecurityRelation.value = socialSecurityRelationToSet
+      socialSecurityRelation.value = new SocialSecurityRelation(socialSecurityRelationToSet)
     })
   })
 
@@ -100,6 +111,8 @@
 
   const showModal = ref(false)
   const socialSecurityRelation = ref(false)
+
+  const relationTypes = ref(['Empregado', 'Empresário / Empregador', 'Autônomo', 'Contribuinte individual', 'Empregado Doméstico', 'Benefício'])
 
   const isLoading = ref(false)
 
@@ -146,12 +159,7 @@
     Api.post(`/app/socialSecurityRelation/updateOrCreate`, socialSecurityRelation.value).then(({ data }) => {
       isLoading.value = true
       close()
-      if(socialSecurityRelation.id) {
-        emitter.emit('socialSecurityRelationUpdated', { socialSecurityRelation: data.socialSecurityRelation })
-      }
-      
       emitter.emit('simulationUpdated')
-
     })
     .catch((err) => {
       console.log(err)

@@ -118,6 +118,7 @@
     Api.post(`/app/contribution/updateOrCreate`, contribution.value).then(({ data }) => {
       isLoading.value = true
       emitter.emit('contributionUpdated', { contribution: data.contribution })
+      emitter.emit('simulationIsPending')
       close()
     })
     .catch((err) => {

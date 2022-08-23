@@ -78,7 +78,7 @@
 
   onBeforeUnmount(() => {
     emitter.off('openGroupedContributionDrawer')
-    emitter.off('simulationUpdated')
+    emitter.off('simulationUpdated', getContributions)
   })
 
   const showDrawer = ref(false)

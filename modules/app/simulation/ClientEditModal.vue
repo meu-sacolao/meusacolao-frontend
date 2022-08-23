@@ -78,19 +78,16 @@
 </template>
 
 <script setup>
-  import { getCurrentInstance } from 'vue'
   import GraphQL from '@/util/GraphQL'
   import Api from '@/util/Api'
   import emitter from '@/util/emitter'
   
   const route = useRoute()
-  const { emit } = getCurrentInstance()
   
   defineEmits(['close'])
 
   onMounted(() => {
     emitter.on('openClientEditModal', ({ client: clientToSet }) => {
-      console.log(clientToSet)
       showModal.value = true
       client.value = clientToSet
     })
@@ -142,11 +139,10 @@
 
   const update = () => {
     
-    Api.post(`/app/client/updateOrCreate`, { ...client.value, simulationId: route.params.simulationId }).then(({ data }) => {
-      isLoading.value = true
-      close()    
+    Api.post(`/app/client/updateOrCreate`, { ...client.value, simulationId: route.params.simulationId }).then(() => {
       emitter.emit('simulationUpdated')
-
+      isLoading.value = true
+      close()
     })
     .catch((err) => {
       console.log(err)

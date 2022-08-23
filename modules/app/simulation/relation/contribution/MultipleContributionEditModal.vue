@@ -139,6 +139,7 @@
       isLoading.value = true
       for(const contribution of data.contributions) {
         emitter.emit('contributionUpdated', { contribution })
+        emitter.emit('simulationIsPending')
       }
       close()
     })

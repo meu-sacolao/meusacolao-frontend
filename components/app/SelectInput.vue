@@ -17,7 +17,7 @@
       class="select-input-classes"
       :class="[icon ? 'pl-9' : 'pl-4']"
     >
-      <option :value="null" disabled>Selecione uma opção</option>
+      <option :value="null" disabled>{{ placeholder }}</option>
       <option v-for="item in getItems" :value="item[keyValue]" :key="item[keyValue]">{{ item[keyLabel] }}</option>
     </select>
     </div>
@@ -44,6 +44,10 @@ export default {
      */
     label: {
       default: ''
+    },
+
+    placeholder: {
+      default: 'Selecione uma opção'
     },
 
     icon: {

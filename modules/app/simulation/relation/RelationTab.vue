@@ -46,27 +46,18 @@
   const route = useRoute()
 
   const socialSecurityRelations = ref(false)
-  
-
-  if(process.client) {
-    const socket = inject('socket')
-    socket.on('simulationProcessed', ({ time }) => {
-      console.log('simulationProcessed received')
-      getSimulationSocialSecurityRelations()
-    })
-  }
 
   onMounted(() => {
     getSimulationSocialSecurityRelations()
-    emitter.on('simulationUpdated', getSimulationSocialSecurityRelations)
     emitter.on('contributionUpdated', updateContribution)
     emitter.on('socialSecurityRelationUpdated', updateSocialSecurityRelation)
+    emitter.on('simulationUpdated', getSimulationSocialSecurityRelations)
   })
 
   onBeforeUnmount(() => {
-    emitter.off('simulationUpdated')
-    emitter.off('contributionUpdated')
-    emitter.off('socialSecurityRelationUpdated')
+    emitter.off('contributionUpdated', updateContribution)
+    emitter.off('socialSecurityRelationUpdated', updateSocialSecurityRelation)
+    emitter.off('simulationUpdated', getSimulationSocialSecurityRelations)
   })
 
   const updateContribution = ({ contribution }) => {

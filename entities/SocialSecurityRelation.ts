@@ -6,7 +6,7 @@ export default class SocialSecurityRelation extends BaseModel {
 	nit: string = ''
 	relationDocument: string = ''
 	relationOrigin: string = ''
-	relationType: string = ''
+	relationType: string = null
 	startAt: string = ''
 	endAt: string = ''
 	specialTime: number = 1

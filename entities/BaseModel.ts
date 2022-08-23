@@ -10,7 +10,7 @@ export default class BaseModel {
 
   public setFillableKeys(instance, keys, data) {
     for(const key of keys) {
-      if(data[key]) instance[key] = data[key]
+      if(typeof(data[key]) !== 'undefined') instance[key] = data[key]
     }
   }
 
