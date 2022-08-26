@@ -14,6 +14,8 @@
       </AppButton>
     </div>
 
+    <SimulationEmpty v-if="socialSecurityRelations && !socialSecurityRelations.length" />
+
     <RelationCard
       v-for="(socialSecurityRelation, index) in socialSecurityRelations"
       :key="`simulation-social-security-${index}`"
@@ -37,6 +39,7 @@
   import ContributionEditModal from '@/modules/app/simulation/relation/contribution/ContributionEditModal'
   import MultipleContributionEditModal from '@/modules/app/simulation/relation/contribution/MultipleContributionEditModal'
   import GroupedContributionDrawer from '@/modules/app/simulation/relation/contribution/GroupedContributionDrawer'
+  import SimulationEmpty from '@/modules/app/simulation/relation/SimulationEmpty'
   import SocialSecurityRelation from '@/entities/SocialSecurityRelation'
   import GraphQL from "@/util/GraphQL"
   import emitter from '@/util/emitter'

@@ -38,7 +38,7 @@
         </div>
 
         <div class="w-full flex space-x-4 mt-4">
-          <NuxtLink :to="`/simulacao/${simulation.id}`" target="_blank" class="w-auto">
+          <NuxtLink :to="`/simulacao/${simulation.id}`" class="w-auto">
             <AppButton class="bg-brand-gradient text-white px-5">
               <AppIcons icon="zoom_in" />
               <span  class="ml-1">Ver online</span>

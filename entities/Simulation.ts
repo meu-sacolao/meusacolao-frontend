@@ -2,6 +2,7 @@ import BaseModel from '@/entities/BaseModel'
 import User from '@/entities/User'
 import Client from '@/entities/Client'
 import SimulationRetirementGroup from '@/entities/SimulationRetirementGroup'
+import SocialSecurityRelation from '@/entities/SocialSecurityRelation'
 
 export default class Simulation extends BaseModel {
   key: number = null
@@ -18,6 +19,7 @@ export default class Simulation extends BaseModel {
   user: User = null
   client: Client = null
   simulationRetirementGroups: SimulationRetirementGroup[] = []
+  socialSecurityRelations: SocialSecurityRelation[] = []
 
   constructor(attributes = {}) {
 		super()
@@ -37,5 +39,6 @@ export default class Simulation extends BaseModel {
     'user',
     'client',
     'simulationRetirementGroups',
+    'socialSecurityRelations',
   ]
 }

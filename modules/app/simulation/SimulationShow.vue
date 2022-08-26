@@ -13,7 +13,7 @@
 
         <div class="w-full flex border-b border-zinc-100">
           <div 
-            v-for="(tab, index) in tabs"
+            v-for="(tab, index) in tabsAvailable"
             :key="`simulation-tabs-${index}`"
             class="px-10 pt-4 pb-2 border-b-8 cursor-pointer relative"
             :class="[tab == tabSelected ? 'border-orange-400 hover:border-orange-500' : 'border-transparent hover:border-zinc-100']"
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <ClientEditModal />
+    <ClientEditModal :simulation="simulation || null"/>
   </div>
 </template>
 
@@ -48,32 +48,27 @@
   import ResultTab from'@/modules/app/simulation/result/ResultTab'
   import SimulationClientCard from'@/modules/app/simulation/SimulationClientCard'
   import RelationTab from'@/modules/app/simulation/relation/RelationTab'
-  import ClientEditModal from './ClientEditModal.vue'
+  import ClientEditModal from '@/modules/app/simulation/ClientEditModal.vue'
   import emitter from '@/util/emitter'
   import GraphQL from "@/util/GraphQL"
   import { useAppSimulationStore } from '@/modules/app/simulation/store'
   import { ArrayHelpers } from '@igortrindade/lazyfy'
-
+  import { SIMULATION_RESULT_TAB, SIMULATION_RELATION_TAB } from './enums'
   const route = useRoute()
   const router = useRouter()
   const appSimulationStore = useAppSimulationStore()
 
   const simulation = ref(false)
 
-  const tabs = ref([
-    {
-      label: 'Resultado',
-      value: 'result'
-    },
-    {
-      label: 'Registros previdênciarios',
-      value: 'social-security-relations'
-    }
-  ])
+  const tabsAvailable = computed(() => {
+    if(simulation.value && !simulation.value.socialSecurityRelations.length) return [SIMULATION_RELATION_TAB]
+    return [SIMULATION_RESULT_TAB, SIMULATION_RELATION_TAB]
+  })
 
   const tabSelected = computed(() => {
-    if(route.query.tab) return ArrayHelpers.find(tabs.value, { value: route.query.tab })
-    return tabs.value[0]
+    if(route.query.tab) return ArrayHelpers.find(tabsAvailable.value, { value: route.query.tab })
+    if(simulation.value && !simulation.value.socialSecurityRelations.length) return ArrayHelpers.find(tabsAvailable.value, { value: SIMULATION_RELATION_TAB.value })
+    return ArrayHelpers.find(tabsAvailable.value, { value: SIMULATION_RESULT_TAB.value })
   })
 
   onMounted(() => {
@@ -138,6 +133,9 @@
                 showForNotLoggedUsers
               }
             }
+          }
+          socialSecurityRelations {
+            id
           }
         }
       }

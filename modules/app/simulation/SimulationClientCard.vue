@@ -46,7 +46,6 @@
 
 <script setup>
 
-  
   import emitter from '@/util/emitter'
   
   const openClientEditModal = () => {

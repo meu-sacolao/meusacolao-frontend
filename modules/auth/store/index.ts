@@ -53,6 +53,8 @@ export const useAuthStore = defineStore('auth', {
     },
     
     redirect() {
+      const route = useRoute()
+      if(route.query.skipRedirect) return
       const router = useRouter()
       const userSimulationStore = useUserSimulationStore()
       // USER

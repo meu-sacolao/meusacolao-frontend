@@ -5,7 +5,7 @@
       <p class="leading-relaxed">Aguarde enquanto processamos o resultado de sua aposentadoria.</p>
     </div>
     <div class="w-full lg:w-2/3 flex flex-wrap items-center justify-center">
-      <img class="w-full w-1/2 lg:w-3/4" src="/images/general/pack-illustrations/10.svg" />
+      <img class="w-full w-1/2 lg:w-3/4" src="/images/general/pack-illustrations/16.svg" />
     </div>
   </div>
 </template>

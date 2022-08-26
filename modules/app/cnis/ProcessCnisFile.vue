@@ -19,8 +19,9 @@
     </div>
     <AppCard>
       <template v-slot:header>
-        <div class="w-full flex space-x-2 pr-12">
-        <h3 class="h3 truncate leading-relaxed ...">Calcular aposentadoria</h3>
+        <div class="w-full flex flex-col pr-12">
+        <h3 class="h3 truncate leading-relaxed ...">Calcular aposentadoria com o CNIS</h3>
+        <h5>Utilize o arquivo CNIS fornecido pelo INSS para calcular de forma automática a sua aposentadoria</h5>
       </div>
       </template>
       <template v-slot:content>
@@ -58,8 +59,36 @@
           </AppButton>
         </div>
       </template>
-    </AppCard>  
+    </AppCard>
+
+    <AppCard>
+      <template v-slot:header>
+        <div class="w-full flex flex-col pr-12">
+        <h3 class="h3 truncate leading-relaxed ...">Calcular aposentadoria manualmente</h3>
+        <h5>Informe os dados do segurado para calcular a sua aposentadoria.</h5>
+      </div>
+      </template>
+      <template v-slot:content>
+        <div class="flex flex-col items-start space-y-6">
+          
+          <p class="text-lg">
+            Não possui o arquivo CNIS fornecido pelo INSS em mãos? Não tem problema! Simule sua aposentadoria informando os dados manualmente.
+          </p>
+          <AppButton 
+            bg="bg-brand-gradient" 
+            text="text-white" 
+            @click="openClientEditModal"
+          >
+            Gerar simulação manualmente
+          </AppButton>
+        </div>
+      </template>
+    </AppCard>
+
     <ProcessCnisLoaderModal :showModal="showModal" @close="closeModal" />
+
+    <ClientEditModal />
+
   </div>
 
 </template>
@@ -68,11 +97,14 @@
   
   import Api from '@/util/Api'
   import ProcessCnisLoaderModal from '@/modules/app/cnis/ProcessCnisLoaderModal.vue'
+  import ClientEditModal from '@/modules/app/simulation/ClientEditModal.vue'
   import { useAppSimulationStore } from '@/modules/app/simulation/store'
+  import emitter from '@/util/emitter'
 
   const appSimulationStore = useAppSimulationStore()
 
   const router = useRouter()
+  const route = useRoute()
 
   const retirementDate = ref(process.env.NODE_ENV == 'production' ? '' : '10/10/2020')
   const showModal = ref(false)
@@ -107,6 +139,11 @@
 
   const closeModal = () => {
     showModal.value = false
+  }
+  
+  const openClientEditModal = () => {
+    emitter.emit('openClientEditModal')
+    router.replace({ ...route, query: { skipRedirect: true }})
   }
 
 </script>
