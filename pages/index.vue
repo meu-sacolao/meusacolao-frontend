@@ -39,12 +39,10 @@
   const route = useRoute()
 
   if(process.client) {
+    
     onMounted(() => {
-      if (route.query.code) {
-        authStore.googleLogin(route.query.code)
-          .then(() => {
-            alert('Logado com sucesso com google')
-          })
+      if (route.query.googleAuthToken) {
+        authStore.googleLogin(route.query.googleAuthToken)
       }
     })
 

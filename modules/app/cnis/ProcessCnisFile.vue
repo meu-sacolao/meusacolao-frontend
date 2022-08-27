@@ -99,9 +99,11 @@
   import ProcessCnisLoaderModal from '@/modules/app/cnis/ProcessCnisLoaderModal.vue'
   import ClientEditModal from '@/modules/app/simulation/ClientEditModal.vue'
   import { useAppSimulationStore } from '@/modules/app/simulation/store'
+  import { useAuthStore } from '@/modules/auth/store'
   import emitter from '@/util/emitter'
 
   const appSimulationStore = useAppSimulationStore()
+  const authStore = useAuthStore()
 
   const router = useRouter()
   const route = useRoute()
@@ -143,7 +145,7 @@
   
   const openClientEditModal = () => {
     emitter.emit('openClientEditModal')
-    router.replace({ ...route, query: { skipRedirect: true }})
+    authStore.setRedirectTo({ route: route.fullPath, event: 'openClientEditModal' })
   }
 
 </script>

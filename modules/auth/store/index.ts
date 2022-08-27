@@ -3,12 +3,15 @@ import Api from '@/util/Api'
 import User from '@/entities/User'
 import { useAppSimulationStore } from '@/modules/app/simulation/store'
 import { useUserSimulationStore } from '@/modules/user/simulation/store'
+import emitter from '@/util/emitter'
 
 export const useAuthStore = defineStore('auth', {
   persist: true,
   state: () => ({
     loggedUser: null,
-    loggedUserToken: null
+    loggedUserToken: null,
+    redirectTo: null,
+    redirectToEvent: null
   }),
   
   actions: {
@@ -16,14 +19,14 @@ export const useAuthStore = defineStore('auth', {
     async login({ email, unencryptedPassword }) {
       return Api.post('/auth/login', { email, unencryptedPassword }).then(({ data }) => {
         this.loggedUserToken = data.token
-        this.getLoggedUser(true)
+        this.getLoggedUser()
       })
     },
     
     async signup({ name, email, phone, unencryptedPassword }) {
       return Api.post('/auth/signup', { name, email, phone, unencryptedPassword }).then(({ data }) => {
         this.loggedUserToken = data.token
-        this.getLoggedUser(true)
+        this.getLoggedUser()
       })
     },
     
@@ -31,19 +34,18 @@ export const useAuthStore = defineStore('auth', {
       return Api.get(`/auth/googleLogin?code=${code}`)
       .then(({ data }) => {
         this.loggedUserToken = data.token
-        this.getLoggedUser(true)
+        this.getLoggedUser()
+        alert('Logado com sucesso com google')
       })
     },
     
-    async getLoggedUser(redirect = false) {
+    async getLoggedUser() {
       const appSimulationStore = useAppSimulationStore()
 
       Api.get('/auth/getLoggedUser').then(({ data }) => {
         this.loggedUser = new User(data)
         appSimulationStore.attachSimulations()
-        if(redirect) {
-          this.redirect()
-        }
+        this.redirect()
       })
     },
     
@@ -51,10 +53,47 @@ export const useAuthStore = defineStore('auth', {
       this.loggedUser = null
       this.loggedUserToken = null
     },
+
+    setRedirectTo({ route, event = null, payload = null }) {
+      this.redirectTo = route
+      if(event) {
+        this.redirectToEvent = { event, payload }
+      }
+    },
+
     
     redirect() {
       const route = useRoute()
-      if(route.query.skipRedirect) return
+
+      if(route.query.skipRedirect || this.redirectTo === false) return
+
+      if(['', null].includes(this.redirectTo)) {
+        this.generalRedirectTo()
+      } else {
+        if(this.redirectTo) {
+          const router = useRouter()
+          router.push(this.redirectTo)
+
+          if(this.redirectToEvent) {
+            setTimeout(() => {
+              if(!this.redirectToEvent.payload) {
+                emitter.emit(this.redirectToEvent.event)
+              } else {
+                emitter.emit(this.redirectToEvent.event, this.redirectToEvent.payload)
+              }
+            }, 1000)
+          }
+        }
+      }
+
+      setTimeout(() => {
+        this.redirectTo = ''
+        this.redirectToEvent = null
+      }, 1500)
+
+    }, 
+    
+    generalRedirectTo() {
       const router = useRouter()
       const userSimulationStore = useUserSimulationStore()
       // USER
@@ -63,11 +102,10 @@ export const useAuthStore = defineStore('auth', {
           .then(({ simulations }) => {
             if(simulations.length) router.push(`/minhas-simulacoes`)
           })
-        
-        // ADMIN
+      // ADMIN
       } else {
         router.push(`/admin/simulations`)
       }
     }
-  },
+  }
 })
