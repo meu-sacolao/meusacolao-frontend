@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.21](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.20...v0.0.21) (2022-08-27)
+
+
+### Features | Funcionalidades
+
+* Adicionado redirecionamento para a mesma pagina de criação de simulação manual após login no google e login com dados ([387caac](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/387caac056f06b8bb8f4cbb7785c62bfea3ab153))
+
 ### [0.0.20](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.19...v0.0.20) (2022-08-26)
 
 
