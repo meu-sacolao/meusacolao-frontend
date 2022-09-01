@@ -159,7 +159,7 @@ import { ArrayHelpers } from '@igortrindade/lazyfy'
     AdminGeneralApiService.updateOrCreate('Article', article.value, '/admin/article/updateOrCreate')
       .then((response) => {
         alert('Artigo atualizado com sucesso')
-        router.push(`/admin/articles`)
+        // router.push(`/admin/articles`)
       })
       .catch((err) => {
         alert('Erro ao atualizar artigo')
