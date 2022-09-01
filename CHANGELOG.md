@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.22](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.21...v0.0.22) (2022-09-01)
+
+
+### Features | Funcionalidades
+
+* Editar artigos e categorias, listar artigos na home e no footer ([06fb85e](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/06fb85e67cc46f1f170c99078f1ef346740125f7))
+
 ### [0.0.21](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.20...v0.0.21) (2022-08-27)
 
 
