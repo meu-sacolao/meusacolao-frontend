@@ -38,8 +38,12 @@
       <div class="four-cols-breakdown">
         <h5 class="h5 font-normal">Artigos</h5>
         <ul class="space-y-2 mt-4">
-          <li>Artigo 1</li>
-          <li>Artigo 2</li>
+
+          <li v-for="article in articles" :key="article.id">
+            <NuxtLink  :to="`/artigos/${ article.slug }`">
+              {{ article.title }}
+            </NuxtLink>
+          </li>
         </ul>
       </div>
       <div class="four-cols-breakdown">
@@ -69,10 +73,57 @@
   </div>
 </template>
 
+
+<script setup>
+  import GraphQL from '@/util/GraphQL'
+
+  const articles = ref([])
+
+  onMounted(() => {
+    getFooterArticles()
+  })
+
+  const getFooterArticles = () => {
+
+    const query = `
+      {
+        categories (
+          where: [
+            { column: "slug", value: "footer" }
+          ]
+        ) {
+          id
+          title
+          articles (
+            take: 3
+            joinWhere: [
+              { column: "isPublished", table: "articles", value: "true" }
+            ]
+            order: [
+              { column: "article_to_category_order", direction: "ASC" }
+            ]
+          ) {
+            id
+            title
+            slug
+            pathUrl
+          }
+        }
+      }
+    
+    `
+
+    GraphQL({ query, caller: 'HomeArticles' })
+      .then(({ data }) => {
+        articles.value = data.categories[0].articles
+      })
+  }
+
+</script>
+
 <style lang="scss">
 
   .footer {
     box-shadow: rgba(0, 0, 0, 0.15) 0px -10px 30px -12px;
-    
   }
 </style>

@@ -86,7 +86,7 @@ export default {
      */
     loaderErrorIcon: {
       type: String,
-      default: 'more_horiz'
+      default: 'report'
     },
 
     iconStyle: {

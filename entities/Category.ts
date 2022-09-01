@@ -1,26 +1,25 @@
 import BaseModel from '@/entities/BaseModel'
 import FileInfo from '@/entities/FileInfo'
-import Category from '@/entities/Category'
-export default class Article extends BaseModel {
+import Article from '@/entities/Article'
+
+export default class Category extends BaseModel {
 
   key: number = null
   id: string = null
   slug: string = null
   title: string = null
-  content: string = null
+  isList: boolean = false
   pathUrl: string = null
-  isPublished: boolean = null
-  isStarred: boolean = null
   order: number = 0
   createdAt: string = null
   updatedAt: string = null
 
-  categories: Category[] = []
   file: FileInfo = new FileInfo()
+  articles: Article[] = []
   
   constructor(attributes = {}) {
     super()
-    this.setFillableKeys(this, Article.fillable, attributes)
+    this.setFillableKeys(this, Category.fillable, attributes)
   }
 
   public static fillable =  [
@@ -28,15 +27,13 @@ export default class Article extends BaseModel {
     'id',
     'slug',
     'title',
-    'content',
+    'isList',
     'order',
     'pathUrl',
-    'isPublished',
-    'isStarred',
     'createdAt',
     'updatedAt',
     'file',
-    'categories',
+    'articles',
   ]
 
 }

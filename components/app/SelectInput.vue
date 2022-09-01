@@ -25,7 +25,7 @@
 </template>
 
 <script>
-
+import { ArrayHelpers } from '@igortrindade/lazyfy'
 export default {
   name: 'PsInputSelect',
   props: {
@@ -93,7 +93,7 @@ export default {
       },
       set(value) {
         if(this.isString) return this.$emit('update:value', value)
-        const finded = find(this.items, { [this.keyValue]: value })
+        const finded = ArrayHelpers.find(this.items, { [this.keyValue]: value })
         this.$emit('update:value', value)
         this.$emit('change', finded)
       }

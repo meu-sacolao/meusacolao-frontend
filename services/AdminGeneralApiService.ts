@@ -2,7 +2,7 @@ import Api from '@/util/Api'
 import FileInfo from '@/entities/FileInfo'
 export default class AdminGeneralApiService {
 
-  static updateOrCreate(entity, instance) {
+  static updateOrCreate(entity, instance, route = '/admin/general/updateOrCreate') {
 
     if(instance.file && instance.file.name) {
 
@@ -15,10 +15,10 @@ export default class AdminGeneralApiService {
         }
       })
 
-      return Api.post(`/admin/general/updateOrCreate`, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
+      return Api.post(route, fd, { headers: { 'Content-Type': 'multipart/form-data' } })
 
     } else {
-      return Api.post(`/admin/general/updateOrCreate`, { entity, ...instance })
+      return Api.post(route, { entity, ...instance })
     }
 
   }

@@ -136,6 +136,10 @@
           action: '/admin/articles'
         },
         {
+          title: 'Categorias',
+          action: '/admin/categories'
+        },
+        {
           title: 'Grupos de aposentadoria',
           action: '/admin/retirement-groups'
         },

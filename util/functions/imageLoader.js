@@ -4,6 +4,7 @@ export default ({ imageUrl, onProgress = null, returnsBase64 = true }) => {
     var notifiedNotComputable = false
 
     xhr.open('GET', imageUrl, true)
+    xhr.withCredentials = false
     xhr.responseType = 'arraybuffer'
 
     xhr.onprogress = (ev) => {
@@ -19,8 +20,7 @@ export default ({ imageUrl, onProgress = null, returnsBase64 = true }) => {
     }
 
     xhr.onloadend = () => {
-      const contentType = xhr.getResponseHeader('Content-Type')
-      if (!contentType.includes('image')) {
+      if (!RegExp('(image|application/octet-stream)').test(xhr.getResponseHeader('Content-Type'))) {
         reject(xhr)
       } else {
         if (!notifiedNotComputable) {
@@ -40,8 +40,8 @@ export default ({ imageUrl, onProgress = null, returnsBase64 = true }) => {
       }
     }
 
-    xhr.onerror = () => {
-      console.log('asd')
+    xhr.onerror = (err) => {
+      console.log(err)
       reject()
     }
 
