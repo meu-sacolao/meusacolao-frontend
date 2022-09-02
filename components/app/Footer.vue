@@ -13,42 +13,55 @@
       </NuxtLink> 
     </div>
 
-    <div class="border-b border-slate-500 flex flex-wrap items-start justify-between py-8 text-zinc-200 space-y-6">
-      <div class="four-cols-breakdown">
-        <h5 class="h5 font-normal">Acesso</h5>
-        <ul class="space-y-2 mt-4">
+    <div class="border-b border-slate-500 flex flex-wrap justify-between mt-6 text-zinc-200 ">
+      <div class="four-cols-breakdown mb-6">
+        <h5 class="h5 font-normal">
+          <span class="border-b-4 pb-1 border-orange-500">Acesso</span>
+        </h5>
+        <ul class="space-y-2 mt-6">
           <li>
             <NuxtLink to="/">Home</NuxtLink>
           </li>
           <li>
             <NuxtLink to="/calcule-sua-aposentadoria">Calcule sua aposentadoria</NuxtLink>
           </li>
-          <li>Suas simulações</li>
-          <li>Cadastre-se</li>
-          <li>Login</li>
+          <li>
+            <NuxtLink v-if="loggedUser" to="/minhas-simulacoes">Suas simulações</NuxtLink>
+            <NuxtLink v-else to="/calcule-sua-aposentadoria">Suas simulações</NuxtLink>
+          </li>
+          <li class="cursor-pointer" @click="openAuthModal()">Cadastre-se</li>
+          <li class="cursor-pointer" @click="openAuthModal()">Login</li>
         </ul>
       </div>
-      <div class="four-cols-breakdown">
-        <h5 class="h5 font-normal">Sobre</h5>
-        <ul class="space-y-2 mt-4">
-          <li>Sobre nós</li>
-          <li>Como sua aposentadoria é calculada</li>
-        </ul>
-      </div>
-      <div class="four-cols-breakdown">
-        <h5 class="h5 font-normal">Artigos</h5>
-        <ul class="space-y-2 mt-4">
-
-          <li v-for="article in articles" :key="article.id">
+      <div class="four-cols-breakdown mb-6">
+        <h5 class="h5 font-normal">
+          <span class="border-b-4 pb-1 border-orange-500">Sobre nós</span>
+        </h5>
+        <ul class="space-y-2 mt-6">
+          <li v-for="article in aboutArticles" :key="article.id">
             <NuxtLink  :to="`/artigos/${ article.slug }`">
               {{ article.title }}
             </NuxtLink>
           </li>
         </ul>
       </div>
-      <div class="four-cols-breakdown">
-        <h5 class="h5 font-normal">Fale conosco</h5>
-        <ul class="space-y-2 mt-4">
+      <div class="four-cols-breakdown mb-6">
+        <h5 class="h5 font-normal">
+          <span class="border-b-4 pb-1 border-orange-500">Artigos</span>
+        </h5>
+        <ul class="space-y-2 mt-6">
+          <li v-for="article in footerArticles" :key="article.id">
+            <NuxtLink  :to="`/artigos/${ article.slug }`">
+              {{ article.title }}
+            </NuxtLink>
+          </li>
+        </ul>
+      </div>
+      <div class="four-cols-breakdown mb-6">
+        <h5 class="h5 font-normal">
+          <span class="border-b-4 pb-1 border-orange-500">Fale conosco</span>
+        </h5>
+        <ul class="space-y-2 mt-6">
           <li>Contato</li>
         </ul>
       </div>
@@ -76,11 +89,19 @@
 
 <script setup>
   import GraphQL from '@/util/GraphQL'
+  import emitter from '@/util/emitter'
+  import { storeToRefs } from 'pinia'
+  import { useAuthStore } from "@/modules/auth/store"
 
-  const articles = ref([])
+  const authStore = useAuthStore()
+  const { loggedUser } = storeToRefs(authStore)
+
+  const footerArticles = ref([])
+  const aboutArticles = ref([])
 
   onMounted(() => {
     getFooterArticles()
+    getAboutArticles()
   })
 
   const getFooterArticles = () => {
@@ -95,7 +116,7 @@
           id
           title
           articles (
-            take: 3
+            take: 4
             joinWhere: [
               { column: "isPublished", table: "articles", value: "true" }
             ]
@@ -115,8 +136,48 @@
 
     GraphQL({ query, caller: 'HomeArticles' })
       .then(({ data }) => {
-        articles.value = data.categories[0].articles
+        footerArticles.value = data.categories[0].articles
       })
+  }
+
+  const getAboutArticles = () => {
+
+    const query = `
+      {
+        categories (
+          where: [
+            { column: "slug", value: "sobre" }
+          ]
+        ) {
+          id
+          title
+          articles (
+            take: 4
+            joinWhere: [
+              { column: "isPublished", table: "articles", value: "true" }
+            ]
+            order: [
+              { column: "article_to_category_order", direction: "ASC" }
+            ]
+          ) {
+            id
+            title
+            slug
+            pathUrl
+          }
+        }
+      }
+    
+    `
+
+    GraphQL({ query, caller: 'HomeArticles' })
+      .then(({ data }) => {
+        aboutArticles.value = data.categories[0].articles
+      })
+  }
+
+  const openAuthModal = () => {
+    emitter.emit('openAuthModal')
   }
 
 </script>
