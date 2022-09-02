@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.25](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.24...v0.0.25) (2022-09-02)
+
+
+### Features | Funcionalidades
+
+* Adicionar searchbar e paginação em Admin Simulações, segurados, usuários e artigos ([4610e8a](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/4610e8a4d7babd8e7176e529061625dc12528750))
+
 ### [0.0.24](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.23...v0.0.24) (2022-09-02)
 
 
