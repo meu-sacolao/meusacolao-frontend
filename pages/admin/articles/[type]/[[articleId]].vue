@@ -149,9 +149,9 @@ import { ArrayHelpers } from '@igortrindade/lazyfy'
 
     GraphQL({ query, caller: 'AdminArticle' })
       .then(({ data }) => {
-        article.value = data.articles[0]
         users.value = data.users
         categories.value = data.categories
+        if(data.articles[0]) article.value = data.articles[0]
       })
   }
 
