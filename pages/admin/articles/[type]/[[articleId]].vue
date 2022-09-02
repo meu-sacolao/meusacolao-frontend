@@ -109,10 +109,11 @@ import { ArrayHelpers } from '@igortrindade/lazyfy'
   })
 
   onMounted(() => {
-    if(articleId) get()
+    getResources()
+    if(articleId) getArticle()
   })
 
-  const get = () => {
+  const getArticle = () => {
     const query = `
       {
         articles (
@@ -134,24 +135,31 @@ import { ArrayHelpers } from '@igortrindade/lazyfy'
             title
           }
         }
+      }
+    `
+    GraphQL({ query, caller: 'AdminArticle' })
+      .then(({ data }) => {
+        if(data.articles[0]) article.value = data.articles[0]
+      })
+  }
 
+  const getResources = () => {
+    const query = `
+      {
         users {
           id
           name
         }
-
         categories {
           id
           title
         }
       }
     `
-
     GraphQL({ query, caller: 'AdminArticle' })
       .then(({ data }) => {
         users.value = data.users
         categories.value = data.categories
-        if(data.articles[0]) article.value = data.articles[0]
       })
   }
 
