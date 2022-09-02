@@ -17,7 +17,7 @@
         <div class="w-full flex flex-col space-y-2">
 
           <AppLabelValue class="w-3/4">
-            <template v-slot:label>Artigo</template>
+            <template v-slot:label>Título</template>
             <template v-slot:value>{{ article.title }}</template>
           </AppLabelValue>
           <div class="w-full flex flex-wrap pb-2 mb-2">
