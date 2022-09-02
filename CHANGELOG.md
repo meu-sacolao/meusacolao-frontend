@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.30](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.29...v0.0.30) (2022-09-02)
+
+
+### Features | Funcionalidades
+
+* Adicionado google analytics event criar simulação manual ([db12965](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/db129654b2181eaa92b030b249b5003e965d03d3))
+
 ### [0.0.29](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.28...v0.0.29) (2022-09-02)
 
 
