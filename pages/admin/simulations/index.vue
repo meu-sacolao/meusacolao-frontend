@@ -2,6 +2,8 @@
   <div class="w-full flex flex-col">
     <AppTitle>Simulações</AppTitle>
 
+    <AppSearchBar placeholder="Procurar por nome da simulação" v-model:search="search" @search="get()" />
+
     <div class="w-full flex flex-col space-y-6 mt-6">
 
       <AppLoaderPlaceholder :quantity="3" v-if="!simulations" />
@@ -53,57 +55,78 @@
         </div>
       </div>
     </div>
+
+    <AppPaginator v-model:skip="skip" :limit="limit" :length="simulations.length" @change="get()"/>
+
   </div>
 </template>
 
 <script setup>
-import GraphQL from '@/util/GraphQL'
+  import GraphQL from '@/util/GraphQL'
 
-const route = useRoute()
+  const route = useRoute()
 
-let whereClause
-if(route.query.clientId) whereClause = `{ column: "clientId", value: "${route.query.clientId}"}`
-if(route.query.userId) whereClause = `{ column: "userId", value: "${route.query.userId}"}`
+  const search = ref('')
+  const skip = ref(0)
+  const limit = ref(12)
+  const simulations = ref(false)
 
-const parameters = !whereClause ? '' : `
-  (
-    where: [
-      ${ whereClause }
-    ]
-  )
-`
-
-const query = `
-  {
-    simulations ${ parameters } {
-      key
-      id
-      title
-      retirementDate  
-      createdAt
-      clientId
-      client {
-        id
-        name
-      }
-      user {
-        id
-        name
-      }
-      cnisFile {
-        id
-        pathUrl
-      }
-    }
-  }
-`
-
-const simulations = ref(false)
-
-GraphQL({ query })
-  .then(({ data }) => {
-    simulations.value = data.simulations
+  onMounted(() => {
+    get()
   })
+
+
+  const get = () => {
+    let whereClause
+    if(route.query.clientId) whereClause = `{ column: "clientId", value: "${route.query.clientId}"}`
+    if(route.query.userId) whereClause = `{ column: "userId", value: "${route.query.userId}"}`
+    
+    const parameters = !whereClause ? '' : `
+      (
+        where: [
+          ${ whereClause }
+          ${
+            !search.value ? '' :  `
+              { column: "title", operation: "ilike", value: "%${search.value}%" }
+            `
+          }
+        ]
+      )
+    `
+    
+    const query = `
+      {
+        simulations ${ parameters } {
+          key
+          id
+          title
+          retirementDate  
+          createdAt
+          clientId
+          client {
+            id
+            name
+          }
+          user {
+            id
+            name
+          }
+          cnisFile {
+            id
+            pathUrl
+          }
+        }
+      }
+    `
+    
+    
+    GraphQL({ query })
+      .then(({ data }) => {
+        simulations.value = data.simulations
+        if(!data.simulations.length) skip.value = 0
+      })
+
+  }
 
   
 </script>

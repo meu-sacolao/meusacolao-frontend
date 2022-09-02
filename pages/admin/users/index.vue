@@ -1,7 +1,11 @@
 <template>
   <div class="w-full flex flex-col">
+
+
     <AppTitle>Usuários</AppTitle>
 
+    <AppSearchBar placeholder="Procurar" v-model:search="search" @search="get()" />
+    
     <div class="w-full flex flex-col space-y-6 mt-6">
 
       <AppLoaderPlaceholder v-if="!users" />
@@ -50,32 +54,60 @@
           </div>
         </div>
     </div>
+
+    <AppPaginator v-model:skip="skip" :limit="limit" :length="users.length" @change="get()"/>
+
   </div>
 </template>
 
 <script setup>
-import GraphQL from '@/util/GraphQL'
+  import GraphQL from '@/util/GraphQL'
 
-const query = `
-  {
-    users {
-      key
-      id
-      name
-      email
-      phone
-      role
-      createdAt
-    }
-  }
-`
+  const search = ref('')
+  const skip = ref(0)
+  const limit = ref(12)
+  const users = ref(false)
 
-const users = ref(false)
-
-GraphQL({ query })
-  .then(({ data }) => {
-    users.value = data.users
+  onMounted(() => {
+    get()
   })
+  const get = () => {
+
+    const query = `
+      {
+        users (
+          skip: ${skip.value}
+          take: ${limit.value}
+          order: [
+            { column: "name", direction: "ASC" }
+          ]
+          ${
+            !search.value ? '' :  `
+              where: [
+                { column: "name", operation: "ilike", value: "%${search.value}%" }
+              ]
+            `
+          }
+        ) {
+          key
+          id
+          name
+          email
+          phone
+          role
+          createdAt
+        }
+      }
+    `
+    
+    
+    GraphQL({ query })
+      .then(({ data }) => {
+        users.value = data.users
+        if(!data.users.length) skip.value = 0
+      })
+  }
+
 
   
 </script>

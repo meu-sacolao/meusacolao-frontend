@@ -2,6 +2,8 @@
   <div class="w-full flex flex-col">
     <AppTitle>Segurados</AppTitle>
 
+    <AppSearchBar placeholder="Procurar" v-model:search="search" @search="get()" />
+
     <div class="w-full flex flex-col space-y-6 mt-6">
 
       <AppLoaderPlaceholder v-if="!clients" />
@@ -49,39 +51,68 @@
             </NuxtLink>
           </div>
         </div>
+
+        <AppPaginator v-model:skip="skip" :limit="limit" :length="clients.length" @change="get()"/>
+
     </div>
   </div>
 </template>
 
 <script setup>
-import GraphQL from '@/util/GraphQL'
+  import GraphQL from '@/util/GraphQL'
+  
+  const search = ref('')
+  const skip = ref(0)
+  const limit = ref(12)
+  const clients = ref(false)
 
-const query = `
-  {
-    clients {
-      key
-      id
-      name
-      email
-      phone
-      cpf
-      nit
-      gender
-      createdAt
-      simulations {
-        id
-        title
-      }
-    }
-  }
-`
-
-const clients = ref(false)
-
-GraphQL({ query })
-  .then(({ data }) => {
-    clients.value = data.clients
+  onMounted(() => {
+    get()
   })
+
+
+  const get = () => {
+    const query = `
+      {
+        clients (
+          skip: ${skip.value}
+          take: ${limit.value}
+          order: [
+            { column: "name", direction: "ASC" }
+          ]
+          ${
+            !search.value ? '' :  `
+              where: [
+                { column: "name", operation: "ilike", value: "%${search.value}%" }
+              ]
+            `
+          }
+        ) {
+          key
+          id
+          name
+          email
+          phone
+          cpf
+          nit
+          gender
+          createdAt
+          simulations {
+            id
+            title
+          }
+        }
+      }
+    `
+    
+    
+    GraphQL({ query })
+      .then(({ data }) => {
+        clients.value = data.clients
+      })
+
+  }
+
 
   
 </script>

@@ -19,7 +19,7 @@
       :articles="articles"
     />
 
-    <AppPaginator v-model:skip="skip" :limit="12" :length="articles.length" @change="get()"/>
+    <AppPaginator v-model:skip="skip" :limit="limit" :length="articles.length" @change="get()"/>
   </div>
 </template>
 
@@ -31,6 +31,7 @@ import AdminArticleList from '@/modules/admin/article/AdminArticleList.vue'
 const articles = ref(false)
 const search = ref('')
 const skip = ref(0)
+const limit = ref(12)
 
 onMounted(() => {
   get()
@@ -41,7 +42,7 @@ const get = () => {
     {
       articles (
         skip: ${skip.value}
-        take: 12
+        take: ${limit.value}
         order: [
           { column: "publishedAt", direction: "DESC" }
         ]
