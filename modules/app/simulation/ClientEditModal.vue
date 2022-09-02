@@ -107,7 +107,7 @@
   import { useAppSimulationStore } from '@/modules/app/simulation/store'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from "@/modules/auth/store"
-
+  const vueInstance = useVueInstance()
   const authStore = useAuthStore()
   const { loggedUser } = storeToRefs(authStore)
 
@@ -192,13 +192,16 @@
     }
 
     Api.post(`/app/client/updateOrCreate`, payload).then(({ data }) => {
-      if(data.simulation.id) {
-        router.push(`/simulacao/${data.simulation.id}`)
-        appSimulationStore.addSimulationToAttach(data.simulation.id)
-      }
+
       emitter.emit('simulationUpdated')
       isLoading.value = true
       close()
+
+      if(!payload.simulationId) {
+        vueInstance.config.globalProperties.$gtag.event('CRIAR_SIMULAÇÃO_MANUAL', { event_category: 'INTERAÇÕES', value: data.simulation.id })
+        router.push(`/simulacao/${data.simulation.id}`)
+        appSimulationStore.addSimulationToAttach(data.simulation.id)
+      }
     })
     .catch((err) => {
       console.log(err)
