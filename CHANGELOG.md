@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.28](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.27...v0.0.28) (2022-09-02)
+
+
+### Routine tasks | Implementações gerais
+
+* Limpado formulatio segurado ([8486141](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/8486141cb7ad0ea6f2a5af0f3842e44d2339c41f))
+* Removido console log do imageLoader ([43d2052](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/43d2052cecda810bfff6654455d7923eff301881))
+
+
+### Features | Funcionalidades
+
+* Adicionado links de artigos e melhorias no footer ([4efe34e](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/4efe34e5200728e742687a28cf47f6cea2dbd9ea))
+
 ### [0.0.27](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.26...v0.0.27) (2022-09-02)
 
 
