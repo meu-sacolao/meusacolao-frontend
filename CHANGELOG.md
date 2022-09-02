@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.29](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.28...v0.0.29) (2022-09-02)
+
+
+### Features | Funcionalidades
+
+* Adicionado Google gtag ([f48d2f7](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/f48d2f71bc0b9d9be55cb9ebc777058a8eeabda7))
+
 ### [0.0.28](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.27...v0.0.28) (2022-09-02)
 
 
