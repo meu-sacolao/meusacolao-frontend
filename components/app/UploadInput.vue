@@ -6,14 +6,14 @@
     </label>
 
     <label
-      class="w-full mt-1 p-8 px-6 border-4 box-border border-dashed border-orange-200 hover:border-orange-400 rounded block flex items-center justify-center relative text-lg"
+      class="w-full mt-1 p-3 lg: p-4 border-4 box-border border-dashed border-orange-200 hover:border-orange-400 rounded block flex items-center justify-center relative text-lg space-x-2"
       :class="[
         disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
         modelValue?.name ? 'bg-orange-400' : 'bg-white',
       ]"
     >
       <AppIcons icon="file_upload" class="mr-2 flex-shrink-0 block" />
-      <span class="whitespace-no-wrap ellipsis block" :class="modelValue && modelValue.name ? 'font-bold' : ''">{{ modelValue.name ? modelValue.name : placeholder }}</span>
+      <span class="ellipsis block" :class="modelValue && modelValue.name ? 'font-bold' : ''">{{ modelValue.name ? modelValue.name : placeholder }}</span>
       <input
         tabindex="0"
         type="file"
@@ -25,6 +25,10 @@
         :data-title="placeholder"
       />
     </label>
+    <p class="text-red-600 h-4" v-if="hasError">
+      <slot />
+    </p>
+    
   </div>
 </template>
 
@@ -53,6 +57,10 @@ export default {
       default: 'Clique para selecionar ou arraste o arquivo aqui'
     },
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    hasError: {
       type: Boolean,
       default: false
     }

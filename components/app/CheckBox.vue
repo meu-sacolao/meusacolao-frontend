@@ -1,24 +1,29 @@
 <template>
-  <div class="flex items-center">
-    <input :id="id" type="checkbox" v-model="childValue" class="
-      flex-none 
-      w-6 
-      h-6
-      bg-cyan-800
-      text-cyan-900
-      bg-gray-100
-      rounded
-      border-gray-300
-      focus:ring-cyan-600
-      dark:focus:ring-cyan-600
-      dark:ring-offset-gray-800
-      focus:ring-2
-      dark:bg-gray-700
-      dark:border-gray-600
-    ">
-    <label :for="id" class="ml-2 font-medium dark:text-gray-300">
-      <slot />
-    </label>
+  <div class="w-full flex flex-col">
+    <div class="flex items-center">
+      <input :id="id" type="checkbox" v-model="childValue" class="
+        flex-none 
+        w-6 
+        h-6
+        bg-cyan-800
+        text-cyan-900
+        bg-gray-100
+        rounded
+        border-gray-300
+        focus:ring-cyan-600
+        dark:focus:ring-cyan-600
+        dark:ring-offset-gray-800
+        focus:ring-2
+        dark:bg-gray-700
+        dark:border-gray-600
+      ">
+      <label :for="id" class="ml-2 font-medium dark:text-gray-300">
+        <slot />
+      </label>
+    </div>
+    <p class="text-red-600 h-4" v-if="hasError">
+      <slot name="error"/>
+    </p>
   </div>
 </template>
 
@@ -29,7 +34,11 @@
 
   const props = defineProps({
     label: String,
-    value: Boolean
+    value: Boolean,
+    hasError: {
+      type: Boolean,
+      default: false
+    }
   })
 
   const id = ref(generateRandomString(10))

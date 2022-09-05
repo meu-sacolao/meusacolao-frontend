@@ -50,3 +50,29 @@ export const minLength = (value, min = 6) => {
 export const inputConfirmation = (first, second) => {
   if (first !== second) return true
 }
+
+export const fileValidation = (file) => {
+  return Boolean(!file || !file.name)
+}
+
+export const dateIsValid = (date) => {
+  return Boolean(!Dates.isValid(date))
+}
+
+export const booleanShouldBeTrueValidation = (value) => {
+  return Boolean(value != true)
+}
+
+export default {
+  cpfValidator,
+  bdayValidator,
+  emailValidator,
+  phoneValidator,
+  cepValidator,
+  minValueValidator,
+  minLength,
+  inputConfirmation,
+  fileValidation,
+  dateIsValid,
+  booleanShouldBeTrueValidation
+}

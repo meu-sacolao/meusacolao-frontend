@@ -1,5 +1,5 @@
 import BaseModel from '@/entities/BaseModel'
-import { cpfValidator, emailValidator, bdayValidator, phoneValidator } from '@/util/validators'
+import { cpfValidator, emailValidator, bdayValidator, phoneValidator } from '~~/util/functions/validators'
 
 export default class Client extends BaseModel {
   id: string | null = null

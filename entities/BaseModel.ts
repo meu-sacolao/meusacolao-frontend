@@ -1,5 +1,5 @@
 import { ObjectHelpers, ArrayHelpers } from '@igortrindade/lazyfy'
-
+import validators from '@/util/functions/validators'
 export default class BaseModel {
 
   static fillable =  []
@@ -19,15 +19,19 @@ export default class BaseModel {
   }
 
 
-  get errors(){
+  get errors() {
     return this.requireds.filter((req) => {
 
-      if(typeof (this[req.item]) == 'boolean' && !this[req.item]) {
-        return false
-      }
-
-      if (typeof (req.validation) == 'function') {
+      if (typeof (req.validation) === 'function') {
         return req.validation(this[req.item], this)
+      } else if (typeof(req.validation) === 'string') {
+        if(validators[req.validation]) {
+          return this.validateItemString(req.validation, this[req.item])
+        }
+      } else if (Array.isArray(req.validation)) {
+        for(const validationStringRefference of req.validation) {
+          if(this.validateItemString(validationStringRefference, this[req.item])) return true
+        }
       }
 
       if (
@@ -48,19 +52,25 @@ export default class BaseModel {
     return (this.errors.length) ? true : false
   }
 
-  get errorPhrase(){
+  get errorPhrase() {
     return {
       init: 'Por favor, verifique os itens ',
       end: ' para continuar.'
     }
   }
 
-  get validationPhrase(){
+  get validationPhrase() {
     return this.errorPhrase.init + this.errors.map((erro) => erro.label).join(', ') + this.errorPhrase.end
   }
 
-  get validationPhraseHtml(){
+  get validationPhraseHtml() {
     return `${this.errorPhrase.init} <b>${this.errors.map((erro) => erro.label).join(', ')}</b> ${this.errorPhrase.end}`
+  }
+
+  validateItemString(validationStringRefference, itemValue) {
+    const [value, arg] = validationStringRefference.split(':')
+    if(!arg) return validators[value](itemValue)
+    return validators[value](itemValue, arg)
   }
 
   validateInput(input) {
