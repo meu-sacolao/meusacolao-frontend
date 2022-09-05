@@ -30,7 +30,14 @@
           <p class="text-lg">
             Insira seu extrato do INSS (arquivo CNIS) para calcular sua aposentadoria gratuitamente.
           </p>
-          <AppInputWithIcon v-model:value="retirementDate" :mask="'##/##/####'" label="Data do cálculo" icon="calendar_month" placeholder="DD/MM/AAAA" />
+          <AppInputWithIcon 
+            v-model:value="retirementDate" 
+            type="tel"
+            :mask="'##/##/####'" 
+            label="Data do cálculo" 
+            icon="calendar_month" 
+            placeholder="DD/MM/AAAA" 
+          />
           <AppUploadInput 
             placeholder="Clique ou arraste aqui um arquivo CNIS (.pdf)"
             v-model="file" 
