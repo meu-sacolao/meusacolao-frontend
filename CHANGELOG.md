@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.32](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.31...v0.0.32) (2022-09-05)
+
+
+### Bug Fixes | Melhorias
+
+* Input type tel na data do calculo na pagina upload cnis ([21de99d](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/21de99ddd5a09f0620ec2ddfdc3a61bc28035e3d))
+
 ### [0.0.31](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.30...v0.0.31) (2022-09-05)
 
 
