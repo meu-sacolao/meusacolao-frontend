@@ -4,7 +4,6 @@
       v-model:value="childValue" 
       icon="search"
       :label="label"
-      type="tel"
       :placeholder="placeholder || label" 
       @keydown.enter="search()"
     />
