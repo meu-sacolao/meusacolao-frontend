@@ -10,111 +10,89 @@
       >
         <AppIcons :icon="icon" color="text-slate-300" size="18" />
       </div>
-    <select 
-      :name="label"
-      :id="label"  
-      v-model="childValue"
-      class="select-input-classes"
-      :class="[icon ? 'pl-9' : 'pl-4']"
-    >
-      <option :value="null" disabled>{{ placeholder }}</option>
-      <option v-for="item in getItems" :value="item[keyValue]" :key="item[keyValue]">{{ item[keyLabel] }}</option>
-    </select>
+      <select 
+        :name="label"
+        :id="label"  
+        v-model="childValue"
+        class="select-input-classes"
+        :class="getInputClass"
+      >
+        <option :value="null" disabled>{{ placeholder }}</option>
+        <option v-for="item in getItems" :value="item[keyValue]" :key="item[keyValue]">{{ item[keyLabel] }}</option>
+      </select>
     </div>
+    <p class="text-red-600 h-4" v-if="hasError">
+      <slot />
+    </p>
   </div>
 </template>
 
-<script>
+<script setup>
+
 import { ArrayHelpers } from '@igortrindade/lazyfy'
-export default {
-  name: 'PsInputSelect',
-  props: {
-    /**
-     * It sets the items which will be rendered within the select input.
-     */
-    items: {
-      required: true
-    },
-    value: {
-      default: '',
-      required: true
-    },
-    /**
-     * It sets the value label of the select input if needed.
-     */
-    label: {
-      default: ''
-    },
+const { emit } = getCurrentInstance()
 
-    placeholder: {
-      default: 'Selecione uma opção'
-    },
-
-    icon: {
-      type: [String, Boolean],
-      default: false
-    },
-
-    /**
-     * It sets the key label of your items if needed.
-     */
-    keyLabel: {
-      default: 'title'
-    },
-    /**
-     * It sets the key value of yout items if needed.
-     */
-    keyValue: {
-      default: 'id'
-    },
-    /**
-     * It disables the select input. All mouse events are disabled.
-     */
-    disabled: {
+const props = defineProps({
+    items: Array,
+    value: [String, Boolean, Number],
+    label: String,
+    placeholder: String,
+    icon: String,
+    keyLabel: String,
+    keyValue: String,
+    disabled: Boolean,
+    hasError: {
       type: Boolean,
       default: false
-    },
-    /**
-     * It sets the layout of the select input. eg: default and mini.
-     */
-    layout:{
-      type: String,
-      default: 'default',
-      validator: (value) => ['default','mini'].includes(value)
     }
-  },
-  computed: {
-    getComponentClass(){
-      return `layout-${this.layout}`
+  })
+
+  defineEmits(['update:value', 'keydown.enter', 'change'])
+
+  const getInputClass = computed(() => {
+    let classes = []
+    if(props.icon) {
+      classes.push('pl-9')
+    } else {
+      classes.push('pl-4')
+    }
+    if(props.hasError) {
+      classes.push('border-red-600')
+    } else {
+      classes.push('border-slate-200 focus:border-slate-300')
+    }
+    return classes
+  })
+
+  const childValue = computed({
+    get() {
+      return props.value
     },
-    childValue: {
-      get() {
-        return this.value
-      },
-      set(value) {
-        if(this.isString) return this.$emit('update:value', value)
-        const finded = ArrayHelpers.find(this.items, { [this.keyValue]: value })
-        this.$emit('update:value', value)
-        this.$emit('change', finded)
-      }
-    },
-    isString() {
-      return  this.items.length > 0 && typeof this.items[0] === 'string'
-    },
-    getItems() {
-      if (this.items.length > 0 && typeof this.items[0] === 'string') {
-        return this.items.map((item) => { 
-          return {
-            [this.keyLabel]: item,
-            [this.keyValue]: item,
-          }
-        })
-      } else {
-        return this.items
-      }
-    },
-  },
-}
+    set(value) {
+      if(isString) return emit('update:value', value)
+      const finded = ArrayHelpers.find(props.items, { [props.keyValue]: value })
+      emit('update:value', value)
+      emit('change', finded)
+    }
+  })
+
+  const isString = computed(() => {
+    return  props.items.length > 0 && typeof props.items[0] === 'string'
+  })
+
+  const getItems = computed(() => {
+    if (props.items.length > 0 && typeof props.items[0] === 'string') {
+      return props.items.map((item) => { 
+        return {
+          [props.keyLabel]: item,
+          [props.keyValue]: item,
+        }
+      })
+    } else {
+      return props.items
+    }
+  })
+
 </script>
 
 <style lang="scss">

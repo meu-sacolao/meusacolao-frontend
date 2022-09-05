@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-
+  
   const props = defineProps({
     icon: String,
     type: String,
@@ -74,8 +74,8 @@
       classes.push('border-slate-200 focus:border-slate-300')
     }
     return classes
-
   })
+  
 </script>
 
 <style lang="scss">

@@ -25,15 +25,21 @@
           label="Data do cálculo"
           :mask="'##/##/####'"
           type="tel"
-          placeholder="Insira a data do cálculo" 
-        />
+          placeholder="Insira a data do cálculo"
+          :hasError="tried && formErrors.includes('retirementDate')"
+        >
+          Preencha a data do cálculo corretamente
+        </AppInputWithIcon>
 
         <AppInputWithIcon 
           v-model:value="client.name" 
           icon="badge"
           label="Nome" 
           placeholder="Insira o nome do segurado(a)" 
-        />
+          :hasError="tried && client.validateInput('name')"
+        >
+          Preencha o nome do segurado
+        </AppInputWithIcon>
 
         <AppInputWithIcon 
           v-model:value="client.cpf" 
@@ -42,7 +48,10 @@
           :mask="['###.###.###-##']"
           type="tel"
           placeholder="Insira o cpf" 
-        />
+          :hasError="tried && client.validateInput('cpf')"
+        >
+          Preencha o cpf válido do segurado
+        </AppInputWithIcon>
 
         <AppInputWithIcon 
           v-model:value="client.birthDate" 
@@ -51,7 +60,10 @@
           :mask="'##/##/####'"
           type="tel"
           placeholder="Insira a data de nascimento" 
-        />
+          :hasError="tried && client.validateInput('birthDate')"
+        >
+          Preencha a data de nascimento válida DD/MM/AAAA
+        </AppInputWithIcon>
 
         <AppInputWithIcon 
           v-model:value="client.phone" 
@@ -60,7 +72,10 @@
           :mask="['(##)#####-####']"
           type="tel"
           placeholder="Insira o telefone" 
-        />
+          :hasError="tried && client.validateInput('phone')"
+        >
+          Preencha o telefone
+        </AppInputWithIcon>
 
         <AppInputWithIcon 
           v-model:value="client.email" 
@@ -68,7 +83,10 @@
           label="Email"
           type="email"
           placeholder="Insira o email" 
-        />
+          :hasError="tried && client.validateInput('email')"
+        >
+          Preencha o email
+        </AppInputWithIcon>
 
         <AppInputWithIcon 
           v-model:value="client.motherName" 
@@ -81,12 +99,16 @@
           v-model:value="client.gender"
           :items="['Feminino', 'Masculino']"
           label="Gênero"
+          placeholder="Selecione o gênero"
           :keyLabel="'label'"
           :keyValue="'value'"
-        />
+          :hasError="tried && client.validateInput('gender')"
+        >
+          Preencha o gênero do segurado {{ client.validateInput('gender') }} {{client.gender }}
+        </AppSelectInput>
 
         <div class="w-full flex justify-end mt-10 block">
-          <AppButton bg="bg-brand-gradient" text="text-white" @click="updateOrCreate()">
+          <AppButton bg="bg-brand-gradient" text="text-white" @click="updateOrCreate()" :disabled="Boolean(tried && formErrors.length)">
             <span>Atualizar</span>
             <AppIcons icon="chevron_right" />
           </AppButton>
@@ -107,6 +129,7 @@
   import { useAppSimulationStore } from '@/modules/app/simulation/store'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from "@/modules/auth/store"
+  import Dates from '@/services/Dates'
   const vueInstance = useVueInstance()
   const authStore = useAuthStore()
   const { loggedUser } = storeToRefs(authStore)
@@ -141,12 +164,17 @@
   })
 
   const showModal = ref(false)
-  const client = ref(false)
-
+  const client = ref(new Client())
   const retirementDate = ref('')
   const simulationId = ref(null)
-
+  const tried = ref(false)
   const isLoading = ref(false)
+
+  const formErrors = computed(() => {
+    const errors = []
+    if(retirementDate.value.length < 10 || !Dates.isValid(retirementDate.value)) errors.push('retirementDate')
+    return [ ...errors, client.value.errors.map((required) => required.item )]
+  })
 
   const close = () => {
     showModal.value = false
@@ -175,7 +203,7 @@
     `
     GraphQL({ query, caller: 'ClientEditModal' })
       .then(({ data }) => {
-        client.value = data.clients[0]
+        client.value = new Client(data.clients[0])
         isLoading.value = false
       })
       .catch((error) => {
@@ -184,6 +212,11 @@
   }
 
   const updateOrCreate = () => {
+
+    if(formErrors.value.length) {
+      tried.value = true
+      return
+    }
     
     const payload = { 
       client: { ...client.value },
