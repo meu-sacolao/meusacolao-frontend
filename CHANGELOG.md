@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.33](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.32...v0.0.33) (2022-09-05)
+
+
+### Bug Fixes | Melhorias
+
+* Remove input tel searchbar ([c76497f](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/c76497f6771ca4f3baa0bfb81a5029562c265c44))
+
 ### [0.0.32](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.31...v0.0.32) (2022-09-05)
 
 
