@@ -21,6 +21,9 @@
         :options="getVueNumberFormatOptions"
       />
     </div>
+    <p class="text-red-600 h-4" v-if="hasError">
+      <slot />
+    </p>
   </div>
 </template>
 
@@ -43,7 +46,11 @@
     action: String,
     inputOptions: Object,
     value: [String, Number],
-    dateReference: [String, Number]
+    dateReference: [String, Number],
+    hasError: {
+      type: Boolean,
+      default: false
+    }
   })
 
   defineEmits(['update:value'])

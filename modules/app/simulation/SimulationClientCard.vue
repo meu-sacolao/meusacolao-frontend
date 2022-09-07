@@ -49,7 +49,7 @@
   import emitter from '@/util/emitter'
   
   const openClientEditModal = () => {
-    emitter.emit('openClientEditModal', { client: props.client })
+    emitter.emit('openClientEditModal', { ...props.client })
   }
 
   const props = defineProps({

@@ -54,7 +54,12 @@
 
   import ProcessCnisFileCard from '@/modules/app/cnis/ProcessCnisFileCard.vue'
   import ClientEditModal from '@/modules/app/simulation/ClientEditModal.vue'
- 
+  import { useAuthStore } from "@/modules/auth/store"
+  
+  const authStore = useAuthStore()
+  const emitter = useEmitter()
+  const route = useRoute()
+
   const openClientEditModal = () => {
     emitter.emit('openClientEditModal')
     authStore.setRedirectTo({ route: route.fullPath, event: 'openClientEditModal' })

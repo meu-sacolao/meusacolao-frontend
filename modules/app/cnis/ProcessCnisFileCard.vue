@@ -72,13 +72,12 @@
   import CnisApiService from '@/services/api/CnisApiService'
   import { useAppSimulationStore } from '@/modules/app/simulation/store'
   import { useAuthStore } from '@/modules/auth/store'
-  import emitter from '@/util/emitter'
-  import Dates from '@/services/Dates'
   import FormCnisFileUpload from '@/forms/FormCnisFileUpload'
 
+  const emitter = useEmitter()
+  const Dates = useDates()
   const appSimulationStore = useAppSimulationStore()
   const authStore = useAuthStore()
-
   const router = useRouter()
   const route = useRoute()
 

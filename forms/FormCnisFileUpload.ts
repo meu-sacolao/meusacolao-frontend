@@ -1,27 +1,40 @@
 
-import BaseModel from "@/entities/BaseModel"
+import BaseFormModel from "@/forms/BaseFormModel"
 import FileInfo from '@/entities/FileInfo'
 
-export default class FormCnisFileUpload extends BaseModel {
+export default class FormCnisFileUpload extends BaseFormModel {
 
-  retirementDate: string = process.env.NODE_ENV == 'production' ? '' : '10/10/2020'
+  retirementDate: string = ''
   file: FileInfo = new FileInfo()
   acceptTerms: boolean = false
-  tried: boolean = false
+
+  constructor(data) {
+    super()
+    this.setFillableKeys(data)
+  }
+
+  get fillable() {
+    return [
+      'retirementDate',
+      'file',
+      'acceptTerms',
+      'tried'
+    ]
+  }
 
   get requireds(): any[] {
     return [
       {
         item: 'retirementDate',
-        validation: ['minLength: 10', 'dateIsValid']
+        validator: ['minLength:10', 'dateIsValid']
       },
       {
         item: 'file',
-        validation: 'fileValidation'
+        validator: 'fileValidation'
       },
       {
         item: 'acceptTerms',
-        validation: 'booleanShouldBeTrueValidation'
+        validator: 'booleanShouldBeTrueValidation'
       }
     ]
   }

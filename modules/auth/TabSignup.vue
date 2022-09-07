@@ -2,44 +2,44 @@
   <div class="w-full flex flex-col">
     <div class="w-full flex flex-col space-y-2">
       <AppInputWithIcon 
-        v-model:value="user.name" 
+        v-model:value="formUserSignup.name" 
         icon="person" 
         type="text" 
         label="Nome" 
         placeholder="Insira seu nome"
-        :hasError="tried && formErrors.includes('name')"
+        :hasError="formUserSignup.tried && formUserSignup.validateInput('name')"
       >
         Preencha seu nome
       </AppInputWithIcon>
       <AppInputWithIcon 
-        v-model:value="user.email" 
+        v-model:value="formUserSignup.email" 
         icon="email" 
         type="email" 
         label="Email" 
         placeholder="Insira seu email"
-        :hasError="tried && formErrors.includes('email')"
+        :hasError="formUserSignup.tried && formUserSignup.validateInput('email')"
       >
         Preencha seu email
       </AppInputWithIcon>
       <AppInputWithIcon 
-        v-model:value="user.phone" 
+        v-model:value="formUserSignup.phone" 
         icon="phone" 
         type="tel" 
         label="Telefone" 
         placeholder="Insira seu telefone"
         :mask="['(##)####-####', '(##)#####-####']"
-        :hasError="tried && formErrors.includes('phone')"
+        :hasError="formUserSignup.tried && formUserSignup.validateInput('phone')"
       >
         Preencha seu telefone
       </AppInputWithIcon>
       <AppInputWithIcon 
-        v-model:value="user.unencryptedPassword" 
+        v-model:value="formUserSignup.unencryptedPassword" 
         icon="key" 
         type="password" 
         label="Senha" 
         placeholder="Insira sua senha"
         @keydown.enter="signup()"
-        :hasError="tried && formErrors.includes('unencryptedPassword')"
+        :hasError="formUserSignup.tried && formUserSignup.validateInput('unencryptedPassword')"
       >
         Preencha a senha
       </AppInputWithIcon>
@@ -57,35 +57,20 @@
 <script setup>
 
   import { useAuthStore } from "@/modules/auth/store"
-  import User from '@/entities/User'
+  import FormUserSignup from '@/forms/FormUserSignup'
 
   const { emit } = getCurrentInstance()
   defineEmits(['close', 'setTabSelected'])
 
   const authStore = useAuthStore()
-  const user = ref(new User())
-  const tried = ref(false)
-
-  const formErrors = computed(() => {
-    const errors = []
-    if(user.value.name.length < 6) errors.push('name')
-    if(user.value.phone.length < 10) errors.push('phone')
-    if(user.value.email.length < 6) errors.push('email')
-    if(user.value.unencryptedPassword.length < 6) errors.push('unencryptedPassword')
-    return errors
-  })
+  const formUserSignup = ref(new FormUserSignup())
 
   const signup = () => {
-    if(formErrors.value.length) {
-      tried.value = true
+    if(formUserSignup.value.hasError) {
+      formUserSignup.value.tried = true
       return
     }
-    authStore.signup({ 
-      name: user.value.name, 
-      email: user.value.email, 
-      phone: user.value.phone, 
-      unencryptedPassword: user.value.unencryptedPassword, 
-    })
+    authStore.signup({  ...formUserSignup.value })
       .then(() => {
         emit('close')
         alert('Cadastrado com sucesso')

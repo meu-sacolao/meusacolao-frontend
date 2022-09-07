@@ -47,6 +47,10 @@ export const minLength = (value, min = 6) => {
   if (value.length < min) return true
 }
 
+export const minWords = (value, min = 2) => {
+  return Boolean(value.split(' ').length < min)
+}
+
 export const inputConfirmation = (first, second) => {
   if (first !== second) return true
 }
@@ -71,8 +75,9 @@ export default {
   cepValidator,
   minValueValidator,
   minLength,
+  minWords,
   inputConfirmation,
   fileValidation,
   dateIsValid,
-  booleanShouldBeTrueValidation
+  booleanShouldBeTrueValidation,
 }
