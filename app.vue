@@ -32,8 +32,26 @@
   </Html>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import '@/assets/css/main.scss'
+  import { useAuthStore } from "@/modules/auth/store"
+  
+  const authStore = useAuthStore()
+  const route = useRoute()
+
+  if(process.client) {
+    
+    onMounted(() => {
+      if (route.query.googleAuthToken) {
+        authStore.googleLogin(route.query.googleAuthToken)
+      }
+
+      if(authStore.loggedUser) {
+        authStore.getLoggedUser()
+      }
+    })
+
+  }
 
   definePageMeta({
     pageTransition: {

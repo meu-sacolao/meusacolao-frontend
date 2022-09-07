@@ -10,21 +10,7 @@
 
 <script setup>
   import AppHomeIntro from '@/modules/app/home/HomeIntro.vue'
-  import AppHomeArticles from '@/modules/app/home/HomeArticles.vue'
-  import { useAuthStore } from "@/modules/auth/store"
-  const authStore = useAuthStore()
-  const route = useRoute()
-
-  if(process.client) {
-    
-    onMounted(() => {
-      if (route.query.googleAuthToken) {
-        authStore.googleLogin(route.query.googleAuthToken)
-      }
-    })
-
-  }
-  
+  import AppHomeArticles from '@/modules/app/home/HomeArticles.vue' 
 </script>
 
 <style lang="scss">
@@ -35,5 +21,4 @@
     
   }
 
-  
 </style>

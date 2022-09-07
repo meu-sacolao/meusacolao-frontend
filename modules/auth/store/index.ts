@@ -4,6 +4,7 @@ import User from '@/entities/User'
 import { useAppSimulationStore } from '@/modules/app/simulation/store'
 import { useUserSimulationStore } from '@/modules/user/simulation/store'
 import emitter from '@/util/emitter'
+import LogRocket from 'logrocket'
 
 export const useAuthStore = defineStore('auth', {
   persist: true,
@@ -46,12 +47,15 @@ export const useAuthStore = defineStore('auth', {
         this.loggedUser = new User(data)
         appSimulationStore.attachSimulations()
         this.redirect()
+
+        LogRocket.identify(this.loggedUser.id, { email : this.loggedUser.email })
       })
     },
     
     logout() {
       this.loggedUser = null
       this.loggedUserToken = null
+      LogRocket.identify()
     },
 
     setRedirectTo({ route, event = null, payload = null }) {
@@ -60,7 +64,6 @@ export const useAuthStore = defineStore('auth', {
         this.redirectToEvent = { event, payload }
       }
     },
-
     
     redirect() {
       const route = useRoute()
