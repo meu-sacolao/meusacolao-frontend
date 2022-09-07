@@ -98,8 +98,6 @@
 
   onMounted(() => {
     emitter.on('openRelationEditModal', ({ socialSecurityRelation: socialSecurityRelationToSet }) => {
-
-      console.log('socialSecurityRelationToSet', socialSecurityRelationToSet)
       showModal.value = true
       socialSecurityRelation.value = new SocialSecurityRelation(socialSecurityRelationToSet)
     })

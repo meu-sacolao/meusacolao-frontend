@@ -105,6 +105,7 @@
           roles: 'NONE',
           action: () => {
             showAuthModal.value = true
+            authStore.setRedirectTo({ route: 'general' })
           }
         }
       ]

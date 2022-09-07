@@ -70,7 +70,7 @@ export const useAuthStore = defineStore('auth', {
 
       if(route.query.skipRedirect || this.redirectTo === false) return
 
-      if(['', null].includes(this.redirectTo)) {
+      if(this.redirectTo === 'general') {
         this.generalRedirectTo()
       } else {
         if(this.redirectTo) {
