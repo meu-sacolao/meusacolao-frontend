@@ -47,8 +47,9 @@ export const minLength = (value, min = 6) => {
   if (value.length < min) return true
 }
 
-export const minWords = (value, min = 2) => {
-  return Boolean(value.split(' ').length < min)
+export const minWords = (value = '', min = 2) => {
+  if(value === null) value = ''
+  return Boolean(value.split(/&nbsp| /).length < min)
 }
 
 export const inputConfirmation = (first, second) => {

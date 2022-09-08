@@ -6,29 +6,48 @@
     </div>
 
     <div class="mt-6 flex flex-col space-y-4">
-      <AppInputWithIcon v-model:value="retirementOption.title" label="Título" placeholder="Insira o título do grupo de aposentadoria" />
+      <AppInputWithIcon 
+        v-model:value="formAdminRetirementOption.title" 
+        label="Título" 
+        placeholder="Insira o título do grupo de aposentadoria"
+        :hasError="formAdminRetirementOption.tried && formAdminRetirementOption.validateInput('title')"
+      >
+        Preencha o título
+      </AppInputWithIcon>
       
       <AppSelectInput
-        v-model:value="retirementOption.retirementGroupId"
+        v-model:value="formAdminRetirementOption.retirementGroupId"
         :items="retirementGroups"
         label="Grupo de aposentadoria"
-      />
+        :hasError="formAdminRetirementOption.tried && formAdminRetirementOption.validateInput('retirementGroupId')"
+        keyValue="id"
+        keyLabel="title"
+        placeholder="Selecione uma opção"
+      >
+        Selecione um grupo de aposentadoria
+      </AppSelectInput>
       
       <AppTextEditorInput 
         input_id="retirement-group-editor" 
-        v-model:value="retirementOption.description" 
+        v-model:value="formAdminRetirementOption.description" 
         label="Descrição curta (até 3 linhas)"
         height="100"
-      />
+        :hasError="formAdminRetirementOption.tried && formAdminRetirementOption.validateInput('description')"
+      >
+        Preencha uma descrição
+      </AppTextEditorInput>
 
       <AppTextEditorInput 
         input_id="retirement-group-editor" 
-        v-model:value="retirementOption.content" 
+        v-model:value="formAdminRetirementOption.content" 
         label="Descrição completa"
-      />
+        :hasError="formAdminRetirementOption.tried && formAdminRetirementOption.validateInput('content')"
+      >
+        Preencha o conteúdo
+      </AppTextEditorInput>
 
       <AppCheckBox
-        v-model:value="retirementOption.showForNotLoggedUsers"
+        v-model:value="formAdminRetirementOption.showForNotLoggedUsers"
       >
         Mostrar para usuários não logados
       </AppCheckBox>
@@ -36,7 +55,6 @@
     </div>
     <div class="w-full flex mt-6">
       <AppButton 
-        :disabled="hasError" 
         class="bg-brand-gradient text-white px-5"
         @click="updateOrCreate()"
       >
@@ -51,24 +69,20 @@
 
 <script setup>
 
-import RetirementOption from '@/entities/RetirementOption'
+import FormAdminRetirementOption from '@/forms/admin/FormAdminRetirementOption'
 import AdminGeneralApiService from '@/services/AdminGeneralApiService'
 import Api from '@/util/Api'
 import GraphQL from '@/util/GraphQL'
 
   const router = useRouter()
   const route = useRoute()
-  const { type, retirementOptionId } = route.params
+  const { retirementOptionId } = route.params
 
-  const retirementOption = ref(new RetirementOption())
+  const formAdminRetirementOption = ref(new FormAdminRetirementOption())
   const retirementGroups = ref([])
   
   const typeLabel = computed(() => {
-    return type == 'edit' ? 'Editar' : 'Adicionar'
-  })
-
-  const hasError = computed(() => {
-    return !retirementOption.value.title || !retirementOption.value.description
+    return retirementOptionId == 'edit' ? 'Editar' : 'Adicionar'
   })
 
   onMounted(() => {
@@ -105,13 +119,17 @@ import GraphQL from '@/util/GraphQL'
 
     GraphQL({ query, caller: 'AdminRetirementOption' })
       .then(({ data }) => {
-        retirementOption.value = data.retirementOptions[0]
         retirementGroups.value = data.retirementGroups
+        formAdminRetirementOption.value = new FormAdminRetirementOption(data.retirementOptions[0])
       })
   }
 
   const updateOrCreate = () => {
-    AdminGeneralApiService.updateOrCreate('RetirementOption', retirementOption.value)
+    if(formAdminRetirementOption.value.hasError) {
+      formAdminRetirementOption.value.tried = true
+      return
+    }
+    AdminGeneralApiService.updateOrCreate('RetirementOption', formAdminRetirementOption.value)
       .then((response) => {
         alert('Regra de aposentadoria atualizado com sucesso')
         router.push(`/admin/retirement-groups`)

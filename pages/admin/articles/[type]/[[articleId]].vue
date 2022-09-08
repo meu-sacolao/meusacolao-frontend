@@ -14,58 +14,77 @@
         keyLabel="title"
         label="Categoria"
         @update:value="setCategory"
-      />
+        :hasError="formAdminArticle.tried && formAdminArticle.validateInput('categories')"
+      >
+        Selecione ao menos uma categoria
+      </AppSelectInput>
 
       <div class="w-full flex flex-wrap space-x-2 -mt-4">
-        <AppPill bg="bg-zinc-300 relative pr-8" v-for="(category, index) in article.categories" :key="category.id">
+        <AppPill bg="bg-zinc-300 relative pr-8" v-for="(category, index) in formAdminArticle.categories" :key="category.id">
           <span>{{ category.title }}</span>
-          <AppButton class="absolute top-o right-0 mt-0 mr-0" @click="article.categories.splice(index, 1)">
+          <AppButton class="absolute top-o right-0 mt-0 mr-0" @click="formAdminArticle.categories.splice(index, 1)">
             <AppIcons icon="close" size="18"/>
           </AppButton>
         </AppPill>
       </div>
 
-      <AppInputWithIcon v-model:value="article.title" label="Título" placeholder="Insira o título do artigo" />
+      <AppInputWithIcon 
+        v-model:value="formAdminArticle.title" 
+        label="Título" 
+        placeholder="Insira o título do artigo" 
+        :hasError="formAdminArticle.tried && formAdminArticle.validateInput('title')"
+      >
+        Preencha o título
+      </AppInputWithIcon>
       
       <AppTextEditorInput 
         input_id="article-editor" 
-        v-model:value="article.content" 
+        v-model:value="formAdminArticle.content" 
         label="Conteúdo auxiliar"
-      />
+        :hasError="formAdminArticle.tried && formAdminArticle.validateInput('content')"
+      >
+        Preencha o conteúdo
+      </AppTextEditorInput>
 
       <AppSelectInput
-        v-model:value="article.userId"
+        v-model:value="formAdminArticle.userId"
         :items="users"
         keyValue="id"
         keyLabel="name"
         label="Autor"
-      />
+        :hasError="formAdminArticle.tried && formAdminArticle.validateInput('userId')"
+        placeholder="Selecione o autor" 
+      >
+        Selecione um autor
+      </AppSelectInput>
 
       <AppInputWithIcon 
-        v-model:value="article.publishedAt" 
+        v-model:value="formAdminArticle.publishedAt" 
         icon="today"
         label="Data da publicação"
         :mask="'##/##/####'"
         type="tel"
         placeholder="Data da publicação" 
-      />
+        :hasError="formAdminArticle.tried && formAdminArticle.validateInput('publishedAt')"
+      >
+        Preencha a data de publicação corretamente
+      </AppInputWithIcon>
 
       <AppCheckBox
-        v-model:value="article.isPublished"
+        v-model:value="formAdminArticle.isPublished"
       >
         Esta publicado?
       </AppCheckBox>
 
       <AppUploadInput 
         placeholder="Clique ou arraste uma imagem de capa"
-        v-model="article.file" 
+        v-model="formAdminArticle.file" 
         accept="images/*"
         label="Imagem de capa"
       />
 
       <div class="w-full flex">
-        <AppButton 
-          :disabled="hasError" 
+        <AppButton
           class="bg-brand-gradient text-white px-5"
           @click="updateOrCreate()"
         >
@@ -81,30 +100,30 @@
 
 <script setup>
 
-import Article from '@/entities/Article'
 import AdminGeneralApiService from '@/services/AdminGeneralApiService'
+import FormAdminArticle from '@/forms/admin/FormAdminArticle'
 import Api from '@/util/Api'
 import GraphQL from '@/util/GraphQL'
 import { ArrayHelpers } from '@igortrindade/lazyfy'
 
   const router = useRouter()
   const route = useRoute()
-  const article = ref(new Article())
+  const formAdminArticle = ref(new FormAdminArticle())
   const users = ref([])
   const categories = ref([])
   const categorySelected = ref(null)
-  const { type, articleId } = route.params
+  const { articleId } = route.params
   const typeLabel = computed(() => {
-    return type == 'edit' ? 'Editar' : 'Adicionar'
+    return articleId ? 'Editar' : 'Adicionar'
   })
 
   const hasError = computed(() => {
-    return !article.value.title || !article.value.content
+    return !formAdminArticle.value.title || !formAdminArticle.value.content
   })
 
   const getCategoriesToSelect = computed(() => {
-    if(!article.value) return []
-    const articleCategoriesIds = article.value.categories.map((category) => category.id)
+    if(!formAdminArticle.value) return []
+    const articleCategoriesIds = formAdminArticle.value.categories.map((category) => category.id)
     return ArrayHelpers.removeAll(categories.value, { id: articleCategoriesIds })
   })
 
@@ -139,7 +158,7 @@ import { ArrayHelpers } from '@igortrindade/lazyfy'
     `
     GraphQL({ query, caller: 'AdminArticle' })
       .then(({ data }) => {
-        if(data.articles[0]) article.value = data.articles[0]
+        if(data.articles[0]) formAdminArticle.value = new FormAdminArticle(data.articles[0])
       })
   }
 
@@ -164,7 +183,12 @@ import { ArrayHelpers } from '@igortrindade/lazyfy'
   }
 
   const updateOrCreate = () => {
-    AdminGeneralApiService.updateOrCreate('Article', article.value, '/admin/article/updateOrCreate')
+
+    if(formAdminArticle.value.hasError) {
+      formAdminArticle.value.tried = true
+      return
+    }
+    AdminGeneralApiService.updateOrCreate('Article', { ...formAdminArticle.value }, '/admin/article/updateOrCreate')
       .then((response) => {
         alert('Artigo atualizado com sucesso')
         // router.push(`/admin/articles`)
@@ -178,7 +202,7 @@ import { ArrayHelpers } from '@igortrindade/lazyfy'
   const setCategory = (id) => {
     const category = ArrayHelpers.find(categories.value, { id })
     if(category) {
-      article.value.categories.push(category)
+      formAdminArticle.value.categories.push(category)
     }
   }
   

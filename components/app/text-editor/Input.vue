@@ -7,7 +7,11 @@
       :id="id"
       :style="{'--pell-content-height': height + 'px' }"
       class="pell mb-2 focus:shadow-sm hover:shadow"
+      :class="{ 'border-red-600': hasError }"
     ></div>
+    <p class="text-red-600 h-4" v-if="hasError">
+      <slot />
+    </p>
   </div>
 </template>
 
@@ -29,6 +33,10 @@
     height: {
       type: String,
       default: '300'
+    },
+    hasError: {
+      type: Boolean,
+      default: false
     }
   })
 

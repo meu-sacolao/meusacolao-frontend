@@ -6,30 +6,42 @@
     </div>
 
     <div class="mt-6 flex flex-col space-y-4">
-      <AppInputWithIcon v-model:value="retirementGroup.title" label="Título" placeholder="Insira o título do grupo de aposentadoria" />
-      
+      <AppInputWithIcon 
+        v-model:value="formAdminRetirementGroup.title"
+        label="Título"
+        placeholder="Insira o título do grupo de aposentadoria"
+        :hasError="formAdminRetirementGroup.tried && formAdminRetirementGroup.validateInput('title')"
+      >
+        Preencha o título
+      </AppInputWithIcon>
+
       <AppTextEditorInput 
         input_id="retirement-group-editor" 
-        v-model:value="retirementGroup.description" 
+        v-model:value="formAdminRetirementGroup.description" 
         label="Descrição curta (até 3 linhas)"
         height="100"
-      />
+        :hasError="formAdminRetirementGroup.tried && formAdminRetirementGroup.validateInput('description')"
+      >
+        Preencha uma descrição
+      </AppTextEditorInput>
 
       <AppTextEditorInput 
         input_id="retirement-group-editor" 
-        v-model:value="retirementGroup.content" 
+        v-model:value="formAdminRetirementGroup.content" 
         label="Descrição completa"
-      />
+        :hasError="formAdminRetirementGroup.tried && formAdminRetirementGroup.validateInput('content')"
+      >
+        Preencha o conteúdo
+      </AppTextEditorInput>
 
       <AppCheckBox
-        v-model:value="retirementGroup.isPreReform"
+        v-model:value="formAdminRetirementGroup.isPreReform"
       >
         É pré reforma
       </AppCheckBox>
 
       <div class="w-full flex">
-        <AppButton 
-          :disabled="hasError" 
+        <AppButton
           class="bg-brand-gradient text-white px-5"
           @click="updateOrCreate()"
         >
@@ -39,27 +51,24 @@
       </div>
     </div>
 
+
   </div>
 
 </template>
 
 <script setup>
 
-import RetirementGroup from '@/entities/RetirementGroup'
 import AdminGeneralApiService from '@/services/AdminGeneralApiService'
+import FormAdminRetirementGroup from '@/forms/admin/FormAdminRetirementGroup'
 import Api from '@/util/Api'
 import GraphQL from '@/util/GraphQL'
 
   const router = useRouter()
   const route = useRoute()
-  const retirementGroup = ref(new RetirementGroup())
+  const formAdminRetirementGroup = ref(new FormAdminRetirementGroup())
   const { type, retirementGroupId } = route.params
   const typeLabel = computed(() => {
     return type == 'edit' ? 'Editar' : 'Adicionar'
-  })
-
-  const hasError = computed(() => {
-    return !retirementGroup.value.title || !retirementGroup.value.description
   })
 
   onMounted(() => {
@@ -86,12 +95,18 @@ import GraphQL from '@/util/GraphQL'
 
     GraphQL({ query, caller: 'AdminRetirementGroup' })
       .then(({ data }) => {
-        retirementGroup.value = data.retirementGroups[0]
+        formAdminRetirementGroup.value = new FormAdminRetirementGroup(data.retirementGroups[0])
       })
   }
 
   const updateOrCreate = () => {
-    AdminGeneralApiService.updateOrCreate('RetirementGroup', retirementGroup.value)
+
+    if(formAdminRetirementGroup.value.hasError) {
+      formAdminRetirementGroup.value.tried = true
+      return
+    }
+
+    AdminGeneralApiService.updateOrCreate('RetirementGroup', { ...formAdminRetirementGroup.value })
       .then((response) => {
         alert('Grupo de aposentadoria atualizado com sucesso')
         router.push(`/admin/retirement-groups`)
