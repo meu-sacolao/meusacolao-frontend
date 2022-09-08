@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.39](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.38...v0.0.39) (2022-09-08)
+
+
+### Features | Funcionalidades
+
+* Validação vinculos ([c272760](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/c272760995a4b2990b323ff62334f2c795632695))
+
 ### [0.0.38](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.37...v0.0.38) (2022-09-07)
 
 
