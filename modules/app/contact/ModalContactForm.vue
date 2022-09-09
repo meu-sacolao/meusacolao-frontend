@@ -7,34 +7,42 @@
         <span>Fale conosco</span>
       </h3>
 
-      <p class="p">Como você prefere falar com nossos analistas especializados em aposentadoria?</p>
+      <p class="p">Fale diretamente com nossos analistas previdenciários.</p>
 
       <div class="w-full flex flex-col space-y-6">
 
-        <div class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5">
+        <AppButton 
+          @click="openCall()"
+          class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5"
+        >
           <div class="w-1/5 flex flex-wrap items-center justify-center p-4 sm:p-8">
           <img src="/icons/contact/phone.png" />
           </div>
           <div class="w-full p-6 flex flex-col justify-center items-start space-y-4">
             <p class="w-full text-center">Entrar em contato por telefone</p>
           </div>
-        </div>
-        <div class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5">
+        </AppButton>
+        <AppButton 
+          class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5"
+          @click="openWhatsapp()"  
+        >
           <div class="w-1/5 flex flex-wrap items-center justify-center p-4 sm:p-8">
           <img src="/icons/contact/whatsapp.png" />
           </div>
           <div class="w-full p-6 flex flex-col justify-center items-start space-y-4">
             <p class="w-full text-center">Entrar em contato por WhatsApp</p>
           </div>
-        </div>
-        <div class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5">
+        </AppButton>
+        <AppButton 
+          class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5"
+        >
           <div class="w-1/5 flex flex-wrap items-center justify-center p-4 sm:p-8">
           <img src="/icons/contact/email.png" />
           </div>
           <div class="w-full p-6 flex flex-col justify-center items-start space-y-4">
             <p class="w-full text-center">Entrar em contato por email</p>
           </div>
-        </div>
+        </AppButton>
 
       </div>
     </div>
@@ -59,6 +67,20 @@
 
   const close = () => {
     showContactModal.value = false
+  }
+
+  const openWhatsapp = () => {
+    const message = `Olá, gostaria de saber informações sobre aposentadoria.`
+    let url = `https://api.whatsapp.com/send?phone=553187971362&text=${encodeURIComponent(message)}\n`;            
+    setTimeout(() => {
+        window.open(url, '_system', null);
+    },100)
+  }
+
+  const openCall = () => {           
+    setTimeout(() => {
+        window.open( `tel:031987971362`, '_system', null)
+    },100)
   }
 
 </script>
