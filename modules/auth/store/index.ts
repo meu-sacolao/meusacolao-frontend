@@ -68,6 +68,11 @@ export const useAuthStore = defineStore('auth', {
     redirect() {
       const route = useRoute()
 
+      setTimeout(() => {
+        this.redirectTo = ''
+        this.redirectToEvent = null
+      }, 1500)
+
       if(route.query.skipRedirect || this.redirectTo === false) return
 
       if(this.redirectTo === 'general') {
@@ -89,12 +94,9 @@ export const useAuthStore = defineStore('auth', {
         }
       }
 
-      setTimeout(() => {
-        this.redirectTo = ''
-        this.redirectToEvent = null
-      }, 1500)
+    },
 
-    }, 
+
     
     generalRedirectTo() {
       const router = useRouter()

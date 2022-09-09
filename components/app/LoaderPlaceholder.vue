@@ -1,15 +1,13 @@
 <template>
-  <ClientOnly>
-    <div class="w-full flex flex-col space-y-6">
-      <div 
-        class="w-full bg-zinc-200"
-        :class="classes"
-        v-for="(i, index) in quantity"
-        :key="`loader-placeholder-${index}`"
-      >
-      </div>
+  <div class="w-full flex flex-col space-y-6">
+    <div 
+      class="w-full bg-zinc-200"
+      :class="classes"
+      v-for="(i, index) in quantity"
+      :key="`loader-placeholder-${index}`"
+    >
     </div>
-  </ClientOnly>
+  </div>
 </template>
 
 <script setup>

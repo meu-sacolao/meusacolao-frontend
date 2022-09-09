@@ -27,6 +27,7 @@
       <AppFooter></AppFooter>
 
       <AppBaseDrawer></AppBaseDrawer>
+      <ModalContactForm />
 
     </Body>
   </Html>
@@ -35,6 +36,7 @@
 <script setup>
   import '@/assets/css/main.scss'
   import { useAuthStore } from "@/modules/auth/store"
+  import ModalContactForm from '@/modules/app/contact/ModalContactForm.vue'
   
   const authStore = useAuthStore()
   const route = useRoute()

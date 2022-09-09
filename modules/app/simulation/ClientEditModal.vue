@@ -170,16 +170,20 @@
       if(props.simulation) {
         formSimulation.value.retirementDate = props.simulation.retirementDate
         formSimulation.value.simulationId = props.simulation.id
+      } else {
+        authStore.setRedirectTo({ route: route.fullPath, event: 'openClientEditModal' })
       }
     })
   })
 
   onBeforeUnmount(() => {
     emitter.off('openClientEditModal')
+    close()
   })
 
   const close = () => {
     showModal.value = false
+    authStore.setRedirectTo({ route: null })
   }
 
   const get = () => {

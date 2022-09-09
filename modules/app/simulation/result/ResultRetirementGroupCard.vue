@@ -25,7 +25,7 @@
       <p class="text-lg italic" v-else>
         Pelos elementos apresentados, você ainda não tem direito à aposentadoria pela regra <b>{{ simulationRetirementGroup.retirementGroup.title }}</b>.
         Fale com o analista previdenciário para verificar a inclusão de novos tempos, revisão de valores e avaliar a melhor estratégia para sua aposentadoria.
-        <span class="font-bold text-blue-600">Fale com o analista!</span>
+        <button class="font-bold text-blue-600 italic" @click="emitter.emit('openContactModal')">Fale com o analista!</button>
       </p>
     </template>
   </AppCard>
@@ -35,7 +35,7 @@
   
   import ResultRetirementOptionCard from '@/modules/app/simulation/result/ResultRetirementOptionCard'
   import Dates from '@/services/Dates'
-
+  const emitter = useEmitter()
   const props = defineProps({
     simulationRetirementGroup: Object,
     simulation: Object,

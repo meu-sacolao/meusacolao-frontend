@@ -1,20 +1,28 @@
 <template>
-  <AppCard v-if="article">
-    <template v-slot:header>
-      <h3 class="h3">{{ article.title }}</h3>
-      <p>Por: {{ article.user.name }}</p>
-      <p>{{ article.publishedAt }}</p>
-    </template>
-    <template v-slot:content>
-      <div v-html="article.content" />
-    </template>
-  </AppCard>
+
+  <div class="w-full flex flex-col space-y-6">
+
+    <AppLoaderPlaceholder :quantity="3" v-if="!article"/>
+
+    <AppCard v-else>
+      <template v-slot:header>
+        <h3 class="h3">{{ article.title }}</h3>
+        <p>Por: {{ article.user.name }}</p>
+        <p class="text-zinc-400 text-xs">{{ article.publishedAt }}</p>
+      </template>
+      <template v-slot:content>
+        <div v-html="article.content" />
+      </template>
+    </AppCard>
+
+    <HomeArticleContactCard />
+  </div>
 </template>
 
 <script setup>
 
   import GraphQL from '@/util/GraphQL'
-
+  import HomeArticleContactCard from '@/modules/app/home/HomeArticleContactCard.vue'
   const route = useRoute()
 
   const article = ref(false)
@@ -36,6 +44,7 @@
           title
           content
           pathUrl
+          publishedAt
           user {
             id
             name

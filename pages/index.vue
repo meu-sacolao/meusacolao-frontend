@@ -18,7 +18,6 @@
   .app-intro {
     height: 60vh;
     padding: 24px;
-    
   }
 
 </style>

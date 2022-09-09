@@ -62,7 +62,7 @@
           <span class="border-b-4 pb-1 border-orange-500">Fale conosco</span>
         </h5>
         <ul class="space-y-2 mt-6">
-          <li>Contato</li>
+          <li class="cursor-pointer" @click="emitter.emit('openContactModal')">Contato</li>
         </ul>
       </div>
     </div>
@@ -89,12 +89,12 @@
 
 <script setup>
   import GraphQL from '@/util/GraphQL'
-  import emitter from '@/util/emitter'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from "@/modules/auth/store"
 
   const authStore = useAuthStore()
   const { loggedUser } = storeToRefs(authStore)
+  const emitter = useEmitter()
 
   const footerArticles = ref([])
   const aboutArticles = ref([])
