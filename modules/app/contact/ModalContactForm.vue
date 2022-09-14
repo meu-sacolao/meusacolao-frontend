@@ -12,35 +12,39 @@
       <div class="w-full flex flex-col space-y-6">
 
         <AppButton 
-          @click="openCall()"
-          class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5"
-        >
-          <div class="w-1/5 flex flex-wrap items-center justify-center p-4 sm:p-8">
-          <img src="/icons/contact/phone.png" />
-          </div>
-          <div class="w-full p-6 flex flex-col justify-center items-start space-y-4">
-            <p class="w-full text-center">Entrar em contato por telefone</p>
-          </div>
-        </AppButton>
-        <AppButton 
           class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5"
           @click="openWhatsapp()"  
         >
           <div class="w-1/5 flex flex-wrap items-center justify-center p-4 sm:p-8">
           <img src="/icons/contact/whatsapp.png" />
           </div>
-          <div class="w-full p-6 flex flex-col justify-center items-start space-y-4">
-            <p class="w-full text-center">Entrar em contato por WhatsApp</p>
+          <div class="w-full p-6 flex flex-col justify-center items-start">
+            <p>Entrar em contato por WhatsApp</p>
+            <h5 class="h5">(31) 98797-1362</h5>
+          </div>
+        </AppButton>
+        <AppButton 
+          @click="openCall()"
+          class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5"
+        >
+          <div class="w-1/5 flex flex-wrap items-center justify-center p-4 sm:p-8">
+          <img src="/icons/contact/phone.png" />
+          </div>
+          <div class="w-full p-6 flex flex-col justify-center items-start">
+            <p>Entrar em contato por telefone</p>
+            <h5 class="h5">(31) 98797-1362</h5>
           </div>
         </AppButton>
         <AppButton 
           class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5"
+          @click="openEmail()"
         >
           <div class="w-1/5 flex flex-wrap items-center justify-center p-4 sm:p-8">
           <img src="/icons/contact/email.png" />
           </div>
-          <div class="w-full p-6 flex flex-col justify-center items-start space-y-4">
-            <p class="w-full text-center">Entrar em contato por email</p>
+          <div class="w-full p-6 flex flex-col justify-center items-start">
+            <p>Entrar em contato por email</p>
+            <h5 class="h5">calculoeprevidencia@gmail.com</h5>
           </div>
         </AppButton>
 
@@ -52,6 +56,7 @@
 <script setup>
   
   const emitter = useEmitter()
+  const vueInstance = useVueInstance()
 
   const showContactModal = ref(false)
 
@@ -73,13 +78,22 @@
     const message = `Olá, gostaria de saber informações sobre aposentadoria.`
     let url = `https://api.whatsapp.com/send?phone=553187971362&text=${encodeURIComponent(message)}\n`;            
     setTimeout(() => {
-        window.open(url, '_system', null);
+      window.open(url, '_system', null)
+      vueInstance.config.globalProperties.$gtag.event('CONTATO_WHATSAPP', { event_category: 'INTERAÇÕES' })
     },100)
   }
 
   const openCall = () => {           
     setTimeout(() => {
-        window.open( `tel:031987971362`, '_system', null)
+      window.open( `tel:031987971362`, '_system', null)
+      vueInstance.config.globalProperties.$gtag.event('CONTATO_TELEFONE', { event_category: 'INTERAÇÕES' })
+    },100)
+  }
+
+  const openEmail = () => {           
+    setTimeout(() => {
+      window.open( `mailto:calculoeprevidencia@gmail.com`, '_system', null)
+      vueInstance.config.globalProperties.$gtag.event('CONTATO_EMAIL', { event_category: 'INTERAÇÕES' })
     },100)
   }
 
