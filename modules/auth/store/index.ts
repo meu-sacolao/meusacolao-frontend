@@ -48,14 +48,13 @@ export const useAuthStore = defineStore('auth', {
         appSimulationStore.attachSimulations()
         this.redirect()
 
-        LogRocket.identify(this.loggedUser.id, { email : this.loggedUser.email })
+        LogRocket.identify(this.loggedUser.id, { name: this.loggedUser.name, email: this.loggedUser.email })
       })
     },
     
     logout() {
       this.loggedUser = null
       this.loggedUserToken = null
-      LogRocket.identify()
     },
 
     setRedirectTo({ route, event = null, payload = null }) {

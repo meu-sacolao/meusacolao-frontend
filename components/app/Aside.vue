@@ -153,6 +153,11 @@
     {
       items: [
         {
+          title: authStore.loggedUser ? authStore.loggedUser.email : '',
+          roles: 'ANY',
+          action: () => { }
+        },
+        {
           title: 'Sair',
           roles: 'ANY',
           action: () => {
