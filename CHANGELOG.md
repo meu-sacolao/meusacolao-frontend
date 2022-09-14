@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.43](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.42...v0.0.43) (2022-09-14)
+
+
+### Features | Funcionalidades
+
+* Adicionar contatos e registrar ações no analytics ([faa53b3](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/faa53b3d35cc12961915a354c76569aaae4afd9a))
+
 ### [0.0.42](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.41...v0.0.42) (2022-09-09)
 
 
