@@ -83,6 +83,10 @@
         label="Imagem de capa"
       />
 
+      <div v-if="formAdminArticle.pathUrl" class="w-full flex">
+        <AppIcons iconClasses="aspect-ratio h-20" :icon="formAdminArticle.pathUrl" />
+      </div>
+
       <div class="w-full flex">
         <AppButton
           class="bg-brand-gradient text-white px-5"
@@ -191,7 +195,7 @@ import { ArrayHelpers } from '@igortrindade/lazyfy'
     AdminGeneralApiService.updateOrCreate('Article', { ...formAdminArticle.value }, '/admin/article/updateOrCreate')
       .then((response) => {
         alert('Artigo atualizado com sucesso')
-        // router.push(`/admin/articles`)
+        router.push(`/admin/articles`)
       })
       .catch((err) => {
         alert('Erro ao atualizar artigo')

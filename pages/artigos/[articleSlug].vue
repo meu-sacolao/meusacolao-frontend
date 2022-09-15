@@ -45,6 +45,7 @@
           content
           pathUrl
           publishedAt
+          isPublished
           user {
             id
             name
