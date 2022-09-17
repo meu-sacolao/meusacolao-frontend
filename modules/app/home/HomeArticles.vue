@@ -7,7 +7,11 @@
       v-for="article in articles" :key="article.id"
       class="border border-zinc-200 hover:shadow-lg"
     > 
-      <AppIcons :icon="article.pathUrl" iconClasses="aspect-square w-full object-contains bg-zinc-100" />
+      <AppIcons 
+        :icon="article.pathUrl" 
+        iconClasses="aspect-square w-full object-contains bg-zinc-100" 
+        errorIcon="/images/general/noticias.jpg"
+      />
       <div class="w-full p-4 lg: p-6">
         <div class="w-full flex flex-col">
           <p class="p">{{ article.user.name }}</p>

@@ -56,6 +56,7 @@ const get = () => {
       ) {
         key
         id
+        slug
         title
         content
         pathUrl

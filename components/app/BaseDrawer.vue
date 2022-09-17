@@ -4,7 +4,7 @@
       <div 
         v-if="showDrawer"
         @click="close()"
-        class="w-screen h-screen fixed inset-0 bg-slate-800 bg-opacity-50"
+        class="w-screen h-screen fixed inset-0 bg-slate-800 bg-opacity-50 z-10"
       ></div>
     </transition>
     <transition

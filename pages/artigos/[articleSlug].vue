@@ -11,7 +11,7 @@
         <p class="text-zinc-400 text-xs">{{ article.publishedAt }}</p>
       </template>
       <template v-slot:content>
-        <div v-html="article.content" />
+        <div class="py-4 leading-loose" v-html="article.content" />
       </template>
     </AppCard>
 
@@ -23,42 +23,38 @@
 
   import GraphQL from '@/util/GraphQL'
   import HomeArticleContactCard from '@/modules/app/home/HomeArticleContactCard.vue'
-  const route = useRoute()
 
+  const route = useRoute()
   const article = ref(false)
 
-  onMounted(() => {
-    getArticle()
-  })
-
-  const getArticle = () => {
-
-    const query = `
-      {
-        articles (
-          where: [
-            { column: "slug", value: "${route.params.articleSlug}" }
-          ]
-        ) {
+  const query = `
+    {
+      articles (
+        where: [
+          { column: "slug", value: "${route.params.articleSlug}" }
+        ]
+      ) {
+        id
+        title
+        content
+        pathUrl
+        publishedAt
+        isPublished
+        user {
           id
-          title
-          content
-          pathUrl
-          publishedAt
-          isPublished
-          user {
-            id
-            name
-          }
+          name
         }
       }
-    
-    `
+    }
+  
+  `
 
-    GraphQL({ query, caller: 'artigos.get' })
-      .then(({ data }) => {
-        article.value = data.articles[0]
-      })
-  }
+  const { data } = await useFetchGraphQL({ query, caller: 'ShowArticles' })
+
+  article.value = data.articles[0]
+
+  useHead({
+    title: article.value.title + " - ",
+  })
 
 </script>

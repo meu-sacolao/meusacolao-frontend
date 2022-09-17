@@ -7,4 +7,9 @@
 </template>
 <script setup>
   import UserSimulationListVue from '@/modules/user/simulation/UserSimulationList.vue'
+
+  useHead({
+    title: 'Minhas simulações - ',
+  })
+
 </script>

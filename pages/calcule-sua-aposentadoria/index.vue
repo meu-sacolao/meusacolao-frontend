@@ -6,7 +6,7 @@
   import ProcessCnisFile from '@/modules/app/cnis/ProcessCnisFile'
 
   useHead({
-    title: 'Simule sua aposentadoria - Cálculo e Previdência',
+    title: 'Calcule sua aposentadoria - ',
   })
 
 </script>

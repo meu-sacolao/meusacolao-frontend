@@ -33,6 +33,9 @@ export default class FormAdminRetirementOption extends BaseFormModel {
         item: 'retirementGroupId'
       },
       {
+        item: 'rule'
+      },
+      {
         item: 'title',
         validator: ['minWords:1']
       },

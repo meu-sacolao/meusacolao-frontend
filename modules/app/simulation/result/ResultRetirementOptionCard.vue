@@ -2,7 +2,15 @@
 
   <div class="w-full flex flex-col items-start space-y-4 shadow hover:shadow-md border border-zinc-100 mb-6 p-4 relative bg-zinc-100/20">
 
-    <h3 class="h4 leading-relaxed">{{ simulationRetirementOption.retirementOption.title }}</h3>
+    <h3 class="h4 leading-relaxed">
+      <span class="mr-2">{{ simulationRetirementOption.retirementOption.title }}</span>
+      <AppIcons 
+        @click="emitter.emit('openContentDrawer', { table: 'retirementOptions', id: simulationRetirementOption.retirementOption.id })" 
+        icon="info" 
+        color="text-sky-700"
+        class="cursor-pointer"
+      />
+    </h3>
 
     <div class="p text-slate-400 leading-relaxed" v-html="simulationRetirementOption.retirementOption.content"></div>
 
@@ -43,13 +51,13 @@
       
       <LabelIsGranted :isGranted="simulationRetirementOption.isGranted" />
 
-      <div class="flex mt-6">
+      <!-- <div class="flex mt-6">
         <AppButton 
           bg="bg-brand-gradient text-white" 
           @click="emitter.emit('openDrawer', { component: 'SimulationRetirementOptionDetailDrawer', payload: simulationRetirementOption })">
             Ver cálculo
         </AppButton>
-      </div>
+      </div> -->
     </template>
 
     <template v-else>
@@ -74,6 +82,7 @@
   import LabelIsGranted from '@/modules/app/simulation/result/LabelIsGranted'
   import { storeToRefs } from 'pinia'
   import { useAuthStore } from "@/modules/auth/store"
+  const emitter = useEmitter()
   const authStore = useAuthStore()
 
   const { loggedUser } = storeToRefs(authStore)

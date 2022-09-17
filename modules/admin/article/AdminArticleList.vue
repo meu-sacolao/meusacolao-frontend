@@ -34,11 +34,21 @@
               <template v-slot:value>{{ article.publishedAt }}</template>
             </AppLabelValue>
 
-            <AppIcons iconClasses="aspect-ratio h-12" :icon="article.pathUrl" />
+            <AppIcons 
+              iconClasses="aspect-ratio h-12" 
+              :icon="article.pathUrl" 
+              errorIcon="/images/general/noticias.jpg"
+            />
 
             <div class="absolute top-0 right-0 mr-4 mt-4 flex space-x-2">
 
               <div class="absolute top-0 right-0 flex justify-end">
+                <NuxtLink :to="`/artigos/${ article.slug }`" class="">
+                  <AppButton class="text-zinc-400 hover:text-orange-600">
+                    <AppIcons icon="search" />
+                    <span  class="ml-1"></span>
+                  </AppButton>
+                </NuxtLink>
                 <NuxtLink :to="`/admin/articles/edit/${ article.id }`" class="">
                   <AppButton class="text-zinc-400 hover:text-orange-600">
                     <AppIcons icon="edit" />

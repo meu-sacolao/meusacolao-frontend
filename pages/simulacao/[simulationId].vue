@@ -6,4 +6,8 @@
   
   import SimulationShow from '@/modules/app/simulation/SimulationShow'
 
+  useHead({
+    title: 'Resultado simulação - ',
+  })
+
 </script>

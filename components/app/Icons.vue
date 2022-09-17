@@ -1,5 +1,5 @@
 <template>
-  <div style="display: contents">
+  <div style="display:contents">
     <span
       v-if="getIconType === 'material-icons'"
       :class="[getIconClasses, `material-symbols-${iconStyle}`]"
@@ -7,7 +7,7 @@
     >
       {{ getIcon }}
     </span>
-    <img v-else-if="getIconType === 'url'" :src="icon" :class="[iconClasses]" />
+    <img v-else-if="getIconType === 'url'" :src="getIcon" :class="[iconClasses]" />
     <inline-svg
       v-else
       :src="icon"
@@ -84,7 +84,7 @@ export default {
     /**
      * It sets a error when the icon is not available.
      */
-    loaderErrorIcon: {
+    errorIcon: {
       type: String,
       default: 'report'
     },
@@ -102,17 +102,17 @@ export default {
   },
   computed: {
     getIconType() {
-      if(this.imageLoadError || !this.finishedImageLoad) return 'material-icons'
+      if(this.imageLoadError || !this.finishedImageLoad && !this.getIcon?.includes('/')) return 'material-icons'
       if(this.type) return this.type
-      if(!this.icon?.includes('/')) return 'material-icons'
-      if(!this.icon?.includes('.svg')) return 'url'
+      if(!this.getIcon?.includes('/')) return 'material-icons'
+      if(!this.getIcon?.includes('.svg')) return 'url'
       return 'svg'
     },
     getIcon() {
-      if(!this.icon?.includes('/')) return this.icon ? this.icon : this.loaderErrorIcon
+      if(!this.icon?.includes('/')) return this.icon ? this.icon : this.errorIcon
       if(!this.finishedImageLoad && !this.imageLoadError && this.loaderIcon) return this.loaderIcon
-      if(this.imageLoadError) return this.loaderErrorIcon
-      return this.icon ? this.icon : this.loaderErrorIcon
+      if(this.imageLoadError) return this.errorIcon
+      return this.icon ? this.icon : this.errorIcon
     },
     getIconClasses() {
       if(this.iconClasses) return this.iconClasses

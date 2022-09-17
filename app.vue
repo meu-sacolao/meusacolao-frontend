@@ -2,7 +2,6 @@
 
   <Html lang="pt-br">
     <Head>
-      <Title>Cálculo e Previdência</Title>
       <Meta name="description" content="Titulo" />
       <Meta charset="utf-8" />
       <Meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -26,8 +25,8 @@
       </NuxtLayout>
       <AppFooter></AppFooter>
 
-      <AppBaseDrawer></AppBaseDrawer>
       <ModalContactForm />
+      <ContentDrawer />
 
     </Body>
   </Html>
@@ -36,7 +35,8 @@
 <script setup>
   import '@/assets/css/main.scss'
   import { useAuthStore } from "@/modules/auth/store"
-  import ModalContactForm from '@/modules/app/contact/ModalContactForm.vue'
+  import ModalContactForm from '@/modules/general/ModalContactForm.vue'
+  import ContentDrawer from '@/modules/general/ContentDrawer.vue'
   
   const authStore = useAuthStore()
   const route = useRoute()
@@ -58,6 +58,13 @@
   definePageMeta({
     pageTransition: {
       mode: 'out-in'
+    }
+  })
+
+  useHead({
+    titleTemplate: '%sCálculo e Previdência',
+    bodyAttrs: {
+      class: 'test'
     }
   })
 

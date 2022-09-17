@@ -5,7 +5,15 @@
   >
     <template v-slot:header>
       <div class="w-full flex flex-col">
-        <h3 class="h3 leading-relaxed ...">{{ simulationRetirementGroup.retirementGroup.title }}</h3>
+        <h3 class="h3 leading-relaxed ...">
+          <span class="mr-2">{{ simulationRetirementGroup.retirementGroup.title }}</span>
+          <AppIcons 
+            @click="emitter.emit('openContentDrawer', { table: 'retirementGroups', id: simulationRetirementGroup.retirementGroup.id })" 
+            icon="info" 
+            color="text-sky-700"
+            class="cursor-pointer ml-1"
+          />
+        </h3>
         <div class="p text-slate-400 leading-relaxed" v-html="simulationRetirementGroup.retirementGroup.content"></div>
       </div>
     </template>

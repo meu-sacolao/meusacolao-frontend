@@ -102,6 +102,7 @@ import GraphQL from '@/util/GraphQL'
           title
           description
           content
+          rule
           retirementGroupId
           showForNotLoggedUsers
           retirementGroup {
