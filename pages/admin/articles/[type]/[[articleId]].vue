@@ -46,6 +46,8 @@
         Preencha o conteúdo
       </AppTextEditorInput>
 
+      <div v-html="formAdminArticle.content"></div>
+
       <AppSelectInput
         v-model:value="formAdminArticle.userId"
         :items="users"
@@ -74,6 +76,18 @@
         v-model:value="formAdminArticle.isPublished"
       >
         Esta publicado?
+      </AppCheckBox>
+      
+      <AppCheckBox
+        v-model:value="formAdminArticle.hidePublishedAt"
+      >
+        Esconder data
+      </AppCheckBox>
+      
+      <AppCheckBox
+        v-model:value="formAdminArticle.hideAuthor"
+      >
+        Esconder autor
       </AppCheckBox>
 
       <AppUploadInput 
@@ -152,6 +166,8 @@ import { ArrayHelpers } from '@igortrindade/lazyfy'
           content
           pathUrl
           isPublished
+          hidePublishedAt
+          hideAuthor
           publishedAt
           categories {
             id

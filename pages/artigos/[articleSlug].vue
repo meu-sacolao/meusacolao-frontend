@@ -6,9 +6,9 @@
 
     <AppCard v-else>
       <template v-slot:header>
-        <h3 class="h3">{{ article.title }}</h3>
-        <p>Por: {{ article.user.name }}</p>
-        <p class="text-zinc-400 text-xs">{{ article.publishedAt }}</p>
+        <h2 class="h2">{{ article.title }}</h2>
+        <p v-if="!article.hideAuthor" >Por: {{ article.user.name }}</p>
+        <p v-if="!article.hidePublishedAt" class="text-zinc-400 text-xs">{{ article.publishedAt }}</p>
       </template>
       <template v-slot:content>
         <div class="py-4 leading-loose" v-html="article.content" />
@@ -39,6 +39,8 @@
         content
         pathUrl
         publishedAt
+        hidePublishedAt
+        hideAuthor
         isPublished
         user {
           id

@@ -1,8 +1,12 @@
 
 
-.h1 { @apply text-2xl lg:text-4xl font-semibold leading-loose; }
-.h2 { @apply text-xl lg:text-3xl font-semibold leading-loose; }
-.h3 { @apply text-lg lg:text-2xl font-semibold leading-loose; }
-.h4 { @apply text-base lg:text-xl font-semibold leading-loose; }
-.h5 { @apply text-base lg:text-lg font-medium leading-loose; }
-body, .p { @apply text-sm lg:text-base leading-relaxed; }
+h1, .h1 { @apply text-4xl lg:text-4xl font-semibold leading-loose; }
+h2, .h2 { @apply text-xl lg:text-3xl font-semibold leading-loose; }
+h3, .h3 { @apply text-lg lg:text-2xl font-semibold leading-loose; }
+h4, .h4 { @apply text-base lg:text-xl font-semibold leading-loose; }
+h5, .h5 { @apply text-base lg:text-lg font-medium leading-loose; }
+body, p, .p { @apply text-sm lg:text-base leading-relaxed; }
+
+h1 { font-size: 2.25rem !important; }
+h2 { font-size: 1.5rem !important; }
+h3 { font-size: 1.2rem !important; }

@@ -38,8 +38,11 @@ const ALLOWED_ATTR = [
   'title',
   'width',
   'height',
+  'size',
+  'style',
   'frameborder',
   'allow',
+  'target',
   'allowfullscreen'
 ]
 

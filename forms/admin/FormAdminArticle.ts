@@ -11,6 +11,8 @@ export default class FormAdminArticle extends BaseFormModel {
   content: string = ''
   pathUrl: string = ''
   isPublished: boolean = false
+  hidePublishedAt: boolean = false
+  hideAuthor: boolean = false
   publishedAt: string = ''
   
   file: FileInfo = new FileInfo()
@@ -30,6 +32,8 @@ export default class FormAdminArticle extends BaseFormModel {
       'content',
       'pathUrl',
       'isPublished',
+      'hidePublishedAt',
+      'hideAuthor',
       'publishedAt',
       'categories'
     ]
