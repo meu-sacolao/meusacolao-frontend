@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.48](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.47...v0.0.48) (2022-09-19)
+
+
+### Features | Funcionalidades
+
+* Adicionado controle esconder autor e data e tamanho da fonte no editor de texto ([f81ac6d](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/f81ac6d4017b91fc290b98c2a748632394dacae9))
+
 ### [0.0.47](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.46...v0.0.47) (2022-09-19)
 
 
