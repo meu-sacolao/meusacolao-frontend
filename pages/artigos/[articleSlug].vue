@@ -11,7 +11,7 @@
         <p v-if="!article.hidePublishedAt" class="text-zinc-400 text-xs">{{ article.publishedAt }}</p>
       </template>
       <template v-slot:content>
-        <div class="py-4 leading-loose" v-html="article.content" />
+        <div class="py-4 leading-loose article-content" v-html="article.content" />
       </template>
     </AppCard>
 
@@ -60,3 +60,9 @@
   })
 
 </script>
+<style lang="scss">
+
+  // .article-content * {
+  //   line-height: 2.5rem;
+  // }
+</style>

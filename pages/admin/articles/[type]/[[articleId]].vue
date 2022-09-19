@@ -46,8 +46,6 @@
         Preencha o conteúdo
       </AppTextEditorInput>
 
-      <div v-html="formAdminArticle.content"></div>
-
       <AppSelectInput
         v-model:value="formAdminArticle.userId"
         :items="users"
