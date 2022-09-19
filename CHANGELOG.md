@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.49](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.48...v0.0.49) (2022-09-19)
+
+
+### Bug Fixes | Melhorias
+
+* Ajuste font e font-height ([6b60442](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/6b6044265efff8390bcf2b9dd4fb88019361e37b))
+
 ### [0.0.48](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.47...v0.0.48) (2022-09-19)
 
 
