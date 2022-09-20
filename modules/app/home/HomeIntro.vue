@@ -1,6 +1,6 @@
 <template>
   <!-- HOME INTRO -->
-  <div class="w-full h-screen block shrink-0 flex flex-col justify-center bg-cyan-800" id="home-intro">
+  <div class="w-full h-screen block shrink-0 flex flex-col justify-center bg-cyan-800 relative" id="home-intro">
     <div class="app-intro flex flex-wrap">
 
       <div class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-end px-10 lg:px-0 text-white text-center lg:text-right space-y-3">
@@ -13,7 +13,7 @@
 
         <NuxtLink to="/calcule-sua-aposentadoria">
           <AppButton class="bg-amber-600 text-white rounded-full px-6">
-            Simule gratuitamente
+            Simule agora
           </AppButton>
         </NuxtLink>
       </div>
@@ -22,6 +22,26 @@
         <img class="w-full" src="/images/general/pack-illustrations/01.svg" />
       </div>
 
+      <AppButton
+        @click="goToArticles()"
+        class="bg-slate-100/40 rounded-full py-10 absolute right-0 bottom-0 mr-6 mb-6 xl:mr-10 xl:mb-10"
+      >
+        <AppIcons icon="arrow_downward" color="text-slate-700" size="32" />
+      </AppButton>
+
     </div>
   </div>
 </template>
+
+<script setup>
+
+  const goToArticles = () => {
+      var scrollDiv = document.getElementById("home-articles").offsetTop
+      document.getElementById('body').scrollTo({
+        top: scrollDiv,
+        left: 0,
+        behavior: 'smooth'
+      })
+  }
+
+</script>

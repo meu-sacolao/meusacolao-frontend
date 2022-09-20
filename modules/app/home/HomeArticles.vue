@@ -1,6 +1,6 @@
 <template>
   <!-- HOME INTRO -->
-  <div class="w-full bg-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-12 px-6 lg:px-20 xl:px-28" id="home-intro">
+  <div class="w-full bg-white grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-12 px-6 lg:px-20 xl:px-28" id="home-articles">
     
     <NuxtLink 
       :to="`/artigos/${ article.slug }`"
