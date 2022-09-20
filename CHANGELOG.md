@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.51](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.50...v0.0.51) (2022-09-20)
+
+
+### Routine tasks | Implementações gerais
+
+* Updated vue-number-format ([8b17399](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/8b17399b1946a527a4bb9f6a9a019b5a9f702042))
+
 ### [0.0.50](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.49...v0.0.50) (2022-09-19)
 
 
