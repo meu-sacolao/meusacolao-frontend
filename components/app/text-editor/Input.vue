@@ -46,12 +46,20 @@
     }, 500)
   })
 
+  watch(() => props.value, (newValue) => {
+    if(editor && newValue && !editor.content.innerHTML) {
+      editor.content.innerHTML = newValue
+    }
+  })
+
   const getPeelHeightClass = computed(() => {
     return `pell-height-${props.height}`
   })
 
+  let editor = null
+
   const pellInit = () => {
-    const editor = pell.init({
+    editor = pell.init({
       element: document.getElementById(id.value),
       onChange: (html) => {
         html = unescape(html)

@@ -39,7 +39,6 @@ const ALLOWED_ATTR = [
   'width',
   'height',
   'size',
-  'style',
   'frameborder',
   'allow',
   'target',
