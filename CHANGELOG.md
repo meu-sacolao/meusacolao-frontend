@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.57](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.56...v0.0.57) (2022-09-20)
+
+
+### Bug Fixes | Melhorias
+
+* Fixed scroll ([80e6c2c](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/80e6c2c4d8da191a845f0a689b35ac4e49ab1792))
+
 ### [0.0.56](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.55...v0.0.56) (2022-09-20)
 
 
