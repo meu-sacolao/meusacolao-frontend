@@ -70,7 +70,7 @@
     <div class="pt-10 flex flex-wrap justify-between space-y-4 text-zinc-400">
 
       <div class="w-full md:w-1/2 text-center md:text-left">
-        Calculo e Previdência - CNPJ 10.100.100/0001-01
+        <!-- Calculo e Previdência - CNPJ 10.100.100/0001-01 -->
       </div>
       <div class="w-full md:w-1/2 flex justify-center md:justify-end text-zinc-400 space-x-3 items-center">
         <p class="font-thin italic">Developed by</p>
