@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.56](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.55...v0.0.56) (2022-09-20)
+
+
+### Features | Funcionalidades
+
+* Adicionado botão rolar para baixo ([0b830c1](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/0b830c1a21062182b09e1908ba0252c33757a349))
+
+
+### Bug Fixes | Melhorias
+
+* Alterado telefone de contato ([a58d961](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/a58d961848680f909708e423429be1038852d8af))
+* Esconder cnpj footer ([a7fff1d](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/a7fff1df6e3c910864d49cb60ac9254e1b5b9daf))
+
 ### [0.0.55](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.54...v0.0.55) (2022-09-20)
 
 
