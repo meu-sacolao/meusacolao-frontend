@@ -32,7 +32,7 @@
           </div>
           <div class="w-full p-6 flex flex-col justify-center items-start">
             <p>Entrar em contato por telefone</p>
-            <h5 class="h5">(31) 98797-1362</h5>
+            <h5 class="h5">(31) 3261-4610</h5>
           </div>
         </AppButton>
         <AppButton 
@@ -85,7 +85,7 @@
 
   const openCall = () => {           
     setTimeout(() => {
-      window.open( `tel:031987971362`, '_system', null)
+      window.open( `tel:0313261-4610`, '_system', null)
       vueInstance.config.globalProperties.$gtag.event('CONTATO_TELEFONE', { event_category: 'INTERAÇÕES' })
     },100)
   }
