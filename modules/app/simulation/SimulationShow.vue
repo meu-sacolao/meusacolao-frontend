@@ -125,6 +125,7 @@
               contributionTime
               contributionsTotal
               requirements
+              projectedRetirementDate
               retirementOption {
                 id
                 title
