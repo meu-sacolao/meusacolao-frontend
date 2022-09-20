@@ -58,7 +58,6 @@ const get = () => {
         id
         slug
         title
-        content
         pathUrl
         isPublished
         publishedAt
