@@ -40,7 +40,7 @@
       <AppTextEditorInput 
         input_id="article-editor" 
         v-model:value="formAdminArticle.content" 
-        label="Conteúdo auxiliar"
+        label="Conteúdo do artigo"
         :hasError="formAdminArticle.tried && formAdminArticle.validateInput('content')"
       >
         Preencha o conteúdo

@@ -62,7 +62,10 @@
       },
       actions: pellActions,
     })
-    editor.content.innerHTML = props.value
+
+    setTimeout(() => {
+      editor.content.innerHTML = props.value
+    }, 200)
   }
 
 </script>
