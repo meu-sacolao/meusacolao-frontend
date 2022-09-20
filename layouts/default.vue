@@ -28,15 +28,9 @@
   const layoutSpacesClasses = ref(nonSpacingRoutes.includes(route.path) ? nonSpacingClasses : spacingClasses)
   
   watch(() => route.path, (newValue) => {
-    if(newValue === '/') {
-      setTimeout(() => {
-        layoutSpacesClasses.value = nonSpacingClasses
-      }, 300)
-    } else {
-      setTimeout(() => {
-        layoutSpacesClasses.value = spacingClasses
-      }, 300)
-    }
+    setTimeout(() => {
+      layoutSpacesClasses.value = newValue === '/' ? nonSpacingClasses : spacingClasses
+    }, 300)
   })
 
 </script>

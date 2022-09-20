@@ -3,7 +3,7 @@ export default () => {
   if(process.client) {
     const router = useRouter()
 
-    router.beforeEach((to) => {
+    router.afterEach((to) => {
       /**
        * Scroll to top on route change
       */
