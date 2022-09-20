@@ -36,9 +36,9 @@
 <script setup>
 
   const goToArticles = () => {
-      var scrollDiv = document.getElementById("home-articles").offsetTop
+      var scrollTo = document.getElementById("home-articles").offsetTop
       document.getElementById('body').scrollTo({
-        top: scrollDiv,
+        top: scrollTo - 120,
         left: 0,
         behavior: 'smooth'
       })
