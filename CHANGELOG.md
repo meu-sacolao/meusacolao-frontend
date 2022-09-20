@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.54](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.53...v0.0.54) (2022-09-20)
+
+
+### Bug Fixes | Melhorias
+
+* Fix editor large content load ([54150e7](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/54150e789ce42dda0bd35c243dd09e4d0dda375a))
+
 ### [0.0.53](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.52...v0.0.53) (2022-09-20)
 
 
