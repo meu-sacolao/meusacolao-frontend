@@ -12,12 +12,3 @@
   import AppHomeIntro from '@/modules/app/home/HomeIntro.vue'
   import AppHomeArticles from '@/modules/app/home/HomeArticles.vue' 
 </script>
-
-<style lang="scss">
-
-  .app-intro {
-    height: 60vh;
-    padding: 24px;
-  }
-
-</style>

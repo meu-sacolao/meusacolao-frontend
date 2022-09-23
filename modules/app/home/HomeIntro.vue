@@ -1,9 +1,7 @@
 <template>
   <!-- HOME INTRO -->
-  <div class="w-full h-screen block shrink-0 flex flex-col justify-center bg-cyan-800 relative" id="home-intro">
-    <div class="app-intro flex flex-wrap">
-
-      <div class="w-full lg:w-1/3 flex flex-col justify-center items-center lg:items-end px-10 lg:px-0 text-white text-center lg:text-right space-y-3">
+  <div class="w-full h-screen-view block shrink-0 flex flex-wrap justify-center bg-cyan-800 relative mt-24" id="home-intro">
+      <div class="w-full h-1/2 lg:h-full lg:w-1/2 flex flex-col justify-center items-center lg:items-end p-10 text-white text-center lg:text-right space-y-3">
         <h1 class="h1 font-medium">Cálculo e Previdência</h1>
         <h4 class="h4 font-normal">
           A maneira mais <span class="text-amber-500 text-xl lg:text-2xl">rápida</span> 
@@ -18,8 +16,8 @@
         </NuxtLink>
       </div>
 
-      <div class="w-full lg:w-2/3 flex items-center justify-center ">
-        <img class="w-full" src="/images/general/pack-illustrations/01.svg" />
+      <div class="w-full block h-1/2 lg:h-full lg:w-1/2 flex items-center justify-center">
+        <img class="app-intro-image" src="/images/general/pack-illustrations/01.svg" />
       </div>
 
       <AppButton
@@ -28,6 +26,8 @@
       >
         <AppIcons icon="arrow_downward" color="text-slate-700" size="32" />
       </AppButton>
+    <div class=" flex flex-wrap h-full">
+
 
     </div>
   </div>
@@ -38,10 +38,24 @@
   const goToArticles = () => {
       var scrollTo = document.getElementById("home-articles").offsetTop
       document.getElementById('body').scrollTo({
-        top: scrollTo - 120,
+        top: scrollTo - 180,
         left: 0,
         behavior: 'smooth'
       })
   }
 
 </script>
+
+<style lang="scss">
+
+  .app-intro {
+    height: 60vh;
+    padding: 24px;
+  }
+
+  .app-intro-image {
+    height: 100%;
+    width: auto;
+    aspect-ratio: attr(width) / attr(height);
+  }
+</style>

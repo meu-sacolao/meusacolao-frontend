@@ -16,9 +16,9 @@
           @click="openWhatsapp()"  
         >
           <div class="w-1/5 flex flex-wrap items-center justify-center p-4 sm:p-8">
-          <img src="/icons/contact/whatsapp.png" />
+            <img src="/icons/contact/whatsapp.png" />
           </div>
-          <div class="w-full p-6 flex flex-col justify-center items-start">
+          <div class="w-4/5 p-6 text-left">
             <p>Entrar em contato por WhatsApp</p>
             <h5 class="h5">(31) 98797-1362</h5>
           </div>
@@ -28,9 +28,9 @@
           class="w-full flex p-0 shadow-md hover:shadow-lg bg-cyan-800/5"
         >
           <div class="w-1/5 flex flex-wrap items-center justify-center p-4 sm:p-8">
-          <img src="/icons/contact/phone.png" />
+            <img src="/icons/contact/phone.png" />
           </div>
-          <div class="w-full p-6 flex flex-col justify-center items-start">
+          <div class="w-4/5 p-6 text-left">
             <p>Entrar em contato por telefone</p>
             <h5 class="h5">(31) 3261-4610</h5>
           </div>
@@ -40,11 +40,11 @@
           @click="openEmail()"
         >
           <div class="w-1/5 flex flex-wrap items-center justify-center p-4 sm:p-8">
-          <img src="/icons/contact/email.png" />
+            <img src="/icons/contact/email.png" />
           </div>
-          <div class="w-full p-6 flex flex-col justify-center items-start">
+          <div class="w-4/5 p-6 text-left">
             <p>Entrar em contato por email</p>
-            <h5 class="h5">calculoeprevidencia@gmail.com</h5>
+            <h5 class="h5 break-words">calculoeprevidencia@gmail.com</h5>
           </div>
         </AppButton>
 

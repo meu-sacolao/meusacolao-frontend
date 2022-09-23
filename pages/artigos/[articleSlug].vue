@@ -12,10 +12,26 @@
       </template>
       <template v-slot:content>
         <div class="py-4 leading-loose article-content" v-html="article.content" />
+
+        <div v-if="!article.hideAuthor" class="border-t border-zinc-100 p-8 lg:p-12 flex">
+
+          <img class="w-20 h-20 object-cover rounded-full flex-none mt-2" :src="article.user.pathUrl" />
+
+          <div class="w-full flex flex-col pl-6">
+            <h3 class="font-semibold">{{ article.user.name }}</h3>
+            <p class="text-sm">{{ article.user.description }}</p>
+          </div>
+        </div>
+
       </template>
     </AppCard>
 
     <HomeArticleContactCard />
+
+    <div class="w-full border-b border-zinc-200 mt-4"></div>
+
+    <ArticleShowLastArticles />    
+
   </div>
 </template>
 
@@ -23,6 +39,7 @@
 
   import GraphQL from '@/util/GraphQL'
   import HomeArticleContactCard from '@/modules/app/home/HomeArticleContactCard.vue'
+  import ArticleShowLastArticles from '@/modules/app/article/ArticleShowLastArticles.vue'
 
   const route = useRoute()
   const article = ref(false)
@@ -43,8 +60,9 @@
         hideAuthor
         isPublished
         user {
-          id
           name
+          pathUrl
+          description
         }
       }
     }
@@ -60,9 +78,3 @@
   })
 
 </script>
-<style lang="scss">
-
-  // .article-content * {
-  //   line-height: 2.5rem;
-  // }
-</style>

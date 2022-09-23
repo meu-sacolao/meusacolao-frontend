@@ -3,11 +3,11 @@
 
     <div class="w-full flex flex-wrap items-center">
 
-    <AppTitle>Artigos</AppTitle>
+      <AppTitle>Artigos</AppTitle>
 
-    <AppSearchBar placeholder="Procurar" v-model:search="search" @search="get()" /> 
-    
-    <NuxtLink :to="`/admin/articles/create`" class="ml-auto">
+      <AppSearchBar placeholder="Procurar" v-model:search="search" @search="get()" /> 
+      
+      <NuxtLink :to="`/admin/articles/create`" class="ml-auto">
         <AppButton class="bg-brand-gradient text-white px-5">
           <AppIcons icon="edit" />
           <span  class="ml-1">Adicionar artigo</span>
@@ -20,6 +20,7 @@
     />
 
     <AppPaginator v-model:skip="skip" :limit="limit" :length="articles.length" @change="get()"/>
+    
   </div>
 </template>
 
