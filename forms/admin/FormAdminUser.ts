@@ -1,12 +1,18 @@
 
 import BaseFormModel from "@/forms/BaseFormModel"
+import Validators from '@/forms/Validators'
+export default class FormAdminUser extends BaseFormModel {
 
-export default class FormUserSignup extends BaseFormModel {
-
+  id: string = ''
   name: string = ''
   email: string = ''
   phone: string = ''
+  updatedPassword: boolean = false
   unencryptedPassword: string = ''
+  role: string = ''
+  file: string = ''
+  isBlocked: boolean = false
+  description: string = ''
 
   constructor(data) {
     super()
@@ -15,10 +21,15 @@ export default class FormUserSignup extends BaseFormModel {
 
   get fillable() {
     return [
+      'id',
       'name',
       'email',
       'phone',
       'unencryptedPassword',
+      'role',
+      'file',
+      'isBlocked',
+      'description',
     ]
   }
 
@@ -33,13 +44,16 @@ export default class FormUserSignup extends BaseFormModel {
         validator: 'emailValidator'
       },
       {
-        item: 'phone',
-        validator: 'phoneValidator'
+        item: 'unencryptedPassword',
+        validator: (value, instance) => {
+          if(!instance.updatePassword) return false
+          if(!value || Validators.minLength(value)) return true
+          return false
+        }
       },
       {
-        item: 'unencryptedPassword',
-        validator: ['minLength:8']
-      },
+        item: 'role',
+      }
     ]
   }
 

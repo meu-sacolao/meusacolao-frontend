@@ -32,19 +32,19 @@ export const emailValidator = (value) => {
 }
 
 export const phoneValidator = (value) => {
-  if (value.length < 14) return true
+  if (!value || value.length < 14) return true
 }
 
 export const cepValidator = (value) => {
-  if (value.length < 9) return true
+  if (!value || value.length < 9) return true
 }
 
 export const minValueValidator = (value, min = 0) => {
-  if (value < min) return true
+  if (!value || value < min) return true
 }
 
 export const minLength = (value, min = 6) => {
-  if (value.length < min) return true
+  if (!value || value.length < min) return true
 }
 
 export const minWords = (value = '', min = 2) => {

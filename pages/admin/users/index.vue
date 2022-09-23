@@ -35,16 +35,36 @@
               <template v-slot:value>{{ user.email }}</template>
             </AppLabelValue>
             <AppLabelValue class="four-cols-breakdown">
-              <template v-slot:label>CPF</template>
-              <template v-slot:value>{{ user.cpf }}</template>
+              <template v-slot:label>Telefone</template>
+              <template v-slot:value>{{ user.phone }}</template>
             </AppLabelValue>
             <AppLabelValue class="four-cols-breakdown">
               <template v-slot:label>Atribuição</template>
               <template v-slot:value>{{ user.role }}</template>
             </AppLabelValue>
+            <AppLabelValue class="four-cols-breakdown">
+              <template v-slot:label>Último login na plataforma</template>
+              <template v-slot:value>{{ user.lastLoginAt }}</template>
+            </AppLabelValue>
+            <AppLabelValue class="four-cols-breakdown">
+              <template v-slot:label>Quantidade de sessões</template>
+              <template v-slot:value>{{ user.sessionCount }}</template>
+            </AppLabelValue>
+            <div class="">
+            </div>
           </div>
+            <AppIcons 
+              iconClasses="object-cover h-20 w-20 rounded-full" 
+              :icon="user.pathUrl"
+            />
 
           <div class="w-full flex space-x-4 mt-4">
+            <NuxtLink :to="`/admin/users/${user.id}`" class="w-auto">
+              <AppButton class="bg-brand-gradient text-white px-5">
+                <AppIcons icon="edit" />
+                <span  class="ml-1">Editar</span>
+              </AppButton>
+            </NuxtLink>
             <NuxtLink :to="`/admin/simulations?userId=${user.id}`" class="w-auto">
               <AppButton class="bg-brand-gradient text-white px-5">
                 <AppIcons icon="zoom_in" />
@@ -96,6 +116,9 @@
           phone
           role
           createdAt
+          lastLoginAt
+          sessionCount
+          pathUrl
         }
       }
     `
