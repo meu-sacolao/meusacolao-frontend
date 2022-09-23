@@ -1,13 +1,13 @@
 <template>
   
-  <div class="w-full flex justify-center space-x-4 mt-2">
-    <AppButton @click="prev()" :disabled="skip < 1">
-      <AppIcons icon="chevron_left" />
+  <div class="w-full flex justify-center items-center space-x-4 mt-2">
+    <AppButton @click="prev()" :disabled="skip < 1" class="flex items-center leading-none disabled:text-zinc-300" >
+      <AppIcons icon="chevron_left" class="mt-1" />
       <span>Anterior</span>
     </AppButton>
-    <AppButton @click="next()" :disabled="limit > length">
+    <AppButton @click="next()" :disabled="limit > length" class="flex items-center leading-none disabled:text-zinc-300" >
       <span>Próximo</span>
-      <AppIcons icon="chevron_right" />
+      <AppIcons icon="chevron_right" class="mt-1" />
     </AppButton>
   </div>
 </template>
