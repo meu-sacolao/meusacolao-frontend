@@ -96,6 +96,10 @@
           action: '/calcule-sua-aposentadoria'
         },
         {
+          title: 'Artigos e notícias',
+          action: '/artigos'
+        },
+        {
           title: 'Minhas simulações',
           action: '/minhas-simulacoes',
           roles: ['STANDARD', 'ADMIN'],
