@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-col">
+  <div class="w-full flex flex-col mt-2">
     <div class="flex items-center">
       <input :id="id" type="checkbox" v-model="childValue" class="
         flex-none 
