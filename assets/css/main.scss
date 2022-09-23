@@ -33,6 +33,14 @@ body, html {
   height: calc(100vh - 192px);
 }
 
+.h-screen-view {
+  height: calc(100vh - 80px);
+}
+
+.min-h-screen-view {
+  min-height: calc(100vh - 80px);
+}
+
 .h-container-50 {
   height: calc(50vh - 192px);
 }
