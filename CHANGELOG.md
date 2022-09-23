@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.61](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.60...v0.0.61) (2022-09-23)
+
+
+### Routine tasks | Implementações gerais
+
+* Styles ([1f8baa3](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/1f8baa3685364d6d97e9a0e42c5d3bad36932807))
+* Styles ([224233d](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/224233da983f7e8a05f4578c6b30bbcfcccd02c2))
+
+
+### Bug Fixes | Melhorias
+
+* Alinhamento inputs ([074afe4](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/074afe4987920dccf17180151aefd81a7ed583b3))
+* Paginator ([1ddf823](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/1ddf823afba0b64f823b63181a0e2f5e80b6d7f6))
+
+
+### Features | Funcionalidades
+
+* Card artigos ([9ab32b0](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/9ab32b0ad03cae7aa275db4426f9f71917f2e9c4))
+* Editar usuario no admin ([47f02e2](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/47f02e269898b165160e88e7458a08a8bd100db8))
+* Link artigos ([c71e607](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/c71e607b084711f79c3c626677e68f6c417fa3d2))
+* Link para pagina artigos ([0df0bd3](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/0df0bd3c507f9b5d29ec2e0c206c4602097f6808))
+* Lista e pesquisa de artigos ([3c9778c](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/3c9778cafa63625a6f340d9b8eedb7b146e675ca))
+
 ### [0.0.60](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.59...v0.0.60) (2022-09-22)
 
 
