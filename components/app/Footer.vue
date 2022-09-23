@@ -47,7 +47,9 @@
       </div>
       <div class="four-cols-breakdown mb-6">
         <h5 class="h5 font-normal">
-          <span class="border-b-4 pb-1 border-orange-500">Artigos</span>
+          <NuxtLink class="border-b-4 pb-1 border-orange-500" to="/artigos">
+            Artigos
+          </NuxtLink>
         </h5>
         <ul class="space-y-2 mt-6">
           <li v-for="article in footerArticles" :key="article.id">
