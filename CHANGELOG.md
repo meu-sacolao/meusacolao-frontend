@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.62](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.61...v0.0.62) (2022-09-27)
+
+
+### Bug Fixes | Melhorias
+
+* Adicionado mais itens à paginação dos artigos ([a3ec90f](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/a3ec90f4c3c9f0a105bb755793f5f7d90fcd5c54))
+
 ### [0.0.61](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.60...v0.0.61) (2022-09-23)
 
 
