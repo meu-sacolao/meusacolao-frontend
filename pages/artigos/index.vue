@@ -33,7 +33,7 @@ const router = useRouter()
 const categories = ref([])
 const articles = ref(false)
 const search = ref('')
-const limit = ref(1)
+const limit = ref(12)
 const skip = ref(route.query.skip ? parseInt(route.query.skip) : 0)
 
 onMounted(() => {
