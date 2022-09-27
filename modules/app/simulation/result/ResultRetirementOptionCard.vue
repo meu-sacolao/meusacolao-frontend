@@ -49,7 +49,7 @@
         </div>
       </div> -->
 
-      <div class="w-full flex items-center" v-if="getProjectedRetirementDate">
+      <div class="w-full flex items-center" v-if="getProjectedRetirementDate && getProjectedRetirementDateIsAfterToday">
         <!-- <AppIcons :icon="simulationRetirementOption.isGranted ? 'check' : 'warning'" :class="[!simulationRetirementOption.isGranted ? 'text-red-400' : 'text-green-600']" /> -->
         <p class="ml-2 text-slate-600 leading-relaxed">
           <span>Em havendo continuidade das contribuições, a aposentadoria nesta modalidade será cumprida em </span>
@@ -103,6 +103,11 @@
   const getProjectedRetirementDate = computed(() => {
     if(!props.simulationRetirementOption.projectedRetirementDate) return false
     return Dates.format(props.simulationRetirementOption.projectedRetirementDate, 'dd/MM/yyyy')
+  })
+
+  const getProjectedRetirementDateIsAfterToday = computed(() => {
+    if(Dates.parse(props.simulationRetirementOption.projectedRetirementDate) <= new Date()) return false
+    return true
   })
   
 </script>
