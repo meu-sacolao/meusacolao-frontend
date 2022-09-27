@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.63](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.62...v0.0.63) (2022-09-27)
+
+
+### Bug Fixes | Melhorias
+
+* Esconder mensagem quando a data for anterior à data de hoje ([930a38d](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/930a38dfa7f2b4f8172acebde1b0006e81b31081))
+
 ### [0.0.62](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.61...v0.0.62) (2022-09-27)
 
 
