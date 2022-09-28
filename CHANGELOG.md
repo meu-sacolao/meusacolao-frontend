@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.64](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.63...v0.0.64) (2022-09-28)
+
+
+### Routine tasks | Implementações gerais
+
+* Adicionado forçar mostrar detalhes para time desenvolvimento ([07ef885](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/07ef8859aa57816716f993b5b01159505175c090))
+
 ### [0.0.63](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.62...v0.0.63) (2022-09-27)
 
 
