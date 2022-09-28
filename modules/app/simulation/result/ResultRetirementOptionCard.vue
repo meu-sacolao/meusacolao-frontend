@@ -35,7 +35,7 @@
 
     <template v-if="loggedUser || simulationRetirementOption.retirementOption.showForNotLoggedUsers">
       <!-- REQUIREMENTS RESULT -->
-      <!-- <div class="w-full flex flex-col">
+      <div class="w-full flex flex-col" v-if="forceShowDetail">
         <p class="p text-slate-400 leading-none mb-2">
           Checklist de requisitos
         </p>
@@ -47,11 +47,14 @@
           <AppIcons :icon="requirement.isGranted ? 'check' : 'warning'" :class="[!requirement.isGranted ? 'text-red-400' : 'text-green-600']" />
           <p class="ml-2 p truncate text-slate-600 leading-relaxed ...">{{ requirement.content }}</p>
         </div>
-      </div> -->
+      </div>
 
-      <div class="w-full flex items-center" v-if="getProjectedRetirementDate && getProjectedRetirementDateIsAfterToday">
+      <div class="w-full flex flex-col" v-if="forceShowDetail || getProjectedRetirementDate && getProjectedRetirementDateIsAfterToday">
+        <p class="p text-slate-400 leading-none mb-2">
+          Projeção de aposentadoria
+        </p>
         <!-- <AppIcons :icon="simulationRetirementOption.isGranted ? 'check' : 'warning'" :class="[!simulationRetirementOption.isGranted ? 'text-red-400' : 'text-green-600']" /> -->
-        <p class="ml-2 text-slate-600 leading-relaxed">
+        <p class="text-slate-600 leading-relaxed">
           <span>Em havendo continuidade das contribuições, a aposentadoria nesta modalidade será cumprida em </span>
           <b>{{ getProjectedRetirementDate }}</b>.
         </p>
@@ -108,6 +111,10 @@
   const getProjectedRetirementDateIsAfterToday = computed(() => {
     if(Dates.parse(props.simulationRetirementOption.projectedRetirementDate) <= new Date()) return false
     return true
+  })
+
+  const forceShowDetail = computed(() => {
+    return loggedUser.value && ['igortrindademe@gmail.com', 'brunofa23@gmail.com'].includes(loggedUser.value.email)
   })
   
 </script>
