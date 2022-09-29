@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.66](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.65...v0.0.66) (2022-09-29)
+
+
+### Bug Fixes | Melhorias
+
+* Adicionar ação botão fale com o analista ([63abe8c](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/63abe8c4426ed82cbd593971a1345ef62ac5bd89))
+
 ### [0.0.65](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.64...v0.0.65) (2022-09-29)
 
 
