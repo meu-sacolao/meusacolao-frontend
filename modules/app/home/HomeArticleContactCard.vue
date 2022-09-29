@@ -5,7 +5,7 @@
     </div>
     <div class="w-full lg:w-1/2 p-6 flex flex-col justify-center items-start space-y-4">
       <h3 class="h3 text-left">Precisa de orientação?</h3>
-      <p class="leading-relaxed">Fale com um analista especializado em aposentadoria gratuitamente.</p>
+      <p class="leading-relaxed">Fale com um analista especializado em aposentadoria.</p>
       <AppButton 
         @click="openContactModal()"
         class="sm:block bg-brand-gradient text-white rounded-full px-8"
