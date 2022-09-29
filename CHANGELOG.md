@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.65](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.64...v0.0.65) (2022-09-29)
+
+
+### Bug Fixes | Melhorias
+
+* Remover palavra gratuitamente do card de contato ([389daaf](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/389daaffa3e4b245bce22ff16381cb9ab0f99371))
+
 ### [0.0.64](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.63...v0.0.64) (2022-09-28)
 
 
