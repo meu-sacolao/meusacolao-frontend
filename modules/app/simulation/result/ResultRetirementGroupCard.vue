@@ -28,7 +28,7 @@
       <p class="text-lg italic" v-if="isGranted">
         Pelos elementos apresentados, você tem direito à aposentadoria pela regra <b>{{ simulationRetirementGroup.retirementGroup.title }}</b>.
         Fale com o analista previdenciário para orientação sobre requerimento ou planejamento para avaliar a melhor estratégia para sua aposentadoria.
-        <span class="font-bold text-blue-600">Fale com o analista!</span>
+        <button class="font-bold text-blue-600 italic" @click="emitter.emit('openContactModal')">Fale com o analista!</button>
       </p>
       <p class="text-lg italic" v-else>
         Pelos elementos apresentados, você ainda não tem direito à aposentadoria pela regra <b>{{ simulationRetirementGroup.retirementGroup.title }}</b>.
