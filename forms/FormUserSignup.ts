@@ -26,7 +26,7 @@ export default class FormUserSignup extends BaseFormModel {
     return [
       {
         item: 'name',
-        validator: ['minLength:8', 'minWords:3']
+        validator: ['minLength:8', 'minWords:2']
       },
       {
         item: 'email',
