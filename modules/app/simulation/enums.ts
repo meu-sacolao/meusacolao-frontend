@@ -4,6 +4,6 @@ export const SIMULATION_RESULT_TAB = {
 }
 
 export const SIMULATION_RELATION_TAB = {
-  label: 'Registros previdênciarios',
+  label: 'Registros previdenciários',
   value: 'social-security-relations'
 }
