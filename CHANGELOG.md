@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.67](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.66...v0.0.67) (2022-10-04)
+
+
+### Bug Fixes | Melhorias
+
+* Alterado minimo 2 palavras para formularios de nome ([2dda316](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/2dda316ac08e210a6fc05f895486d5f73129e96b))
+
 ### [0.0.66](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.65...v0.0.66) (2022-09-29)
 
 
