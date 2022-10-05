@@ -42,9 +42,6 @@ export default class FormSocialSecurityRelation extends BaseFormModel {
         item: 'relationOrigin'
       },
       {
-        item: 'relationDocument'
-      },
-      {
         item: 'relationType'
       },
       {
