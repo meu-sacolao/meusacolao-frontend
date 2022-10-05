@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.69](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.68...v0.0.69) (2022-10-05)
+
+
+### Bug Fixes | Melhorias
+
+* Removido obrigatoriedade de informar documento no vinculo ([a36481f](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/a36481fd46fe1f9635d6751b24061f60da243153))
+
 ### [0.0.68](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.67...v0.0.68) (2022-10-04)
 
 
