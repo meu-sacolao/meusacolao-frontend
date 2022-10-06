@@ -22,7 +22,7 @@
         <AppInputWithIcon 
           v-model:value="formSimulation.retirementDate" 
           icon="today"
-          label="Data do cálculo"
+          label="Data do cálculo *"
           :mask="'##/##/####'"
           type="tel"
           placeholder="Insira a data do cálculo"
@@ -34,17 +34,29 @@
         <AppInputWithIcon 
           v-model:value="formSimulation.name" 
           icon="badge"
-          label="Nome" 
+          label="Nome *" 
           placeholder="Insira o nome do segurado(a)" 
           :hasError="formSimulation.tried && formSimulation.validateInput('name')"
         >
           Preencha o nome do segurado
         </AppInputWithIcon>
 
+        <AppSelectInput
+          v-model:value="formSimulation.gender"
+          :items="genders"
+          label="Gênero *"
+          placeholder="Selecione o gênero"
+          :keyLabel="'label'"
+          :keyValue="'value'"
+          :hasError="formSimulation.tried && formSimulation.validateInput('gender')"
+        >
+          Preencha o gênero do segurado
+        </AppSelectInput>
+
         <AppInputWithIcon 
           v-model:value="formSimulation.cpf" 
           icon="fact_check"
-          label="CPF" 
+          label="CPF *" 
           :mask="['###.###.###-##']"
           type="tel"
           placeholder="Insira o cpf" 
@@ -56,7 +68,7 @@
         <AppInputWithIcon 
           v-model:value="formSimulation.birthDate" 
           icon="today"
-          label="Data de nascimento"
+          label="Data de nascimento *"
           :mask="'##/##/####'"
           type="tel"
           placeholder="Insira a data de nascimento" 
@@ -68,7 +80,7 @@
         <AppInputWithIcon 
           v-model:value="formSimulation.phone" 
           icon="today"
-          label="Telefone"
+          label="Telefone *"
           :mask="['(##)#####-####']"
           type="tel"
           placeholder="Insira o telefone" 
@@ -80,7 +92,7 @@
         <AppInputWithIcon 
           v-model:value="formSimulation.email" 
           icon="email"
-          label="Email"
+          label="Email *"
           type="email"
           placeholder="Insira o email" 
           :hasError="formSimulation.tried && formSimulation.validateInput('email')"
@@ -96,23 +108,14 @@
         />
 
         <AppInputWithIcon 
+          v-if="simulation"
           v-model:value="formSimulation.nit" 
           icon="badge"
           label="Nit" 
           placeholder="Insira o NIT do segurado" 
         />
 
-        <AppSelectInput
-          v-model:value="formSimulation.gender"
-          :items="['Feminino', 'Masculino']"
-          label="Gênero"
-          placeholder="Selecione o gênero"
-          :keyLabel="'label'"
-          :keyValue="'value'"
-          :hasError="formSimulation.tried && formSimulation.validateInput('gender')"
-        >
-          Preencha o gênero do segurado
-        </AppSelectInput>
+        <p v-if="formSimulation.hasError" v-html="formSimulation.validationPhraseHtml"></p>
 
         <div class="w-full flex justify-end mt-10 block">
           <AppButton 
@@ -155,18 +158,23 @@
   
   const props = defineProps({
     simulation: {
-      type: [Object, Boolean],
-      default: false
+      type: [Object]
     }
   })
 
   const showModal = ref(false)
   const formSimulation = ref(new FormSimulation())
+  const genders = ref([
+    { label: 'Feminino', value: 'female' },
+    { label: 'Masculino', value: 'male' }
+  ])
 
   onMounted(() => {
     emitter.on('openClientEditModal', (client = {}) => {
       showModal.value = true
       formSimulation.value = new FormSimulation(client)
+      
+      if(client.id) formSimulation.value.clientId = client.id
       if(props.simulation) {
         formSimulation.value.retirementDate = props.simulation.retirementDate
         formSimulation.value.simulationId = props.simulation.id
@@ -186,37 +194,6 @@
     authStore.setRedirectTo({ route: null })
   }
 
-  const get = () => {
-    isLoading.value = true
-
-    const query = `
-      {
-        clients (
-          where: [
-            { column: "id", value: "${props.clientId}"}
-          ]
-        ) {
-          id
-          name
-          phone
-          birthDate
-          motherName
-          cpf
-          nit
-          gender
-        }
-      }
-    `
-    GraphQL({ query, caller: 'ClientEditModal' })
-      .then(({ data }) => {
-        formSimulation.value.setFillableKeys(data.clients[0])
-        isLoading.value = false
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
   const updateOrCreate = () => {
 
     if(formSimulation.value.hasError) {
@@ -227,7 +204,6 @@
     Api.post(`/app/client/updateOrCreate`, { ...formSimulation.value }).then(({ data }) => {
 
       emitter.emit('simulationUpdated')
-      isLoading.value = true
       close()
 
       if(!formSimulation.value.simulationId) {

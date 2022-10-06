@@ -32,7 +32,7 @@
         </AppLabelValue>
         <AppLabelValue class="four-cols-breakdown mt-4">
           <template v-slot:label>Gênero</template>
-          <template v-slot:value>{{ client.gender }}</template>
+          <template v-slot:value>{{ getGender }}</template>
         </AppLabelValue>
         <AppLabelValue class="four-cols-breakdown mt-4">
           <template v-slot:label>Nome mãe</template>
@@ -51,6 +51,11 @@
   const openClientEditModal = () => {
     emitter.emit('openClientEditModal', { ...props.client })
   }
+
+  const getGender = computed(() => {
+    if(props.client.gender === 'female') return 'Feminino'
+    return 'Masculino'
+  })
 
   const props = defineProps({
     client: Object,

@@ -62,7 +62,7 @@ export default class BaseFormModel {
   }
 
   get validationPhrase() {
-    return this.errorPhrase.init + this.errors.map((erro) => erro.label).join(', ') + this.errorPhrase.end
+    return this.errorPhrase.init + this.errors.map((erro) => erro.label ? erro.label : erro.item).join(', ') + this.errorPhrase.end
   }
 
   get validationPhraseHtml() {

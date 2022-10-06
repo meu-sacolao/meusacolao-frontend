@@ -103,6 +103,7 @@
             name
             motherName
             email
+            phone
             cpf
             nit
             gender

@@ -4,7 +4,8 @@ import BaseFormModel from "@/forms/BaseFormModel"
 export default class FormSimulation extends BaseFormModel {
 
   retirementDate: string = ''
-  simulationId: string = ''
+  simulationId: string = null
+  clientId: string = null
   name: string = ''
   email: string = ''
   phone: string = ''
@@ -22,6 +23,9 @@ export default class FormSimulation extends BaseFormModel {
 
   get fillable() {
     return [
+      'retirementDate',
+      'simulationId',
+      'clientId',
       'name',
       'email',
       'phone',
@@ -38,35 +42,42 @@ export default class FormSimulation extends BaseFormModel {
     return [
       {
         item: 'retirementDate',
+        label: 'data do cálculo',
         validator: ['minLength:10', 'dateIsValid']
       },
       {
         item: 'name',
-        validator: ['minLength:8', 'minWords:3']
+        label: 'nome do segurado(a)',
+        validator: ['minLength:8', 'minWords:2']
       },
       {
         item: 'email',
+        label: 'email',
         validator: 'emailValidator'
       },
       {
         item: 'phone',
+        label: 'telefone',
         validator: 'phoneValidator'
       },
       {
         item: 'birthDate',
+        label: 'data de nascimento do segurado(a)',
         validator: ['minLength:10', 'dateIsValid']
       },
       {
         item: 'cpf',
+        label: 'cpf do segurado(a)',
         validator: 'cpfValidator'
       },
       {
-        item: 'gender'
+        item: 'gender',
+        label: 'gênero do segurado(a)',
       },
-      {
-        item: 'acceptTerms',
-        validator: 'booleanShouldBeTrueValidation'
-      },
+      // {
+      //   item: 'acceptTerms',
+      //   validator: 'booleanShouldBeTrueValidation'
+      // },
     ]
   }
 
