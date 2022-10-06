@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.72](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.71...v0.0.72) (2022-10-06)
+
+
+### Bug Fixes | Melhorias
+
+* Adicionado opção para logar ao editar cadastros quando o usuário não esta logado para evitar erro sessão expirada ([f8bf3ea](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/commit/f8bf3ea60b9ec0a96169db26d9fb9718935dd87f))
+
 ### [0.0.71](https://github.com/PROJETO-PREVIDENCIA/pp-frontend/compare/v0.0.70...v0.0.71) (2022-10-06)
 
 
