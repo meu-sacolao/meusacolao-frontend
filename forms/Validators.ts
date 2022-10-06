@@ -52,6 +52,10 @@ export const minWords = (value = '', min = 2) => {
   return Boolean(value.split(/&nbsp| /).length < min)
 }
 
+export const notEmpty = (value = '') => {
+  if([undefined, null, ''].includes(value)) return true
+}
+
 export const inputConfirmation = (first, second) => {
   if (first !== second) return true
 }
@@ -81,4 +85,5 @@ export default {
   fileValidation,
   dateIsValid,
   booleanShouldBeTrueValidation,
+  notEmpty,
 }

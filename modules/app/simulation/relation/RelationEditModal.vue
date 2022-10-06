@@ -1,5 +1,5 @@
 <template>
-  <AppBaseModal :show="showModal" @close="close">
+  <AppBaseModal :show="showModal" @close="close" :requireAuth="true">
     <div class="w-full flex flex-col space-y-4">
 
       <h3 class="h3 border-l-10 border-orange-500 pl-6 leading-normal mb-4">
@@ -132,40 +132,6 @@
 
   const close = () => {
     showModal.value = false
-  }
-
-  const get = () => {
-    isLoading.value = true
-
-    const query = `
-      {
-        socialSecurityRelations (
-          where: [
-            { column: "id", value: "${props.socialSecurityRelationId}"}
-          ]
-        ) {
-          id
-          nit
-          relationDocument
-          relationOrigin
-          relationType
-          startAt
-          endAt
-          lastPaymentAt
-          isIgnored
-          ignoredReason
-          specialTime
-        }
-      }
-    `
-    GraphQL({ query, caller: 'RelationEditModal' })
-      .then(({ data }) => {
-        formSocialSecurityRelation.value = new FormSocialSecurityRelation(data.socialSecurityRelations[0])
-        isLoading.value = false
-      })
-      .catch((error) => {
-        console.log(error)
-      })
   }
 
   const update = () => {

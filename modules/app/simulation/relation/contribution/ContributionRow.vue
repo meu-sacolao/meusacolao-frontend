@@ -69,7 +69,7 @@
   import getCurrencyType from '@/util/functions/getCurrencyType'
   import Dates from '@/services/Dates'
 
-  defineProps({
+  const props = defineProps({
     contribution: Object
   })
   
@@ -78,14 +78,16 @@
   const showContent = ref(false)
   const isProcessing = ref(false)
 
-  const openContributionModal = ({ id = null, socialSecurityRelation = null }) => {
-    let socialSecurityRelationId, monthReference
+  const openContributionModal = () => {
+    
+    const id = props.contribution.id
+    const socialSecurityRelationId = props.contribution.socialSecurityRelationId
     const simulationId = route.params.simulationId
-    if(socialSecurityRelation) {
-      socialSecurityRelationId = socialSecurityRelation.id
-      if(socialSecurityRelation.endAt) monthReference = Dates.format(socialSecurityRelation.endAt, 'MM/yyyy')
-    }
-    emitter.emit('openModalEditContribution', { id, simulationId, socialSecurityRelationId, monthReference })
+    const monthReference = props.contribution.monthReference
+    const isIgnored = props.contribution.isIgnored
+    const ignoredReason = props.contribution.ignoredReason
+
+    emitter.emit('openModalEditContribution', { id, simulationId, socialSecurityRelationId, monthReference, isIgnored, ignoredReason })
   }
 
   const openContributionMonthReferenceDrawer = (monthReference) => {

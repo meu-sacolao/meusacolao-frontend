@@ -1,5 +1,5 @@
 <template>
-  <AppBaseModal :show="showModal" @close="close">
+  <AppBaseModal :show="showModal" @close="close" :requireAuth="true">
     <div class="w-full flex flex-col space-y-6">
       
       <h3 class="h3 border-l-10 border-orange-500 pl-6 leading-normal mb-4">Adicionar múltiplas contribuições</h3>

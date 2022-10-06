@@ -35,7 +35,8 @@ export default class FormContribution extends BaseFormModel {
         validator: ['minLength:7', 'dateIsValid']
       },
       {
-        item: 'baseValue'
+        item: 'baseValue',
+        validator: 'notEmpty'
       }
     ]
   }

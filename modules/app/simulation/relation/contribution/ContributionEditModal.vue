@@ -1,5 +1,5 @@
 <template>
-  <AppBaseModal :show="showModal" @open="get" @close="close">
+  <AppBaseModal :show="showModal" @close="close" :requireAuth="true">
     <div class="w-full flex flex-col space-y-6">
 
       <h3 class="h3 border-l-10 border-orange-500 pl-6 leading-normal mb-4">
@@ -66,10 +66,9 @@
   import emitter from '@/util/emitter'
 
   onMounted(() => {
-    emitter.on('openModalEditContribution', ({ id = null, socialSecurityRelationId = null, simulationId = null, monthReference = null }) => {
-      formContribution.value = new FormContribution({ id, socialSecurityRelationId, simulationId, monthReference })
+    emitter.on('openModalEditContribution', ({ id = null, socialSecurityRelationId = null, simulationId = null, monthReference = null, isIgnored = false, ignoredReason = '' }) => {
+      formContribution.value = new FormContribution({ id, socialSecurityRelationId, simulationId, monthReference, isIgnored, ignoredReason })
       showModal.value = true
-      get()
     })
   })
 

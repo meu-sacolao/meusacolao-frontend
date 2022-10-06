@@ -46,7 +46,17 @@
             <AppIcons icon="close" />
           </button>
           <div class="w-full mt-8">
-            <slot />
+
+            <div class="flex flex-col space-y-6" v-if="requireAuth && !loggedUser">
+              <h3 class="h3 border-l-10 border-orange-500 pl-6 leading-normal mb-4">
+                <span>Login</span>
+              </h3>
+
+              <h5 class="h5">Entre ou cadastre-se para editar os dados.</h5>
+              <AuthForm />
+            </div>
+
+            <slot v-else />
           </div>
         </div>
       </div>
@@ -55,6 +65,15 @@
 </template>
 
 <script setup>
+
+  import AuthForm from '@/modules/auth/AuthForm'
+  import { storeToRefs } from 'pinia'
+  import { useAuthStore } from "@/modules/auth/store"
+  import FormSimulation from '@/forms/FormSimulation'
+
+  const vueInstance = useVueInstance()
+  const authStore = useAuthStore()
+  const { loggedUser } = storeToRefs(authStore)
 
   const { emit } = getCurrentInstance()
 
@@ -72,6 +91,10 @@
     allowClose: {
       type: Boolean,
       default: true
+    },
+    requireAuth: {
+      type: Boolean,
+      default: false
     }
   })
 
