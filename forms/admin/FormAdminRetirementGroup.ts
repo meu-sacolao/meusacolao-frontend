@@ -35,7 +35,7 @@ export default class FormAdminRetirementGroup extends BaseFormModel {
       },
       {
         item: 'content',
-        validator: ['minWords:10']
+        validator: ['minWords:2']
       }
     ]
   }

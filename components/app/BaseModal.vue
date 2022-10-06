@@ -67,7 +67,7 @@
     },
     dialogClasses: {
       type: String,
-      default: 'w-full max-w-2xl'
+      default: 'w-full max-w-3xl'
     },
     allowClose: {
       type: Boolean,
