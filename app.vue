@@ -18,14 +18,10 @@
 
     </Head>
     <Body id="body" class="w-screen h-screen font-sans bg-slate-100 text-zinc-700 overflow-x-hidden scrolling-touch relative">
-
-      <AppPageHeader></AppPageHeader>
       <NuxtLayout>
         <NuxtPage/>
       </NuxtLayout>
-      <AppFooter></AppFooter>
 
-      <ModalContactForm />
       <ContentDrawer />
 
     </Body>

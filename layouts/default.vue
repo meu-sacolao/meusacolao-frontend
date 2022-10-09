@@ -3,7 +3,7 @@
   <div class="
     min-h-container 
     w-full
-    mt-24
+    mb-32
     flex 
     flex-col
     overflow-y-auto
